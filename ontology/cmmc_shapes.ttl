@@ -295,21 +295,26 @@ ce:PassedRequiresAdequacyAndSufficiencyShape a sh:NodeShape ;
     ] .
 
 # -- #8a ----------------------------------------------------------------------
-# ForwardTraceabilityShape: every cmmc:Control reaches evidence with an
-# addressing link AND an attestation (any outcome value, since declined
-# attestations are well-formed too). Scoped to cmmc:Control instances.
+# ForwardTraceabilityShape: every REQUIRED control (ce:requiresControl — i.e. one
+# an Order actually requires) reaches evidence with an addressing link AND an
+# attestation (any outcome value, since declined attestations are well-formed
+# too). Scoped to the Order's required set: a control no Order requires is out of
+# scope and must NOT fire (matches the audit's forward check in
+# traceability/audit.py). So a full 110-control catalog with a Phase-I Tier-1
+# Order does not raise ~88 false failures for out-of-scope controls.
 # -----------------------------------------------------------------------------
 
 ce:ForwardTraceabilityShape a sh:NodeShape ;
     sh:targetClass cmmc:Control ;
     sh:sparql [
-        sh:message "Forward-traceability failure: control is not reachable to addressing evidence + an attestation." ;
+        sh:message "Forward-traceability failure: required control is not reachable to addressing evidence + an attestation." ;
         sh:prefixes ce: ;
         sh:select """
             PREFIX ce:   <http://dynamicalsystems.group/compliance-engine/>
             PREFIX cmmc: <http://dynamicalsystems.group/ontology/cmmc#>
             SELECT $this WHERE {
                 $this a cmmc:Control .
+                ?ord ce:requiresControl $this .
                 FILTER NOT EXISTS {
                     ?att ce:attests $this ;
                          ce:hasEvidence ?ev ;

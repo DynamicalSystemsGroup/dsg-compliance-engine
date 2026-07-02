@@ -20,7 +20,6 @@ from __future__ import annotations
 import json
 
 from rdflib import Graph, URIRef
-from rdflib.namespace import RDF
 
 from ontology.prefixes import CE, CMMC, G_AUDIT, G_EVIDENCE, G_ATTESTATIONS
 from pipeline.dataset import create_dataset, graph_for
@@ -194,28 +193,63 @@ def test_evidence_graph_never_carries_attests():
 
 
 # ---------------------------------------------------------------------------
-# Full-catalog probe — documents the ForwardTraceabilityShape scope finding.
-# Proves there is NO predicate drift: even at full scale the ONLY shape that
-# fires is ForwardTraceabilityShape (one per un-attested control), never a
-# predicate-mismatch shape.
+# Full-catalog + in-scope Order — ForwardTraceabilityShape is scoped to
+# ce:requiresControl, so out-of-scope controls (the ~88 a Phase-I Tier-1 Order
+# doesn't require) no longer produce false failures.
 # ---------------------------------------------------------------------------
 
-def test_full_catalog_only_forward_traceability_fires():
+def _wire_no_load(ds, cid: str, summary: dict) -> None:
+    """Evidence + oracle + attestation for a control, WITHOUT loading its ABox
+    (the full catalog is loaded separately in these full-catalog cases)."""
+    _bind_evidence(ds, cid, summary)
+    assertion = _emit_oracle(ds, cid, summary)
+    request_attestation(
+        ds, cid, "Jane Official", auto_attest=True,
+        adequacy="adequate", sufficiency="sufficient",
+        outcome=OUTCOME_PASSED, backing_oracle=assertion,
+    )
+
+
+def _require(ds, cid: str) -> None:
+    graph_for(ds, "order").add((CE["Order-NV012"], CE.requiresControl, CMMC[cid]))
+
+
+def test_full_catalog_with_inscope_order_conforms():
+    # Full 110-control catalog loaded, but the Order requires only the 3 controls
+    # we fully wire → out-of-scope controls must NOT fire ForwardTraceability.
     ds = create_dataset()
     og = graph_for(ds, "ontology")
     for t in _CATALOG:
         og.add(t)
     for cid, summary in _PASSING.items():
-        _bind_evidence(ds, cid, summary)
-        assertion = _emit_oracle(ds, cid, summary)
-        request_attestation(
-            ds, cid, "Jane Official", auto_attest=True,
-            adequacy="adequate", sufficiency="sufficient",
-            outcome=OUTCOME_PASSED, backing_oracle=assertion,
-        )
+        _wire_no_load(ds, cid, summary)
+        _require(ds, cid)
+    report = verify(ds)
+    assert report.conforms is True, (
+        "out-of-scope controls should not fire ForwardTraceability: "
+        + "; ".join(f"{v.shape.rsplit('#', 1)[-1]}: {v.focus}"
+                    for v in report.shape_violations)
+    )
+    assert report.shape_violations == []
+
+
+def test_required_but_unattested_control_fires_forward():
+    # Full catalog + an Order requiring one control that is NOT attested →
+    # ForwardTraceability fires for EXACTLY that control (real in-scope gap),
+    # and for no other (out-of-scope controls stay silent).
+    ds = create_dataset()
+    og = graph_for(ds, "ontology")
+    for t in _CATALOG:
+        og.add(t)
+    # wire + require the 3 machine controls...
+    for cid, summary in _PASSING.items():
+        _wire_no_load(ds, cid, summary)
+        _require(ds, cid)
+    # ...then require an extra control with NO evidence/attestation.
+    gap = "AU.L2-3.3.1"
+    _require(ds, gap)
     report = verify(ds)
     assert report.conforms is False
-    # The 110 controls minus the 3 fully wired = 107 forward-traceability gaps.
     assert report.shapes_named() == {"ForwardTraceabilityShape"}
-    n_controls = len(set(_CATALOG.subjects(RDF.type, CMMC.Control)))
-    assert len(report.shape_violations) == n_controls - len(_PASSING)
+    assert len(report.shape_violations) == 1
+    assert report.shape_violations[0].focus == str(CMMC[gap])
