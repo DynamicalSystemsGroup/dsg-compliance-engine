@@ -26,10 +26,14 @@ import hashlib
 from collections.abc import Iterable
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Annotated
+from typing import TYPE_CHECKING, Annotated
 
 import typer
 from rdflib import BNode, Dataset, Literal, URIRef
+
+if TYPE_CHECKING:
+    from traceability.audit import AuditReport
+    from traceability.bom import BOM
 
 from ontology.prefixes import NAMED_GRAPHS
 from traceability.attestation import STATUS_LABEL
@@ -400,8 +404,75 @@ def compile_ssp(
 
 
 # ---------------------------------------------------------------------------
+# Run integration — wire the colophon to the real audit (U10) + BOM (U11b)
+# ---------------------------------------------------------------------------
+
+def sprs_summary_from_audit(report: "AuditReport | None") -> SprsSummary | None:
+    """Build the colophon SPRS summary from an audit report.
+
+    ``score``/``status`` come from ``report.sprs`` (the U10-sprs ``SprsResult``);
+    ``met_by_machine``/``met_by_human_only`` from ``report.proven`` (the
+    proven-vs-attested split); ``contradiction_count`` = ``len(report.contradictions)``.
+    Returns ``None`` when no report is given or the audit produced no SPRS score
+    (so the colophon falls back to "pending").
+    """
+    if report is None or report.sprs is None:
+        return None
+    return SprsSummary(
+        score=report.sprs.score,
+        status=report.sprs.status,
+        met_by_machine=report.proven.machine_count,
+        met_by_human_only=report.proven.human_count,
+        contradiction_count=len(report.contradictions),
+    )
+
+
+def compile_ssp_from_run(
+    ds: Dataset,
+    *,
+    audit_report: "AuditReport | None" = None,
+    bom: "BOM | None" = None,
+    dataset_path: Path | None = None,
+) -> str:
+    """Compile the SSP with the real audit + BOM colophon when available.
+
+    The entry point for ``cli.py`` (agent-1) and the U13 e2e run: derives
+    ``sprs_summary`` from ``audit_report`` and ``bom_artifact_hashes`` from
+    ``bom.artifact_hashes()``, then delegates to :func:`compile_ssp`. When both
+    are ``None`` the output is identical to the U12a fallback ("pending" SPRS +
+    committed ``ce:contentHash`` values); the R12 banner is unaffected either way.
+    """
+    return compile_ssp(
+        ds,
+        dataset_path=dataset_path,
+        sprs_summary=sprs_summary_from_audit(audit_report),
+        bom_artifact_hashes=(bom.artifact_hashes() if bom is not None else None),
+    )
+
+
+# ---------------------------------------------------------------------------
 # CLI
 # ---------------------------------------------------------------------------
+
+def _compile_with_optional_audit(ds: Dataset, input: Path, audit: bool) -> str:
+    """Compile, deriving the real audit colophon from the dataset when asked.
+
+    The audit (SPRS + contradictions) is derivable from the persisted dataset;
+    the BOM object is not reconstructed here, so BOM hashes fall back to the
+    committed ``ce:contentHash`` values. A dataset that cannot be audited (e.g.
+    missing the control catalog) falls back cleanly to the "pending" colophon —
+    the no-audit path and R12 banner are never broken.
+    """
+    if not audit:
+        return compile_ssp(ds, dataset_path=input)
+    try:
+        from traceability.audit import audit as run_audit
+
+        report = run_audit(ds)
+    except Exception:
+        return compile_ssp(ds, dataset_path=input)
+    return compile_ssp_from_run(ds, audit_report=report, dataset_path=input)
+
 
 app = typer.Typer(
     add_completion=False,
@@ -435,6 +506,12 @@ def build(
     stdout: Annotated[bool, typer.Option(
         "--stdout", help="Print the document instead of writing --output.",
     )] = False,
+    audit: Annotated[bool, typer.Option(
+        "--audit/--no-audit",
+        help="Derive the real SPRS/contradiction colophon from the dataset "
+             "(falls back to 'pending' if the audit cannot run). --no-audit "
+             "forces the pending colophon.",
+    )] = True,
 ) -> None:
     """Build (or drift-check) the SSP document."""
     if not input.exists():
@@ -442,7 +519,7 @@ def build(
         raise typer.Exit(code=2)
     ds = Dataset(default_union=True)
     ds.parse(input, format="trig")
-    doc = compile_ssp(ds, dataset_path=input)
+    doc = _compile_with_optional_audit(ds, input, audit)
 
     if check:
         if not output.exists():

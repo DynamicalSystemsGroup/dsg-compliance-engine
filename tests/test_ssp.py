@@ -15,14 +15,21 @@ from rdflib import BNode, Literal
 from rdflib.namespace import RDF, RDFS, XSD
 from typer.testing import CliRunner
 
+from types import SimpleNamespace
+
 from ontology.prefixes import CE, CMMC, EARL, GSN, PROV
 from pipeline.dataset import create_dataset, graph_for, load_into
+from traceability.audit import ContradictionRow, ProvenVsAttested
+from traceability.bom import BOM
+from traceability.sprs import SprsResult
 from documents.ssp import (
     SprsSummary,
     app,
     compile_ssp,
+    compile_ssp_from_run,
     dataset_fingerprint,
     document_date,
+    sprs_summary_from_audit,
 )
 
 _REPO = Path(__file__).resolve().parents[1]
@@ -239,3 +246,80 @@ class TestCliDriftGate:
         r = runner.invoke(app, ["build", "--input", str(tmp_path / "nope.trig"),
                                 "--output", str(tmp_path / "o.md")])
         assert r.exit_code == 2
+
+
+# --------------------------------------------------------------------------- #
+# U12b — real audit + BOM colophon wiring
+# --------------------------------------------------------------------------- #
+
+def _synthetic_audit(sprs_result, *, machine, human, contradictions=()):
+    """A duck-typed AuditReport stand-in (real proven/contradiction types)."""
+    return SimpleNamespace(
+        sprs=sprs_result,
+        proven=ProvenVsAttested(met_by_machine=list(machine),
+                                met_by_human_only=list(human)),
+        contradictions=list(contradictions),
+    )
+
+
+def _fake_bom(evidence_hashes):
+    return BOM(
+        contract_id="NV012", order_hash="o" * 64, tier="tier1", impact_level="IL4",
+        standard="CMMC L2", state_hash=None, plan_resource_ids=(),
+        evidence_hashes=tuple(evidence_hashes), module_hashes={}, oracle_outcomes={},
+        policy_passed=True, policy_findings=(), control_mapping=(), attestations=(),
+        evidentiary_status="mock", bom_hash="b" * 64,
+    )
+
+
+class TestAuditBomWiring:
+    def test_sprs_summary_from_audit_all_met(self):
+        report = _synthetic_audit(
+            SprsResult(110, "Final"),
+            machine=[f"M{i}" for i in range(5)],
+            human=[f"H{i}" for i in range(105)],
+        )
+        summary = sprs_summary_from_audit(report)
+        assert summary == SprsSummary(110, "Final", 5, 105, 0)
+
+        doc = compile_ssp_from_run(_base_dataset(), audit_report=report)
+        assert "SPRS summary: score 110 (Final); " in doc
+        assert "5 MET-by-machine / 105 MET-by-human-only" in doc
+        assert "contradictions: 0." in doc
+        assert "pending audit" not in doc
+
+    def test_none_sprs_falls_back_to_pending(self):
+        report = _synthetic_audit(None, machine=[], human=[])
+        assert sprs_summary_from_audit(report) is None
+        doc = compile_ssp_from_run(_base_dataset(), audit_report=report)
+        assert "SPRS summary: pending audit (U10/U11 integration)." in doc
+
+    def test_contradiction_count_surfaced(self):
+        report = _synthetic_audit(
+            SprsResult(105, "Conditional"),
+            machine=["IA.L2-3.5.3"], human=["AC.L2-3.1.1"],
+            contradictions=[ContradictionRow(
+                attestation="att/x", control="IA.L2-3.5.3", oracle_outcome="failed")],
+        )
+        doc = compile_ssp_from_run(_base_dataset(), audit_report=report)
+        assert "contradictions: 1." in doc
+        assert "score 105 (Conditional)" in doc
+
+    def test_bom_hashes_labelled_bom_not_pending(self):
+        bom = _fake_bom(["e1" + "0" * 62, "e2" + "0" * 62])
+        doc = compile_ssp_from_run(_base_dataset(), bom=bom)
+        assert "Artifact hashes (BOM): " in doc
+        assert "committed ce:contentHash (BOM pending)" not in doc
+        assert f"- `{'o' * 64}`" in doc              # order hash is in artifact_hashes()
+        assert f"- `{'e1' + '0' * 62}`" in doc
+
+    def test_from_run_deterministic_and_r12_preserved(self):
+        report = _synthetic_audit(SprsResult(88, "Conditional"),
+                                  machine=["IA.L2-3.5.3"], human=["SC.L2-3.13.1"])
+        bom = _fake_bom(["a" * 64])
+        ds = _base_dataset(mock=True)
+        doc1 = compile_ssp_from_run(ds, audit_report=report, bom=bom)
+        doc2 = compile_ssp_from_run(_base_dataset(mock=True), audit_report=report, bom=bom)
+        assert doc1 == doc2                          # byte-identical across runs
+        assert "NON-EVIDENTIARY" in doc1             # R12 banner still fires
+        assert "score 88 (Conditional)" in doc1
