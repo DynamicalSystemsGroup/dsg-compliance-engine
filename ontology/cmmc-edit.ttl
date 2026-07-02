@@ -1,10 +1,12 @@
 # CMMC integration ontology — SOURCE (hand-edited). Build → cmmc.ttl.
-# SCAFFOLD: skeleton only. Populate all 110 controls from
-# reference/control-catalog.md (Document 1). No novel epistemic vocabulary:
-# cmmc:Control is a SysMLv2 requirement; status reuses the EARL lattice.
+# Generated from reference/control-catalog.md (Document 1): all 110
+# NIST SP 800-171 Rev.2 controls encoded as cmmc:Control individuals with
+# SPRS weights (32 CFR 170.24) and POA&M eligibility (32 CFR 170.21).
+# No novel epistemic vocabulary: cmmc:Control is a SysMLv2 requirement;
+# status reuses the EARL lattice.
 
 @prefix cmmc:  <http://dynamicalsystems.group/ontology/cmmc#> .
-@prefix rtm:   <http://example.org/ontology/rtm#> .
+@prefix ce:    <http://dynamicalsystems.group/compliance-engine/> .
 @prefix sysml: <https://www.omg.org/spec/SysML/2.0/> .
 @prefix earl:  <http://www.w3.org/ns/earl#> .
 @prefix owl:   <http://www.w3.org/2002/07/owl#> .
@@ -23,55 +25,1151 @@ cmmc:Control a owl:Class ;
 cmmc:Family a owl:Class ;
     rdfs:label "NIST 800-171 control family (AC, AU, IA, SC, ...)" .
 
-# --- data properties mirroring Document 1's columns ---
-cmmc:controlId        a owl:DatatypeProperty ; rdfs:range xsd:string .
-cmmc:weight           a owl:DatatypeProperty ; rdfs:range xsd:integer .  # 1 | 3 | 5
-cmmc:poamEligible     a owl:DatatypeProperty ; rdfs:range xsd:boolean .
-cmmc:nonDeferrable    a owl:DatatypeProperty ; rdfs:range xsd:boolean .
-cmmc:assessmentMethod a owl:ObjectProperty .   # cmmc:Examine|Interview|Test
-cmmc:evidenceType     a owl:ObjectProperty .
-cmmc:family           a owl:ObjectProperty ; rdfs:range cmmc:Family .
-cmmc:derivedFrom      a owl:ObjectProperty ; rdfs:subPropertyOf rtm:derivedFrom .
-cmmc:poamItem         a owl:ObjectProperty .   # link to a POA&M entry (legal only if weight = 1)
+cmmc:AssessmentMethod a owl:Class ;
+    rdfs:label "NIST SP 800-171A assessment method (Examine/Interview/Test)" .
 
-cmmc:Examine a cmmc:AssessmentMethod . cmmc:Interview a cmmc:AssessmentMethod . cmmc:Test a cmmc:AssessmentMethod .
+# --- data properties mirroring Document 1's columns ---
+cmmc:controlId         a owl:DatatypeProperty ; rdfs:range xsd:string .
+cmmc:text              a owl:DatatypeProperty ; rdfs:range xsd:string .   # verbatim NIST statement
+cmmc:weight            a owl:DatatypeProperty ; rdfs:range xsd:integer .  # 1 | 3 | 5 (max for variable)
+cmmc:poamEligible      a owl:DatatypeProperty ; rdfs:range xsd:boolean .
+cmmc:nonDeferrable     a owl:DatatypeProperty ; rdfs:range xsd:boolean .
+cmmc:variableWeight    a owl:DatatypeProperty ; rdfs:range xsd:boolean .  # weight varies by implementation
+cmmc:weightIfPartial   a owl:DatatypeProperty ; rdfs:range xsd:integer .  # reduced score for variable controls
+cmmc:inherited         a owl:DatatypeProperty ; rdfs:range xsd:boolean .  # CSP-inherited (MET-when-attested)
+cmmc:family            a owl:ObjectProperty   ; rdfs:range cmmc:Family .
+cmmc:assessmentMethod  a owl:ObjectProperty   ; rdfs:range cmmc:AssessmentMethod .
+cmmc:poamItem          a owl:ObjectProperty .   # link to a POA&M entry (legal only if weight = 1)
+cmmc:overrideJustification a owl:DatatypeProperty ; rdfs:range xsd:string .  # R13 contradiction override
+
+cmmc:Examine   a cmmc:AssessmentMethod .
+cmmc:Interview a cmmc:AssessmentMethod .
+cmmc:Test      a cmmc:AssessmentMethod .
 
 # families
+
 cmmc:AC a cmmc:Family ; rdfs:label "Access Control" .
-cmmc:IA a cmmc:Family ; rdfs:label "Identification & Authentication" .
-cmmc:SC a cmmc:Family ; rdfs:label "System & Communications Protection" .
-# ... AT AU CM IR MA MP PS PE RA CA SI — add the remaining 11 families.
+cmmc:AT a cmmc:Family ; rdfs:label "Awareness and Training" .
+cmmc:AU a cmmc:Family ; rdfs:label "Audit and Accountability" .
+cmmc:CM a cmmc:Family ; rdfs:label "Configuration Management" .
+cmmc:IA a cmmc:Family ; rdfs:label "Identification and Authentication" .
+cmmc:IR a cmmc:Family ; rdfs:label "Incident Response" .
+cmmc:MA a cmmc:Family ; rdfs:label "Maintenance" .
+cmmc:MP a cmmc:Family ; rdfs:label "Media Protection" .
+cmmc:PS a cmmc:Family ; rdfs:label "Personnel Security" .
+cmmc:PE a cmmc:Family ; rdfs:label "Physical Protection" .
+cmmc:RA a cmmc:Family ; rdfs:label "Risk Assessment" .
+cmmc:CA a cmmc:Family ; rdfs:label "Security Assessment" .
+cmmc:SC a cmmc:Family ; rdfs:label "System and Communications Protection" .
+cmmc:SI a cmmc:Family ; rdfs:label "System and Information Integrity" .
 
 #################################################################
-# ABox — controls. EXAMPLES ONLY. Author all 110 from Document 1.
+# ABox — the 110 controls (Document 1). weight histogram:
+#   {5: 42, 3: 14, 1: 52, variable: 2}
 #################################################################
-
-cmmc:IA.L2-3.5.3 a cmmc:Control ;
-    cmmc:controlId        "IA.L2-3.5.3" ;
-    sysml:declaredName    "IA.L2-3.5.3" ;
-    sysml:text            "Use multifactor authentication for local and network access to privileged accounts and for network access to non-privileged accounts." ;
-    cmmc:weight           5 ;
-    cmmc:poamEligible     false ;
-    cmmc:nonDeferrable    true ;
-    cmmc:assessmentMethod cmmc:Examine, cmmc:Test ;
-    cmmc:family           cmmc:IA .
-
-cmmc:SC.L2-3.13.11 a cmmc:Control ;
-    cmmc:controlId        "SC.L2-3.13.11" ;
-    sysml:declaredName    "SC.L2-3.13.11" ;
-    sysml:text            "Employ FIPS-validated cryptography when used to protect the confidentiality of CUI." ;
-    cmmc:weight           5 ;
-    cmmc:poamEligible     false ;
-    cmmc:nonDeferrable    true ;
-    cmmc:assessmentMethod cmmc:Examine, cmmc:Test ;
-    cmmc:family           cmmc:SC .
 
 cmmc:AC.L2-3.1.1 a cmmc:Control ;
     cmmc:controlId        "AC.L2-3.1.1" ;
     sysml:declaredName    "AC.L2-3.1.1" ;
-    sysml:text            "Limit system access to authorized users, processes acting on behalf of authorized users, and devices." ;
+    cmmc:text             "Limit system access to authorized users, processes acting on behalf of authorized users, and devices (including other systems)." ;
+    sysml:text            "Limit system access to authorized users, processes acting on behalf of authorized users, and devices (including other systems)." ;
     cmmc:weight           5 ;
     cmmc:poamEligible     false ;
     cmmc:nonDeferrable    true ;
-    cmmc:assessmentMethod cmmc:Examine, cmmc:Test ;
     cmmc:family           cmmc:AC .
+
+cmmc:AC.L2-3.1.2 a cmmc:Control ;
+    cmmc:controlId        "AC.L2-3.1.2" ;
+    sysml:declaredName    "AC.L2-3.1.2" ;
+    cmmc:text             "Limit system access to the types of transactions and functions that authorized users are permitted to execute." ;
+    sysml:text            "Limit system access to the types of transactions and functions that authorized users are permitted to execute." ;
+    cmmc:weight           5 ;
+    cmmc:poamEligible     false ;
+    cmmc:nonDeferrable    true ;
+    cmmc:family           cmmc:AC .
+
+cmmc:AC.L2-3.1.3 a cmmc:Control ;
+    cmmc:controlId        "AC.L2-3.1.3" ;
+    sysml:declaredName    "AC.L2-3.1.3" ;
+    cmmc:text             "Control the flow of CUI in accordance with approved authorizations." ;
+    sysml:text            "Control the flow of CUI in accordance with approved authorizations." ;
+    cmmc:weight           1 ;
+    cmmc:poamEligible     true ;
+    cmmc:nonDeferrable    false ;
+    cmmc:family           cmmc:AC .
+
+cmmc:AC.L2-3.1.4 a cmmc:Control ;
+    cmmc:controlId        "AC.L2-3.1.4" ;
+    sysml:declaredName    "AC.L2-3.1.4" ;
+    cmmc:text             "Separate the duties of individuals to reduce the risk of malevolent activity without collusion." ;
+    sysml:text            "Separate the duties of individuals to reduce the risk of malevolent activity without collusion." ;
+    cmmc:weight           1 ;
+    cmmc:poamEligible     true ;
+    cmmc:nonDeferrable    false ;
+    cmmc:family           cmmc:AC .
+
+cmmc:AC.L2-3.1.5 a cmmc:Control ;
+    cmmc:controlId        "AC.L2-3.1.5" ;
+    sysml:declaredName    "AC.L2-3.1.5" ;
+    cmmc:text             "Employ the principle of least privilege, including for specific security functions and privileged accounts." ;
+    sysml:text            "Employ the principle of least privilege, including for specific security functions and privileged accounts." ;
+    cmmc:weight           3 ;
+    cmmc:poamEligible     false ;
+    cmmc:nonDeferrable    true ;
+    cmmc:family           cmmc:AC .
+
+cmmc:AC.L2-3.1.6 a cmmc:Control ;
+    cmmc:controlId        "AC.L2-3.1.6" ;
+    sysml:declaredName    "AC.L2-3.1.6" ;
+    cmmc:text             "Use non-privileged accounts or roles when accessing nonsecurity functions." ;
+    sysml:text            "Use non-privileged accounts or roles when accessing nonsecurity functions." ;
+    cmmc:weight           1 ;
+    cmmc:poamEligible     true ;
+    cmmc:nonDeferrable    false ;
+    cmmc:family           cmmc:AC .
+
+cmmc:AC.L2-3.1.7 a cmmc:Control ;
+    cmmc:controlId        "AC.L2-3.1.7" ;
+    sysml:declaredName    "AC.L2-3.1.7" ;
+    cmmc:text             "Prevent non-privileged users from executing privileged functions and capture the execution of such functions in audit logs." ;
+    sysml:text            "Prevent non-privileged users from executing privileged functions and capture the execution of such functions in audit logs." ;
+    cmmc:weight           1 ;
+    cmmc:poamEligible     true ;
+    cmmc:nonDeferrable    false ;
+    cmmc:family           cmmc:AC .
+
+cmmc:AC.L2-3.1.8 a cmmc:Control ;
+    cmmc:controlId        "AC.L2-3.1.8" ;
+    sysml:declaredName    "AC.L2-3.1.8" ;
+    cmmc:text             "Limit unsuccessful logon attempts." ;
+    sysml:text            "Limit unsuccessful logon attempts." ;
+    cmmc:weight           1 ;
+    cmmc:poamEligible     true ;
+    cmmc:nonDeferrable    false ;
+    cmmc:family           cmmc:AC .
+
+cmmc:AC.L2-3.1.9 a cmmc:Control ;
+    cmmc:controlId        "AC.L2-3.1.9" ;
+    sysml:declaredName    "AC.L2-3.1.9" ;
+    cmmc:text             "Provide privacy and security notices consistent with applicable CUI rules." ;
+    sysml:text            "Provide privacy and security notices consistent with applicable CUI rules." ;
+    cmmc:weight           1 ;
+    cmmc:poamEligible     true ;
+    cmmc:nonDeferrable    false ;
+    cmmc:family           cmmc:AC .
+
+cmmc:AC.L2-3.1.10 a cmmc:Control ;
+    cmmc:controlId        "AC.L2-3.1.10" ;
+    sysml:declaredName    "AC.L2-3.1.10" ;
+    cmmc:text             "Use session lock with pattern-hiding displays to prevent access and viewing of data after a period of inactivity." ;
+    sysml:text            "Use session lock with pattern-hiding displays to prevent access and viewing of data after a period of inactivity." ;
+    cmmc:weight           1 ;
+    cmmc:poamEligible     true ;
+    cmmc:nonDeferrable    false ;
+    cmmc:family           cmmc:AC .
+
+cmmc:AC.L2-3.1.11 a cmmc:Control ;
+    cmmc:controlId        "AC.L2-3.1.11" ;
+    sysml:declaredName    "AC.L2-3.1.11" ;
+    cmmc:text             "Terminate (automatically) a user session after a defined condition." ;
+    sysml:text            "Terminate (automatically) a user session after a defined condition." ;
+    cmmc:weight           1 ;
+    cmmc:poamEligible     true ;
+    cmmc:nonDeferrable    false ;
+    cmmc:family           cmmc:AC .
+
+cmmc:AC.L2-3.1.12 a cmmc:Control ;
+    cmmc:controlId        "AC.L2-3.1.12" ;
+    sysml:declaredName    "AC.L2-3.1.12" ;
+    cmmc:text             "Monitor and control remote access sessions." ;
+    sysml:text            "Monitor and control remote access sessions." ;
+    cmmc:weight           5 ;
+    cmmc:poamEligible     false ;
+    cmmc:nonDeferrable    true ;
+    cmmc:family           cmmc:AC .
+
+cmmc:AC.L2-3.1.13 a cmmc:Control ;
+    cmmc:controlId        "AC.L2-3.1.13" ;
+    sysml:declaredName    "AC.L2-3.1.13" ;
+    cmmc:text             "Employ cryptographic mechanisms to protect the confidentiality of remote access sessions." ;
+    sysml:text            "Employ cryptographic mechanisms to protect the confidentiality of remote access sessions." ;
+    cmmc:weight           5 ;
+    cmmc:poamEligible     false ;
+    cmmc:nonDeferrable    true ;
+    cmmc:family           cmmc:AC .
+
+cmmc:AC.L2-3.1.14 a cmmc:Control ;
+    cmmc:controlId        "AC.L2-3.1.14" ;
+    sysml:declaredName    "AC.L2-3.1.14" ;
+    cmmc:text             "Route remote access via managed access control points." ;
+    sysml:text            "Route remote access via managed access control points." ;
+    cmmc:weight           1 ;
+    cmmc:poamEligible     true ;
+    cmmc:nonDeferrable    false ;
+    cmmc:family           cmmc:AC .
+
+cmmc:AC.L2-3.1.15 a cmmc:Control ;
+    cmmc:controlId        "AC.L2-3.1.15" ;
+    sysml:declaredName    "AC.L2-3.1.15" ;
+    cmmc:text             "Authorize remote execution of privileged commands and remote access to security-relevant information." ;
+    sysml:text            "Authorize remote execution of privileged commands and remote access to security-relevant information." ;
+    cmmc:weight           1 ;
+    cmmc:poamEligible     true ;
+    cmmc:nonDeferrable    false ;
+    cmmc:family           cmmc:AC .
+
+cmmc:AC.L2-3.1.16 a cmmc:Control ;
+    cmmc:controlId        "AC.L2-3.1.16" ;
+    sysml:declaredName    "AC.L2-3.1.16" ;
+    cmmc:text             "Authorize wireless access prior to allowing such connections." ;
+    sysml:text            "Authorize wireless access prior to allowing such connections." ;
+    cmmc:weight           5 ;
+    cmmc:poamEligible     false ;
+    cmmc:nonDeferrable    true ;
+    cmmc:family           cmmc:AC .
+
+cmmc:AC.L2-3.1.17 a cmmc:Control ;
+    cmmc:controlId        "AC.L2-3.1.17" ;
+    sysml:declaredName    "AC.L2-3.1.17" ;
+    cmmc:text             "Protect wireless access using authentication and encryption." ;
+    sysml:text            "Protect wireless access using authentication and encryption." ;
+    cmmc:weight           5 ;
+    cmmc:poamEligible     false ;
+    cmmc:nonDeferrable    true ;
+    cmmc:family           cmmc:AC .
+
+cmmc:AC.L2-3.1.18 a cmmc:Control ;
+    cmmc:controlId        "AC.L2-3.1.18" ;
+    sysml:declaredName    "AC.L2-3.1.18" ;
+    cmmc:text             "Control connection of mobile devices." ;
+    sysml:text            "Control connection of mobile devices." ;
+    cmmc:weight           5 ;
+    cmmc:poamEligible     false ;
+    cmmc:nonDeferrable    true ;
+    cmmc:family           cmmc:AC .
+
+cmmc:AC.L2-3.1.19 a cmmc:Control ;
+    cmmc:controlId        "AC.L2-3.1.19" ;
+    sysml:declaredName    "AC.L2-3.1.19" ;
+    cmmc:text             "Encrypt CUI on mobile devices and mobile computing platforms." ;
+    sysml:text            "Encrypt CUI on mobile devices and mobile computing platforms." ;
+    cmmc:weight           3 ;
+    cmmc:poamEligible     false ;
+    cmmc:nonDeferrable    true ;
+    cmmc:family           cmmc:AC .
+
+cmmc:AC.L2-3.1.20 a cmmc:Control ;
+    cmmc:controlId        "AC.L2-3.1.20" ;
+    sysml:declaredName    "AC.L2-3.1.20" ;
+    cmmc:text             "Verify and control/limit connections to and use of external systems." ;
+    sysml:text            "Verify and control/limit connections to and use of external systems." ;
+    cmmc:weight           1 ;
+    cmmc:poamEligible     false ;
+    cmmc:nonDeferrable    true ;
+    cmmc:family           cmmc:AC .
+
+cmmc:AC.L2-3.1.21 a cmmc:Control ;
+    cmmc:controlId        "AC.L2-3.1.21" ;
+    sysml:declaredName    "AC.L2-3.1.21" ;
+    cmmc:text             "Limit use of portable storage devices on external systems." ;
+    sysml:text            "Limit use of portable storage devices on external systems." ;
+    cmmc:weight           1 ;
+    cmmc:poamEligible     true ;
+    cmmc:nonDeferrable    false ;
+    cmmc:family           cmmc:AC .
+
+cmmc:AC.L2-3.1.22 a cmmc:Control ;
+    cmmc:controlId        "AC.L2-3.1.22" ;
+    sysml:declaredName    "AC.L2-3.1.22" ;
+    cmmc:text             "Control CUI posted or processed on publicly accessible systems." ;
+    sysml:text            "Control CUI posted or processed on publicly accessible systems." ;
+    cmmc:weight           1 ;
+    cmmc:poamEligible     false ;
+    cmmc:nonDeferrable    true ;
+    cmmc:family           cmmc:AC .
+
+cmmc:AT.L2-3.2.1 a cmmc:Control ;
+    cmmc:controlId        "AT.L2-3.2.1" ;
+    sysml:declaredName    "AT.L2-3.2.1" ;
+    cmmc:text             "Ensure that managers, systems administrators, and users of organizational systems are made aware of the security risks associated with their activities and of the applicable policies, standards, and procedures related to the security of those systems." ;
+    sysml:text            "Ensure that managers, systems administrators, and users of organizational systems are made aware of the security risks associated with their activities and of the applicable policies, standards, and procedures related to the security of those systems." ;
+    cmmc:weight           5 ;
+    cmmc:poamEligible     false ;
+    cmmc:nonDeferrable    true ;
+    cmmc:family           cmmc:AT .
+
+cmmc:AT.L2-3.2.2 a cmmc:Control ;
+    cmmc:controlId        "AT.L2-3.2.2" ;
+    sysml:declaredName    "AT.L2-3.2.2" ;
+    cmmc:text             "Ensure that personnel are trained to carry out their assigned information security-related duties and responsibilities." ;
+    sysml:text            "Ensure that personnel are trained to carry out their assigned information security-related duties and responsibilities." ;
+    cmmc:weight           5 ;
+    cmmc:poamEligible     false ;
+    cmmc:nonDeferrable    true ;
+    cmmc:family           cmmc:AT .
+
+cmmc:AT.L2-3.2.3 a cmmc:Control ;
+    cmmc:controlId        "AT.L2-3.2.3" ;
+    sysml:declaredName    "AT.L2-3.2.3" ;
+    cmmc:text             "Provide security awareness training on recognizing and reporting potential indicators of insider threat." ;
+    sysml:text            "Provide security awareness training on recognizing and reporting potential indicators of insider threat." ;
+    cmmc:weight           1 ;
+    cmmc:poamEligible     true ;
+    cmmc:nonDeferrable    false ;
+    cmmc:family           cmmc:AT .
+
+cmmc:AU.L2-3.3.1 a cmmc:Control ;
+    cmmc:controlId        "AU.L2-3.3.1" ;
+    sysml:declaredName    "AU.L2-3.3.1" ;
+    cmmc:text             "Create and retain system audit logs and records to the extent needed to enable the monitoring, analysis, investigation, and reporting of unlawful or unauthorized system activity." ;
+    sysml:text            "Create and retain system audit logs and records to the extent needed to enable the monitoring, analysis, investigation, and reporting of unlawful or unauthorized system activity." ;
+    cmmc:weight           5 ;
+    cmmc:poamEligible     false ;
+    cmmc:nonDeferrable    true ;
+    cmmc:family           cmmc:AU .
+
+cmmc:AU.L2-3.3.2 a cmmc:Control ;
+    cmmc:controlId        "AU.L2-3.3.2" ;
+    sysml:declaredName    "AU.L2-3.3.2" ;
+    cmmc:text             "Ensure that the actions of individual system users can be uniquely traced to those users, so they can be held accountable for their actions." ;
+    sysml:text            "Ensure that the actions of individual system users can be uniquely traced to those users, so they can be held accountable for their actions." ;
+    cmmc:weight           3 ;
+    cmmc:poamEligible     false ;
+    cmmc:nonDeferrable    true ;
+    cmmc:family           cmmc:AU .
+
+cmmc:AU.L2-3.3.3 a cmmc:Control ;
+    cmmc:controlId        "AU.L2-3.3.3" ;
+    sysml:declaredName    "AU.L2-3.3.3" ;
+    cmmc:text             "Review and update logged events." ;
+    sysml:text            "Review and update logged events." ;
+    cmmc:weight           1 ;
+    cmmc:poamEligible     true ;
+    cmmc:nonDeferrable    false ;
+    cmmc:family           cmmc:AU .
+
+cmmc:AU.L2-3.3.4 a cmmc:Control ;
+    cmmc:controlId        "AU.L2-3.3.4" ;
+    sysml:declaredName    "AU.L2-3.3.4" ;
+    cmmc:text             "Alert in the event of an audit logging process failure." ;
+    sysml:text            "Alert in the event of an audit logging process failure." ;
+    cmmc:weight           1 ;
+    cmmc:poamEligible     true ;
+    cmmc:nonDeferrable    false ;
+    cmmc:family           cmmc:AU .
+
+cmmc:AU.L2-3.3.5 a cmmc:Control ;
+    cmmc:controlId        "AU.L2-3.3.5" ;
+    sysml:declaredName    "AU.L2-3.3.5" ;
+    cmmc:text             "Correlate audit record review, analysis, and reporting processes for investigation and response to indications of unlawful, unauthorized, suspicious, or unusual activity." ;
+    sysml:text            "Correlate audit record review, analysis, and reporting processes for investigation and response to indications of unlawful, unauthorized, suspicious, or unusual activity." ;
+    cmmc:weight           5 ;
+    cmmc:poamEligible     false ;
+    cmmc:nonDeferrable    true ;
+    cmmc:family           cmmc:AU .
+
+cmmc:AU.L2-3.3.6 a cmmc:Control ;
+    cmmc:controlId        "AU.L2-3.3.6" ;
+    sysml:declaredName    "AU.L2-3.3.6" ;
+    cmmc:text             "Provide audit record reduction and report generation to support on-demand analysis and reporting." ;
+    sysml:text            "Provide audit record reduction and report generation to support on-demand analysis and reporting." ;
+    cmmc:weight           1 ;
+    cmmc:poamEligible     true ;
+    cmmc:nonDeferrable    false ;
+    cmmc:family           cmmc:AU .
+
+cmmc:AU.L2-3.3.7 a cmmc:Control ;
+    cmmc:controlId        "AU.L2-3.3.7" ;
+    sysml:declaredName    "AU.L2-3.3.7" ;
+    cmmc:text             "Provide a system capability that compares and synchronizes internal system clocks with an authoritative source to generate time stamps for audit records." ;
+    sysml:text            "Provide a system capability that compares and synchronizes internal system clocks with an authoritative source to generate time stamps for audit records." ;
+    cmmc:weight           1 ;
+    cmmc:poamEligible     true ;
+    cmmc:nonDeferrable    false ;
+    cmmc:family           cmmc:AU .
+
+cmmc:AU.L2-3.3.8 a cmmc:Control ;
+    cmmc:controlId        "AU.L2-3.3.8" ;
+    sysml:declaredName    "AU.L2-3.3.8" ;
+    cmmc:text             "Protect audit information and audit logging tools from unauthorized access, modification, and deletion." ;
+    sysml:text            "Protect audit information and audit logging tools from unauthorized access, modification, and deletion." ;
+    cmmc:weight           1 ;
+    cmmc:poamEligible     true ;
+    cmmc:nonDeferrable    false ;
+    cmmc:family           cmmc:AU .
+
+cmmc:AU.L2-3.3.9 a cmmc:Control ;
+    cmmc:controlId        "AU.L2-3.3.9" ;
+    sysml:declaredName    "AU.L2-3.3.9" ;
+    cmmc:text             "Limit management of audit logging functionality to a subset of privileged users." ;
+    sysml:text            "Limit management of audit logging functionality to a subset of privileged users." ;
+    cmmc:weight           1 ;
+    cmmc:poamEligible     true ;
+    cmmc:nonDeferrable    false ;
+    cmmc:family           cmmc:AU .
+
+cmmc:CM.L2-3.4.1 a cmmc:Control ;
+    cmmc:controlId        "CM.L2-3.4.1" ;
+    sysml:declaredName    "CM.L2-3.4.1" ;
+    cmmc:text             "Establish and maintain baseline configurations and inventories of organizational systems (including hardware, software, firmware, and documentation) throughout the respective system development life cycles." ;
+    sysml:text            "Establish and maintain baseline configurations and inventories of organizational systems (including hardware, software, firmware, and documentation) throughout the respective system development life cycles." ;
+    cmmc:weight           5 ;
+    cmmc:poamEligible     false ;
+    cmmc:nonDeferrable    true ;
+    cmmc:family           cmmc:CM .
+
+cmmc:CM.L2-3.4.2 a cmmc:Control ;
+    cmmc:controlId        "CM.L2-3.4.2" ;
+    sysml:declaredName    "CM.L2-3.4.2" ;
+    cmmc:text             "Establish and enforce security configuration settings for information technology products employed in organizational systems." ;
+    sysml:text            "Establish and enforce security configuration settings for information technology products employed in organizational systems." ;
+    cmmc:weight           5 ;
+    cmmc:poamEligible     false ;
+    cmmc:nonDeferrable    true ;
+    cmmc:family           cmmc:CM .
+
+cmmc:CM.L2-3.4.3 a cmmc:Control ;
+    cmmc:controlId        "CM.L2-3.4.3" ;
+    sysml:declaredName    "CM.L2-3.4.3" ;
+    cmmc:text             "Track, review, approve or disapprove, and log changes to organizational systems." ;
+    sysml:text            "Track, review, approve or disapprove, and log changes to organizational systems." ;
+    cmmc:weight           1 ;
+    cmmc:poamEligible     true ;
+    cmmc:nonDeferrable    false ;
+    cmmc:family           cmmc:CM .
+
+cmmc:CM.L2-3.4.4 a cmmc:Control ;
+    cmmc:controlId        "CM.L2-3.4.4" ;
+    sysml:declaredName    "CM.L2-3.4.4" ;
+    cmmc:text             "Analyze the security impact of changes prior to implementation." ;
+    sysml:text            "Analyze the security impact of changes prior to implementation." ;
+    cmmc:weight           1 ;
+    cmmc:poamEligible     true ;
+    cmmc:nonDeferrable    false ;
+    cmmc:family           cmmc:CM .
+
+cmmc:CM.L2-3.4.5 a cmmc:Control ;
+    cmmc:controlId        "CM.L2-3.4.5" ;
+    sysml:declaredName    "CM.L2-3.4.5" ;
+    cmmc:text             "Define, document, approve, and enforce physical and logical access restrictions associated with changes to organizational systems." ;
+    sysml:text            "Define, document, approve, and enforce physical and logical access restrictions associated with changes to organizational systems." ;
+    cmmc:weight           5 ;
+    cmmc:poamEligible     false ;
+    cmmc:nonDeferrable    true ;
+    cmmc:family           cmmc:CM .
+
+cmmc:CM.L2-3.4.6 a cmmc:Control ;
+    cmmc:controlId        "CM.L2-3.4.6" ;
+    sysml:declaredName    "CM.L2-3.4.6" ;
+    cmmc:text             "Employ the principle of least functionality by configuring organizational systems to provide only essential capabilities." ;
+    sysml:text            "Employ the principle of least functionality by configuring organizational systems to provide only essential capabilities." ;
+    cmmc:weight           5 ;
+    cmmc:poamEligible     false ;
+    cmmc:nonDeferrable    true ;
+    cmmc:family           cmmc:CM .
+
+cmmc:CM.L2-3.4.7 a cmmc:Control ;
+    cmmc:controlId        "CM.L2-3.4.7" ;
+    sysml:declaredName    "CM.L2-3.4.7" ;
+    cmmc:text             "Restrict, disable, or prevent the use of nonessential programs, functions, ports, protocols, and services." ;
+    sysml:text            "Restrict, disable, or prevent the use of nonessential programs, functions, ports, protocols, and services." ;
+    cmmc:weight           5 ;
+    cmmc:poamEligible     false ;
+    cmmc:nonDeferrable    true ;
+    cmmc:family           cmmc:CM .
+
+cmmc:CM.L2-3.4.8 a cmmc:Control ;
+    cmmc:controlId        "CM.L2-3.4.8" ;
+    sysml:declaredName    "CM.L2-3.4.8" ;
+    cmmc:text             "Apply deny-by-exception (blacklisting) policy to prevent the use of unauthorized software or deny-all, permit-by-exception (whitelisting) policy to allow the execution of authorized software." ;
+    sysml:text            "Apply deny-by-exception (blacklisting) policy to prevent the use of unauthorized software or deny-all, permit-by-exception (whitelisting) policy to allow the execution of authorized software." ;
+    cmmc:weight           5 ;
+    cmmc:poamEligible     false ;
+    cmmc:nonDeferrable    true ;
+    cmmc:family           cmmc:CM .
+
+cmmc:CM.L2-3.4.9 a cmmc:Control ;
+    cmmc:controlId        "CM.L2-3.4.9" ;
+    sysml:declaredName    "CM.L2-3.4.9" ;
+    cmmc:text             "Control and monitor user-installed software." ;
+    sysml:text            "Control and monitor user-installed software." ;
+    cmmc:weight           1 ;
+    cmmc:poamEligible     true ;
+    cmmc:nonDeferrable    false ;
+    cmmc:family           cmmc:CM .
+
+cmmc:IA.L2-3.5.1 a cmmc:Control ;
+    cmmc:controlId        "IA.L2-3.5.1" ;
+    sysml:declaredName    "IA.L2-3.5.1" ;
+    cmmc:text             "Identify system users, processes acting on behalf of users, and devices." ;
+    sysml:text            "Identify system users, processes acting on behalf of users, and devices." ;
+    cmmc:weight           5 ;
+    cmmc:poamEligible     false ;
+    cmmc:nonDeferrable    true ;
+    cmmc:family           cmmc:IA .
+
+cmmc:IA.L2-3.5.2 a cmmc:Control ;
+    cmmc:controlId        "IA.L2-3.5.2" ;
+    sysml:declaredName    "IA.L2-3.5.2" ;
+    cmmc:text             "Authenticate (or verify) the identities of users, processes, or devices, as a prerequisite to allowing access to organizational systems." ;
+    sysml:text            "Authenticate (or verify) the identities of users, processes, or devices, as a prerequisite to allowing access to organizational systems." ;
+    cmmc:weight           5 ;
+    cmmc:poamEligible     false ;
+    cmmc:nonDeferrable    true ;
+    cmmc:family           cmmc:IA .
+
+cmmc:IA.L2-3.5.3 a cmmc:Control ;
+    cmmc:controlId        "IA.L2-3.5.3" ;
+    sysml:declaredName    "IA.L2-3.5.3" ;
+    cmmc:text             "Use multifactor authentication for local and network access to privileged accounts and for network access to non-privileged accounts." ;
+    sysml:text            "Use multifactor authentication for local and network access to privileged accounts and for network access to non-privileged accounts." ;
+    cmmc:weight           5 ;
+    cmmc:poamEligible     false ;
+    cmmc:nonDeferrable    true ;
+    cmmc:variableWeight   true ;
+    cmmc:weightIfPartial  3 ;
+    cmmc:family           cmmc:IA .
+
+cmmc:IA.L2-3.5.4 a cmmc:Control ;
+    cmmc:controlId        "IA.L2-3.5.4" ;
+    sysml:declaredName    "IA.L2-3.5.4" ;
+    cmmc:text             "Employ replay-resistant authentication mechanisms for network access to privileged and non-privileged accounts." ;
+    sysml:text            "Employ replay-resistant authentication mechanisms for network access to privileged and non-privileged accounts." ;
+    cmmc:weight           1 ;
+    cmmc:poamEligible     true ;
+    cmmc:nonDeferrable    false ;
+    cmmc:family           cmmc:IA .
+
+cmmc:IA.L2-3.5.5 a cmmc:Control ;
+    cmmc:controlId        "IA.L2-3.5.5" ;
+    sysml:declaredName    "IA.L2-3.5.5" ;
+    cmmc:text             "Prevent reuse of identifiers for a defined period." ;
+    sysml:text            "Prevent reuse of identifiers for a defined period." ;
+    cmmc:weight           1 ;
+    cmmc:poamEligible     true ;
+    cmmc:nonDeferrable    false ;
+    cmmc:family           cmmc:IA .
+
+cmmc:IA.L2-3.5.6 a cmmc:Control ;
+    cmmc:controlId        "IA.L2-3.5.6" ;
+    sysml:declaredName    "IA.L2-3.5.6" ;
+    cmmc:text             "Disable identifiers after a defined period of inactivity." ;
+    sysml:text            "Disable identifiers after a defined period of inactivity." ;
+    cmmc:weight           1 ;
+    cmmc:poamEligible     true ;
+    cmmc:nonDeferrable    false ;
+    cmmc:family           cmmc:IA .
+
+cmmc:IA.L2-3.5.7 a cmmc:Control ;
+    cmmc:controlId        "IA.L2-3.5.7" ;
+    sysml:declaredName    "IA.L2-3.5.7" ;
+    cmmc:text             "Enforce a minimum password complexity and change of characters when new passwords are created." ;
+    sysml:text            "Enforce a minimum password complexity and change of characters when new passwords are created." ;
+    cmmc:weight           1 ;
+    cmmc:poamEligible     true ;
+    cmmc:nonDeferrable    false ;
+    cmmc:family           cmmc:IA .
+
+cmmc:IA.L2-3.5.8 a cmmc:Control ;
+    cmmc:controlId        "IA.L2-3.5.8" ;
+    sysml:declaredName    "IA.L2-3.5.8" ;
+    cmmc:text             "Prohibit password reuse for a specified number of generations." ;
+    sysml:text            "Prohibit password reuse for a specified number of generations." ;
+    cmmc:weight           1 ;
+    cmmc:poamEligible     true ;
+    cmmc:nonDeferrable    false ;
+    cmmc:family           cmmc:IA .
+
+cmmc:IA.L2-3.5.9 a cmmc:Control ;
+    cmmc:controlId        "IA.L2-3.5.9" ;
+    sysml:declaredName    "IA.L2-3.5.9" ;
+    cmmc:text             "Allow temporary password use for system logons with an immediate change to a permanent password." ;
+    sysml:text            "Allow temporary password use for system logons with an immediate change to a permanent password." ;
+    cmmc:weight           1 ;
+    cmmc:poamEligible     true ;
+    cmmc:nonDeferrable    false ;
+    cmmc:family           cmmc:IA .
+
+cmmc:IA.L2-3.5.10 a cmmc:Control ;
+    cmmc:controlId        "IA.L2-3.5.10" ;
+    sysml:declaredName    "IA.L2-3.5.10" ;
+    cmmc:text             "Store and transmit only cryptographically-protected passwords." ;
+    sysml:text            "Store and transmit only cryptographically-protected passwords." ;
+    cmmc:weight           5 ;
+    cmmc:poamEligible     false ;
+    cmmc:nonDeferrable    true ;
+    cmmc:family           cmmc:IA .
+
+cmmc:IA.L2-3.5.11 a cmmc:Control ;
+    cmmc:controlId        "IA.L2-3.5.11" ;
+    sysml:declaredName    "IA.L2-3.5.11" ;
+    cmmc:text             "Obscure feedback of authentication information." ;
+    sysml:text            "Obscure feedback of authentication information." ;
+    cmmc:weight           1 ;
+    cmmc:poamEligible     true ;
+    cmmc:nonDeferrable    false ;
+    cmmc:family           cmmc:IA .
+
+cmmc:IR.L2-3.6.1 a cmmc:Control ;
+    cmmc:controlId        "IR.L2-3.6.1" ;
+    sysml:declaredName    "IR.L2-3.6.1" ;
+    cmmc:text             "Establish an operational incident-handling capability for organizational systems that includes preparation, detection, analysis, containment, recovery, and user response activities." ;
+    sysml:text            "Establish an operational incident-handling capability for organizational systems that includes preparation, detection, analysis, containment, recovery, and user response activities." ;
+    cmmc:weight           5 ;
+    cmmc:poamEligible     false ;
+    cmmc:nonDeferrable    true ;
+    cmmc:family           cmmc:IR .
+
+cmmc:IR.L2-3.6.2 a cmmc:Control ;
+    cmmc:controlId        "IR.L2-3.6.2" ;
+    sysml:declaredName    "IR.L2-3.6.2" ;
+    cmmc:text             "Track, document, and report incidents to designated officials and/or authorities both internal and external to the organization." ;
+    sysml:text            "Track, document, and report incidents to designated officials and/or authorities both internal and external to the organization." ;
+    cmmc:weight           5 ;
+    cmmc:poamEligible     false ;
+    cmmc:nonDeferrable    true ;
+    cmmc:family           cmmc:IR .
+
+cmmc:IR.L2-3.6.3 a cmmc:Control ;
+    cmmc:controlId        "IR.L2-3.6.3" ;
+    sysml:declaredName    "IR.L2-3.6.3" ;
+    cmmc:text             "Test the organizational incident response capability." ;
+    sysml:text            "Test the organizational incident response capability." ;
+    cmmc:weight           1 ;
+    cmmc:poamEligible     true ;
+    cmmc:nonDeferrable    false ;
+    cmmc:family           cmmc:IR .
+
+cmmc:MA.L2-3.7.1 a cmmc:Control ;
+    cmmc:controlId        "MA.L2-3.7.1" ;
+    sysml:declaredName    "MA.L2-3.7.1" ;
+    cmmc:text             "Perform maintenance on organizational systems." ;
+    sysml:text            "Perform maintenance on organizational systems." ;
+    cmmc:weight           3 ;
+    cmmc:poamEligible     false ;
+    cmmc:nonDeferrable    true ;
+    cmmc:family           cmmc:MA .
+
+cmmc:MA.L2-3.7.2 a cmmc:Control ;
+    cmmc:controlId        "MA.L2-3.7.2" ;
+    sysml:declaredName    "MA.L2-3.7.2" ;
+    cmmc:text             "Provide controls on the tools, techniques, mechanisms, and personnel used to conduct system maintenance." ;
+    sysml:text            "Provide controls on the tools, techniques, mechanisms, and personnel used to conduct system maintenance." ;
+    cmmc:weight           5 ;
+    cmmc:poamEligible     false ;
+    cmmc:nonDeferrable    true ;
+    cmmc:family           cmmc:MA .
+
+cmmc:MA.L2-3.7.3 a cmmc:Control ;
+    cmmc:controlId        "MA.L2-3.7.3" ;
+    sysml:declaredName    "MA.L2-3.7.3" ;
+    cmmc:text             "Ensure equipment removed for off-site maintenance is sanitized of any CUI." ;
+    sysml:text            "Ensure equipment removed for off-site maintenance is sanitized of any CUI." ;
+    cmmc:weight           1 ;
+    cmmc:poamEligible     true ;
+    cmmc:nonDeferrable    false ;
+    cmmc:family           cmmc:MA .
+
+cmmc:MA.L2-3.7.4 a cmmc:Control ;
+    cmmc:controlId        "MA.L2-3.7.4" ;
+    sysml:declaredName    "MA.L2-3.7.4" ;
+    cmmc:text             "Check media containing diagnostic and test programs for malicious code before the media are used in organizational systems." ;
+    sysml:text            "Check media containing diagnostic and test programs for malicious code before the media are used in organizational systems." ;
+    cmmc:weight           3 ;
+    cmmc:poamEligible     false ;
+    cmmc:nonDeferrable    true ;
+    cmmc:family           cmmc:MA .
+
+cmmc:MA.L2-3.7.5 a cmmc:Control ;
+    cmmc:controlId        "MA.L2-3.7.5" ;
+    sysml:declaredName    "MA.L2-3.7.5" ;
+    cmmc:text             "Require multifactor authentication to establish nonlocal maintenance sessions via external network connections and terminate such connections when nonlocal maintenance is complete." ;
+    sysml:text            "Require multifactor authentication to establish nonlocal maintenance sessions via external network connections and terminate such connections when nonlocal maintenance is complete." ;
+    cmmc:weight           5 ;
+    cmmc:poamEligible     false ;
+    cmmc:nonDeferrable    true ;
+    cmmc:family           cmmc:MA .
+
+cmmc:MA.L2-3.7.6 a cmmc:Control ;
+    cmmc:controlId        "MA.L2-3.7.6" ;
+    sysml:declaredName    "MA.L2-3.7.6" ;
+    cmmc:text             "Supervise the maintenance activities of maintenance personnel without required access authorization." ;
+    sysml:text            "Supervise the maintenance activities of maintenance personnel without required access authorization." ;
+    cmmc:weight           1 ;
+    cmmc:poamEligible     true ;
+    cmmc:nonDeferrable    false ;
+    cmmc:family           cmmc:MA .
+
+cmmc:MP.L2-3.8.1 a cmmc:Control ;
+    cmmc:controlId        "MP.L2-3.8.1" ;
+    sysml:declaredName    "MP.L2-3.8.1" ;
+    cmmc:text             "Protect (i.e., physically control and securely store) system media containing CUI, both paper and digital." ;
+    sysml:text            "Protect (i.e., physically control and securely store) system media containing CUI, both paper and digital." ;
+    cmmc:weight           3 ;
+    cmmc:poamEligible     false ;
+    cmmc:nonDeferrable    true ;
+    cmmc:family           cmmc:MP .
+
+cmmc:MP.L2-3.8.2 a cmmc:Control ;
+    cmmc:controlId        "MP.L2-3.8.2" ;
+    sysml:declaredName    "MP.L2-3.8.2" ;
+    cmmc:text             "Limit access to CUI on system media to authorized users." ;
+    sysml:text            "Limit access to CUI on system media to authorized users." ;
+    cmmc:weight           3 ;
+    cmmc:poamEligible     false ;
+    cmmc:nonDeferrable    true ;
+    cmmc:family           cmmc:MP .
+
+cmmc:MP.L2-3.8.3 a cmmc:Control ;
+    cmmc:controlId        "MP.L2-3.8.3" ;
+    sysml:declaredName    "MP.L2-3.8.3" ;
+    cmmc:text             "Sanitize or destroy system media containing CUI before disposal or release for reuse." ;
+    sysml:text            "Sanitize or destroy system media containing CUI before disposal or release for reuse." ;
+    cmmc:weight           5 ;
+    cmmc:poamEligible     false ;
+    cmmc:nonDeferrable    true ;
+    cmmc:family           cmmc:MP .
+
+cmmc:MP.L2-3.8.4 a cmmc:Control ;
+    cmmc:controlId        "MP.L2-3.8.4" ;
+    sysml:declaredName    "MP.L2-3.8.4" ;
+    cmmc:text             "Mark media with necessary CUI markings and distribution limitations." ;
+    sysml:text            "Mark media with necessary CUI markings and distribution limitations." ;
+    cmmc:weight           1 ;
+    cmmc:poamEligible     true ;
+    cmmc:nonDeferrable    false ;
+    cmmc:family           cmmc:MP .
+
+cmmc:MP.L2-3.8.5 a cmmc:Control ;
+    cmmc:controlId        "MP.L2-3.8.5" ;
+    sysml:declaredName    "MP.L2-3.8.5" ;
+    cmmc:text             "Control access to media containing CUI and maintain accountability for media during transport outside of controlled areas." ;
+    sysml:text            "Control access to media containing CUI and maintain accountability for media during transport outside of controlled areas." ;
+    cmmc:weight           1 ;
+    cmmc:poamEligible     true ;
+    cmmc:nonDeferrable    false ;
+    cmmc:family           cmmc:MP .
+
+cmmc:MP.L2-3.8.6 a cmmc:Control ;
+    cmmc:controlId        "MP.L2-3.8.6" ;
+    sysml:declaredName    "MP.L2-3.8.6" ;
+    cmmc:text             "Implement cryptographic mechanisms to protect the confidentiality of CUI stored on digital media during transport unless otherwise protected by alternative physical safeguards." ;
+    sysml:text            "Implement cryptographic mechanisms to protect the confidentiality of CUI stored on digital media during transport unless otherwise protected by alternative physical safeguards." ;
+    cmmc:weight           1 ;
+    cmmc:poamEligible     true ;
+    cmmc:nonDeferrable    false ;
+    cmmc:family           cmmc:MP .
+
+cmmc:MP.L2-3.8.7 a cmmc:Control ;
+    cmmc:controlId        "MP.L2-3.8.7" ;
+    sysml:declaredName    "MP.L2-3.8.7" ;
+    cmmc:text             "Control the use of removable media on system components." ;
+    sysml:text            "Control the use of removable media on system components." ;
+    cmmc:weight           5 ;
+    cmmc:poamEligible     false ;
+    cmmc:nonDeferrable    true ;
+    cmmc:family           cmmc:MP .
+
+cmmc:MP.L2-3.8.8 a cmmc:Control ;
+    cmmc:controlId        "MP.L2-3.8.8" ;
+    sysml:declaredName    "MP.L2-3.8.8" ;
+    cmmc:text             "Prohibit the use of portable storage devices when such devices have no identifiable owner." ;
+    sysml:text            "Prohibit the use of portable storage devices when such devices have no identifiable owner." ;
+    cmmc:weight           3 ;
+    cmmc:poamEligible     false ;
+    cmmc:nonDeferrable    true ;
+    cmmc:family           cmmc:MP .
+
+cmmc:MP.L2-3.8.9 a cmmc:Control ;
+    cmmc:controlId        "MP.L2-3.8.9" ;
+    sysml:declaredName    "MP.L2-3.8.9" ;
+    cmmc:text             "Protect the confidentiality of backup CUI at storage locations." ;
+    sysml:text            "Protect the confidentiality of backup CUI at storage locations." ;
+    cmmc:weight           1 ;
+    cmmc:poamEligible     true ;
+    cmmc:nonDeferrable    false ;
+    cmmc:family           cmmc:MP .
+
+cmmc:PS.L2-3.9.1 a cmmc:Control ;
+    cmmc:controlId        "PS.L2-3.9.1" ;
+    sysml:declaredName    "PS.L2-3.9.1" ;
+    cmmc:text             "Screen individuals prior to authorizing access to organizational systems containing CUI." ;
+    sysml:text            "Screen individuals prior to authorizing access to organizational systems containing CUI." ;
+    cmmc:weight           3 ;
+    cmmc:poamEligible     false ;
+    cmmc:nonDeferrable    true ;
+    cmmc:family           cmmc:PS .
+
+cmmc:PS.L2-3.9.2 a cmmc:Control ;
+    cmmc:controlId        "PS.L2-3.9.2" ;
+    sysml:declaredName    "PS.L2-3.9.2" ;
+    cmmc:text             "Ensure that organizational systems containing CUI are protected during and after personnel actions such as terminations and transfers." ;
+    sysml:text            "Ensure that organizational systems containing CUI are protected during and after personnel actions such as terminations and transfers." ;
+    cmmc:weight           5 ;
+    cmmc:poamEligible     false ;
+    cmmc:nonDeferrable    true ;
+    cmmc:family           cmmc:PS .
+
+cmmc:PE.L2-3.10.1 a cmmc:Control ;
+    cmmc:controlId        "PE.L2-3.10.1" ;
+    sysml:declaredName    "PE.L2-3.10.1" ;
+    cmmc:text             "Limit physical access to organizational systems, equipment, and the respective operating environments to authorized individuals." ;
+    sysml:text            "Limit physical access to organizational systems, equipment, and the respective operating environments to authorized individuals." ;
+    cmmc:weight           5 ;
+    cmmc:poamEligible     false ;
+    cmmc:nonDeferrable    true ;
+    cmmc:inherited        true ;
+    cmmc:family           cmmc:PE .
+
+cmmc:PE.L2-3.10.2 a cmmc:Control ;
+    cmmc:controlId        "PE.L2-3.10.2" ;
+    sysml:declaredName    "PE.L2-3.10.2" ;
+    cmmc:text             "Protect and monitor the physical facility and support infrastructure for organizational systems." ;
+    sysml:text            "Protect and monitor the physical facility and support infrastructure for organizational systems." ;
+    cmmc:weight           5 ;
+    cmmc:poamEligible     false ;
+    cmmc:nonDeferrable    true ;
+    cmmc:inherited        true ;
+    cmmc:family           cmmc:PE .
+
+cmmc:PE.L2-3.10.3 a cmmc:Control ;
+    cmmc:controlId        "PE.L2-3.10.3" ;
+    sysml:declaredName    "PE.L2-3.10.3" ;
+    cmmc:text             "Escort visitors and monitor visitor activity." ;
+    sysml:text            "Escort visitors and monitor visitor activity." ;
+    cmmc:weight           1 ;
+    cmmc:poamEligible     false ;
+    cmmc:nonDeferrable    true ;
+    cmmc:family           cmmc:PE .
+
+cmmc:PE.L2-3.10.4 a cmmc:Control ;
+    cmmc:controlId        "PE.L2-3.10.4" ;
+    sysml:declaredName    "PE.L2-3.10.4" ;
+    cmmc:text             "Maintain audit logs of physical access." ;
+    sysml:text            "Maintain audit logs of physical access." ;
+    cmmc:weight           1 ;
+    cmmc:poamEligible     false ;
+    cmmc:nonDeferrable    true ;
+    cmmc:family           cmmc:PE .
+
+cmmc:PE.L2-3.10.5 a cmmc:Control ;
+    cmmc:controlId        "PE.L2-3.10.5" ;
+    sysml:declaredName    "PE.L2-3.10.5" ;
+    cmmc:text             "Control and manage physical access devices." ;
+    sysml:text            "Control and manage physical access devices." ;
+    cmmc:weight           1 ;
+    cmmc:poamEligible     false ;
+    cmmc:nonDeferrable    true ;
+    cmmc:family           cmmc:PE .
+
+cmmc:PE.L2-3.10.6 a cmmc:Control ;
+    cmmc:controlId        "PE.L2-3.10.6" ;
+    sysml:declaredName    "PE.L2-3.10.6" ;
+    cmmc:text             "Enforce safeguarding measures for CUI at alternate work sites." ;
+    sysml:text            "Enforce safeguarding measures for CUI at alternate work sites." ;
+    cmmc:weight           1 ;
+    cmmc:poamEligible     true ;
+    cmmc:nonDeferrable    false ;
+    cmmc:family           cmmc:PE .
+
+cmmc:RA.L2-3.11.1 a cmmc:Control ;
+    cmmc:controlId        "RA.L2-3.11.1" ;
+    sysml:declaredName    "RA.L2-3.11.1" ;
+    cmmc:text             "Periodically assess the risk to organizational operations (including mission, functions, image, or reputation), organizational assets, and individuals, resulting from the operation of organizational systems and the associated processing, storage, or transmission of CUI." ;
+    sysml:text            "Periodically assess the risk to organizational operations (including mission, functions, image, or reputation), organizational assets, and individuals, resulting from the operation of organizational systems and the associated processing, storage, or transmission of CUI." ;
+    cmmc:weight           3 ;
+    cmmc:poamEligible     false ;
+    cmmc:nonDeferrable    true ;
+    cmmc:family           cmmc:RA .
+
+cmmc:RA.L2-3.11.2 a cmmc:Control ;
+    cmmc:controlId        "RA.L2-3.11.2" ;
+    sysml:declaredName    "RA.L2-3.11.2" ;
+    cmmc:text             "Scan for vulnerabilities in organizational systems and applications periodically and when new vulnerabilities affecting those systems and applications are identified." ;
+    sysml:text            "Scan for vulnerabilities in organizational systems and applications periodically and when new vulnerabilities affecting those systems and applications are identified." ;
+    cmmc:weight           5 ;
+    cmmc:poamEligible     false ;
+    cmmc:nonDeferrable    true ;
+    cmmc:family           cmmc:RA .
+
+cmmc:RA.L2-3.11.3 a cmmc:Control ;
+    cmmc:controlId        "RA.L2-3.11.3" ;
+    sysml:declaredName    "RA.L2-3.11.3" ;
+    cmmc:text             "Remediate vulnerabilities in accordance with risk assessments." ;
+    sysml:text            "Remediate vulnerabilities in accordance with risk assessments." ;
+    cmmc:weight           1 ;
+    cmmc:poamEligible     true ;
+    cmmc:nonDeferrable    false ;
+    cmmc:family           cmmc:RA .
+
+cmmc:CA.L2-3.12.1 a cmmc:Control ;
+    cmmc:controlId        "CA.L2-3.12.1" ;
+    sysml:declaredName    "CA.L2-3.12.1" ;
+    cmmc:text             "Periodically assess the security controls in organizational systems to determine if the controls are effective in their application." ;
+    sysml:text            "Periodically assess the security controls in organizational systems to determine if the controls are effective in their application." ;
+    cmmc:weight           5 ;
+    cmmc:poamEligible     false ;
+    cmmc:nonDeferrable    true ;
+    cmmc:family           cmmc:CA .
+
+cmmc:CA.L2-3.12.2 a cmmc:Control ;
+    cmmc:controlId        "CA.L2-3.12.2" ;
+    sysml:declaredName    "CA.L2-3.12.2" ;
+    cmmc:text             "Develop and implement plans of action designed to correct deficiencies and reduce or eliminate vulnerabilities in organizational systems." ;
+    sysml:text            "Develop and implement plans of action designed to correct deficiencies and reduce or eliminate vulnerabilities in organizational systems." ;
+    cmmc:weight           3 ;
+    cmmc:poamEligible     false ;
+    cmmc:nonDeferrable    true ;
+    cmmc:family           cmmc:CA .
+
+cmmc:CA.L2-3.12.3 a cmmc:Control ;
+    cmmc:controlId        "CA.L2-3.12.3" ;
+    sysml:declaredName    "CA.L2-3.12.3" ;
+    cmmc:text             "Monitor security controls on an ongoing basis to ensure the continued effectiveness of the controls." ;
+    sysml:text            "Monitor security controls on an ongoing basis to ensure the continued effectiveness of the controls." ;
+    cmmc:weight           5 ;
+    cmmc:poamEligible     false ;
+    cmmc:nonDeferrable    true ;
+    cmmc:family           cmmc:CA .
+
+cmmc:CA.L2-3.12.4 a cmmc:Control ;
+    cmmc:controlId        "CA.L2-3.12.4" ;
+    sysml:declaredName    "CA.L2-3.12.4" ;
+    cmmc:text             "Develop, document, and periodically update system security plans that describe system boundaries, system environments of operation, how security requirements are implemented, and the relationships with or connections to other systems." ;
+    sysml:text            "Develop, document, and periodically update system security plans that describe system boundaries, system environments of operation, how security requirements are implemented, and the relationships with or connections to other systems." ;
+    cmmc:weight           1 ;
+    cmmc:poamEligible     false ;
+    cmmc:nonDeferrable    true ;
+    cmmc:family           cmmc:CA .
+
+cmmc:SC.L2-3.13.1 a cmmc:Control ;
+    cmmc:controlId        "SC.L2-3.13.1" ;
+    sysml:declaredName    "SC.L2-3.13.1" ;
+    cmmc:text             "Monitor, control, and protect communications (i.e., information transmitted or received by organizational systems) at the external boundaries and key internal boundaries of organizational systems." ;
+    sysml:text            "Monitor, control, and protect communications (i.e., information transmitted or received by organizational systems) at the external boundaries and key internal boundaries of organizational systems." ;
+    cmmc:weight           5 ;
+    cmmc:poamEligible     false ;
+    cmmc:nonDeferrable    true ;
+    cmmc:family           cmmc:SC .
+
+cmmc:SC.L2-3.13.2 a cmmc:Control ;
+    cmmc:controlId        "SC.L2-3.13.2" ;
+    sysml:declaredName    "SC.L2-3.13.2" ;
+    cmmc:text             "Employ architectural designs, software development techniques, and systems engineering principles that promote effective information security within organizational systems." ;
+    sysml:text            "Employ architectural designs, software development techniques, and systems engineering principles that promote effective information security within organizational systems." ;
+    cmmc:weight           5 ;
+    cmmc:poamEligible     false ;
+    cmmc:nonDeferrable    true ;
+    cmmc:family           cmmc:SC .
+
+cmmc:SC.L2-3.13.3 a cmmc:Control ;
+    cmmc:controlId        "SC.L2-3.13.3" ;
+    sysml:declaredName    "SC.L2-3.13.3" ;
+    cmmc:text             "Separate user functionality from system management functionality." ;
+    sysml:text            "Separate user functionality from system management functionality." ;
+    cmmc:weight           1 ;
+    cmmc:poamEligible     true ;
+    cmmc:nonDeferrable    false ;
+    cmmc:family           cmmc:SC .
+
+cmmc:SC.L2-3.13.4 a cmmc:Control ;
+    cmmc:controlId        "SC.L2-3.13.4" ;
+    sysml:declaredName    "SC.L2-3.13.4" ;
+    cmmc:text             "Prevent unauthorized and unintended information transfer via shared system resources." ;
+    sysml:text            "Prevent unauthorized and unintended information transfer via shared system resources." ;
+    cmmc:weight           1 ;
+    cmmc:poamEligible     true ;
+    cmmc:nonDeferrable    false ;
+    cmmc:family           cmmc:SC .
+
+cmmc:SC.L2-3.13.5 a cmmc:Control ;
+    cmmc:controlId        "SC.L2-3.13.5" ;
+    sysml:declaredName    "SC.L2-3.13.5" ;
+    cmmc:text             "Implement subnetworks for publicly accessible system components that are physically or logically separated from internal networks." ;
+    sysml:text            "Implement subnetworks for publicly accessible system components that are physically or logically separated from internal networks." ;
+    cmmc:weight           5 ;
+    cmmc:poamEligible     false ;
+    cmmc:nonDeferrable    true ;
+    cmmc:family           cmmc:SC .
+
+cmmc:SC.L2-3.13.6 a cmmc:Control ;
+    cmmc:controlId        "SC.L2-3.13.6" ;
+    sysml:declaredName    "SC.L2-3.13.6" ;
+    cmmc:text             "Deny network communications traffic by default and allow network communications traffic by exception (i.e., deny all, permit by exception)." ;
+    sysml:text            "Deny network communications traffic by default and allow network communications traffic by exception (i.e., deny all, permit by exception)." ;
+    cmmc:weight           5 ;
+    cmmc:poamEligible     false ;
+    cmmc:nonDeferrable    true ;
+    cmmc:family           cmmc:SC .
+
+cmmc:SC.L2-3.13.7 a cmmc:Control ;
+    cmmc:controlId        "SC.L2-3.13.7" ;
+    sysml:declaredName    "SC.L2-3.13.7" ;
+    cmmc:text             "Prevent remote devices from simultaneously establishing non-remote connections with organizational systems and communicating via some other connection to resources in external networks (i.e., split tunneling)." ;
+    sysml:text            "Prevent remote devices from simultaneously establishing non-remote connections with organizational systems and communicating via some other connection to resources in external networks (i.e., split tunneling)." ;
+    cmmc:weight           1 ;
+    cmmc:poamEligible     true ;
+    cmmc:nonDeferrable    false ;
+    cmmc:family           cmmc:SC .
+
+cmmc:SC.L2-3.13.8 a cmmc:Control ;
+    cmmc:controlId        "SC.L2-3.13.8" ;
+    sysml:declaredName    "SC.L2-3.13.8" ;
+    cmmc:text             "Implement cryptographic mechanisms to prevent unauthorized disclosure of CUI during transmission unless otherwise protected by alternative physical safeguards." ;
+    sysml:text            "Implement cryptographic mechanisms to prevent unauthorized disclosure of CUI during transmission unless otherwise protected by alternative physical safeguards." ;
+    cmmc:weight           3 ;
+    cmmc:poamEligible     false ;
+    cmmc:nonDeferrable    true ;
+    cmmc:family           cmmc:SC .
+
+cmmc:SC.L2-3.13.9 a cmmc:Control ;
+    cmmc:controlId        "SC.L2-3.13.9" ;
+    sysml:declaredName    "SC.L2-3.13.9" ;
+    cmmc:text             "Terminate network connections associated with communications sessions at the end of the sessions or after a defined period of inactivity." ;
+    sysml:text            "Terminate network connections associated with communications sessions at the end of the sessions or after a defined period of inactivity." ;
+    cmmc:weight           1 ;
+    cmmc:poamEligible     true ;
+    cmmc:nonDeferrable    false ;
+    cmmc:family           cmmc:SC .
+
+cmmc:SC.L2-3.13.10 a cmmc:Control ;
+    cmmc:controlId        "SC.L2-3.13.10" ;
+    sysml:declaredName    "SC.L2-3.13.10" ;
+    cmmc:text             "Establish and manage cryptographic keys for cryptography employed in organizational systems." ;
+    sysml:text            "Establish and manage cryptographic keys for cryptography employed in organizational systems." ;
+    cmmc:weight           1 ;
+    cmmc:poamEligible     true ;
+    cmmc:nonDeferrable    false ;
+    cmmc:family           cmmc:SC .
+
+cmmc:SC.L2-3.13.11 a cmmc:Control ;
+    cmmc:controlId        "SC.L2-3.13.11" ;
+    sysml:declaredName    "SC.L2-3.13.11" ;
+    cmmc:text             "Employ FIPS-validated cryptography when used to protect the confidentiality of CUI." ;
+    sysml:text            "Employ FIPS-validated cryptography when used to protect the confidentiality of CUI." ;
+    cmmc:weight           5 ;
+    cmmc:poamEligible     false ;
+    cmmc:nonDeferrable    true ;
+    cmmc:variableWeight   true ;
+    cmmc:weightIfPartial  3 ;
+    cmmc:family           cmmc:SC .
+
+cmmc:SC.L2-3.13.12 a cmmc:Control ;
+    cmmc:controlId        "SC.L2-3.13.12" ;
+    sysml:declaredName    "SC.L2-3.13.12" ;
+    cmmc:text             "Prohibit remote activation of collaborative computing devices and provide indication of devices in use to users present at the device." ;
+    sysml:text            "Prohibit remote activation of collaborative computing devices and provide indication of devices in use to users present at the device." ;
+    cmmc:weight           1 ;
+    cmmc:poamEligible     true ;
+    cmmc:nonDeferrable    false ;
+    cmmc:family           cmmc:SC .
+
+cmmc:SC.L2-3.13.13 a cmmc:Control ;
+    cmmc:controlId        "SC.L2-3.13.13" ;
+    sysml:declaredName    "SC.L2-3.13.13" ;
+    cmmc:text             "Control and monitor the use of mobile code." ;
+    sysml:text            "Control and monitor the use of mobile code." ;
+    cmmc:weight           1 ;
+    cmmc:poamEligible     true ;
+    cmmc:nonDeferrable    false ;
+    cmmc:family           cmmc:SC .
+
+cmmc:SC.L2-3.13.14 a cmmc:Control ;
+    cmmc:controlId        "SC.L2-3.13.14" ;
+    sysml:declaredName    "SC.L2-3.13.14" ;
+    cmmc:text             "Control and monitor the use of Voice over Internet Protocol (VoIP) technologies." ;
+    sysml:text            "Control and monitor the use of Voice over Internet Protocol (VoIP) technologies." ;
+    cmmc:weight           1 ;
+    cmmc:poamEligible     true ;
+    cmmc:nonDeferrable    false ;
+    cmmc:family           cmmc:SC .
+
+cmmc:SC.L2-3.13.15 a cmmc:Control ;
+    cmmc:controlId        "SC.L2-3.13.15" ;
+    sysml:declaredName    "SC.L2-3.13.15" ;
+    cmmc:text             "Protect the authenticity of communications sessions." ;
+    sysml:text            "Protect the authenticity of communications sessions." ;
+    cmmc:weight           5 ;
+    cmmc:poamEligible     false ;
+    cmmc:nonDeferrable    true ;
+    cmmc:family           cmmc:SC .
+
+cmmc:SC.L2-3.13.16 a cmmc:Control ;
+    cmmc:controlId        "SC.L2-3.13.16" ;
+    sysml:declaredName    "SC.L2-3.13.16" ;
+    cmmc:text             "Protect the confidentiality of CUI at rest." ;
+    sysml:text            "Protect the confidentiality of CUI at rest." ;
+    cmmc:weight           1 ;
+    cmmc:poamEligible     true ;
+    cmmc:nonDeferrable    false ;
+    cmmc:family           cmmc:SC .
+
+cmmc:SI.L2-3.14.1 a cmmc:Control ;
+    cmmc:controlId        "SI.L2-3.14.1" ;
+    sysml:declaredName    "SI.L2-3.14.1" ;
+    cmmc:text             "Identify, report, and correct system flaws in a timely manner." ;
+    sysml:text            "Identify, report, and correct system flaws in a timely manner." ;
+    cmmc:weight           5 ;
+    cmmc:poamEligible     false ;
+    cmmc:nonDeferrable    true ;
+    cmmc:family           cmmc:SI .
+
+cmmc:SI.L2-3.14.2 a cmmc:Control ;
+    cmmc:controlId        "SI.L2-3.14.2" ;
+    sysml:declaredName    "SI.L2-3.14.2" ;
+    cmmc:text             "Provide protection from malicious code at designated locations within organizational systems." ;
+    sysml:text            "Provide protection from malicious code at designated locations within organizational systems." ;
+    cmmc:weight           5 ;
+    cmmc:poamEligible     false ;
+    cmmc:nonDeferrable    true ;
+    cmmc:family           cmmc:SI .
+
+cmmc:SI.L2-3.14.3 a cmmc:Control ;
+    cmmc:controlId        "SI.L2-3.14.3" ;
+    sysml:declaredName    "SI.L2-3.14.3" ;
+    cmmc:text             "Monitor system security alerts and advisories and take action in response." ;
+    sysml:text            "Monitor system security alerts and advisories and take action in response." ;
+    cmmc:weight           5 ;
+    cmmc:poamEligible     false ;
+    cmmc:nonDeferrable    true ;
+    cmmc:family           cmmc:SI .
+
+cmmc:SI.L2-3.14.4 a cmmc:Control ;
+    cmmc:controlId        "SI.L2-3.14.4" ;
+    sysml:declaredName    "SI.L2-3.14.4" ;
+    cmmc:text             "Update malicious code protection mechanisms when new releases are available." ;
+    sysml:text            "Update malicious code protection mechanisms when new releases are available." ;
+    cmmc:weight           5 ;
+    cmmc:poamEligible     false ;
+    cmmc:nonDeferrable    true ;
+    cmmc:family           cmmc:SI .
+
+cmmc:SI.L2-3.14.5 a cmmc:Control ;
+    cmmc:controlId        "SI.L2-3.14.5" ;
+    sysml:declaredName    "SI.L2-3.14.5" ;
+    cmmc:text             "Perform periodic scans of organizational systems and real-time scans of files from external sources as files are downloaded, opened, or executed." ;
+    sysml:text            "Perform periodic scans of organizational systems and real-time scans of files from external sources as files are downloaded, opened, or executed." ;
+    cmmc:weight           3 ;
+    cmmc:poamEligible     false ;
+    cmmc:nonDeferrable    true ;
+    cmmc:family           cmmc:SI .
+
+cmmc:SI.L2-3.14.6 a cmmc:Control ;
+    cmmc:controlId        "SI.L2-3.14.6" ;
+    sysml:declaredName    "SI.L2-3.14.6" ;
+    cmmc:text             "Monitor organizational systems, including inbound and outbound communications traffic, to detect attacks and indicators of potential attacks." ;
+    sysml:text            "Monitor organizational systems, including inbound and outbound communications traffic, to detect attacks and indicators of potential attacks." ;
+    cmmc:weight           5 ;
+    cmmc:poamEligible     false ;
+    cmmc:nonDeferrable    true ;
+    cmmc:family           cmmc:SI .
+
+cmmc:SI.L2-3.14.7 a cmmc:Control ;
+    cmmc:controlId        "SI.L2-3.14.7" ;
+    sysml:declaredName    "SI.L2-3.14.7" ;
+    cmmc:text             "Identify unauthorized use of organizational systems." ;
+    sysml:text            "Identify unauthorized use of organizational systems." ;
+    cmmc:weight           3 ;
+    cmmc:poamEligible     false ;
+    cmmc:nonDeferrable    true ;
+    cmmc:family           cmmc:SI .

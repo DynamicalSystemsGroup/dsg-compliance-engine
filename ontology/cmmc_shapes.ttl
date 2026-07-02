@@ -1,0 +1,342 @@
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix sh:      <http://www.w3.org/ns/shacl#> .
+@prefix prov:    <http://www.w3.org/ns/prov#> .
+@prefix earl:    <http://www.w3.org/ns/earl#> .
+@prefix gsn:     <https://w3id.org/OntoGSN/ontology#> .
+@prefix p-plan:  <http://purl.org/net/p-plan#> .
+@prefix sysml:   <https://www.omg.org/spec/SysML/2.0/> .
+@prefix cmmc:    <http://dynamicalsystems.group/ontology/cmmc#> .
+@prefix ce:      <http://dynamicalsystems.group/compliance-engine/> .
+
+# =============================================================================
+# The closure-rule suite — well-formedness invariants for the compliance engine.
+#
+# Adapted from ADCS-lifecycle-demo/ontology/rtm_shapes.ttl:
+#   * instance vocab rtm: -> ce: (attestation/evidence/traceability layer)
+#   * requirement/control vocab -> cmmc: (a cmmc:Control IS a sysml:RequirementDefinition)
+#   * sysml:/prov:/earl:/gsn:/p-plan:/sh: retained verbatim
+#   * Docker / Organization / TransactionLog shapes DROPPED (no container substrate)
+#   * ADDED: ControlShape, PoamLegalityShape, ContradictionShape (the guardrails)
+#
+# Each shape checks one invariant. Together they are the machine-checkable
+# definition of "a well-constructed compliance dataset" — orthogonal to and
+# prerequisite for the SPRS score + POA&M legality computed by the audit module.
+# =============================================================================
+
+# -- Control ------------------------------------------------------------------
+# ControlShape: every cmmc:Control carries an id, text, weight and POA&M flag.
+# This is the structural spine Document 1 must satisfy after the build.
+# -----------------------------------------------------------------------------
+
+cmmc:ControlShape a sh:NodeShape ;
+    sh:targetClass cmmc:Control ;
+    sh:property [
+        sh:path cmmc:controlId ;
+        sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ;
+        sh:message "cmmc:Control must carry exactly one cmmc:controlId."
+    ] ;
+    sh:property [
+        sh:path cmmc:text ;
+        sh:minCount 1 ; sh:datatype xsd:string ; sh:minLength 1 ;
+        sh:message "cmmc:Control must carry the verbatim NIST statement in cmmc:text."
+    ] ;
+    sh:property [
+        sh:path cmmc:weight ;
+        sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:integer ;
+        sh:in ( 1 3 5 ) ;
+        sh:message "cmmc:Control must carry exactly one cmmc:weight in {1,3,5}."
+    ] ;
+    sh:property [
+        sh:path cmmc:poamEligible ;
+        sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:boolean ;
+        sh:message "cmmc:Control must declare cmmc:poamEligible (true|false)."
+    ] .
+
+# -- PoamLegality (guardrail #1) ----------------------------------------------
+# PoamLegalityShape: only 1-point controls may sit on a POA&M. A cmmc:Control
+# whose cmmc:weight > 1 MUST NOT carry a cmmc:poamItem. (32 CFR 170.21(a)(2))
+# -----------------------------------------------------------------------------
+
+cmmc:PoamLegalityShape a sh:NodeShape ;
+    sh:targetClass cmmc:Control ;
+    sh:sparql [
+        sh:message "POA&M legality violation: a control with weight > 1 must not carry a cmmc:poamItem (only 1-point controls are POA&M-eligible)." ;
+        sh:prefixes cmmc: ;
+        sh:select """
+            PREFIX cmmc: <http://dynamicalsystems.group/ontology/cmmc#>
+            SELECT $this WHERE {
+                $this cmmc:weight ?w ;
+                      cmmc:poamItem ?item .
+                FILTER (?w > 1)
+            }
+        """
+    ] .
+
+# -- Contradiction (guardrail #2, R13) ----------------------------------------
+# ContradictionShape: a MET attestation (ce:attests some control with outcome
+# earl:passed) whose backing oracle assertion reports earl:failed, and which
+# carries no cmmc:overrideJustification, is a violation. Attestation may record
+# the backing outcome directly (ce:oracleOutcome) or via a linked earl:Assertion
+# (ce:backedBy … earl:outcome). Either failing path trips the shape.
+# -----------------------------------------------------------------------------
+
+cmmc:ContradictionShape a sh:NodeShape ;
+    sh:targetClass ce:Attestation ;
+    sh:sparql [
+        sh:message "Contradiction (R13): attestation marked MET (earl:passed) but its backing oracle FAILED, with no cmmc:overrideJustification." ;
+        sh:prefixes cmmc: ;
+        sh:select """
+            PREFIX cmmc: <http://dynamicalsystems.group/ontology/cmmc#>
+            PREFIX ce:   <http://dynamicalsystems.group/compliance-engine/>
+            PREFIX earl: <http://www.w3.org/ns/earl#>
+            SELECT $this WHERE {
+                $this ce:attests ?control ;
+                      ce:hasOutcome earl:passed .
+                {
+                    $this ce:oracleOutcome earl:failed .
+                } UNION {
+                    $this ce:backedBy ?assertion .
+                    ?assertion earl:outcome earl:failed .
+                }
+                FILTER NOT EXISTS { $this cmmc:overrideJustification ?j }
+            }
+        """
+    ] .
+
+# -- #1 -----------------------------------------------------------------------
+# AttestationShape: every Attestation carries adequacy Assumption +
+# sufficiency Justification + exactly one outcome + qualified association.
+# -----------------------------------------------------------------------------
+
+ce:AttestationShape a sh:NodeShape ;
+    sh:targetClass ce:Attestation ;
+    sh:property [
+        sh:path gsn:inContextOf ;
+        sh:qualifiedValueShape [ sh:class gsn:Assumption ] ;
+        sh:qualifiedMinCount 1 ;
+        sh:message "Attestation must include at least one adequacy gsn:Assumption linked via gsn:inContextOf."
+    ] ;
+    sh:property [
+        sh:path gsn:inContextOf ;
+        sh:qualifiedValueShape [ sh:class gsn:Justification ] ;
+        sh:qualifiedMinCount 1 ;
+        sh:message "Attestation must include at least one sufficiency gsn:Justification linked via gsn:inContextOf."
+    ] ;
+    sh:property [
+        sh:path ce:hasOutcome ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:message "Attestation must record exactly one ce:hasOutcome (an EARL outcome value)."
+    ] ;
+    sh:property [
+        sh:path prov:qualifiedAssociation ;
+        sh:minCount 1 ;
+        sh:message "Attestation must record a prov:qualifiedAssociation (with prov:hadRole and prov:hadPlan)."
+    ] ;
+    sh:property [
+        sh:path ce:attests ;
+        sh:minCount 1 ;
+        sh:message "Attestation must attest at least one control."
+    ] .
+
+# -- #2 -----------------------------------------------------------------------
+# PlanInstantiationShape: every p-plan:Activity corresponds to a known step.
+# Predecessor ordering is checked at runtime (SPARQL ASK in the audit module)
+# since SHACL pure cannot navigate transitive precedes-relations.
+# -----------------------------------------------------------------------------
+
+ce:PlanInstantiationShape a sh:NodeShape ;
+    sh:targetClass p-plan:Activity ;
+    sh:property [
+        sh:path p-plan:correspondsToStep ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:class p-plan:Step ;
+        sh:message "p-plan:Activity must correspondsToStep exactly one p-plan:Step."
+    ] ;
+    sh:property [
+        sh:path prov:startedAtTime ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:datatype xsd:dateTime ;
+        sh:message "p-plan:Activity must record prov:startedAtTime."
+    ] .
+
+# -- #3 -----------------------------------------------------------------------
+# EvidenceShape: hashes + source + generating activity + addresses control.
+# -----------------------------------------------------------------------------
+
+ce:EvidenceShape a sh:NodeShape ;
+    sh:targetClass ce:Evidence ;
+    sh:property [
+        sh:path ce:contentHash ;
+        sh:minCount 1 ; sh:datatype xsd:string ;
+        sh:message "Evidence must record a ce:contentHash."
+    ] ;
+    sh:property [
+        sh:path ce:modelHash ;
+        sh:minCount 1 ; sh:datatype xsd:string ;
+        sh:message "Evidence must record a ce:modelHash."
+    ] ;
+    sh:property [
+        sh:path ce:sourceFile ;
+        sh:minCount 1 ; sh:datatype xsd:string ;
+        sh:message "Evidence must record a ce:sourceFile."
+    ] ;
+    sh:property [
+        sh:path ce:resultSummary ;
+        sh:minCount 1 ; sh:datatype xsd:string ;
+        sh:message "Evidence must record a ce:resultSummary."
+    ] ;
+    sh:property [
+        sh:path prov:wasGeneratedBy ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:message "Evidence must record exactly one prov:wasGeneratedBy activity."
+    ] ;
+    sh:property [
+        sh:path ce:addresses ;
+        sh:minCount 1 ;
+        sh:message "Evidence must ce:addresses at least one control (or be flagged as orphan in the audit)."
+    ] .
+
+# -- #4 -----------------------------------------------------------------------
+# RequirementShape: declared name + text. derivedFrom acyclicity is checked at
+# runtime (graph traversal) since SHACL cannot universally express transitive
+# non-cyclicity without recursion extensions.
+# -----------------------------------------------------------------------------
+
+ce:RequirementShape a sh:NodeShape ;
+    sh:targetClass sysml:RequirementDefinition ;
+    sh:property [
+        sh:path sysml:declaredName ;
+        sh:minCount 1 ; sh:datatype xsd:string ;
+        sh:message "Requirement must have a sysml:declaredName."
+    ] ;
+    sh:property [
+        sh:path sysml:text ;
+        sh:minCount 1 ; sh:datatype xsd:string ;
+        sh:message "Requirement must have sysml:text (the textual statement)."
+    ] .
+
+# -- #5 -----------------------------------------------------------------------
+# GsnArgumentShape: Strategy supported by at least one Solution; Assumption,
+# Justification, Context must carry non-empty gsn:statement.
+# -----------------------------------------------------------------------------
+
+ce:StrategySupportedShape a sh:NodeShape ;
+    sh:targetClass gsn:Strategy ;
+    sh:property [
+        sh:path gsn:supportedBy ;
+        sh:qualifiedValueShape [ sh:class gsn:Solution ] ;
+        sh:qualifiedMinCount 1 ;
+        sh:message "gsn:Strategy must be gsn:supportedBy at least one gsn:Solution."
+    ] .
+
+ce:GoalSupportedShape a sh:NodeShape ;
+    sh:targetClass gsn:Goal ;
+    sh:property [
+        sh:path [ sh:inversePath gsn:supportedBy ] ;
+        sh:minCount 1 ;
+        sh:message "gsn:Goal must have at least one supportedBy (incoming) — a Strategy or Solution that argues it."
+    ] .
+
+ce:GsnTextShape a sh:NodeShape ;
+    sh:targetClass gsn:Assumption , gsn:Justification , gsn:Context ;
+    sh:property [
+        sh:path gsn:statement ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:minLength 1 ;
+        sh:message "GSN Assumption / Justification / Context must carry a non-empty gsn:statement."
+    ] .
+
+# -- #6 -----------------------------------------------------------------------
+# ProvenanceShape: Activity has agent; Entity has at most one generating activity.
+# -----------------------------------------------------------------------------
+
+ce:ActivityAgentShape a sh:NodeShape ;
+    sh:targetClass prov:Activity ;
+    sh:property [
+        sh:path prov:wasAssociatedWith ;
+        sh:minCount 1 ;
+        sh:message "prov:Activity must record at least one prov:wasAssociatedWith agent."
+    ] .
+
+ce:EntityGeneratingActivityShape a sh:NodeShape ;
+    sh:targetClass prov:Entity ;
+    sh:property [
+        sh:path prov:wasGeneratedBy ;
+        sh:maxCount 1 ;
+        sh:message "prov:Entity must have at most one generating activity (PROV-O constraint)."
+    ] .
+
+# -- #7 -----------------------------------------------------------------------
+# OutcomeSemanticsShape: outcome-specific rationale requirements. A MET
+# attestation (earl:passed) must carry non-empty adequacy + sufficiency text.
+# -----------------------------------------------------------------------------
+
+ce:PassedRequiresAdequacyAndSufficiencyShape a sh:NodeShape ;
+    sh:targetClass ce:Attestation ;
+    sh:sparql [
+        sh:message "Attestation with outcome earl:passed must have non-empty adequacy and sufficiency gsn:statement text." ;
+        sh:prefixes ce: ;
+        sh:select """
+            PREFIX ce:   <http://dynamicalsystems.group/compliance-engine/>
+            PREFIX earl: <http://www.w3.org/ns/earl#>
+            PREFIX gsn:  <https://w3id.org/OntoGSN/ontology#>
+            SELECT $this WHERE {
+                $this ce:hasOutcome earl:passed .
+                FILTER NOT EXISTS {
+                    $this gsn:inContextOf ?asm .
+                    ?asm a gsn:Assumption ; gsn:statement ?at .
+                    FILTER (STRLEN(STR(?at)) > 0)
+                }
+            }
+        """
+    ] .
+
+# -- #8a ----------------------------------------------------------------------
+# ForwardTraceabilityShape: every cmmc:Control reaches evidence with an
+# addressing link AND an attestation (any outcome value, since declined
+# attestations are well-formed too). Scoped to cmmc:Control instances.
+# -----------------------------------------------------------------------------
+
+ce:ForwardTraceabilityShape a sh:NodeShape ;
+    sh:targetClass cmmc:Control ;
+    sh:sparql [
+        sh:message "Forward-traceability failure: control is not reachable to addressing evidence + an attestation." ;
+        sh:prefixes ce: ;
+        sh:select """
+            PREFIX ce:   <http://dynamicalsystems.group/compliance-engine/>
+            PREFIX cmmc: <http://dynamicalsystems.group/ontology/cmmc#>
+            SELECT $this WHERE {
+                $this a cmmc:Control .
+                FILTER NOT EXISTS {
+                    ?att ce:attests $this ;
+                         ce:hasEvidence ?ev ;
+                         ce:hasOutcome ?out .
+                    ?ev ce:addresses $this .
+                }
+            }
+        """
+    ] .
+
+# -- #8b ----------------------------------------------------------------------
+# BackwardTraceabilityShape: every attestation's evidence is addresses-linked
+# back to the control it attests. Independent of #8a — runs and reports its
+# failures separately so error messages identify which direction broke.
+# -----------------------------------------------------------------------------
+
+ce:BackwardTraceabilityShape a sh:NodeShape ;
+    sh:targetClass ce:Attestation ;
+    sh:sparql [
+        sh:message "Backward-traceability failure: attestation references evidence that does not declare addressing the attested control." ;
+        sh:prefixes ce: ;
+        sh:select """
+            PREFIX ce: <http://dynamicalsystems.group/compliance-engine/>
+            SELECT $this WHERE {
+                $this ce:attests ?req ;
+                      ce:hasEvidence ?ev .
+                FILTER NOT EXISTS { ?ev ce:addresses ?req }
+            }
+        """
+    ] .
