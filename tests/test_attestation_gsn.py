@@ -195,9 +195,14 @@ def test_same_now_yields_byte_identical_attestation_triples():
     # (blank nodes canonicalised so the qualifiedAssociation node can't drift).
     g1 = _attestations_graph(_NOW)
     g2 = _attestations_graph(_NOW)
-    bytes1 = to_canonical_graph(g1).serialize(format="nt", encoding="utf-8")
-    bytes2 = to_canonical_graph(g2).serialize(format="nt", encoding="utf-8")
-    assert bytes1 == bytes2
+    # Canonicalise blank nodes, then compare SORTED lines: rdflib's N-Triples
+    # serializer stabilises blank-node labels via to_canonical_graph but does not
+    # guarantee triple *line order* across independent builds, so sort before
+    # comparing (matches how documents/ssp.py fingerprints over sorted quads).
+    def _canon_lines(g):
+        nt = to_canonical_graph(g).serialize(format="nt", encoding="utf-8")
+        return sorted(nt.splitlines())
+    assert _canon_lines(g1) == _canon_lines(g2)
 
 
 def test_different_now_changes_the_subgraph():
