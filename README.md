@@ -88,6 +88,8 @@ The [`ADCS-lifecycle-demo`](../ADCS-lifecycle-demo) engine is the proven **back 
 
 ## Status
 
-**Scaffold + design.** Nothing runs yet. See [`ARCHITECTURE.md`](ARCHITECTURE.md) for the loop in detail and [`ROADMAP.md`](ROADMAP.md) for the phased buildout.
+**Runnable.** The full chain is implemented and tested — ontology build, Order compilation + Gate 1, real Terraform plan-level provisioning (mock providers), evidence/oracles, Gate 2 attestation, audit + SPRS, BOM + registry, and the deterministic SSP/Matrix. See [`ARCHITECTURE.md`](ARCHITECTURE.md) for the loop in detail and [`ROADMAP.md`](ROADMAP.md) for the phased buildout.
+
+**As-built:** [`docs/AS-BUILT.md`](docs/AS-BUILT.md) maps the shipped code to the architecture, the two gates, the named-graph/predicate component map, and R1–R13 requirements traceability.
 
 *Design material, not legal advice. Verify all CMMC/ITAR interpretations with the contracting officer, C3PAO, and counsel.*
