@@ -42,7 +42,7 @@ generator run unions them into the per-control evidence summary.
 | Set              | Files                                                                 | Purpose (U13)                                                                                           |
 | ---------------- | -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
 | `all-covered/`   | all 5 exports, **every criterion passes**                            | happy path — Gate 1 passes, Factory completes, **SPRS 110/Final** (mock-marked).                        |
-| `gap/`           | 4 exports — **omits `gcp_kms_cmvp.json`** (the FIPS module)          | drives a **Gate-1 refusal**: `SC.L2-3.13.11` has no claiming module/evidence → Order refused, gap named.|
+| `gap/`           | 4 exports — **omits `gcp_kms_cmvp.json`** (the FIPS evidence)        | at the **Factory/oracle** layer: with no FIPS export the `fips_module_present` metric is absent → the `SC.L2-3.13.11` oracle returns `cantTell`/absent (missing-evidence gap). NB: `SC.L2-3.13.11` still has a claiming tier1 module (`CMEK_KeyRing`), so this set does **not** by itself trip **Gate 1** — Gate 1 is a *planning* check on module coverage, not evidence. See the U13 note below. |
 | `contradiction/` | all 5 exports, but `mfa_enforced_privileged: false`                  | oracle for `IA.L2-3.5.3` **fails**; when the Affirming Official attests MET the audit's contradiction dimension fires (**MET-over-failed-oracle**, R13). |
 
 ### Set file inventory
@@ -53,3 +53,20 @@ generator run unions them into the per-control evidence summary.
   `SC.L2-3.13.11` absent → the metric `fips_module_present` never appears).
 - **`contradiction/`**: same five as `all-covered/`, with the MFA export patched
   so `mfa_enforced_privileged: false` (oracle `failed`).
+
+## End-to-end (U13) — expected end-states (`tests/test_nv012_e2e.py`)
+
+The acceptance test drives the whole chain (compile → Gate 1 → Factory →
+attest → audit → SPRS → BOM → SSP) programmatically and asserts:
+
+| Scenario | Driver | Asserted end-state |
+| -------- | ------ | ------------------ |
+| **all-covered** | `evidence_set="all-covered"`; all 22 required controls attested MET | Gate 1 passes → Factory completes → **SPRS 110 / Final / `valid_submission`**; BOM + run carry `ce:evidentiaryStatus "mock"`; the SSP shows the **NON-EVIDENTIARY** banner (R12); every required control is MET and the machine-checkable subset is cited to a 64-hex evidence hash; the SSP VCRM status column equals the attestation outcomes in the graph (no drift); the registry resolves `NV012 → latest BOM → artifact hashes`. |
+| **gap** | an **uncovered 5-point required control** (`AC.L2-3.1.12`, no claiming tier1 module) added at the *obligation* layer | `compile_order` raises **`Gate1Failed`**; the gap report names `AC.L2-3.1.12`; **no Order is emitted and the Factory never runs**. (This is the *planning*-gate refusal. The `gap/` evidence set above is the complementary *Factory-layer* missing-evidence gap.) |
+| **contradiction** | `evidence_set="contradiction"` (oracle `IA.L2-3.5.3` = `failed`); official attests MET **without** `cmmc:overrideJustification` | the audit's **R13 contradiction dimension** flags the MET-over-failed-oracle; the report reads "0 MET-by-machine / 1 MET-by-human-only"; the SSP colophon surfaces `contradictions: 1.`; SPRS reflects the human MET call. Adding an override justification **clears** the contradiction (`contradictions: 0.`). |
+
+Note on Gate 1 vs. evidence gaps: **Gate 1** (Order Compiler) checks that every
+required control has a claiming module — a *planning*-time property, independent
+of any evidence set. A missing/failed *oracle* (the `gap/` and `contradiction/`
+sets) is a *Factory/Gate 2* concern surfaced later by the oracles + audit, not a
+Gate-1 refusal.
