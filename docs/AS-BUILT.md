@@ -1,9 +1,12 @@
 # Compliance Engine — As-Built Architecture
 
-> **Status:** As-built snapshot, 2026-07-02. U1–U11 + U14 committed; U12 (SSP/Matrix)
-> and U13 (end-to-end run) in progress. Every predicate, path, and number below is
-> taken from the committed tree or a `results/agent-*.md` contract — items still in
-> flight are marked **(in progress)**.
+> **Status:** As-built snapshot, 2026-07-02. U1–U12 + U14 committed, plus the
+> operator CLI (`cli.py`, U13a) that drives the full chain in one command. Every
+> predicate, path, and number below is taken from the committed tree or a
+> `results/agent-*.md` contract. One item is queued, not a gap: the
+> `ForwardTraceabilityShape` scope fix (it currently targets *every* `cmmc:Control`,
+> so `verify()` over the full 110-control catalog flags out-of-scope controls — the
+> orchestrator applies the fix after the U13 acceptance test lands).
 
 ## Thesis: compliance is a provisioning artifact
 
@@ -78,7 +81,8 @@ Named graphs (`ontology/prefixes.py`): `<ce:ontology> <ce:plan> <ce:structural>
 | `traceability/audit.py` (U10) | Bidirectional audit + R13 contradiction + proven-vs-attested + SPRS wiring | `<ce:audit>` | `ce:forwardPassed/backwardPassed/bidirectionalPassed/contradictionCount/metByMachine/metByHumanOnly/sprsScore/sprsStatus/validSubmission` |
 | `traceability/sprs.py` (U10) | SPRS score + POA&M legality gate | — | `ControlStatus`, `SprsResult(score,status,illegal_poam,unmet,valid_submission)`, `score()`, `load_control_statuses()` |
 | `traceability/bom.py` (U11) | BOM assembly, hash-reference, two-level registry store | registry + `ce:BOM` RDF | `ce:BOM`, `ce:forContract`, `ce:derivedFromOrder`, `ce:bomHash`, `ce:evidentiaryStatus`, `ce:referencesArtifact`, `ce:hasControlMapping` |
-| `documents/` — `ssp/queries` (U12, **in progress**) | Deterministic SSP + generated Traceability Matrix (Document 2); R12 banner | — (reads) | VCRM columns; `dataset_fingerprint`; NON-EVIDENTIARY banner |
+| `documents/ssp.py` + `documents/queries.py` (U12) | Deterministic, byte-stable SSP + generated Traceability Matrix (Document 2); mandatory R12 banner | — (reads) | `compile_ssp(ds, …)` / `compile_ssp_from_run(…)` → Markdown; `dataset_fingerprint` (sorted quads, bnode-stable); `document_date` = `MAX(prov:generatedAtTime)`; NON-EVIDENTIARY banner; `--check` drift gate |
+| `cli.py` (U13a) | Operator driver — the one-command NV012 `demo` chaining all stages over one shared Dataset; six standalone subcommands | writes run artifacts under `output/` (`bom.json`, engine `.trig`, run state) | `demo` = compile-order → run-factory → attest → audit → bom → ssp-hook; `--evidence-set {all-covered\|gap\|contradiction}`, `--backend {fake\|terraform}`, `--auto` |
 
 ## Requirements traceability (R1–R13)
 
@@ -88,21 +92,25 @@ The plan defines **R1–R13** (13 requirements; there is no R14 — see gaps).
 | --- | --- | --- | --- |
 | **R1** | Order **compiled** from the contract via a human-attested COP | U4 `order-compiler/rule_library.py`, U5 `order-compiler/{cop.py,compiler.py}` | obligations resolve to controls; COP attested; `compiler` emits `ce:requiresControl` |
 | **R2** | **Gate 1** planning coverage (forward/backward + no untestable claim) | U5 `order-compiler/gate1.py`, U3 `structural/tier1.ttl` | own SPARQL over the satisfy edge + `cmmc:verificationMethod`; no coverage ⇒ no Order |
-| **R3** | Factory executes an Order **end-to-end** (mock provision + fixture evidence) → BOM | U8 `pipeline/runner.py`+`provision/terraform.py`, U14 `terraform/tier1`, **U13 e2e (in progress)** | staged pipeline; real `terraform plan`, mock apply; fixture generators |
+| **R3** | Factory executes an Order **end-to-end** (mock provision + fixture evidence) → BOM | U8 `pipeline/runner.py`+`provision/terraform.py`, U14 `terraform/tier1`, U13a `cli.py demo` | staged pipeline; real `terraform plan`, mock apply; fixture generators; `cli.py demo` chains it all (tested by `tests/test_cli.py`) |
 | **R4** | MET **only when evidence passes AND a human attests**; no criterion → `cantTell`→human | U7 `oracles/`, U9 `traceability/attestation.py` | oracle `earl:{passed,failed,cantTell}`; MET requires `ce:attests`+`earl:passed` |
 | **R5** | **Bidirectional audit** against the Order's required set | U10 `traceability/audit.py` | forward (required→module+attestation), backward (attestation evidence `ce:addresses` same control) |
 | **R6** | **SPRS score** + hard-fail illegal POA&M | U2 `ContradictionShape`/`PoamLegalityShape`, U10 `traceability/sprs.py` + `audit.py` | `110 − Σ weight(non-MET)`; any weight>1/excluded on a POA&M ⇒ `valid_submission False` |
-| **R7** | Deterministic, drift-checked **SSP** + generated **Matrix (Doc 2)** | U12 `documents/ssp.py`+`queries.py` **(in progress)** | fingerprint over sorted quads; `--check` drift gate; VCRM from the graph |
+| **R7** | Deterministic, drift-checked **SSP** + generated **Matrix (Doc 2)** | U12 `documents/ssp.py`+`documents/queries.py` | `compile_ssp` renders byte-stable Markdown; fingerprint over sorted quads (bnode-stable); `--check` drift gate; VCRM (all 110 controls) from the graph |
 | **R8** | **SHA-256 write-once registry**; BOM references artifacts by hash | U1 `pipeline/registry.py`+`backends/`, U6 `evidence/hashing.py`, U11 `traceability/bom.py` | content-addressing; `ContentMismatch` on rewrite; BOM `ce:referencesArtifact` by hash |
 | **R9** | **Reuse the ADCS substrate by porting** it | U1/U6/U7/U9/U10 (all ported from `ADCS-lifecycle-demo/`) | dataset, hashing, oracle, attestation, audit, verification ported + retargeted `rtm:`→`ce:`/`cmmc:` |
 | **R10** | Encode **all 110 controls** with weights + POA&M eligibility | U2 `ontology/cmmc-edit.ttl` | 110 `cmmc:Control`; histogram `{5:42, 3:14, 1:52, variable:2}`; six excluded 1-pointers `nonDeferrable` |
 | **R11** | Separate **environment** vs **deliverable** obligations (attested, not silent) | U4 `order-compiler/obligations.ttl`+`rule_library.py` | `cmmc:obligationType`; a CUI/ITAR-marked deliverable raises `SpilloverReviewRequired` (never silent `{}`) |
-| **R12** | **Non-evidentiary marker** propagates; SSP refuses to omit it | U6 `evidence/binding.py` (`ce:evidentiaryStatus "mock"`), U11 `bom.py` propagation, U12 `documents/ssp.py` banner **(in progress)** | any weak status ⇒ whole BOM `"mock"`; SSP forces a NON-EVIDENTIARY banner (no suppress flag) |
-| **R13** | **Contradiction detector** + proven-vs-attested split | U2 `ContradictionShape`, U9 `attestation.py` (`ce:oracleOutcome`/`cmmc:overrideJustification`), U10 `audit.py` | MET over `failed`/absent oracle w/o override = violation; "N MET-by-machine / M MET-by-human-only" metric |
+| **R12** | **Non-evidentiary marker** propagates; SSP refuses to omit it | U6 `evidence/binding.py` (`ce:evidentiaryStatus "mock"`), U11 `bom.py` propagation, U12 `documents/ssp.py` banner | any weak status ⇒ whole BOM `"mock"`; the SSP emits a NON-EVIDENTIARY banner + colophon stamp whenever a mock status is present — structurally forced, no suppress flag |
+| **R13** | **Contradiction detector** + proven-vs-attested split, surfaced in the SSP | U2 `ContradictionShape`, U9 `attestation.py` (`ce:oracleOutcome`/`cmmc:overrideJustification`), U10 `audit.py`, U12 `documents/ssp.py` (colophon) | MET over `failed`/absent oracle w/o override = violation; "N MET-by-machine / M MET-by-human-only" metric flows into the SSP colophon via `SprsSummary` |
 
-**Coverage: 13/13 requirements map to shipped units.** R7 and the SSP half of R12
-land in U12 (in progress); the full end-to-end exercise of R3/R13 lands in U13
-(in progress). Every other requirement is satisfied by committed code.
+**Coverage: 13/13 requirements are satisfied by committed, tested code.** With U12
+(`documents/ssp.py`) and the U13a operator CLI (`cli.py`) now in, R7, the SSP half
+of R12, and R13's SSP surfacing are shipped; R3's end-to-end chain runs via
+`cli.py demo` and is exercised by `tests/test_cli.py`. The only outstanding item is
+the queued `ForwardTraceabilityShape` scope fix (a shape refinement, not a
+requirement) — see the Status note — plus the formal U13 acceptance test the
+orchestrator lands next.
 
 ## SPRS + POA&M legality
 
@@ -125,7 +133,25 @@ land in U12 (in progress); the full end-to-end exercise of R3/R13 lands in U13
 | Evidence generators (`evidence/generators/`) | **Fixture-backed** until a live tenant exists. Fixture-sourced evidence carries `ce:evidentiaryStatus "mock"` (R12) and forces the SSP's NON-EVIDENTIARY banner — a mock BOM/SSP can never be mistaken for a submittable one. |
 | Content-addressing | **SHA-256** into a local write-once registry (GCS Tier-1 / Azure Blob Tier-2 backends). **Sigstore signing is deferred** — `hash_reference` exposes the `registry://<hash>` seam without "sign" naming. |
 | IL5 hosting overlay | **Deferred to Phase II.** `OBL-IL5` / `IL5-OVERLAY` resolve to an **empty** control set in Phase I (Tier 1 / IL4) — tagged, not an error. |
-| SSP / Traceability Matrix (U12), end-to-end run (U13) | **In progress.** |
+| SSP / Traceability Matrix (`documents/ssp.py`, U12) | **Real and byte-stable** (deterministic fingerprint, `--check` drift gate). But it renders over the **fixture-backed (mock) evidence** above, so its output carries the **NON-EVIDENTIARY** banner — a compiled demo SSP, never a submittable one. |
+| End-to-end acceptance | `cli.py demo` runs the full chain today (tested by `tests/test_cli.py`). The SSP step *inside* `cli.py demo` is currently a stub hook — the SSP is produced by the standalone `documents.ssp build` over the run's `.trig`. The formal U13 acceptance test + demo-SSP wiring land next. |
+
+## Running it
+
+```
+# The one-command NV012 demo (compile-order → run-factory → attest → audit → bom → ssp-hook):
+uv run python cli.py demo --evidence-set all-covered      # happy path: Order emits, chain completes, mock BOM
+uv run python cli.py demo --evidence-set gap              # Gate 1 REFUSES — Order not emitted, exit 2, no bom.json
+uv run python cli.py demo --evidence-set contradiction    # completes with an R13 contradiction in the audit
+
+# Render the deterministic SSP + Traceability Matrix from a run's dataset (carries the NON-EVIDENTIARY banner):
+uv run python -m documents.ssp build --input output/engine.trig [--check]
+```
+
+`cli.py demo` writes `bom.json`, the engine `.trig`, and run state under
+`output/`. See the README's **"Run the NV012 demo"** section for the operator
+walkthrough. Individual stages are also available as subcommands (`compile-order`,
+`run-factory`, `attest`, `audit`, `bom`, `ssp`).
 
 ---
 *Design material, not legal advice. Verify all CMMC/ITAR interpretations with the
