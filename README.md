@@ -2,7 +2,7 @@
 
 **A build system where "provision the cloud environment" and "prove it's compliant" are the same action.**
 
-Every environment is *born* from a signed, policy-checked infrastructure Order and ships with a re-executable proof of compliance (a signed BOM that doubles as the SSP). Compliance is not gathered after the fact by inspecting an existing setup — it is a **byproduct of provisioning**.
+Every environment is _born_ from a signed, policy-checked infrastructure Order and ships with a re-executable proof of compliance (a signed BOM that doubles as the SSP). Compliance is not gathered after the fact by inspecting an existing setup — it is a **byproduct of provisioning**.
 
 > **Design of record.** Where any document under [`reference/`](reference/) conflicts with this repo, this repo wins.
 
@@ -17,19 +17,19 @@ The work splits into two decoupled systems (a deliberate seam — they hand a fi
         │
         ▼
 ┌───────────────────────────┐   separate upstream tool
-│   ORDER COMPILER           │   order-compiler/
-│   contract → obligations   │   • AI drafts obligations, human attests (COP)
-│   → controls → modules     │   • proves PLANNING COVERAGE (Gate 1)
-│   → a signed ORDER file    │   • emits a proof-carrying Order
+│   ORDER COMPILER          │   order-compiler/
+│   contract → obligations  │   • AI drafts obligations, human attests (COP)
+│   → controls → modules    │   • proves PLANNING COVERAGE (Gate 1)
+│   → a signed ORDER file   │   • emits a proof-carrying Order
 └───────────────────────────┘
         │  Order file (signed, hash-referenced)
         ▼
 ┌───────────────────────────┐   the engine (this repo's runtime)
-│   THE FACTORY              │   pipeline/  + evidence/ oracles/ traceability/
-│   fetch modules by hash    │   • terraform plan → policy-as-code check
-│   → apply (BUILDS it)      │   • terraform apply → live compliance tests
-│   → live tests → BOM       │   • proves FULFILLMENT (Gate 2), human attests
-│   → sign → registry        │   • BOM = SSP, stored write-once (GCS/Azure Blob)
+│   THE FACTORY             │   pipeline/  + evidence/ oracles/ traceability/
+│   fetch modules by hash   │   • terraform plan → policy-as-code check
+│   → apply (BUILDS it)     │   • terraform apply → live compliance tests
+│   → live tests → BOM      │   • proves FULFILLMENT (Gate 2), human attests
+│   → sign → registry       │   • BOM = SSP, stored write-once (GCS/Azure Blob)
 └───────────────────────────┘
         │  BOM hash
         ▼
@@ -40,12 +40,12 @@ The work splits into two decoupled systems (a deliberate seam — they hand a fi
 
 **The Order Compiler is a separate tool** (a chosen seam): its only output is a signed Order file. The Factory consumes Orders and doesn't care how they were made. See [`order-compiler/DESIGN.md`](order-compiler/DESIGN.md) and [`pipeline/DESIGN.md`](pipeline/DESIGN.md).
 
-## The two coverage gates (why the mapping is *real*)
+## The two coverage gates (why the mapping is _real_)
 
 The engine's honesty rests on refusing to proceed unless traceability is complete in both directions:
 
-- **Gate 1 — Planning coverage** (Order Compiler, before anything is built): every control the contract requires has ≥1 module *claiming* it, every module traces back to a required control, and no claim lacks a testable method. Missing coverage ⇒ **the Order won't emit.**
-- **Gate 2 — Proven fulfillment** (Factory, at BOM close): a control is MET only when its claim's evidence *passes* and a human *attests*. The BOM's control-mapping is audited against the Order's required-control set. A claim whose live test fails ⇒ **the BOM is invalid.**
+- **Gate 1 — Planning coverage** (Order Compiler, before anything is built): every control the contract requires has ≥1 module _claiming_ it, every module traces back to a required control, and no claim lacks a testable method. Missing coverage ⇒ **the Order won't emit.**
+- **Gate 2 — Proven fulfillment** (Factory, at BOM close): a control is MET only when its claim's evidence _passes_ and a human _attests_. The BOM's control-mapping is audited against the Order's required-control set. A claim whose live test fails ⇒ **the BOM is invalid.**
 
 Planning-coverage is a promise; proven-fulfillment is the receipt. Both are content-addressed and bidirectionally audited.
 
@@ -67,18 +67,18 @@ The [`ADCS-lifecycle-demo`](../ADCS-lifecycle-demo) engine is the proven **back 
 
 ## Repo map
 
-| Path | Role | Ports from ADCS |
-| --- | --- | --- |
+| Path                                 | Role                                                                                    | Ports from ADCS                                                |
+| ------------------------------------ | --------------------------------------------------------------------------------------- | -------------------------------------------------------------- |
 | [`order-compiler/`](order-compiler/) | **Separate upstream tool:** contract → COP → controls → modules → signed Order (Gate 1) | ADCS requirement-derivation model, extended up to the contract |
-| [`pipeline/`](pipeline/) | **The Factory:** executes an Order — plan → policy → apply → live tests → BOM | `pipeline/runner.py`, `plan.ttl` |
-| [`evidence/`](evidence/) | Hashing + binding + the Factory's evidence generators (policy-as-code, config export) | `evidence/hashing.py`, `binding.py`, `analysis/` |
-| [`oracles/`](oracles/) | Pre-deployment policy checks + live compliance tests (metric vs criterion) | `analysis/oracle.py` |
-| [`traceability/`](traceability/) | Attestation, bidirectional audit, **Gate 2 + SPRS score + POA&M-legality** | `attestation.py`, `audit.py` |
-| [`structural/`](structural/) | Terraform-module ↔ control allocation (what each module claims) | `structural/satellite.ttl` |
-| [`ontology/`](ontology/) | `cmmc:` TBox — controls (Doc 1) + obligation/derivation vocab | `ontology/`, `scripts/build_ontology.py` |
-| [`documents/`](documents/) | Deterministic **SSP** compiler (the BOM as a human-readable doc) | `documents/design_description.py` |
-| [`backends/`](backends/) | Tiered write-once registry: **GCS (Tier 1)**, **Azure Blob (Tier 2)** | `pipeline/backends/` |
-| [`reference/`](reference/) | Migrated research: guides, contracts, requirements, concepts, standards | — |
+| [`pipeline/`](pipeline/)             | **The Factory:** executes an Order — plan → policy → apply → live tests → BOM           | `pipeline/runner.py`, `plan.ttl`                               |
+| [`evidence/`](evidence/)             | Hashing + binding + the Factory's evidence generators (policy-as-code, config export)   | `evidence/hashing.py`, `binding.py`, `analysis/`               |
+| [`oracles/`](oracles/)               | Pre-deployment policy checks + live compliance tests (metric vs criterion)              | `analysis/oracle.py`                                           |
+| [`traceability/`](traceability/)     | Attestation, bidirectional audit, **Gate 2 + SPRS score + POA&M-legality**              | `attestation.py`, `audit.py`                                   |
+| [`structural/`](structural/)         | Terraform-module ↔ control allocation (what each module claims)                         | `structural/satellite.ttl`                                     |
+| [`ontology/`](ontology/)             | `cmmc:` TBox — controls (Doc 1) + obligation/derivation vocab                           | `ontology/`, `scripts/build_ontology.py`                       |
+| [`documents/`](documents/)           | Deterministic **SSP** compiler (the BOM as a human-readable doc)                        | `documents/design_description.py`                              |
+| [`backends/`](backends/)             | Tiered write-once registry: **GCS (Tier 1)**, **Azure Blob (Tier 2)**                   | `pipeline/backends/`                                           |
+| [`reference/`](reference/)           | Migrated research: guides, contracts, requirements, concepts, standards                 | —                                                              |
 
 ## Key decisions
 
@@ -134,13 +134,13 @@ What to expect:
 
 Artifacts written under `--output-dir` (default `output/`):
 
-| Artifact | What it is |
-| --- | --- |
-| `bom.json` | the BOM — control-mapping + attestations + artifact hashes (canonical JSON) |
-| `audit.md` / `audit.json` | bidirectional audit + SPRS score / POA&M-legality + R13 contradictions |
-| `registry/` | write-once, content-addressed object store + two-level index (`contract → BOM → artifacts`) |
-| `engine.trig` | the full `<ce:*>` named-graph dataset for the run |
-| `run_state.json` | the finalized `PipelineState` summary (per-stage results) |
+| Artifact                  | What it is                                                                                  |
+| ------------------------- | ------------------------------------------------------------------------------------------- |
+| `bom.json`                | the BOM — control-mapping + attestations + artifact hashes (canonical JSON)                 |
+| `audit.md` / `audit.json` | bidirectional audit + SPRS score / POA&M-legality + R13 contradictions                      |
+| `registry/`               | write-once, content-addressed object store + two-level index (`contract → BOM → artifacts`) |
+| `engine.trig`             | the full `<ce:*>` named-graph dataset for the run                                           |
+| `run_state.json`          | the finalized `PipelineState` summary (per-stage results)                                   |
 
 Exit codes: **0** success · **1** Factory safety-valve halt (a pre-apply policy
 check failed, e.g. a non-US region — nothing was applied) · **2** Gate-1 refusal
@@ -155,4 +155,4 @@ Other subcommands run the stages individually against `--output-dir`:
 `compile-order`, `run-factory`, `attest`, `audit`, `bom`, `ssp` (SSP rendering is
 wired at integration — U12). Run `uv run python cli.py --help` for the full list.
 
-*Design material, not legal advice. Verify all CMMC/ITAR interpretations with the contracting officer, C3PAO, and counsel.*
+_Design material, not legal advice. Verify all CMMC/ITAR interpretations with the contracting officer, C3PAO, and counsel._

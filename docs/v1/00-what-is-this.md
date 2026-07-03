@@ -11,7 +11,7 @@ government standard called **NIST SP 800-171**. It has about **110 rules**
 
 > **CUI, CMMC, NIST 800-171, control** → see [glossary](06-glossary.md).
 
-Here's the painful part: today, *proving* you follow those rules is mostly
+Here's the painful part: today, _proving_ you follow those rules is mostly
 manual. People take screenshots of settings, fill in spreadsheets, and assemble
 a giant binder for an auditor. It's slow, error-prone, and goes stale the moment
 someone changes a setting.
@@ -22,14 +22,14 @@ someone changes a setting.
 > action.**
 
 **Analogy.** Imagine a factory that builds a product. Instead of building it and
-*then* sending an inspector around later, this factory stamps a **certificate of
+_then_ sending an inspector around later, this factory stamps a **certificate of
 authenticity as a byproduct of building the product** — the certificate is
 produced by the same machine, from the same steps, at the same time. If the
 build changes, the certificate changes with it. You can't have one without the
 other.
 
 That's what this system does for cloud security setups. Compliance isn't
-gathered *after* the fact by inspecting an existing setup — it's a **byproduct of
+gathered _after_ the fact by inspecting an existing setup — it's a **byproduct of
 building the setup in the first place.**
 
 ## The two machines and the hand-off
@@ -68,13 +68,13 @@ deliberate.
 
 The system refuses to fool itself. Two "gates" must pass:
 
-- **Gate 1 — before anything is built:** *"Don't start unless the plan actually
-  covers every required rule."* Every required rule must have a piece of setup
+- **Gate 1 — before anything is built:** _"Don't start unless the plan actually
+  covers every required rule."_ Every required rule must have a piece of setup
   claiming to satisfy it, every piece of setup must trace back to a required
   rule, and every claim must be testable. If something's missing, **the Order is
   refused and names exactly what's missing** — nothing gets built.
-- **Gate 2 — at the end:** *"A rule only counts as MET when a responsible human
-  signs off, backed by evidence."* A machine can gather evidence and run checks,
+- **Gate 2 — at the end:** _"A rule only counts as MET when a responsible human
+  signs off, backed by evidence."_ A machine can gather evidence and run checks,
   but it can **never** declare a rule satisfied. Only a human — the Affirming
   Official — does that, and they carry the legal accountability. (More in
   **[03 — Machines vs. humans](03-machine-vs-human.md)**.)
@@ -91,13 +91,13 @@ real:
   in the repo, not a live cloud.
 - **Terraform runs in preview (plan) mode only, with mock providers.** Terraform
   is the tool that would normally build cloud infrastructure — here it only
-  *describes* what it would build. **Nothing is deployed. No cloud account. No
+  _describes_ what it would build. **Nothing is deployed. No cloud account. No
   credentials. Nothing is created.**
 - Because of that, **every output is stamped `NON-EVIDENTIARY`** — it's a
   practice artifact that demonstrates the machinery, **not** a real submission to
   the government.
 
-None of that makes the demo fake in a misleading way — the *mechanism* is fully
+None of that makes the demo fake in a misleading way — the _mechanism_ is fully
 wired end to end. It just runs on stand-in data until real cloud integration is
 switched on. You can run it yourself in **[05 — Try it yourself](05-try-it.md)**.
 

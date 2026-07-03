@@ -2,13 +2,13 @@
 
 The engine is a **provisioning loop** — the environment is built from an Order and the proof falls out of the build — running on the [`ADCS-lifecycle-demo`](../ADCS-lifecycle-demo) traceability substrate. Per-module detail lives in each directory's `DESIGN.md`.
 
-> **Design of record (end-state).** This document describes the full target architecture. For what is *implemented today* vs. deferred, see [`docs/AS-BUILT.md`](docs/AS-BUILT.md). In the diagrams below, **🟩 green = runs today** and **🟨 amber = Phase II (mocked or deferred today)**. Every current run is fixture-backed and stamped **NON-EVIDENTIARY**.
+> **Design of record (end-state).** This document describes the full target architecture. For what is _implemented today_ vs. deferred, see [`docs/AS-BUILT.md`](docs/AS-BUILT.md). In the diagrams below, **🟩 green = runs today** and **🟨 amber = Phase II (mocked or deferred today)**. Every current run is fixture-backed and stamped **NON-EVIDENTIARY**.
 
 ## 1. The two systems and the seam between them
 
 ```mermaid
 flowchart TB
-    subgraph OC["🧩 Order Compiler · order-compiler/ — separate upstream tool"]
+    subgraph OC["Order Compiler · order-compiler/ — separate upstream tool"]
         direction TB
         C["Contract artifacts<br/>(hashed)"] --> COP["Contract Obligation Profile (COP)<br/>AI drafts · human ATTESTS"]
         COP --> RC["Required control set<br/>clause library + rule library"]
@@ -20,7 +20,7 @@ flowchart TB
 
     ORD ==>|"the seam: a signed, hash-referenced Order file"| AP
 
-    subgraph FAC["🏭 The Factory · pipeline/ · evidence/ · oracles/ · traceability/"]
+    subgraph FAC["The Factory · pipeline/ · evidence/ · oracles/ · traceability/"]
         direction TB
         AP["Approval gate<br/>GitHub PR + environment reviewer<br/>(separation of duties)"] --> F1["1 · fetch modules + policies<br/>from registry BY HASH"]
         F1 --> F2["2 · terraform plan<br/>→ plan hash"]
@@ -90,19 +90,17 @@ Everything is held as an `rdflib.Dataset` of named graphs (ADCS pattern), one pe
 
 ```mermaid
 flowchart LR
-    ONT["ce:ontology<br/>controls + vocab"] --> STR["ce:structural<br/>module ↔ control"]
-    STR --> ORD3["ce:order<br/>Order + COP (Gate 1)"]
-    ORD3 --> EV["ce:evidence<br/>plan/state/check/test hashes"]
-    EV --> ATT["ce:attestations<br/>Affirming Official (Gate 2)"]
-    PLN["ce:plan<br/>Order process model"] -.-> ORD3
-    ONT -.-> AUD["ce:audit<br/>bidirectional audit + SPRS"]
+    ONT["&lt;ce:ontology&gt;<br/>controls + vocab"] --> STR["&lt;ce:structural&gt;<br/>module ↔ control"]
+    STR --> ORD3["&lt;ce:order&gt;<br/>Order + COP (Gate 1)"]
+    ORD3 --> EV["&lt;ce:evidence&gt;<br/>plan/state/check/test hashes"]
+    EV --> ATT["&lt;ce:attestations&gt;<br/>Affirming Official (Gate 2)"]
+    PLN["&lt;ce:plan&gt;<br/>Order process model"] -.-> ORD3
+    ONT -.-> AUD["&lt;ce:audit&gt;<br/>bidirectional audit + SPRS"]
     STR -.-> AUD
     ORD3 -.-> AUD
     EV -.-> AUD
     ATT -.-> AUD
 ```
-
-_(named graphs shown without their `<…>` delimiters for diagram clarity; the table below uses the canonical `<ce:…>` form.)_
 
 | Named graph         | Holds                                                  | Filled by                           |
 | ------------------- | ------------------------------------------------------ | ----------------------------------- |
