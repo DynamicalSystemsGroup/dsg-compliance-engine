@@ -18,7 +18,6 @@ __pycache__/
 
 # Output / generated artifacts (NOT committed)
 output/
-artifacts/
 
 # Never commit CUI or live evidence exports
 *.cui
