@@ -65,7 +65,7 @@ Output (the many per-control MET lines are trimmed; every summary line is verbat
 SPRS: score=110 status=Final valid_submission=True
 Proven vs attested: 4 MET-by-machine / 18 MET-by-human-only
 Contradictions (attested MET over failed machine check): 0
-[5/6 bom] cc29c2e11b5009883ec263b4593cf38d4864d972c7cb140f9bc7993382f77ca5 evidentiary_status=mock -> /tmp/nv012-all/bom.json
+[5/6 bom] 4df1499a6b9949bf0e12c3bf5d502428a04debb28db189b897131f6b70903d7c evidentiary_status=mock -> /tmp/nv012-all/bom.json
 [6/6 ssp]
 SSP: wrote /tmp/nv012-all/ssp.md (NON-EVIDENTIARY banner: present)
 ```
@@ -158,7 +158,7 @@ Output (tail; earlier lines match Scenario A's shape):
 SPRS: score=110 status=Final valid_submission=True
 Proven vs attested: 3 MET-by-machine / 19 MET-by-human-only
 Contradictions (attested MET over failed machine check): 1
-[5/6 bom] 047ac45af023a08d907c67cc19a1540e3ecb2f81003778d528ec5324df2b3a37 evidentiary_status=mock -> /tmp/nv012-con/bom.json
+[5/6 bom] 1cb90743ec6b98d421a7ccc5dd73c4da801269fe4b94bfa88c6ab4e45f5658ee evidentiary_status=mock -> /tmp/nv012-con/bom.json
 [6/6 ssp]
 SSP: wrote /tmp/nv012-con/ssp.md (NON-EVIDENTIARY banner: present)
 ```

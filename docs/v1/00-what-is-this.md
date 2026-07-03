@@ -211,16 +211,31 @@ It matters to state plainly what is not yet real. None of this is buried in fine
   claim still passes here. A human signer carries the accountability, and an assessor
   catches it.
 - **References are not resolved live yet.** They resolve against local files and
-  fixtures rather than reaching out to the real authoritative source.
-- **Attestations are not cryptographically signed yet.** Today the trust is the Git
-  history of the attestation file. Sigstore/cosign is scaffolded (there is a `sig_algo`
-  field) but not wired.
+  fixtures rather than reaching out to the real authoritative source. References now
+  carry a pinned version and a signature field for the signed-policy model, but the
+  live resolvers are deferred.
+- **Attestation signing is wired, but the production key path is deferred.** The engine
+  signs and verifies attestation records with real Ed25519 signatures today, and rejects
+  a tampered or unverifiable signed record at load (fail-closed). The production
+  cosign + FIPS-KMS path is implemented behind a probe and switches on when the cosign
+  binary and KMS key are present. The demo runs unsigned (`sig_algo=none`, git-trust) and
+  is stamped NON-EVIDENTIARY.
+- **The append-only tier of record is wired, but the live server is deferred.** A Flexo
+  MMS backend persists each run to an append-only, versioned store (`--store-backend
+  flexo`); it is offline-simulated here, with the local registry retained as the
+  cache/fallback tier. Standing up a live in-enclave Flexo server is deferred.
 - **The engine does not talk to SPRS.** A human files the computed score at the
   government portal.
 - **The 16 policy documents** under `src/compliance_engine/documents/policies/` are
   scaffolding and must be replaced with an organization's own adopted policies.
 - **Deferred work** includes: live terraform apply, live evidence resolvers,
-  cryptographic signing, cloud (GCS/Azure) registry backends, and an approval gate.
+  cosign + KMS signing (Ed25519 works today), a live Flexo MMS server (the backend is
+  wired and offline-simulated), cloud (GCS/Azure) registry backends, and an approval gate.
+
+What is now real end to end: full-chain P-Plan provenance (contract to BOM/SSP, with an
+SOP-adherence check), cryptographically-signed attestations, an append-only storage tier,
+and a single signed **audit package** (`ce package` / `ce verify-package`) an assessor can
+re-verify offline.
 
 Note: none of this makes the demo misleading. The mechanism is wired end to end; it
 simply runs on stand-in inputs until live integration is switched on, and it stamps

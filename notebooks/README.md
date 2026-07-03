@@ -84,7 +84,10 @@ but cold-start is slower than the server-backed `marimo run`.
    equal footing, with the real authoritative sources and reference records behind the 43
    Track B controls.
 8. **Gate 2 — the human attests MET** — the Affirming Official's sign-off, the
-   contradiction rule, and the real per-control BOM mapping.
+   contradiction rule (an override needs a written justification **and** appended
+   evidence), and the real per-control BOM mapping with an **Evidence backing** column
+   (machine / human-only / override) that traces each attestation to its machine
+   evidence.
 9. **The proof outputs** — the audit, the SPRS score and its bands, the content-addressed
    BOM, and the deterministic SSP with its structural NON-EVIDENTIARY banner.
 10. **Proof by reproduction** — how a C3PAO re-derives the record with `ce verify`, and how

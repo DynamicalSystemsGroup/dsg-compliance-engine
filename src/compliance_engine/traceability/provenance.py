@@ -34,6 +34,7 @@ from compliance_engine.pipeline.plan_execution import (
     entity_iri,
     mark_input,
     mark_output,
+    var_iri,
 )
 
 # The upstream Order-Compiler agent (distinct from the runtime pipeline agent).
@@ -150,19 +151,21 @@ def bind_runtime_provenance(state) -> None:
         declare_entity(g, ph_e, "PlanHash", label="terraform plan (mock providers)")
         mark_output(g, ph_e, acts["Plan"])
 
+    # Evidence nodes and oracle assertions already carry their own generating
+    # activity and provenance (bind_evidence / the oracle emitter). Only tie them
+    # to the plan Variable via correspondsToVariable — do NOT add a second
+    # prov:wasGeneratedBy, which would break the one-generating-activity shape.
     if "CollectEvidence" in acts:
         for entry in state.evidence_index:
             ev = URIRef(str(entry["iri"]))
-            declare_entity(g, ev, "Evidence")
-            mark_output(g, ev, acts["CollectEvidence"])
+            g.add((ev, P_PLAN.correspondsToVariable, var_iri("Evidence")))
 
     if state.oracles and "Oracles" in acts:
         for entry in state.evidence_index:
             mark_input(g, acts["Oracles"], URIRef(str(entry["iri"])))
         for assertion in state.oracles.assertion_iris:
             ae = URIRef(str(assertion))
-            declare_entity(g, ae, "OracleAssertions")
-            mark_output(g, ae, acts["Oracles"])
+            g.add((ae, P_PLAN.correspondsToVariable, var_iri("OracleAssertions")))
 
 
 # ---------------------------------------------------------------------------

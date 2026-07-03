@@ -192,9 +192,9 @@ required control and what supports it. Each required control gets one row.
 ### Content-addressed, write-once, weakest-status
 
 - **Content-addressed.** The BOM has its own **SHA-256**. In the all-covered demo the
-  BOM hash is `cc29c2e11b5009883ec263b4593cf38d4864d972c7cb140f9bc7993382f77ca5`; in
+  BOM hash is `4df1499a6b9949bf0e12c3bf5d502428a04debb28db189b897131f6b70903d7c`; in
   the contradiction demo it is
-  `047ac45af023a08d907c67cc19a1540e3ecb2f81003778d528ec5324df2b3a37`. Change one byte
+  `1cb90743ec6b98d421a7ccc5dd73c4da801269fe4b94bfa88c6ab4e45f5658ee`. Change one byte
   and the hash changes, which is how tampering is detected.
 - **Write-once.** It is stored in the registry write-once; a delivered BOM is not
   edited in place.
@@ -205,7 +205,7 @@ required control and what supports it. Each required control gets one row.
   across its evidence. The demo BOM is stamped `evidentiary_status=mock`:
 
 ```
-[5/6 bom] cc29c2e11b5009883ec263b4593cf38d4864d972c7cb140f9bc7993382f77ca5 evidentiary_status=mock -> <dir>/bom.json
+[5/6 bom] 4df1499a6b9949bf0e12c3bf5d502428a04debb28db189b897131f6b70903d7c evidentiary_status=mock -> <dir>/bom.json
 ```
 
 If any weak status is present, the whole BOM and SSP are stamped NON-EVIDENTIARY and
