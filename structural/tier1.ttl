@@ -167,3 +167,365 @@ ce:CSP_Physical_Inheritance a sysml:PartUsage ;
     cmmc:controlsSatisfied cmmc:PE.L2-3.10.1 , cmmc:PE.L2-3.10.2 ;
     cmmc:satisfiedByInheritance true ;
     cmmc:verificationMethod "inherited:google-workspace-crm" .
+
+# --- Track A machine-verified modules (added by the coverage build-out) ---
+
+# VPC segmentation + firewall + Cloud Armor: covers most SC family network
+# controls. Config-check oracle asserts default-deny ingress, private CUI
+# subnet, TLS 1.2+ enforcement, no split-tunnel, session termination, and
+# authenticity protection over a GCP Compute API export.
+ce:VPC_Segmentation a sysml:PartUsage ;
+    rdfs:label "VPC network segmentation (subnetworks + firewalls + Cloud Armor)" ;
+    sysml:ownedRelationship [
+        a sysml:SatisfyRequirementUsage ;
+        sysml:satisfyingElement ce:VPC_Segmentation ;
+        sysml:satisfiedRequirement
+            cmmc:SC.L2-3.13.3 , cmmc:SC.L2-3.13.4 , cmmc:SC.L2-3.13.5 ,
+            cmmc:SC.L2-3.13.6 , cmmc:SC.L2-3.13.7 , cmmc:SC.L2-3.13.8 ,
+            cmmc:SC.L2-3.13.9 , cmmc:SC.L2-3.13.15
+    ] ;
+    cmmc:controlsSatisfied
+        cmmc:SC.L2-3.13.3 , cmmc:SC.L2-3.13.4 , cmmc:SC.L2-3.13.5 ,
+        cmmc:SC.L2-3.13.6 , cmmc:SC.L2-3.13.7 , cmmc:SC.L2-3.13.8 ,
+        cmmc:SC.L2-3.13.9 , cmmc:SC.L2-3.13.15 ;
+    cmmc:verificationMethod ce:oracle-vpc-segmentation .
+
+ce:EndpointVerification_CrowdStrike a sysml:PartUsage ;
+    rdfs:label "CrowdStrike Falcon EDR — malware + endpoint integrity" ;
+    sysml:ownedRelationship [
+        a sysml:SatisfyRequirementUsage ;
+        sysml:satisfyingElement ce:EndpointVerification_CrowdStrike ;
+        sysml:satisfiedRequirement cmmc:SI.L2-3.14.2 , cmmc:SI.L2-3.14.4 , cmmc:SI.L2-3.14.7
+    ] ;
+    cmmc:controlsSatisfied cmmc:SI.L2-3.14.2 , cmmc:SI.L2-3.14.4 , cmmc:SI.L2-3.14.7 ;
+    cmmc:verificationMethod ce:oracle-endpoint-edr .
+
+ce:MDM_ChromeOS a sysml:PartUsage ;
+    rdfs:label "Chrome Cloud Management + Endpoint Verification (MDM)" ;
+    sysml:ownedRelationship [
+        a sysml:SatisfyRequirementUsage ;
+        sysml:satisfyingElement ce:MDM_ChromeOS ;
+        sysml:satisfiedRequirement cmmc:AC.L2-3.1.16 , cmmc:AC.L2-3.1.17 , cmmc:AC.L2-3.1.18 , cmmc:AC.L2-3.1.19 , cmmc:MP.L2-3.8.7
+    ] ;
+    cmmc:controlsSatisfied cmmc:AC.L2-3.1.16 , cmmc:AC.L2-3.1.17 , cmmc:AC.L2-3.1.18 , cmmc:AC.L2-3.1.19 , cmmc:MP.L2-3.8.7 ;
+    cmmc:verificationMethod ce:oracle-mdm-policy .
+
+ce:SecurityCommandCenter a sysml:PartUsage ;
+    rdfs:label "GCP Security Command Center — vulnerability management" ;
+    sysml:ownedRelationship [
+        a sysml:SatisfyRequirementUsage ;
+        sysml:satisfyingElement ce:SecurityCommandCenter ;
+        sysml:satisfiedRequirement cmmc:RA.L2-3.11.2 , cmmc:SI.L2-3.14.1 , cmmc:SI.L2-3.14.5
+    ] ;
+    cmmc:controlsSatisfied cmmc:RA.L2-3.11.2 , cmmc:SI.L2-3.14.1 , cmmc:SI.L2-3.14.5 ;
+    cmmc:verificationMethod ce:oracle-scc-vuln-mgmt .
+
+ce:WorkspaceAdmin_Policy a sysml:PartUsage ;
+    rdfs:label "Workspace Admin identity lifecycle + password policy" ;
+    sysml:ownedRelationship [
+        a sysml:SatisfyRequirementUsage ;
+        sysml:satisfyingElement ce:WorkspaceAdmin_Policy ;
+        sysml:satisfiedRequirement cmmc:IA.L2-3.5.1 , cmmc:IA.L2-3.5.5 , cmmc:IA.L2-3.5.6 , cmmc:IA.L2-3.5.7 , cmmc:IA.L2-3.5.8 , cmmc:IA.L2-3.5.9 , cmmc:IA.L2-3.5.10 , cmmc:IA.L2-3.5.11
+    ] ;
+    cmmc:controlsSatisfied cmmc:IA.L2-3.5.1 , cmmc:IA.L2-3.5.5 , cmmc:IA.L2-3.5.6 , cmmc:IA.L2-3.5.7 , cmmc:IA.L2-3.5.8 , cmmc:IA.L2-3.5.9 , cmmc:IA.L2-3.5.10 , cmmc:IA.L2-3.5.11 ;
+    cmmc:verificationMethod ce:oracle-workspace-admin-policy .
+
+ce:VPNAccess_BeyondCorp a sysml:PartUsage ;
+    rdfs:label "BeyondCorp Enterprise remote access + TLS enforcement" ;
+    sysml:ownedRelationship [
+        a sysml:SatisfyRequirementUsage ;
+        sysml:satisfyingElement ce:VPNAccess_BeyondCorp ;
+        sysml:satisfiedRequirement cmmc:AC.L2-3.1.12 , cmmc:AC.L2-3.1.13 , cmmc:AC.L2-3.1.14
+    ] ;
+    cmmc:controlsSatisfied cmmc:AC.L2-3.1.12 , cmmc:AC.L2-3.1.13 , cmmc:AC.L2-3.1.14 ;
+    cmmc:verificationMethod ce:oracle-beyondcorp-remote-access .
+
+ce:ChangeManagement_GitHub a sysml:PartUsage ;
+    rdfs:label "GitHub branch protection + required reviews" ;
+    sysml:ownedRelationship [
+        a sysml:SatisfyRequirementUsage ;
+        sysml:satisfyingElement ce:ChangeManagement_GitHub ;
+        sysml:satisfiedRequirement cmmc:CM.L2-3.4.3 , cmmc:CM.L2-3.4.5
+    ] ;
+    cmmc:controlsSatisfied cmmc:CM.L2-3.4.3 , cmmc:CM.L2-3.4.5 ;
+    cmmc:verificationMethod ce:oracle-github-change-mgmt .
+
+ce:CloudIdentity_RemoteMaintenance a sysml:PartUsage ;
+    rdfs:label "Cloud Identity MFA for ops / break-glass roles" ;
+    sysml:ownedRelationship [
+        a sysml:SatisfyRequirementUsage ;
+        sysml:satisfyingElement ce:CloudIdentity_RemoteMaintenance ;
+        sysml:satisfiedRequirement cmmc:MA.L2-3.7.5
+    ] ;
+    cmmc:controlsSatisfied cmmc:MA.L2-3.7.5 ;
+    cmmc:verificationMethod ce:oracle-remote-maintenance-mfa .
+
+ce:CloudLogging_Config a sysml:PartUsage ;
+    rdfs:label "Cloud Logging sinks + NTP + IAM on log buckets" ;
+    sysml:ownedRelationship [
+        a sysml:SatisfyRequirementUsage ;
+        sysml:satisfyingElement ce:CloudLogging_Config ;
+        sysml:satisfiedRequirement cmmc:AU.L2-3.3.4 , cmmc:AU.L2-3.3.7 , cmmc:AU.L2-3.3.8 , cmmc:AU.L2-3.3.9
+    ] ;
+    cmmc:controlsSatisfied cmmc:AU.L2-3.3.4 , cmmc:AU.L2-3.3.7 , cmmc:AU.L2-3.3.8 , cmmc:AU.L2-3.3.9 ;
+    cmmc:verificationMethod ce:oracle-cloud-logging-config .
+
+ce:OrgPolicy_Allowlist a sysml:PartUsage ;
+    rdfs:label "Binary Authorization — image allowlist / user-installed software" ;
+    sysml:ownedRelationship [
+        a sysml:SatisfyRequirementUsage ;
+        sysml:satisfyingElement ce:OrgPolicy_Allowlist ;
+        sysml:satisfiedRequirement cmmc:CM.L2-3.4.8 , cmmc:CM.L2-3.4.9
+    ] ;
+    cmmc:controlsSatisfied cmmc:CM.L2-3.4.8 , cmmc:CM.L2-3.4.9 ;
+    cmmc:verificationMethod ce:oracle-binauth-allowlist .
+
+ce:OrgPolicy_SessionControl a sysml:PartUsage ;
+    rdfs:label "Cloud Identity session control + failed-login lockout" ;
+    sysml:ownedRelationship [
+        a sysml:SatisfyRequirementUsage ;
+        sysml:satisfyingElement ce:OrgPolicy_SessionControl ;
+        sysml:satisfiedRequirement cmmc:AC.L2-3.1.8 , cmmc:AC.L2-3.1.10 , cmmc:AC.L2-3.1.11
+    ] ;
+    cmmc:controlsSatisfied cmmc:AC.L2-3.1.8 , cmmc:AC.L2-3.1.10 , cmmc:AC.L2-3.1.11 ;
+    cmmc:verificationMethod ce:oracle-session-control .
+
+ce:AccessTransparency_ExternalSystems a sysml:PartUsage ;
+    rdfs:label "VPC Service Controls perimeter — external system authorization" ;
+    sysml:ownedRelationship [
+        a sysml:SatisfyRequirementUsage ;
+        sysml:satisfyingElement ce:AccessTransparency_ExternalSystems ;
+        sysml:satisfiedRequirement cmmc:AC.L2-3.1.20
+    ] ;
+    cmmc:controlsSatisfied cmmc:AC.L2-3.1.20 ;
+    cmmc:verificationMethod ce:oracle-vpc-sc-perimeter .
+
+ce:IAMRoles_Privilege a sysml:PartUsage ;
+    rdfs:label "GCP IAM policy + audit-log signals for privileged use" ;
+    sysml:ownedRelationship [
+        a sysml:SatisfyRequirementUsage ;
+        sysml:satisfyingElement ce:IAMRoles_Privilege ;
+        sysml:satisfiedRequirement cmmc:AC.L2-3.1.6 , cmmc:AC.L2-3.1.7
+    ] ;
+    cmmc:controlsSatisfied cmmc:AC.L2-3.1.6 , cmmc:AC.L2-3.1.7 ;
+    cmmc:verificationMethod ce:oracle-iam-privileged-use .
+
+#################################################################
+# Track B — attested-reference (policy) modules.
+#
+# Each carries: ce:authoritativeSource (the system that owns the truth),
+# ce:reference (into structural/references.ttl), ce:attestationRole (required
+# signer role), and cmmc:verificationMethod ce:oracle-attested-reference.
+#
+# References are resolved and freshness-checked by
+# oracles.attested_reference.evaluate_attested_reference; fixture AO signatures
+# live in attestations/tier1.jsonl (evidentiary_status "attested-reference-mock").
+#################################################################
+
+ce:POL_SSP_SystemDescription a sysml:PartUsage ;
+    rdfs:label "System Security Plan supplement (system description)" ;
+    sysml:ownedRelationship [
+        a sysml:SatisfyRequirementUsage ;
+        sysml:satisfyingElement ce:POL_SSP_SystemDescription ;
+        sysml:satisfiedRequirement cmmc:CA.L2-3.12.4
+    ] ;
+    cmmc:controlsSatisfied cmmc:CA.L2-3.12.4 ;
+    ce:authoritativeSource ce:AUTHSRC_DocRepo ;
+    ce:reference ce:REF_POL_SSP_v1 ;
+    ce:attestationRole ce:Role_AffirmingOfficial ;
+    cmmc:verificationMethod ce:oracle-attested-reference .
+
+ce:POL_AT_Training a sysml:PartUsage ;
+    rdfs:label "Annual security awareness + role-based training program" ;
+    sysml:ownedRelationship [
+        a sysml:SatisfyRequirementUsage ;
+        sysml:satisfyingElement ce:POL_AT_Training ;
+        sysml:satisfiedRequirement cmmc:AT.L2-3.2.1 , cmmc:AT.L2-3.2.2 , cmmc:AT.L2-3.2.3
+    ] ;
+    cmmc:controlsSatisfied cmmc:AT.L2-3.2.1 , cmmc:AT.L2-3.2.2 , cmmc:AT.L2-3.2.3 ;
+    ce:authoritativeSource ce:AUTHSRC_LMS ;
+    ce:reference ce:REF_POL_AT_Training_v1 ;
+    ce:attestationRole ce:Role_SecurityOfficer ;
+    cmmc:verificationMethod ce:oracle-attested-reference .
+
+ce:POL_IR_Plan a sysml:PartUsage ;
+    rdfs:label "Incident Response Plan + annual tabletop exercise" ;
+    sysml:ownedRelationship [
+        a sysml:SatisfyRequirementUsage ;
+        sysml:satisfyingElement ce:POL_IR_Plan ;
+        sysml:satisfiedRequirement cmmc:IR.L2-3.6.1 , cmmc:IR.L2-3.6.2 , cmmc:IR.L2-3.6.3
+    ] ;
+    cmmc:controlsSatisfied cmmc:IR.L2-3.6.1 , cmmc:IR.L2-3.6.2 , cmmc:IR.L2-3.6.3 ;
+    ce:authoritativeSource ce:AUTHSRC_DocRepo ;
+    ce:reference ce:REF_POL_IR_Plan_v1 ;
+    ce:attestationRole ce:Role_SecurityOfficer ;
+    cmmc:verificationMethod ce:oracle-attested-reference .
+
+ce:POL_RA_Assessment a sysml:PartUsage ;
+    rdfs:label "Formal risk assessment + finding tracker" ;
+    sysml:ownedRelationship [
+        a sysml:SatisfyRequirementUsage ;
+        sysml:satisfyingElement ce:POL_RA_Assessment ;
+        sysml:satisfiedRequirement cmmc:RA.L2-3.11.1 , cmmc:RA.L2-3.11.3
+    ] ;
+    cmmc:controlsSatisfied cmmc:RA.L2-3.11.1 , cmmc:RA.L2-3.11.3 ;
+    ce:authoritativeSource ce:AUTHSRC_DocRepo ;
+    ce:reference ce:REF_POL_RA_Assessment_v1 ;
+    ce:attestationRole ce:Role_SecurityOfficer ;
+    cmmc:verificationMethod ce:oracle-attested-reference .
+
+ce:POL_PS_Personnel a sysml:PartUsage ;
+    rdfs:label "Personnel security: background screening + offboarding" ;
+    sysml:ownedRelationship [
+        a sysml:SatisfyRequirementUsage ;
+        sysml:satisfyingElement ce:POL_PS_Personnel ;
+        sysml:satisfiedRequirement cmmc:PS.L2-3.9.1 , cmmc:PS.L2-3.9.2
+    ] ;
+    cmmc:controlsSatisfied cmmc:PS.L2-3.9.1 , cmmc:PS.L2-3.9.2 ;
+    ce:authoritativeSource ce:AUTHSRC_HRIS ;
+    ce:reference ce:REF_POL_PS_Personnel_v1 ;
+    ce:attestationRole ce:Role_OPs ;
+    cmmc:verificationMethod ce:oracle-attested-reference .
+
+ce:POL_CM_Config a sysml:PartUsage ;
+    rdfs:label "Configuration management: security impact analysis procedure" ;
+    sysml:ownedRelationship [
+        a sysml:SatisfyRequirementUsage ;
+        sysml:satisfyingElement ce:POL_CM_Config ;
+        sysml:satisfiedRequirement cmmc:CM.L2-3.4.4
+    ] ;
+    cmmc:controlsSatisfied cmmc:CM.L2-3.4.4 ;
+    ce:authoritativeSource ce:AUTHSRC_DocRepo ;
+    ce:reference ce:REF_POL_CM_Config_v1 ;
+    ce:attestationRole ce:Role_ITAdmin ;
+    cmmc:verificationMethod ce:oracle-attested-reference .
+
+ce:POL_MA_Maintenance a sysml:PartUsage ;
+    rdfs:label "Maintenance policy: approved vendor list + maintenance log" ;
+    sysml:ownedRelationship [
+        a sysml:SatisfyRequirementUsage ;
+        sysml:satisfyingElement ce:POL_MA_Maintenance ;
+        sysml:satisfiedRequirement cmmc:MA.L2-3.7.1 , cmmc:MA.L2-3.7.2 , cmmc:MA.L2-3.7.3 , cmmc:MA.L2-3.7.4 , cmmc:MA.L2-3.7.6
+    ] ;
+    cmmc:controlsSatisfied cmmc:MA.L2-3.7.1 , cmmc:MA.L2-3.7.2 , cmmc:MA.L2-3.7.3 , cmmc:MA.L2-3.7.4 , cmmc:MA.L2-3.7.6 ;
+    ce:authoritativeSource ce:AUTHSRC_DocRepo ;
+    ce:reference ce:REF_POL_MA_Maintenance_v1 ;
+    ce:attestationRole ce:Role_OPs ;
+    cmmc:verificationMethod ce:oracle-attested-reference .
+
+ce:POL_MP_Media a sysml:PartUsage ;
+    rdfs:label "Media protection: labeling, storage, sanitization (NIST SP 800-88)" ;
+    sysml:ownedRelationship [
+        a sysml:SatisfyRequirementUsage ;
+        sysml:satisfyingElement ce:POL_MP_Media ;
+        sysml:satisfiedRequirement cmmc:MP.L2-3.8.1 , cmmc:MP.L2-3.8.2 , cmmc:MP.L2-3.8.3 , cmmc:MP.L2-3.8.4 , cmmc:MP.L2-3.8.5 , cmmc:MP.L2-3.8.6 , cmmc:MP.L2-3.8.8 , cmmc:MP.L2-3.8.9
+    ] ;
+    cmmc:controlsSatisfied cmmc:MP.L2-3.8.1 , cmmc:MP.L2-3.8.2 , cmmc:MP.L2-3.8.3 , cmmc:MP.L2-3.8.4 , cmmc:MP.L2-3.8.5 , cmmc:MP.L2-3.8.6 , cmmc:MP.L2-3.8.8 , cmmc:MP.L2-3.8.9 ;
+    ce:authoritativeSource ce:AUTHSRC_DocRepo ;
+    ce:reference ce:REF_POL_MP_Media_v1 ;
+    ce:attestationRole ce:Role_OPs ;
+    cmmc:verificationMethod ce:oracle-attested-reference .
+
+ce:POL_AU_Procedure a sysml:PartUsage ;
+    rdfs:label "Audit management procedure (log review cadence + reports)" ;
+    sysml:ownedRelationship [
+        a sysml:SatisfyRequirementUsage ;
+        sysml:satisfyingElement ce:POL_AU_Procedure ;
+        sysml:satisfiedRequirement cmmc:AU.L2-3.3.3 , cmmc:AU.L2-3.3.6
+    ] ;
+    cmmc:controlsSatisfied cmmc:AU.L2-3.3.3 , cmmc:AU.L2-3.3.6 ;
+    ce:authoritativeSource ce:AUTHSRC_DocRepo ;
+    ce:reference ce:REF_POL_AU_Procedure_v1 ;
+    ce:attestationRole ce:Role_SecurityOfficer ;
+    cmmc:verificationMethod ce:oracle-attested-reference .
+
+ce:POL_SC_SecEng a sysml:PartUsage ;
+    rdfs:label "Security engineering principles (NIST SP 800-160 Vol.1)" ;
+    sysml:ownedRelationship [
+        a sysml:SatisfyRequirementUsage ;
+        sysml:satisfyingElement ce:POL_SC_SecEng ;
+        sysml:satisfiedRequirement cmmc:SC.L2-3.13.2
+    ] ;
+    cmmc:controlsSatisfied cmmc:SC.L2-3.13.2 ;
+    ce:authoritativeSource ce:AUTHSRC_DocRepo ;
+    ce:reference ce:REF_POL_SC_SecEng_v1 ;
+    ce:attestationRole ce:Role_SecurityOfficer ;
+    cmmc:verificationMethod ce:oracle-attested-reference .
+
+ce:POL_AC_RemoteAuth a sysml:PartUsage ;
+    rdfs:label "Remote access authorization (SSP appendix)" ;
+    sysml:ownedRelationship [
+        a sysml:SatisfyRequirementUsage ;
+        sysml:satisfyingElement ce:POL_AC_RemoteAuth ;
+        sysml:satisfiedRequirement cmmc:AC.L2-3.1.15 , cmmc:AC.L2-3.1.21 , cmmc:AC.L2-3.1.22
+    ] ;
+    cmmc:controlsSatisfied cmmc:AC.L2-3.1.15 , cmmc:AC.L2-3.1.21 , cmmc:AC.L2-3.1.22 ;
+    ce:authoritativeSource ce:AUTHSRC_DocRepo ;
+    ce:reference ce:REF_POL_AC_RemoteAuth_v1 ;
+    ce:attestationRole ce:Role_SecurityOfficer ;
+    cmmc:verificationMethod ce:oracle-attested-reference .
+
+ce:POL_PE_Physical a sysml:PartUsage ;
+    rdfs:label "Physical access (visitor log + badge + WFH agreements)" ;
+    sysml:ownedRelationship [
+        a sysml:SatisfyRequirementUsage ;
+        sysml:satisfyingElement ce:POL_PE_Physical ;
+        sysml:satisfiedRequirement cmmc:PE.L2-3.10.3 , cmmc:PE.L2-3.10.4 , cmmc:PE.L2-3.10.5 , cmmc:PE.L2-3.10.6
+    ] ;
+    cmmc:controlsSatisfied cmmc:PE.L2-3.10.3 , cmmc:PE.L2-3.10.4 , cmmc:PE.L2-3.10.5 , cmmc:PE.L2-3.10.6 ;
+    ce:authoritativeSource ce:AUTHSRC_DocRepo ;
+    ce:reference ce:REF_POL_PE_Physical_v1 ;
+    ce:attestationRole ce:Role_OPs ;
+    cmmc:verificationMethod ce:oracle-attested-reference .
+
+ce:POL_SC_Collab a sysml:PartUsage ;
+    rdfs:label "Collaborative computing / mobile code / VoIP policies" ;
+    sysml:ownedRelationship [
+        a sysml:SatisfyRequirementUsage ;
+        sysml:satisfyingElement ce:POL_SC_Collab ;
+        sysml:satisfiedRequirement cmmc:SC.L2-3.13.12 , cmmc:SC.L2-3.13.13 , cmmc:SC.L2-3.13.14
+    ] ;
+    cmmc:controlsSatisfied cmmc:SC.L2-3.13.12 , cmmc:SC.L2-3.13.13 , cmmc:SC.L2-3.13.14 ;
+    ce:authoritativeSource ce:AUTHSRC_DocRepo ;
+    ce:reference ce:REF_POL_SC_Collab_v1 ;
+    ce:attestationRole ce:Role_ITAdmin ;
+    cmmc:verificationMethod ce:oracle-attested-reference .
+
+ce:POL_AC_SoD a sysml:PartUsage ;
+    rdfs:label "Separation of duties (RACI matrix)" ;
+    sysml:ownedRelationship [
+        a sysml:SatisfyRequirementUsage ;
+        sysml:satisfyingElement ce:POL_AC_SoD ;
+        sysml:satisfiedRequirement cmmc:AC.L2-3.1.4
+    ] ;
+    cmmc:controlsSatisfied cmmc:AC.L2-3.1.4 ;
+    ce:authoritativeSource ce:AUTHSRC_DocRepo ;
+    ce:reference ce:REF_POL_AC_SoD_v1 ;
+    ce:attestationRole ce:Role_SecurityOfficer ;
+    cmmc:verificationMethod ce:oracle-attested-reference .
+
+ce:POL_CA_Monitoring a sysml:PartUsage ;
+    rdfs:label "Continuous monitoring: engine run history + POA&M tracker" ;
+    sysml:ownedRelationship [
+        a sysml:SatisfyRequirementUsage ;
+        sysml:satisfyingElement ce:POL_CA_Monitoring ;
+        sysml:satisfiedRequirement cmmc:CA.L2-3.12.1 , cmmc:CA.L2-3.12.2 , cmmc:CA.L2-3.12.3
+    ] ;
+    cmmc:controlsSatisfied cmmc:CA.L2-3.12.1 , cmmc:CA.L2-3.12.2 , cmmc:CA.L2-3.12.3 ;
+    ce:authoritativeSource ce:AUTHSRC_EngineHistory ;
+    ce:reference ce:REF_POL_CA_Monitoring_v1 ;
+    ce:attestationRole ce:Role_SecurityOfficer ;
+    cmmc:verificationMethod ce:oracle-attested-reference .
+
+ce:POL_AC_LoginBanner a sysml:PartUsage ;
+    rdfs:label "Login banner policy (system-use notification)" ;
+    sysml:ownedRelationship [
+        a sysml:SatisfyRequirementUsage ;
+        sysml:satisfyingElement ce:POL_AC_LoginBanner ;
+        sysml:satisfiedRequirement cmmc:AC.L2-3.1.9
+    ] ;
+    cmmc:controlsSatisfied cmmc:AC.L2-3.1.9 ;
+    ce:authoritativeSource ce:AUTHSRC_DocRepo ;
+    ce:reference ce:REF_POL_AC_LoginBanner_v1 ;
+    ce:attestationRole ce:Role_SecurityOfficer ;
+    cmmc:verificationMethod ce:oracle-attested-reference .

@@ -32,12 +32,14 @@ from traceability.queries import EVIDENCE_FOR_CONTROL, query_to_dicts
 ROLE_AFFIRMING_OFFICIAL = URIRef(f"{CE}role-AffirmingOfficial")
 PLAN_STANDARD_PROCEDURE = URIRef(f"{CE}plan-StandardAttestationProcedure-v1")
 
-# EARL outcome values (upstream EARL vocabulary) and their CMMC status meaning.
+# EARL outcome values (upstream EARL vocabulary) + ce:needsAction (local, a
+# subclass of earl:OutcomeValue defined in ontology/ce-attestation-refs.ttl).
 OUTCOME_PASSED = EARL.passed          # MET
 OUTCOME_FAILED = EARL.failed          # NOT MET
 OUTCOME_INAPPLICABLE = EARL.inapplicable  # N/A
 OUTCOME_UNTESTED = EARL.untested      # PLANNED
 OUTCOME_CANT_TELL = EARL.cantTell     # (declined on sufficiency)
+OUTCOME_NEEDS_ACTION = CE.needsAction  # actionable missing piece under attested-ref model
 
 # Outcome IRI -> CMMC determination label (consumed by SPRS audit + SSP compiler).
 STATUS_LABEL: dict[URIRef, str] = {
@@ -46,6 +48,7 @@ STATUS_LABEL: dict[URIRef, str] = {
     OUTCOME_INAPPLICABLE: "N/A",
     OUTCOME_UNTESTED: "PLANNED",
     OUTCOME_CANT_TELL: "CANT TELL",
+    OUTCOME_NEEDS_ACTION: "NEEDS ACTION",
 }
 
 MODE_MANUAL = EARL.manual

@@ -17,6 +17,11 @@ from typing import Any
 OUTCOME_PASSED = "passed"
 OUTCOME_FAILED = "failed"
 OUTCOME_CANTTELL = "cantTell"
+OUTCOME_NEEDS_ACTION = "needsAction"
+
+VALID_OUTCOMES: frozenset[str] = frozenset({
+    OUTCOME_PASSED, OUTCOME_FAILED, OUTCOME_CANTTELL, OUTCOME_NEEDS_ACTION,
+})
 
 _COMPARATORS = {
     "eq": lambda v, t: v == t,
@@ -40,8 +45,16 @@ class Criterion:
 class OracleResult:
     control_id: str
     metric_value: Any
-    outcome: str             # passed | failed | cantTell
+    outcome: str             # passed | failed | cantTell | needsAction
     detail: str
+    reason: str | None = None  # machine-readable reason (required for needsAction)
+
+    def __post_init__(self) -> None:
+        if self.outcome not in VALID_OUTCOMES:
+            raise ValueError(f"invalid outcome {self.outcome!r}; "
+                             f"expected one of {sorted(VALID_OUTCOMES)}")
+        if self.outcome == OUTCOME_NEEDS_ACTION and not self.reason:
+            raise ValueError("needsAction requires a machine-readable reason")
 
 
 # Single source of truth for machine-checkable controls. This is the
@@ -83,6 +96,25 @@ CRITERIA: dict[str, Criterion] = {
     # ITAR residency (modelled as a pseudo-control id, not a NIST 800-171 control)
     "ITAR-120.54":   Criterion("ITAR-120.54", "data_region", "eq", "US",
                                "data residency US-only"),
+    # --- VPC segmentation (oracle-vpc-segmentation) --------------------------
+    # One config-check criterion per SC.13 control the module claims. The
+    # keys mirror fixtures/nv012/all-covered/gcp_vpc_segmentation.json summary.
+    "SC.L2-3.13.3":  Criterion("SC.L2-3.13.3", "cui_subnet_private", "eq", True,
+                               "separate CUI subnet from general access"),
+    "SC.L2-3.13.4":  Criterion("SC.L2-3.13.4", "shared_resource_isolation", "eq", True,
+                               "prevent unauthorized transfer via shared resources"),
+    "SC.L2-3.13.5":  Criterion("SC.L2-3.13.5", "public_access_denied", "eq", True,
+                               "deny public access to CUI subnetwork"),
+    "SC.L2-3.13.6":  Criterion("SC.L2-3.13.6", "default_deny_ingress", "eq", True,
+                               "default-deny network ingress"),
+    "SC.L2-3.13.7":  Criterion("SC.L2-3.13.7", "split_tunnel_disabled", "eq", True,
+                               "split-tunnel VPN disabled"),
+    "SC.L2-3.13.8":  Criterion("SC.L2-3.13.8", "tls_minimum_version", "ge", "1.2",
+                               "TLS 1.2+ enforced for crypto in transit"),
+    "SC.L2-3.13.9":  Criterion("SC.L2-3.13.9", "session_termination_configured", "eq", True,
+                               "network sessions terminate at end"),
+    "SC.L2-3.13.15": Criterion("SC.L2-3.13.15", "session_authenticity_protected", "eq", True,
+                               "communications session authenticity protected"),
 }
 
 

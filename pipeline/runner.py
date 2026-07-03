@@ -51,7 +51,9 @@ from evidence.hashing import _serialize_for_hash, hash_structural_model
 
 _REPO_ROOT = Path(__file__).resolve().parent.parent
 CATALOG_TTL = _REPO_ROOT / "ontology" / "cmmc-edit.ttl"
+ATTREF_VOCAB_TTL = _REPO_ROOT / "ontology" / "ce-attestation-refs.ttl"
 TIER1_TTL = _REPO_ROOT / "structural" / "tier1.ttl"
+REFERENCES_TTL = _REPO_ROOT / "structural" / "references.ttl"
 
 # The Order canonical shapes below MUST match order-compiler/compiler.py. They
 # are re-implemented here (not imported) so the Factory verifies the Order
@@ -223,7 +225,13 @@ def run_stage_plan(state: PipelineState) -> None:
 
 
 def run_stage_policycheck(state: PipelineState) -> None:
-    """Region/policy gate + oracles on the REAL plan. A FAIL HALTS before Apply."""
+    """Region/policy gate + oracles on the REAL plan. A FAIL HALTS before Apply.
+
+    Residency invariant (hard gate, never silently disabled): the plan MUST
+    carry at least one region signal. A plan with zero region-bearing
+    resources cannot prove residency, so the check itself is non-evidentiary
+    and the run halts — safer than silently passing a mis-tagged plan.
+    """
     from oracles.criteria import CRITERIA, evaluate
 
     act = emit_stage_activity(state.ds, "PolicyCheck")
@@ -231,13 +239,23 @@ def run_stage_policycheck(state: PipelineState) -> None:
     pr = state.plan.plan_result
 
     findings: list[PolicyFinding] = []
+    region_signals_seen = 0
     for res in pr.resources:
-        if res.region is not None and not is_us_region(res.region):
-            findings.append(PolicyFinding(
-                resource_id=res.resource_id,
-                reason="planned resource region is not US (data residency violation)",
-                detail={"region": res.region},
-            ))
+        if res.region is not None:
+            region_signals_seen += 1
+            if not is_us_region(res.region):
+                findings.append(PolicyFinding(
+                    resource_id=res.resource_id,
+                    reason="planned resource region is not US (data residency violation)",
+                    detail={"region": res.region},
+                ))
+    if region_signals_seen == 0:
+        findings.append(PolicyFinding(
+            resource_id="<none>",
+            reason=("residency invariant: plan carries no region-bearing "
+                    "resource — cannot prove US-only residency"),
+            detail={"region_signals_seen": 0},
+        ))
 
     # Oracles on the plan-derived summary (region → ITAR-120.54 residency criterion).
     oracle_outcomes: dict[str, str] = {}
@@ -414,14 +432,26 @@ def run_factory(
     return state
 
 
-def load_factory_dataset(order_ttl, *, catalog_ttl=CATALOG_TTL, tier1_ttl=TIER1_TTL) -> Dataset:
-    """Build a Dataset with catalog + tier1 + a serialized Order loaded.
+def load_factory_dataset(
+    order_ttl,
+    *,
+    catalog_ttl=CATALOG_TTL,
+    tier1_ttl=TIER1_TTL,
+    attref_vocab_ttl=ATTREF_VOCAB_TTL,
+    references_ttl=REFERENCES_TTL,
+) -> Dataset:
+    """Build a Dataset with catalog + attestation vocab + tier1 + references +
+    a serialized Order loaded.
 
     `order_ttl` is a TriG/Turtle export whose Order triples land in <ce:order>.
     """
     ds = create_dataset()
     load_into(ds, "ontology", catalog_ttl)
+    if Path(attref_vocab_ttl).is_file():
+        load_into(ds, "ontology", attref_vocab_ttl)
     load_into(ds, "structural", tier1_ttl)
+    if Path(references_ttl).is_file():
+        load_into(ds, "structural", references_ttl)
     # An order file may be TriG (named graphs) or flat Turtle for <ce:order>.
     order_path = str(order_ttl)
     if order_path.endswith(".trig"):

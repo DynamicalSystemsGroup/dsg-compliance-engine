@@ -1,0 +1,224 @@
+# Track B (attested-reference) sidecar — authoritative sources + references.
+#
+# Sidecar of ce:AuthoritativeSource and ce:Reference individuals cited by
+# modules in structural/tier1.ttl. Kept separate so topology (tier1.ttl) stays
+# stable while references churn (URIs move, freshness policies change, new
+# authoritative systems come online). Loaded into the <ce:structural> named
+# graph alongside tier1.ttl.
+#
+# Prefixes match ontology/prefixes.py exactly. Schema is defined in
+# ontology/ce-attestation-refs.ttl (do not reintroduce class-level triples
+# here).
+
+@prefix ce:    <http://dynamicalsystems.group/compliance-engine/> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+
+#################################################################
+# Authoritative sources
+#################################################################
+
+# --- Track B (paperwork) ---
+
+ce:AUTHSRC_DocRepo a ce:AuthoritativeSource ;
+    rdfs:label "In-repo policy document store (documents/policies/)" ;
+    rdfs:comment "File:// URIs into the git-tracked policy directory. Freshness is enforced by the reference's ce:lastVerified; substantive change is caught by git history." .
+
+ce:AUTHSRC_LMS a ce:AuthoritativeSource ;
+    rdfs:label "Learning Management System (KnowBe4 / Vector)" ;
+    rdfs:comment "Training completion records. Reference URIs point at the report export for the current training cycle." .
+
+ce:AUTHSRC_HRIS a ce:AuthoritativeSource ;
+    rdfs:label "Human Resources Info System (Rippling / Gusto)" ;
+    rdfs:comment "Personnel lifecycle records: background checks, hire/termination events, offboarding checklists." .
+
+ce:AUTHSRC_TicketingSystem a ce:AuthoritativeSource ;
+    rdfs:label "Ticketing system (Linear / Jira)" ;
+    rdfs:comment "Operational event log: tabletop drill runs, maintenance events, sanitization records, offboarding tickets." .
+
+ce:AUTHSRC_EngineHistory a ce:AuthoritativeSource ;
+    rdfs:label "This compliance engine's own run history" ;
+    rdfs:comment "The audit / evidence graphs produced by prior engine runs. Used for continuous-monitoring evidence (CA family)." .
+
+# --- Track A (machine) ---
+
+ce:AUTHSRC_GCP_ComputeAPI a ce:AuthoritativeSource ;
+    rdfs:label "GCP Compute API" ;
+    rdfs:comment "VPC networks, subnetworks, firewall rules, Cloud Armor policies." .
+
+ce:AUTHSRC_GCP_CloudLogging a ce:AuthoritativeSource ;
+    rdfs:label "GCP Cloud Logging API" ;
+    rdfs:comment "Log sinks, retention policy, IAM on log buckets." .
+
+ce:AUTHSRC_GCP_SCC a ce:AuthoritativeSource ;
+    rdfs:label "GCP Security Command Center API" ;
+    rdfs:comment "Vulnerability scan runs + findings." .
+
+ce:AUTHSRC_GCP_BinaryAuth a ce:AuthoritativeSource ;
+    rdfs:label "GCP Binary Authorization API" ;
+    rdfs:comment "Container image allowlist / attestation policy." .
+
+ce:AUTHSRC_GCP_IAM a ce:AuthoritativeSource ;
+    rdfs:label "GCP IAM API + audit logs" ;
+    rdfs:comment "Role bindings + privileged-action audit trail." .
+
+ce:AUTHSRC_Workspace_AdminSDK a ce:AuthoritativeSource ;
+    rdfs:label "Google Workspace Admin SDK" ;
+    rdfs:comment "User/group/policy configuration for Workspace CUI users." .
+
+ce:AUTHSRC_CrowdStrike a ce:AuthoritativeSource ;
+    rdfs:label "CrowdStrike Falcon API" ;
+    rdfs:comment "Endpoint sensor status + AV definition freshness + anomaly detection." .
+
+ce:AUTHSRC_GCP_BeyondCorp a ce:AuthoritativeSource ;
+    rdfs:label "GCP BeyondCorp Enterprise API" ;
+    rdfs:comment "Zero-trust remote access policy + session config." .
+
+ce:AUTHSRC_ChromeCloudMgmt a ce:AuthoritativeSource ;
+    rdfs:label "Chrome Browser Cloud Management + Endpoint Verification" ;
+    rdfs:comment "Managed device policy: 802.1X, encryption, USB, MDM." .
+
+ce:AUTHSRC_GitHub_API a ce:AuthoritativeSource ;
+    rdfs:label "GitHub REST API" ;
+    rdfs:comment "Branch protection, required reviews, change log commits." .
+
+ce:AUTHSRC_GCP_CloudIdentity a ce:AuthoritativeSource ;
+    rdfs:label "GCP Cloud Identity policy" ;
+    rdfs:comment "Session duration, idle timeout, failed-login lockout." .
+
+ce:AUTHSRC_GCP_VPCServiceControls a ce:AuthoritativeSource ;
+    rdfs:label "GCP VPC Service Controls" ;
+    rdfs:comment "Service perimeter config + external-system authorization." .
+
+#################################################################
+# Track B references — one per policy module. lastVerified is a fixture
+# timestamp; production runs update this via a resolver plugin per source.
+#################################################################
+
+ce:REF_POL_SSP_v1 a ce:Reference ;
+    rdfs:label "SSP supplement (system description) v1" ;
+    ce:uri <file://documents/policies/POL_SSP_SystemDescription.md> ;
+    ce:sourceSystem ce:AUTHSRC_DocRepo ;
+    ce:freshnessDays "365"^^xsd:integer ;
+    ce:lastVerified "2026-06-15T12:00:00+00:00"^^xsd:dateTime ;
+    ce:custodian "Sayer Tindall (Affirming Official)" .
+
+ce:REF_POL_AT_Training_v1 a ce:Reference ;
+    rdfs:label "Annual security awareness training completion (2026 cycle)" ;
+    ce:uri <file://documents/policies/POL_AT_Training.md> ;
+    ce:sourceSystem ce:AUTHSRC_LMS ;
+    ce:freshnessDays "365"^^xsd:integer ;
+    ce:lastVerified "2026-06-15T12:00:00+00:00"^^xsd:dateTime ;
+    ce:custodian "Operations lead (LMS admin)" .
+
+ce:REF_POL_IR_Plan_v1 a ce:Reference ;
+    rdfs:label "Incident Response Plan + 2026 tabletop report" ;
+    ce:uri <file://documents/policies/POL_IR_Plan.md> ;
+    ce:sourceSystem ce:AUTHSRC_DocRepo ;
+    ce:freshnessDays "365"^^xsd:integer ;
+    ce:lastVerified "2026-06-15T12:00:00+00:00"^^xsd:dateTime ;
+    ce:custodian "Security Officer" .
+
+ce:REF_POL_RA_Assessment_v1 a ce:Reference ;
+    rdfs:label "Formal risk assessment + finding tracker (2026)" ;
+    ce:uri <file://documents/policies/POL_RA_Assessment.md> ;
+    ce:sourceSystem ce:AUTHSRC_DocRepo ;
+    ce:freshnessDays "365"^^xsd:integer ;
+    ce:lastVerified "2026-06-15T12:00:00+00:00"^^xsd:dateTime ;
+    ce:custodian "Security Officer" .
+
+ce:REF_POL_PS_Personnel_v1 a ce:Reference ;
+    rdfs:label "Personnel security records (screening + offboarding)" ;
+    ce:uri <file://documents/policies/POL_PS_Personnel.md> ;
+    ce:sourceSystem ce:AUTHSRC_HRIS ;
+    ce:freshnessDays "0"^^xsd:integer ;   # event-based: exists per event
+    ce:lastVerified "2026-06-15T12:00:00+00:00"^^xsd:dateTime ;
+    ce:custodian "Operations lead" .
+
+ce:REF_POL_CM_Config_v1 a ce:Reference ;
+    rdfs:label "Configuration management: SIA procedure + change log" ;
+    ce:uri <file://documents/policies/POL_CM_Config.md> ;
+    ce:sourceSystem ce:AUTHSRC_DocRepo ;
+    ce:freshnessDays "180"^^xsd:integer ;
+    ce:lastVerified "2026-06-15T12:00:00+00:00"^^xsd:dateTime ;
+    ce:custodian "IT Admin" .
+
+ce:REF_POL_MA_Maintenance_v1 a ce:Reference ;
+    rdfs:label "Maintenance policy: approved vendor list + maintenance log" ;
+    ce:uri <file://documents/policies/POL_MA_Maintenance.md> ;
+    ce:sourceSystem ce:AUTHSRC_DocRepo ;
+    ce:freshnessDays "365"^^xsd:integer ;
+    ce:lastVerified "2026-06-15T12:00:00+00:00"^^xsd:dateTime ;
+    ce:custodian "Operations lead" .
+
+ce:REF_POL_MP_Media_v1 a ce:Reference ;
+    rdfs:label "Media protection: inventory + sanitization records (NIST SP 800-88)" ;
+    ce:uri <file://documents/policies/POL_MP_Media.md> ;
+    ce:sourceSystem ce:AUTHSRC_DocRepo ;
+    ce:freshnessDays "0"^^xsd:integer ;   # event-based: per sanitization event
+    ce:lastVerified "2026-06-15T12:00:00+00:00"^^xsd:dateTime ;
+    ce:custodian "Operations lead" .
+
+ce:REF_POL_AU_Procedure_v1 a ce:Reference ;
+    rdfs:label "Audit management procedure + sample log review report" ;
+    ce:uri <file://documents/policies/POL_AU_Procedure.md> ;
+    ce:sourceSystem ce:AUTHSRC_DocRepo ;
+    ce:freshnessDays "90"^^xsd:integer ;
+    ce:lastVerified "2026-06-15T12:00:00+00:00"^^xsd:dateTime ;
+    ce:custodian "Security Officer" .
+
+ce:REF_POL_SC_SecEng_v1 a ce:Reference ;
+    rdfs:label "Security engineering principles (NIST SP 800-160 Vol.1)" ;
+    ce:uri <file://documents/policies/POL_SC_SecEng.md> ;
+    ce:sourceSystem ce:AUTHSRC_DocRepo ;
+    ce:freshnessDays "365"^^xsd:integer ;
+    ce:lastVerified "2026-06-15T12:00:00+00:00"^^xsd:dateTime ;
+    ce:custodian "Security Officer" .
+
+ce:REF_POL_AC_RemoteAuth_v1 a ce:Reference ;
+    rdfs:label "Remote access authorization (SSP appendix)" ;
+    ce:uri <file://documents/policies/POL_AC_RemoteAuth.md> ;
+    ce:sourceSystem ce:AUTHSRC_DocRepo ;
+    ce:freshnessDays "365"^^xsd:integer ;
+    ce:lastVerified "2026-06-15T12:00:00+00:00"^^xsd:dateTime ;
+    ce:custodian "Security Officer" .
+
+ce:REF_POL_PE_Physical_v1 a ce:Reference ;
+    rdfs:label "Physical access + WFH agreements + visitor/badge logs" ;
+    ce:uri <file://documents/policies/POL_PE_Physical.md> ;
+    ce:sourceSystem ce:AUTHSRC_DocRepo ;
+    ce:freshnessDays "365"^^xsd:integer ;
+    ce:lastVerified "2026-06-15T12:00:00+00:00"^^xsd:dateTime ;
+    ce:custodian "Operations lead" .
+
+ce:REF_POL_SC_Collab_v1 a ce:Reference ;
+    rdfs:label "Collaborative computing / mobile code / VoIP policies" ;
+    ce:uri <file://documents/policies/POL_SC_Collab.md> ;
+    ce:sourceSystem ce:AUTHSRC_DocRepo ;
+    ce:freshnessDays "365"^^xsd:integer ;
+    ce:lastVerified "2026-06-15T12:00:00+00:00"^^xsd:dateTime ;
+    ce:custodian "IT Admin" .
+
+ce:REF_POL_AC_SoD_v1 a ce:Reference ;
+    rdfs:label "Separation of duties (RACI matrix)" ;
+    ce:uri <file://documents/policies/POL_AC_SoD.md> ;
+    ce:sourceSystem ce:AUTHSRC_DocRepo ;
+    ce:freshnessDays "365"^^xsd:integer ;
+    ce:lastVerified "2026-06-15T12:00:00+00:00"^^xsd:dateTime ;
+    ce:custodian "Security Officer" .
+
+ce:REF_POL_CA_Monitoring_v1 a ce:Reference ;
+    rdfs:label "Continuous monitoring: engine run history + POA&M tracker" ;
+    ce:uri <file://documents/policies/POL_CA_Monitoring.md> ;
+    ce:sourceSystem ce:AUTHSRC_EngineHistory ;
+    ce:freshnessDays "90"^^xsd:integer ;
+    ce:lastVerified "2026-06-15T12:00:00+00:00"^^xsd:dateTime ;
+    ce:custodian "Security Officer" .
+
+ce:REF_POL_AC_LoginBanner_v1 a ce:Reference ;
+    rdfs:label "Login banner policy text (Workspace + CUI systems)" ;
+    ce:uri <file://documents/policies/POL_AC_LoginBanner.md> ;
+    ce:sourceSystem ce:AUTHSRC_DocRepo ;
+    ce:freshnessDays "365"^^xsd:integer ;
+    ce:lastVerified "2026-06-15T12:00:00+00:00"^^xsd:dateTime ;
+    ce:custodian "Security Officer" .

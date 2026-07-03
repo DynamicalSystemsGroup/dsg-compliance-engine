@@ -23,8 +23,8 @@ run "plan_builds_enclave" {
   }
 
   assert {
-    condition     = length(terraform_data.cmmc_tag) == 10
-    error_message = "Expected one control tag per tier1.ttl module (10)."
+    condition     = length(terraform_data.cmmc_tag) == 11
+    error_message = "Expected one control tag per tier1.ttl module (11: 10 tier-1 + VPC_Segmentation)."
   }
 }
 

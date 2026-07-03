@@ -1,0 +1,170 @@
+# CE attestation + reference vocabulary — the "ask bob / ask the authoritative
+# system where bob logs it" model. Every module — machine-verifiable or human-
+# only — points at an authoritative source and records a reference into it; the
+# oracle checks that the reference exists, is fresh, and carries an AO
+# attestation signed by someone in the required role.
+#
+# This file adds three classes (AuthoritativeSource, Reference, Role), one
+# evidence subtype (AttestedReference — parallel to ce:ConfigExport /
+# ce:PolicyCheck), role individuals, three oracle-kind IRIs, and the properties
+# wiring them together. It does NOT redefine ce:Attestation — that class is
+# already targeted by ce:AttestationShape in cmmc_shapes.ttl and remains the
+# signed statement over evidence for any control.
+
+@prefix cmmc:  <http://dynamicalsystems.group/ontology/cmmc#> .
+@prefix ce:    <http://dynamicalsystems.group/compliance-engine/> .
+@prefix earl:  <http://www.w3.org/ns/earl#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+
+#################################################################
+# ce:needsAction — new outcome distinct from earl:cantTell.
+#
+# EARL's built-in lattice: passed, failed, cantTell, inapplicable, untested.
+# cantTell is "the machine genuinely cannot know" — for us, that's a copout:
+# under the attested-reference model every control has SOMEWHERE bob logs it,
+# so 'unknowable' becomes 'no reference registered yet'. ce:needsAction is a
+# first-class outcome that names the concrete missing piece — an unregistered
+# reference, a stale reference past its freshness window, or a reference
+# awaiting AO attestation. Consumers (SPRS gate, SSP, BOM, audit) treat it as
+# distinct from cantTell so 'needs attestation' doesn't get lumped with
+# 'genuinely unknowable'. Subclass of earl:OutcomeValue so existing EARL
+# consumers still see it as a valid outcome value.
+#################################################################
+
+ce:needsAction a earl:OutcomeValue ;
+    rdfs:label "needs action" ;
+    rdfs:comment "The control has a claimable module and an authoritative source, but is missing something concrete and actionable: no reference registered, a stale reference, or a reference awaiting AO attestation. Distinct from cantTell (genuinely unknowable) — needsAction always carries a machine-readable reason describing the missing piece." .
+
+ce:outcomeReason a owl:DatatypeProperty ;
+    rdfs:label "outcome reason" ;
+    rdfs:range xsd:string ;
+    rdfs:comment "Machine-readable reason attached to an EARL result — required for ce:needsAction, optional elsewhere. Examples: 'reference-missing', 'reference-stale:172d>90d', 'awaiting-attestation', 'signer-role-mismatch:ITAdmin!=SecurityOfficer'." .
+
+#################################################################
+# Classes
+#################################################################
+
+ce:AuthoritativeSource a owl:Class ;
+    rdfs:label "Authoritative source" ;
+    rdfs:comment "A system that owns ground truth for one class of compliance evidence: a cloud API, an LMS, an HRIS, a doc repo, a KOI-Net node, a signed PDF store. Modules point at exactly one; references resolve into it." .
+
+ce:Reference a owl:Class ;
+    rdfs:label "Reference into an authoritative source" ;
+    rdfs:comment "A resolvable pointer into a ce:AuthoritativeSource. Carries a URI, its source system, a freshness window, a last-verified timestamp, and the human custodian ('bob') accountable for keeping it current." .
+
+ce:Role a owl:Class ;
+    rdfs:label "Attestation role" ;
+    rdfs:comment "The hat a signer wears when attesting evidence. Role is a smell-detector for a C3PAO reviewing the trail: the wrong role signing the wrong evidence is a signal. The Affirming Official can attest anything (they carry the § 1001 liability); other roles are bounded to their domain." .
+
+# Evidence subtype for the attested-reference pattern. Parallel to the existing
+# ce:ConfigExport (raw API JSON) and ce:PolicyCheck (policy result over config).
+ce:AttestedReference a owl:Class ;
+    rdfs:subClassOf ce:Evidence ;
+    rdfs:label "Attested reference evidence" ;
+    rdfs:comment "Evidence produced by resolving a ce:Reference into its authoritative source and attaching an AO attestation. Distinct evidentiary_status: 'attested-reference' (live) or 'attested-reference-mock' (fixture)." .
+
+#################################################################
+# Role individuals
+#################################################################
+
+ce:Role_AffirmingOfficial a ce:Role ;
+    rdfs:label "Affirming Official" ;
+    rdfs:comment "Senior officer who signs the SPRS submission; carries personal liability under 18 U.S.C. § 1001. Can attest any control." .
+
+ce:Role_SecurityOfficer a ce:Role ;
+    rdfs:label "Security Officer" ;
+    rdfs:comment "Accountable for the security program: SSP, IR plan, risk assessment, security engineering principles, monitoring cadence. Signs the substance of security policies." .
+
+ce:Role_ITAdmin a ce:Role ;
+    rdfs:label "IT Administrator" ;
+    rdfs:comment "Runs technical controls: Workspace 2SV, DLP, MDM, IAM, key rotation. Attests operational reality of machine-verifiable configs." .
+
+ce:Role_OPs a ce:Role ;
+    rdfs:label "Operations" ;
+    rdfs:comment "Owns operational evidence: personnel lifecycle records (background checks, training completion, offboarding), maintenance logs, sanitization records, tabletop drill artifacts. Attests facts about operational events and personnel state." .
+
+#################################################################
+# Properties — module → reference → evidence + attestation wiring
+#################################################################
+
+# Module → the system it draws truth from.
+ce:authoritativeSource a owl:ObjectProperty ;
+    rdfs:label "authoritative source" ;
+    rdfs:range ce:AuthoritativeSource ;
+    rdfs:comment "Points a module at the system where 'bob logs it'." .
+
+# Module → its (usually singleton) reference into that source. A module may
+# carry multiple references (e.g. IR plan + tabletop report) — both address
+# the same controls.
+ce:reference a owl:ObjectProperty ;
+    rdfs:label "reference" ;
+    rdfs:range ce:Reference ;
+    rdfs:comment "Points a module at a resolvable reference into its authoritative source." .
+
+# Module → required signer role for the AO attestation of its evidence.
+ce:attestationRole a owl:ObjectProperty ;
+    rdfs:label "required attestation role" ;
+    rdfs:range ce:Role ;
+    rdfs:comment "The role a signer must hold for a non-AO attestation to satisfy this module. The Affirming Official can always attest regardless of this hint." .
+
+# Reference → its URI (resolvable — https, file, or koi:rid:).
+ce:uri a owl:DatatypeProperty ;
+    rdfs:label "reference URI" ;
+    rdfs:range xsd:anyURI ;
+    rdfs:comment "Where the reference lives. Resolution dispatched by ce:sourceSystem: https for docs and APIs; file:// for repo-tracked artifacts; koi:rid: for KOI-Net-resolved references." .
+
+# Reference → the AuthoritativeSource it points into (for resolver dispatch).
+ce:sourceSystem a owl:ObjectProperty ;
+    rdfs:label "source system" ;
+    rdfs:range ce:AuthoritativeSource .
+
+# Freshness — days after ce:lastVerified before the reference goes stale and
+# the attested-reference oracle FAILs the control until a re-verify.
+ce:freshnessDays a owl:DatatypeProperty ;
+    rdfs:label "freshness window (days)" ;
+    rdfs:range xsd:integer ;
+    rdfs:comment "Non-negative integer. 0 = event-based (never expires, but must exist per event); positive = must be re-verified every N days." .
+
+ce:lastVerified a owl:DatatypeProperty ;
+    rdfs:label "last verified" ;
+    rdfs:range xsd:dateTime ;
+    rdfs:comment "When the reference was last checked to still resolve to current, authoritative content." .
+
+ce:custodian a owl:DatatypeProperty ;
+    rdfs:label "custodian" ;
+    rdfs:range xsd:string ;
+    rdfs:comment "The human 'bob' — the person accountable for keeping this reference fresh. Recorded for the audit trail, not consumed by the engine." .
+
+# Attestation → the role the signer was wearing when they signed. The
+# attested-reference oracle checks this against the module's ce:attestationRole
+# (with an AO override).
+ce:signerRole a owl:ObjectProperty ;
+    rdfs:label "signer role" ;
+    rdfs:range ce:Role ;
+    rdfs:comment "The role the attestation signer held. If this is ce:Role_AffirmingOfficial, the module's ce:attestationRole hint is bypassed." .
+
+#################################################################
+# Oracle-kind IRIs — three canonical kinds referenced by
+# cmmc:verificationMethod. Track A machine modules use oracle-config-check;
+# Track B policy modules use oracle-attested-reference; signed-artifact is for
+# cosign/Rekor-signed artifacts (SSPs, tabletop reports).
+#################################################################
+
+ce:oracle-attested-reference a ce:Oracle ;
+    rdfs:label "attested-reference oracle" ;
+    rdfs:comment "PASS iff reference registered, resolvable, within freshness window, attested by a signer whose role satisfies the module's ce:attestationRole (or is AO), and attestation not older than the reference's lastVerified." .
+
+ce:oracle-config-check a ce:Oracle ;
+    rdfs:label "config-check oracle" ;
+    rdfs:comment "Policy-checks a config export (API JSON, terraform plan JSON, GitHub branch protection JSON, etc.) resolved from a machine-authoritative source." .
+
+ce:oracle-signed-artifact a ce:Oracle ;
+    rdfs:label "signed-artifact oracle" ;
+    rdfs:comment "Verifies a detached signature (cosign / JWS) over a repo-tracked artifact. Used for the SSP itself and for tabletop-report artifacts." .
+
+ce:Oracle a owl:Class ;
+    rdfs:label "Oracle kind" ;
+    rdfs:comment "One of the three canonical oracle kinds. Module cmmc:verificationMethod points here." .

@@ -40,11 +40,15 @@ if TYPE_CHECKING:  # pragma: no cover
 ORACLE_AGENT = URIRef("urn:ce:agent:control-oracle")
 CONTROL_CHECK_TEST = URIRef("urn:ce:test:control-check")
 
-# String outcome (oracles.criteria) -> EARL outcome IRI.
+# String outcome (oracles.criteria) -> outcome IRI. ce:needsAction is a
+# compliance-engine-local outcome value (subclass of earl:OutcomeValue) —
+# distinct from cantTell so 'action required' doesn't get lumped with
+# 'genuinely unknowable'. See ontology/ce-attestation-refs.ttl.
 _OUTCOME_IRI = {
     "passed": EARL.passed,
     "failed": EARL.failed,
     "cantTell": EARL.cantTell,
+    "needsAction": CE.needsAction,
 }
 
 
@@ -93,6 +97,8 @@ def emit_control_check_assertion(
     g.add((assertion, EARL.result, result_node))
     g.add((result_node, RDF.type, EARL.TestResult))
     g.add((result_node, EARL.outcome, _OUTCOME_IRI[result.outcome]))
+    if result.reason:
+        g.add((result_node, CE.outcomeReason, Literal(result.reason)))
 
     # Control link — ce:evaluatesAgainst, NOT ce:attests (human-only).
     g.add((assertion, CE.evaluatesAgainst, control_iri))

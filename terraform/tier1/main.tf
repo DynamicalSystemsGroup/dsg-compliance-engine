@@ -60,6 +60,16 @@ locals {
       resources = ["null_resource.monitoring_alerting"]
       inherited = false
     }
+    VPC_Segmentation = {
+      controls  = ["SC.L2-3.13.3", "SC.L2-3.13.4", "SC.L2-3.13.5",
+                   "SC.L2-3.13.6", "SC.L2-3.13.7", "SC.L2-3.13.8",
+                   "SC.L2-3.13.9", "SC.L2-3.13.15"]
+      resources = ["google_compute_network.cui",
+                   "google_compute_subnetwork.cui_private",
+                   "google_compute_firewall.deny_all_ingress",
+                   "google_compute_firewall.allow_internal_tls"]
+      inherited = false
+    }
     # CSP-inherited physical protection: NOT machine-provable at plan time
     # (MET-by-inheritance, human-attested). Tagged for traceability, but the
     # generator skips binding a plan-derived PASS for inherited modules.

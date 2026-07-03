@@ -49,12 +49,20 @@ _SHORT_STATUS = {
     "inapplicable": "N/A",
     "untested": "PLANNED",
     "cantTell": "CANT TELL",
+    # ce:needsAction — a concrete missing piece under the attested-reference
+    # model (unregistered reference, stale reference, or awaiting attestation).
+    # Distinct from CANT TELL: it's actionable, and the audit trail carries the
+    # specific reason.
+    "needsAction": "NEEDS ACTION",
 }
 # A control with no attestation is NOT MET (MET requires a human attestation).
 _UNATTESTED_STATUS = "NOT MET"
 
 # Evidentiary statuses that make the whole BOM non-evidentiary (R12).
-_WEAK_STATUSES = {"mock", "mock-plan", "auto", "automatic", "semiAuto"}
+# 'attested-reference-mock' is the fixture-backed Track B analogue of
+# 'mock-plan' — same downgrade semantics.
+_WEAK_STATUSES = {"mock", "mock-plan", "auto", "automatic", "semiAuto",
+                  "attested-reference-mock"}
 
 
 # ---------------------------------------------------------------------------

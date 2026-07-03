@@ -43,7 +43,9 @@ SATISFYING_ELEMENT = SYSML.satisfyingElement
 SATISFIED_REQUIREMENT = SYSML.satisfiedRequirement
 
 # The authoritative Tier 1 mapping — this test IS the spec for the allocation.
-# Machine-verifiable modules: verificationMethod is an oracle IRI.
+# Machine-verifiable modules: verificationMethod is a machine-oracle IRI
+# (config-check / signed-artifact / bespoke oracle IRIs — anything BUT
+# ce:oracle-attested-reference).
 EXPECTED_MACHINE = {
     "Workspace2SV_CUI_OU": {"IA.L2-3.5.3", "IA.L2-3.5.2", "IA.L2-3.5.4"},
     "CMEK_KeyRing": {"SC.L2-3.13.11", "SC.L2-3.13.10", "SC.L2-3.13.16"},
@@ -54,11 +56,42 @@ EXPECTED_MACHINE = {
     "Disable_NonFedRAMP_Services": {"CM.L2-3.4.6", "CM.L2-3.4.7"},
     "Terraform_Baseline": {"CM.L2-3.4.1", "CM.L2-3.4.2"},
     "Monitoring_Alerting": {"SI.L2-3.14.3", "SI.L2-3.14.6"},
+    "VPC_Segmentation": {"SC.L2-3.13.3", "SC.L2-3.13.4", "SC.L2-3.13.5",
+                          "SC.L2-3.13.6", "SC.L2-3.13.7", "SC.L2-3.13.8",
+                          "SC.L2-3.13.9", "SC.L2-3.13.15"},
 }
 # Inherited module: verificationMethod is a literal (attested, not machine).
 EXPECTED_INHERITED = {
     "CSP_Physical_Inheritance": {"PE.L2-3.10.1", "PE.L2-3.10.2"},
 }
+# Track B (attested-reference) modules: verificationMethod is the shared IRI
+# ce:oracle-attested-reference. These use the "ask bob / ask the authoritative
+# system where bob logs it" model — the engine records + freshness-checks the
+# reference; substance is bob's judgement, captured in the AO attestation.
+EXPECTED_POLICY = {
+    "POL_SSP_SystemDescription": {"CA.L2-3.12.4"},
+    "POL_AT_Training": {"AT.L2-3.2.1", "AT.L2-3.2.2", "AT.L2-3.2.3"},
+    "POL_IR_Plan": {"IR.L2-3.6.1", "IR.L2-3.6.2", "IR.L2-3.6.3"},
+    "POL_RA_Assessment": {"RA.L2-3.11.1", "RA.L2-3.11.3"},
+    "POL_PS_Personnel": {"PS.L2-3.9.1", "PS.L2-3.9.2"},
+    "POL_CM_Config": {"CM.L2-3.4.4"},
+    "POL_MA_Maintenance": {"MA.L2-3.7.1", "MA.L2-3.7.2", "MA.L2-3.7.3",
+                            "MA.L2-3.7.4", "MA.L2-3.7.6"},
+    "POL_MP_Media": {"MP.L2-3.8.1", "MP.L2-3.8.2", "MP.L2-3.8.3", "MP.L2-3.8.4",
+                     "MP.L2-3.8.5", "MP.L2-3.8.6", "MP.L2-3.8.8", "MP.L2-3.8.9"},
+    "POL_AU_Procedure": {"AU.L2-3.3.3", "AU.L2-3.3.6"},
+    "POL_SC_SecEng": {"SC.L2-3.13.2"},
+    "POL_AC_RemoteAuth": {"AC.L2-3.1.15", "AC.L2-3.1.21", "AC.L2-3.1.22"},
+    "POL_PE_Physical": {"PE.L2-3.10.3", "PE.L2-3.10.4", "PE.L2-3.10.5",
+                        "PE.L2-3.10.6"},
+    "POL_SC_Collab": {"SC.L2-3.13.12", "SC.L2-3.13.13", "SC.L2-3.13.14"},
+    "POL_AC_SoD": {"AC.L2-3.1.4"},
+    "POL_CA_Monitoring": {"CA.L2-3.12.1", "CA.L2-3.12.2", "CA.L2-3.12.3"},
+    "POL_AC_LoginBanner": {"AC.L2-3.1.9"},
+}
+# ce:oracle-attested-reference — modules using this IRI are Track B, not
+# machine-verified in the config-check sense.
+ATTESTED_REFERENCE_IRI = "http://dynamicalsystems.group/compliance-engine/oracle-attested-reference"
 
 TOTAL_CONTROLS = 110
 
@@ -186,7 +219,7 @@ def test_mapping_matches_spec_exactly(ds):
     claims = _modules_with_claims(ds)
     got = {str(m).replace(str(CE), ""): {str(c).replace(str(CMMC), "") for c in cs}
            for m, cs in claims.items()}
-    expected = {**EXPECTED_MACHINE, **EXPECTED_INHERITED}
+    expected = {**EXPECTED_MACHINE, **EXPECTED_INHERITED, **EXPECTED_POLICY}
     assert got == expected, f"tier1 mapping drifted from spec:\n{got}"
 
 
@@ -218,12 +251,16 @@ def test_coverage_query_reports_proven_vs_attested(ds, catalog_controls):
         for c in controls:
             per_control.setdefault(c, set()).add(m)
 
-    # A control is machine-verified iff some claiming module has an IRI method.
+    # A control is machine-verified iff some claiming module has an IRI method
+    # that is NOT ce:oracle-attested-reference (which is Track B — the engine
+    # records + freshness-checks a reference, but bob's judgement is what makes
+    # it MET, so it does not count as "proven by machine").
     machine_verified: set[URIRef] = set()
     for c, mods in per_control.items():
         for m in mods:
             methods = list(struct.objects(m, VERIFICATION_METHOD))
-            if any(isinstance(x, URIRef) for x in methods):
+            iri_methods = [x for x in methods if isinstance(x, URIRef)]
+            if any(str(x) != ATTESTED_REFERENCE_IRI for x in iri_methods):
                 machine_verified.add(c)
                 break
 
@@ -236,13 +273,22 @@ def test_coverage_query_reports_proven_vs_attested(ds, catalog_controls):
     # Expected totals derived from the spec.
     expected_machine = {_ctrl(x) for cs in EXPECTED_MACHINE.values() for x in cs}
     expected_inherited = {_ctrl(x) for cs in EXPECTED_INHERITED.values() for x in cs}
-    expected_claimed = expected_machine | expected_inherited
+    expected_policy = {_ctrl(x) for cs in EXPECTED_POLICY.values() for x in cs}
+    expected_claimed = expected_machine | expected_inherited | expected_policy
 
     assert claimed == expected_claimed
     assert machine_verified == expected_machine
-    assert len(machine_verified) == 20
-    assert len(claimed) == 22
-    assert len(catalog_controls - claimed) == 88          # controls with NO claiming module
-    assert len(no_machine) == TOTAL_CONTROLS - 20 == 90   # no machine verificationMethod
-    # The inherited pair is claimed but NOT machine-verified.
+    # 20 (tier1) + 8 (VPC_Segmentation) = 28 machine-verified so far. Track A
+    # modules 2-13 will push this toward the full 45.
+    assert len(machine_verified) == 20 + 8 == 28
+    # 22 tier1 + 43 track B + 8 VPC = 73 claimed. Remaining 37 come from
+    # Track A modules 2-13.
+    assert len(claimed) == 22 + 43 + 8 == 73
+    assert len(catalog_controls - claimed) == 110 - 73 == 37
+    # Everything not machine-verified today (inherited + attested-reference +
+    # not-yet-claimed).
+    assert len(no_machine) == TOTAL_CONTROLS - 28 == 82
+    # The inherited pair AND every Track B policy control is claimed but NOT
+    # machine-verified in the config-check sense.
     assert expected_inherited <= no_machine
+    assert expected_policy <= no_machine

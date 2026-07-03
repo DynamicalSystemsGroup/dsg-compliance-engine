@@ -1,0 +1,40 @@
+{
+  "source_system": "gcp.compute",
+  "export_command": "gcloud compute networks describe cui-enclave --format json && gcloud compute firewall-rules list --filter='network=cui-enclave' --format json",
+  "collected_at": "2026-07-02T00:00:00Z",
+  "collector_version": "mock-0.1.0",
+  "controls": ["SC.L2-3.13.3", "SC.L2-3.13.4", "SC.L2-3.13.5",
+               "SC.L2-3.13.6", "SC.L2-3.13.7", "SC.L2-3.13.8",
+               "SC.L2-3.13.9", "SC.L2-3.13.15"],
+  "evidentiary_status": "mock",
+  "raw": {
+    "network": {
+      "name": "cui-enclave",
+      "autoCreateSubnetworks": false,
+      "routingConfig": {"routingMode": "REGIONAL"}
+    },
+    "subnetworks": [
+      {"name": "cui-private", "ipCidrRange": "10.10.0.0/20",
+       "privateIpGoogleAccess": true, "purpose": "PRIVATE"}
+    ],
+    "firewall_rules": [
+      {"name": "cui-deny-all-ingress", "priority": 65534, "direction": "INGRESS",
+       "sourceRanges": ["0.0.0.0/0"], "denied": [{"IPProtocol": "all"}]},
+      {"name": "cui-allow-internal-tls", "priority": 1000, "direction": "INGRESS",
+       "sourceRanges": ["10.10.0.0/20"],
+       "allowed": [{"IPProtocol": "tcp", "ports": ["443"]}]}
+    ],
+    "load_balancer_ssl_policy": {"minTlsVersion": "TLS_1_2",
+                                 "profile": "RESTRICTED"}
+  },
+  "summary": {
+    "cui_subnet_private": true,
+    "shared_resource_isolation": true,
+    "public_access_denied": true,
+    "default_deny_ingress": true,
+    "split_tunnel_disabled": true,
+    "tls_minimum_version": "1.2",
+    "session_termination_configured": true,
+    "session_authenticity_protected": true
+  }
+}

@@ -195,10 +195,15 @@ def _do_attest(ds, state) -> int:
     machine oracle is attested MET as human/inherited (no `ce:oracleOutcome`),
     so `all-covered` reaches full coverage over the required set → SPRS 110/Final.
     """
-    from ontology.prefixes import EARL
+    from ontology.prefixes import CE, EARL
     from traceability.attestation import OUTCOME_PASSED, request_attestation
 
-    outcome_iri = {"passed": EARL.passed, "failed": EARL.failed, "cantTell": EARL.cantTell}
+    outcome_iri = {
+        "passed": EARL.passed,
+        "failed": EARL.failed,
+        "cantTell": EARL.cantTell,
+        "needsAction": CE.needsAction,
+    }
     required = state.load_order.required_controls if state.load_order else ()
     outcomes = state.oracles.outcomes if state.oracles else {}
     n = 0

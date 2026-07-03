@@ -54,7 +54,9 @@ DOC_TITLE = "NV012 System Security Plan + Traceability Matrix (Document 2)"
 SHORT_HASH = 12
 
 # Evidentiary-status literals that make the dataset NON-EVIDENTIARY (R12).
-MOCK_STATUSES = frozenset({"mock", "mock-plan"})
+# 'attested-reference-mock' is the fixture-backed Track B analogue of
+# 'mock-plan' — same downgrade semantics until the reference is resolved live.
+MOCK_STATUSES = frozenset({"mock", "mock-plan", "attested-reference-mock"})
 
 # EARL outcome short-name → human status label (MET / NOT MET / N/A / PLANNED …).
 _SHORT_TO_LABEL = {

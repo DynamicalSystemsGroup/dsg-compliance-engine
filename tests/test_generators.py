@@ -18,12 +18,23 @@ from evidence.generators.mock_config import MockConfigExportGenerator
 from evidence.generators.mock_policy import MockPolicyCheckGenerator
 
 # summary keys the oracles read (must stay aligned with oracles/criteria.py).
+# 5 Tier-1 keys + 8 VPC_Segmentation keys added by Track A module 1.
 _ORACLE_KEYS = {
+    # Tier 1
     "mfa_enforced_privileged",
     "fips_module_present",
     "cui_encrypted_at_rest",
     "unauthorized_principals",
     "data_region",
+    # VPC_Segmentation (SC.13.3/4/5/6/7/8/9/15)
+    "cui_subnet_private",
+    "shared_resource_isolation",
+    "public_access_denied",
+    "default_deny_ingress",
+    "split_tunnel_disabled",
+    "tls_minimum_version",
+    "session_termination_configured",
+    "session_authenticity_protected",
 }
 
 
@@ -43,8 +54,8 @@ class TestProtocolConformance:
 class TestMockConfigExportGenerator:
     def test_all_covered_emits_every_criterion(self):
         arts = MockConfigExportGenerator().collect(GeneratorContext(evidence_set="all-covered"))
-        # 5 fixture exports in all-covered → 5 artifacts.
-        assert len(arts) == 5
+        # 5 tier-1 fixtures + 1 VPC_Segmentation fixture = 6 artifacts.
+        assert len(arts) == 6
         assert _summary_keys(arts) == _ORACLE_KEYS
 
     def test_artifact_shape(self):
