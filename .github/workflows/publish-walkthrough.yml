@@ -32,10 +32,10 @@ jobs:
           python-version: "3.12"
 
       - name: Install dependencies
-        run: uv sync --group notebook
+        run: uv sync --group notebook --all-groups
 
       - name: Build walkthrough (marimo export)
-        run: uv run --group notebook marimo export html-wasm notebooks/compliance_walkthrough.py -o walkthrough/
+        run: uv run marimo export html notebooks/compliance_walkthrough.py -o walkthrough/index.html
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
