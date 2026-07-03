@@ -228,8 +228,22 @@ def _do_compile(ds, obligations, evidence_set: str, now: str):
         raise _GapRefused(str(exc)) from exc
 
 
-def _do_run_factory(ds, order_iri, evidence_set: str, backend: str, output_dir: Path):
-    from compliance_engine.pipeline.backends.local import LocalBackend
+def _make_store_backend(store_backend: str, output_dir: Path):
+    """Construct the run's store backend. `local` (default) writes files; `flexo`
+    is the append-only versioned remote tier (a self-hosted Flexo MMS in the IL4
+    enclave; offline-simulated here). Local files are always written regardless, so
+    the local registry stays as the cache/fallback tier."""
+    from compliance_engine.pipeline.backends.base import get_backend
+
+    if store_backend == "flexo":
+        return get_backend("flexo", store_root=output_dir / "flexo", ref=CONTRACT_ID)
+    return get_backend("local")
+
+
+def _do_run_factory(
+    ds, order_iri, evidence_set: str, backend: str, output_dir: Path,
+    store_backend: str = "local",
+):
     from compliance_engine.pipeline.provision import (
         FakeProvisionBackend,
         TerraformBackend,
@@ -241,12 +255,33 @@ def _do_run_factory(ds, order_iri, evidence_set: str, backend: str, output_dir: 
         ds,
         order_iri,
         provision_backend=provision,
-        store_backend=LocalBackend(),
+        store_backend=_make_store_backend(store_backend, output_dir),
         evidence_set=evidence_set,
         now=RUN_SEED_TS,
         run_preflight=True,
         output_dir=output_dir,
     )
+
+
+def _persist_to_flexo(ds, output_dir: Path) -> None:
+    """Durably persist the run to the Flexo append-only tier of record. Degrades
+    gracefully: on Flexo unavailability the local files remain as the cache and the
+    run is not failed."""
+    from compliance_engine.pipeline.backends.base import BackendUnavailable
+    from compliance_engine.pipeline.backends.flexo import FlexoBackend
+
+    flexo = FlexoBackend(store_root=output_dir / "flexo", ref=CONTRACT_ID)
+    try:
+        flexo.probe(output_dir=output_dir)
+        counts = flexo.persist(ds, output_dir)
+        version = flexo.store.history(flexo.ref)[-1] if flexo.store else "?"
+        typer.echo(
+            f"[flexo] committed run to append-only tier "
+            f"(ref={flexo.ref}, version={version[:12]}, "
+            f"{sum(counts.values())} triples across {len(counts)} graphs)"
+        )
+    except BackendUnavailable as exc:
+        typer.echo(f"[flexo] unavailable — local cache retained (degraded): {exc}")
 
 
 def _do_attest(ds, state) -> int:
@@ -528,6 +563,9 @@ def demo(
     backend: Annotated[
         str, typer.Option("--backend", help="fake | terraform.")
     ] = "fake",
+    store_backend: Annotated[
+        str, typer.Option("--store-backend", help="local | flexo (append-only tier of record).")
+    ] = "local",
 ) -> None:
     """Run the full NV012 chain: compile-order → run-factory → attest → audit → bom → ssp."""
     from compliance_engine.order_compiler import compiler
@@ -554,7 +592,7 @@ def demo(
     )
 
     # 2. run Factory.
-    state = _do_run_factory(ds, order.iri, evidence_set, backend, out)
+    state = _do_run_factory(ds, order.iri, evidence_set, backend, out, store_backend)
     if state.halted:
         typer.echo(
             f"[2/6 run-factory] HALTED at {state.halted_at} "
@@ -582,12 +620,25 @@ def demo(
         f"-> {out / 'bom.json'}"
     )
 
+    # Full-chain provenance: bind the downstream artifacts (attestations, BOM, SSP)
+    # so the contract -> SSP lineage is complete before the dataset is persisted.
+    from compliance_engine.traceability.provenance import bind_downstream_provenance
+    bind_downstream_provenance(
+        ds, order.contract,
+        attestation_count=n, bom_hash=bom.bom_hash, ssp_present=True,
+    )
+
     # 6. SSP — render the real document from this run's audit + BOM.
     typer.echo("[6/6 ssp]")
     _save_ds(ds, out)  # persist first so ssp's dataset path resolves
     _ssp_hook(out, ds=ds, audit_report=report, bom=bom)
 
     _dump_run_state(state, out)
+
+    # Durable append-only tier of record (Flexo), when selected. Local files are
+    # always written above, so the local registry remains the cache/fallback tier.
+    if store_backend == "flexo":
+        _persist_to_flexo(ds, out)
 
 
 def main() -> None:  # pragma: no cover

@@ -87,4 +87,7 @@ def get_backend(name: str, **kwargs) -> StoreBackend:
     if name == "local":
         from compliance_engine.pipeline.backends.local import LocalBackend
         return LocalBackend(**kwargs)
-    raise ValueError(f"Unknown backend {name!r}. Choose: local")
+    if name == "flexo":
+        from compliance_engine.pipeline.backends.flexo import FlexoBackend
+        return FlexoBackend(**kwargs)
+    raise ValueError(f"Unknown backend {name!r}. Choose: local, flexo")

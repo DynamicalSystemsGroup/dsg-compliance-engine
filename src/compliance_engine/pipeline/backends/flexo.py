@@ -264,8 +264,13 @@ class FlexoBackend:
 
     # -- StoreBackend protocol ---------------------------------------------
 
-    def probe(self) -> None:
+    def probe(self, output_dir: Path | None = None) -> None:
         """Preflight reachability check.
+
+        Signature matches LocalBackend.probe (the runner calls
+        ``probe(output_dir=...)`` and Registry calls ``probe(root)``);
+        ``output_dir`` is accepted for parity and ignored — Flexo is a remote
+        quadstore, not a file target.
 
         Fake-store mode is always reachable (offline). Real-endpoint mode
         performs a cheap, bounded HTTP HEAD-style GET and raises
