@@ -138,6 +138,25 @@ ce:custodian a owl:DatatypeProperty ;
     rdfs:range xsd:string ;
     rdfs:comment "The human 'bob' — the person accountable for keeping this reference fresh. Recorded for the audit trail, not consumed by the engine." .
 
+# Reference → the pinned version of the authoritative artifact it resolves to.
+# For a policy stored in Flexo (the append-only versioned tier), this is the
+# commit/ref version; the reference always resolves to this exact version, so a
+# later re-sign creates a new version and updates the pin while the prior version
+# remains immutably retrievable.
+ce:version a owl:DatatypeProperty ;
+    rdfs:label "pinned version" ;
+    rdfs:range xsd:string ;
+    rdfs:comment "The version id (Flexo commit / ref version) the reference is pinned to. Absent = latest / unpinned (fixture mode)." .
+
+# Reference → the detached signature over the referenced artifact at ce:version.
+# The signature is produced by compliance_engine.signing (Ed25519 for fixtures,
+# cosign+KMS in production) and proves the Affirming Official signed this exact
+# artifact version. Verified live when the reference is resolved.
+ce:signature a owl:DatatypeProperty ;
+    rdfs:label "artifact signature" ;
+    rdfs:range xsd:string ;
+    rdfs:comment "Base64 detached signature over the referenced artifact at ce:version. Verified against the signing key when the reference is resolved live; recorded here for the audit trail." .
+
 # Attestation → the role the signer was wearing when they signed. The
 # attested-reference oracle checks this against the module's ce:attestationRole
 # (with an AO override).
