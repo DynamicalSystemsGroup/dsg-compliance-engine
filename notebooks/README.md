@@ -1,117 +1,108 @@
-# The compliance engine — interactive walkthrough
+# The compliance engine — end-to-end walkthrough
 
-A [marimo](https://marimo.io) dashboard that runs the **real** engine end-to-end
-and tells the full compliance story: contract → obligations → controls → signed
-Order → Factory assembly line → human attestation → proof artifacts.
+A [marimo](https://marimo.io) notebook that runs the **real** engine and follows one
+artifact all the way down the assembly line. A signed defense contract enters, and
+you watch it change shape at each station — obligations, required controls, a signed
+Order, the Runtime, human attestation — until it comes out the far end as the audit,
+SPRS score, BOM, and SSP an assessor reads.
 
-Pick a scenario from the sidebar and the whole chain re-runs on the real code:
+It is one continuous scroll, not a set of tabs. Each station shows what goes **in**
+and what comes **out**, in plain English on top and with the real engine payload
+underneath. A sidebar rail tracks where the artifact currently is.
 
-- **all-covered** — full chain completes → SPRS 110 / Final + mock BOM & SSP.
+Pick a scenario in the sidebar and the whole chain re-executes on the real code:
+
+- **all-covered** — the full chain completes: SPRS 110 / Final, plus a mock BOM and SSP.
 - **gap** — Gate 1 refuses and names the uncovered control; nothing is built.
-- **contradiction** — a human signs MET over a *failed* machine check → the audit flags it.
+- **contradiction** — a human signs MET over a *failed* machine check; the audit flags it.
 
-Everything runs on fixture data with mock providers — no cloud, no credentials —
+Everything runs on fixture evidence with mock providers — no cloud, no credentials —
 so every artifact is stamped **NON-EVIDENTIARY**.
 
 ## Run it
 
-All commands from the **repo root** so the notebook can import the engine.
+All commands are run from the **repo root** so the notebook can import the engine.
 
 ```bash
 # one-time: install marimo (the only notebook dependency)
 uv sync --group notebook
 ```
 
-### Author / explore (interactive, editable)
+### Explore (interactive, editable)
 
 ```bash
-uv run --group notebook marimo edit notebook/compliance_walkthrough.py
+uv run --group notebook marimo edit notebooks/compliance_walkthrough.py
 ```
 
-Opens the notebook in marimo's editor. Code cells are visible. Change the
-**Scenario** dropdown in the sidebar and watch every cell downstream re-run.
+Opens the notebook in marimo's editor with code cells visible. Change the **Scenario**
+dropdown in the sidebar and every cell downstream re-runs.
 
-### Present (read-only dashboard, no code)
+### Present (read-only app, no code)
 
 ```bash
-uv run --group notebook marimo run notebook/compliance_walkthrough.py
+uv run --group notebook marimo run notebooks/compliance_walkthrough.py
 ```
 
-Opens the notebook as a read-only app at `http://localhost:2718`. No code cells
-visible — just the sidebar + four tabs. Ideal for demos and sharing.
+Opens the notebook as a read-only app at `http://localhost:2718`. No code cells — just
+the sidebar and the single scroll. This is the mode for demos and sharing.
 
-### Export to static HTML
-
-```bash
-uv run --group notebook marimo export html-wasm notebook/compliance_walkthrough.py -o walkthrough/
-```
-
-Produces a self-contained static site in `walkthrough/`. Serve it with any HTTP
-server:
+### Export to a static site
 
 ```bash
+uv run --group notebook marimo export html-wasm notebooks/compliance_walkthrough.py -o walkthrough/
 python -m http.server --directory walkthrough/
 ```
 
-**Caveat:** WASM export runs marimo's Python runtime in the browser via
-Pyodide. The engine is deterministic, so it reproduces the same numbers, but
-cold-start is slower than the server-backed `marimo run`.
+Produces a self-contained static site. The WASM export runs marimo's Python runtime in
+the browser via Pyodide; the engine is deterministic, so it reproduces the same numbers,
+but cold-start is slower than the server-backed `marimo run`.
 
-## Structure
+## What you will see
 
 ### Sidebar (always visible)
 
-- **Scenario selector** — switch between all-covered, gap, contradiction
-- **Live indicators** — controls required, modules claimed, Gate 1 status,
-  SPRS score, contradiction count, machine-proven split
-- **NON-EVIDENTIARY warning**
-- **Glossary** — 15 terms in a collapsible accordion
+- **Scenario selector** — switch between all-covered, gap, and contradiction.
+- **Where the artifact is** — a "you are here" rail over the ten stations, marking how
+  far this run travelled (and where Gate 1 stopped it, in the gap scenario).
+- **Live indicators** — controls required, modules claimed, Gate 1 status, SPRS score,
+  the machine-vs-human split, and the contradiction count.
+- **NON-EVIDENTIARY notice.**
 
-### Tab 1: The Contract — *what must be true*
+### The scroll (twelve stations)
 
-The story from contract to signed build order. Shows where obligations come from
-(DFARS clause, SBIR text, Q&A), the COP signing ceremony (Compliance Officer
-mockup), the obligation→control→module mapping, and Gate 1's planning coverage
-check (green PASS or red REFUSAL naming the gap).
+1. **The contract** — the NV012 contract enters; its obligations are extracted.
+2. **Obligations become controls** — the rule library expands them into the required set.
+3. **The Compliance Officer signs the COP** — the first human judgment (real COP fields).
+4. **Gate 1 — planning coverage** — forward, backward, and no-untestable-claim; pass or
+   a refusal that names the gap.
+5. **The signed Order** — the one hash-referenced artifact that passes across the seam.
+6. **The Runtime** — the seven-stage assembly line (load, fetch-by-hash, terraform plan
+   with mock providers, policy check with the residency hard gate, mock apply, evidence,
+   oracles), with the real modules, evidence, and oracle outcomes.
+7. **The attested-reference model** — the centerpiece: the one uniform check (registered,
+   resolves, fresh, signed-by-role) shown across a machine control and a human control on
+   equal footing, with the real authoritative sources and reference records behind the 43
+   Track B controls.
+8. **Gate 2 — the human attests MET** — the Affirming Official's sign-off, the
+   contradiction rule, and the real per-control BOM mapping.
+9. **The proof outputs** — the audit, the SPRS score and its bands, the content-addressed
+   BOM, and the deterministic SSP with its structural NON-EVIDENTIARY banner.
+10. **Proof by reproduction** — how a C3PAO re-derives the record with `ce verify`, and how
+    a one-byte change is caught by the hash.
+11. **The substrate** — the eight named graphs of one RDF dataset, with live triple counts,
+    and the five roles on the line.
+12. **Full coverage — all 110 controls** — a filterable view of how every control is
+    verified: **65** machine-verified, **43** attested-reference, **2** CSP-inherited. The
+    demonstration Order runs a slice; the structural model claims the whole catalog.
 
-### Tab 2: The Factory — *make it true + prove it*
+## The engine adapter
 
-The 7-stage assembly line: load Order → fetch modules by hash → Terraform plan
-(mock providers) → policy check → mock apply → evidence collection → oracle
-outcomes. Includes the **control attestation screen** (Affirming Official
-mockup), the override-justification flow, and a False Claims Act warning
-callout.
-
-### Tab 3: The Proof — *here's what we can show*
-
-SPRS score dashboard, proven-vs-attested visual split, contradiction flag, BOM
-preview (with content-addressed registry), SSP preview (with NON-EVIDENTIARY
-banner), and the **auditor's view** — C3PAO re-verification screen, tamper
-detection demo, before/after comparison (screenshots vs content-addressing),
-named-graph substrate, timeline, and roles diagram.
-
-### Tab 4: Coverage — *what the engine covers vs. what you own*
-
-All 110 CMMC Level 2 controls in one filterable table. Three status categories:
-
-- **✅ Covered** — engine checks this today (Terraform config, oracle criteria,
-  attestation all wired).
-- **🔧 Wire it** — machine-checkable via GCP / Workspace / GitHub / EDR APIs,
-  but no evidence generator exists yet. See Track A in the self-assessment plan.
-- **📋 On you** — requires policy documents, training records, physical
-  inspection, or signed procedures. The oracle always returns `cantTell`.
-
-Columns include SPRS weight (**Wt**), **No POA&M** flag (controls that cannot
-be deferred — all 5-pt and 3-pt controls plus six specific 1-pt controls), and
-**CSP** inheritance status (two PE controls handled by Google IL4). Bottom
-section: per-family scorecard showing maximum SPRS points at risk by family.
-
-### Engine adapter
-
-[`_engine.py`](_engine.py) calls the same code paths the operator CLI
-(`../cli.py`) uses — it never reimplements engine logic. The notebook is a
-viewport: the signing screen mockups, auditor views, contract excerpts, and
-False Claims Act warning are presentation-layer content, not engine output. Run
+[`_engine.py`](_engine.py) calls the same code paths the operator CLI (`ce`) uses — it
+never reimplements engine logic. The notebook is a viewport onto the running engine. The
+one clearly-fenced *illustration* panel (the override-justification flow) is labelled as
+such; every other number and payload is real engine output. Coverage and the
+attested-reference records are read live from the graph
+(`data/structural/tier1.ttl` + `data/structural/references.ttl`), never hardcoded. Run
 artifacts go to a throwaway temp directory, never the repo.
 
 ## Tests
@@ -120,5 +111,6 @@ artifacts go to a throwaway temp directory, never the repo.
 uv run --group notebook pytest tests/test_notebook_smoke.py -v
 ```
 
-Covers all three scenarios, determinism, invalid input, named-graph population,
-and marimo file validity.
+Covers all three scenarios, determinism, invalid input, named-graph population, and that
+the notebook file is a valid marimo app. The notebook itself is validated headlessly by
+exporting each scenario and confirming every cell executes without error.

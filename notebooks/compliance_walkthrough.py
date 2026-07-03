@@ -1,16 +1,22 @@
-"""Compliance engine — interactive glass-walled walkthrough.
+"""Compliance engine - end-to-end walkthrough (follow one contract through the line).
 
-A reactive marimo dashboard that runs the real engine end-to-end and tells the
-full compliance story: the contract → obligations → controls → the signed Order →
-the Factory assembly line → the human attestation → the proof artifacts.
+A reactive marimo notebook that runs the real engine and follows a single artifact
+all the way down the assembly line: a signed contract becomes obligations, becomes a
+required-control set, becomes a signed Order, is executed by the Runtime, is attested
+by a human, and comes out the far end as an audit, an SPRS score, a BOM, and an SSP.
 
-Three scenarios, four tabs, one reactive root: pick from the sidebar and watch
-every cell re-execute on the real engine code. Mock fixture data, Terraform in preview only,
-nothing deployed — every artifact stamped NON-EVIDENTIARY.
+It is one continuous scroll, not a set of tabs. Each station shows what goes IN and
+what comes OUT, in plain English on top and with the real engine payload underneath.
+A sidebar rail tracks where the artifact currently is.
 
-Run it:  uv run --group notebook marimo edit notebook/compliance_walkthrough.py
-Read-only:  uv run --group notebook marimo run notebook/compliance_walkthrough.py
-(from the repo root)
+Pick a scenario in the sidebar and the whole chain re-executes on the real engine
+code. Fixture evidence, terraform in preview with mock providers, nothing deployed -
+every output stamped NON-EVIDENTIARY.
+
+Run it (from the repo root):
+    uv run --group notebook marimo edit notebooks/compliance_walkthrough.py
+Read-only app:
+    uv run --group notebook marimo run notebooks/compliance_walkthrough.py
 """
 
 import marimo
@@ -32,8 +38,8 @@ def _():
         _here = _Path(__file__).resolve().parent
     except NameError:
         _here = _Path.cwd()
-        if _here.name != "notebook" and (_here / "notebook").is_dir():
-            _here = _here / "notebook"
+        if _here.name != "notebooks" and (_here / "notebooks").is_dir():
+            _here = _here / "notebooks"
     for _p in (str(_here), str(_here.parent)):
         if _p not in _sys.path:
             _sys.path.insert(0, _p)
@@ -49,31 +55,52 @@ def _():
 # ═══════════════════════════════════════════════════════════════════════════════
 
 @app.cell(hide_code=True)
-def _():
-    def md_table(rows, columns=None):
-        """Render a list of dicts as a markdown table."""
-        if not rows:
-            return "_(none)_"
-        _cols = columns or list(rows[0].keys())
-        _head = "| " + " | ".join(_cols) + " |"
-        _sep = "| " + " | ".join("---" for _ in _cols) + " |"
-        _body = "\n".join(
-            "| " + " | ".join(str(r.get(c, "")) for c in _cols) + " |" for r in rows
-        )
-        return "\n".join([_head, _sep, _body])
-
+def _(mo):
     def short(value, n=14):
         _s = str(value or "")
-        return _s[:n] + "\u2026" if len(_s) > n else _s
+        return _s[:n] + "…" if len(_s) > n else _s
 
     def join(items, sep=", "):
-        return sep.join(str(x) for x in items) if items else "\u2014"
+        return sep.join(str(x) for x in items) if items else "—"
 
-    return join, md_table, short
+    def table(rows, page_size=None):
+        """Read-only interactive data grid (not a markdown table)."""
+        if not rows:
+            return mo.md("_(none)_")
+        _paginate = page_size is not None and len(rows) > page_size
+        return mo.ui.table(
+            rows,
+            selection=None,
+            pagination=_paginate,
+            page_size=page_size or max(1, len(rows)),
+            show_column_summaries=False,
+        )
+
+    def station(number, title, tagline):
+        """A numbered station header with a one-line plain-English tagline."""
+        return mo.md(
+            f"## Station {number} — {title}\n\n"
+            f"<span style='opacity:0.75'>{tagline}</span>"
+        )
+
+    def io_flow(in_label, in_body, out_label, out_body):
+        """Side-by-side 'what goes in' -> 'what comes out' for one hop."""
+        _in = mo.callout(mo.md(f"**IN · {in_label}**\n\n{in_body}"), kind="neutral")
+        _out = mo.callout(mo.md(f"**OUT · {out_label}**\n\n{out_body}"), kind="info")
+        return mo.hstack([_in, _out], widths=[1, 1], gap="1rem")
+
+    def illustration(body_md):
+        """A clearly-fenced illustrative panel (NOT engine output)."""
+        return mo.callout(
+            mo.md("**Illustration — not engine output**\n\n" + body_md),
+            kind="neutral",
+        )
+
+    return illustration, io_flow, join, short, station, table
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# Pipeline data cells — the reactive spine
+# The reactive spine - one scenario drives every cell below
 # ═══════════════════════════════════════════════════════════════════════════════
 
 @app.cell
@@ -87,7 +114,7 @@ def _(engine, mo):
 
 
 @app.cell
-def _(engine, mo, scenario):
+def _(engine, scenario):
     ds, obligations = engine.build_dataset(scenario.value)
     return ds, obligations
 
@@ -119,7 +146,7 @@ def _(cop_att, ds, engine, obligations):
 
 
 @app.cell
-def _(ds, engine, mo, order, order_ok, scenario):
+def _(ds, engine, order, order_ok, scenario):
     if not order_ok:
         factory_ok, factory_state, outdir = False, None, None
     else:
@@ -130,55 +157,51 @@ def _(ds, engine, mo, order, order_ok, scenario):
 
 
 @app.cell
-def _(ds, engine, factory_ok, factory_state, mo):
-    if not factory_ok:
-        attested = 0
-    else:
-        attested = engine.attest_step(ds, factory_state)
+def _(ds, engine, factory_ok, factory_state):
+    attested = 0 if not factory_ok else engine.attest_step(ds, factory_state)
     return (attested,)
 
 
 @app.cell
-def _(ds, engine, factory_ok, mo, outdir):
-    if not factory_ok:
-        audit_report = None
-    else:
-        audit_report = engine.audit_step(ds, outdir)
+def _(ds, engine, factory_ok, outdir):
+    audit_report = None if not factory_ok else engine.audit_step(ds, outdir)
     return (audit_report,)
 
 
 @app.cell
-def _(ds, engine, factory_ok, factory_state, mo, outdir):
-    if not factory_ok:
-        bom_result = None
-    else:
-        bom_result = engine.bom_step(factory_state, ds, outdir)
+def _(ds, engine, factory_ok, factory_state, outdir):
+    bom_result = None if not factory_ok else engine.bom_step(factory_state, ds, outdir)
     return (bom_result,)
 
 
 @app.cell
-def _(audit_report, bom_result, ds, engine, factory_ok, mo, outdir):
-    if not factory_ok:
-        ssp_md = ""
-    else:
-        ssp_md = engine.ssp_step(ds, audit_report, bom_result, outdir)
+def _(audit_report, bom_result, ds, engine, factory_ok, outdir):
+    ssp_md = "" if not factory_ok else engine.ssp_step(ds, audit_report, bom_result, outdir)
     return (ssp_md,)
 
 
 @app.cell
-def _(bom_result, ds, engine):
-    _bom = bom_result  # sequence after BOM step
+def _(ds, engine):
     graph_counts = engine.named_graph_counts(ds)
     return (graph_counts,)
 
 
+@app.cell
+def _(engine):
+    # Static structural facts (independent of the scenario): how each of the 110
+    # controls is verified, and the attested-reference records behind Track B.
+    coverage = engine.get_coverage_data()
+    reference_rows = engine.get_reference_data()
+    sources = engine.authoritative_sources()
+    return coverage, reference_rows, sources
+
+
 # ═══════════════════════════════════════════════════════════════════════════════
-# Sidebar — scenario selector + live dashboard
+# Sidebar - scenario selector + "you are here" rail + live indicators
 # ═══════════════════════════════════════════════════════════════════════════════
 
 @app.cell
 def _(
-    attested,
     audit_report,
     factory_ok,
     g1,
@@ -188,107 +211,89 @@ def _(
     required,
     scenario,
 ):
-    # --- Live indicator stats (update reactively) ---
+    # --- "you are here" rail: mark how far the artifact travelled this run ---
+    _rail_steps = [
+        ("1", "Contract"),
+        ("2", "Required controls"),
+        ("3", "COP signed"),
+        ("4", "Gate 1 (planning)"),
+        ("5", "Signed Order"),
+        ("6", "The Runtime"),
+        ("7", "Attested-reference"),
+        ("8", "Gate 2 (human MET)"),
+        ("9", "Proof outputs"),
+        ("10", "Reproduction"),
+    ]
+    if order_ok and factory_ok:
+        _reached = {s[0] for s in _rail_steps}          # whole line ran
+        _stop = None
+    else:
+        _reached = {"1", "2", "3"}                       # up to the COP
+        _stop = "4"                                      # Gate 1 refused here
+
+    _rail_lines = []
+    for _num, _name in _rail_steps:
+        if _num == _stop:
+            _rail_lines.append(f"■ **{_num}. {_name} — REFUSED**")
+        elif _num in _reached:
+            _rail_lines.append(f"● {_num}. {_name}")
+        else:
+            _rail_lines.append(f"<span style='opacity:0.4'>○ {_num}. {_name}</span>")
+    _rail = mo.md("  \n".join(_rail_lines))
+
+    # --- live indicators ---
     _stat_items = [
+        mo.stat(value=str(len(required)), label="Controls required", caption="by this Order", bordered=True),
         mo.stat(
-            value=str(len(required)),
-            label="Controls Required",
-            caption="of 110 in NIST 800-171",
-            bordered=True,
-        ),
-        mo.stat(
-            value=str(len(order.included_modules)) if order_ok else "\u2014",
-            label="Modules Claimed",
-            caption="cloud setup blocks",
-            bordered=True,
+            value=str(len(order.included_modules)) if order_ok else "—",
+            label="Modules claimed", caption="build blocks", bordered=True,
         ),
         mo.stat(
             value="PASS" if g1.passed else "REFUSED",
-            label="Gate 1",
-            caption="planning coverage",
-            bordered=True,
+            label="Gate 1", caption="planning coverage", bordered=True,
         ),
     ]
-
     if factory_ok and audit_report is not None:
         _s = audit_report.sprs
-        _stat_items.append(
+        _stat_items += [
             mo.stat(
-                value=f"{_s.score} / {_s.status}",
-                label="SPRS Score",
-                caption="valid" if _s.valid_submission else "invalid submission",
+                value=f"{_s.score}", label="SPRS score",
+                caption=f"{_s.status} · {'valid' if _s.valid_submission else 'invalid'}",
                 bordered=True,
-            )
-        )
-        _stat_items.append(
+            ),
+            mo.stat(
+                value=f"{audit_report.proven.machine_count} / {audit_report.proven.human_count}",
+                label="Machine / human", caption="proven vs attested", bordered=True,
+            ),
             mo.stat(
                 value=str(len(audit_report.contradictions)),
-                label="Contradictions",
-                caption="human-over-machine flags",
-                bordered=True,
-            )
-        )
-        _stat_items.append(
-            mo.stat(
-                value=f"{audit_report.proven.machine_count} of {len(required)}",
-                label="Machine-Proven",
-                caption=f"{audit_report.proven.human_count} by human only",
-                bordered=True,
-            )
-        )
+                label="Contradictions", caption="MET over failed check", bordered=True,
+            ),
+        ]
 
-    _sidebar = mo.sidebar(
+    mo.sidebar(
         [
-            mo.md("# Compliance Engine"),
-            mo.md("*Building the secure environment and proving it's compliant are the same action.*"),
+            mo.md("# Compliance engine"),
+            mo.md("<span style='opacity:0.8'>Building the secure environment and "
+                  "proving it is compliant are one action.</span>"),
             mo.md("---"),
             scenario,
             mo.md(
-                """
-                **all-covered** \u2014 everything covered and signed off.
-                **gap** \u2014 Gate 1 refuses; nothing is built.
-                **contradiction** \u2014 human signs MET despite a failed machine check; contradiction flagged in audit.
-                """
+                "**all-covered** — the full chain completes.  \n"
+                "**gap** — Gate 1 refuses; nothing is built.  \n"
+                "**contradiction** — a human signs MET over a failed machine check."
             ),
             mo.md("---"),
-            mo.md("### Live Indicators"),
-            mo.vstack(_stat_items, gap=0.5),
+            mo.md("### Where the artifact is"),
+            _rail,
+            mo.md("---"),
+            mo.md("### Live indicators"),
+            mo.vstack(_stat_items, gap=0.4),
             mo.md("---"),
             mo.callout(
-                mo.md(
-                    "**NON-EVIDENTIARY**  \n"
-                    "This is a mock run. Fixture data, mock providers, "
-                    "nothing deployed. Not submittable."
-                ),
+                mo.md("**NON-EVIDENTIARY.** Fixture evidence, mock providers, nothing "
+                      "deployed. Not a real submission."),
                 kind="warn",
-            ),
-            mo.md("---"),
-            mo.accordion(
-                {
-                    "\U0001f4d6 Glossary": mo.md(
-                        """
-| Term | Plain meaning |
-| --- | --- |
-| **CMMC Level 2** | 110 security rules for DoD contractors handling CUI. |
-| **Control** | One security rule (e.g. "require MFA"). |
-| **COP** | Contract Obligation Profile — structured contract requirements. |
-| **Order** | Signed, hash-referenced build order the Factory executes. |
-| **Module** | Cloud setup piece (KMS keyring, IAM group) claiming a control. |
-| **Evidence** | An artifact that *addresses* a control — never MET on its own. |
-| **Oracle** | Automated check: evidence vs criterion → pass / fail / cantTell. |
-| **Attestation** | Human's signed MET/NOT-MET judgment. Only this makes a control MET. |
-| **Gate 1** | Planning gate — refuses if plan has uncovered controls. |
-| **Gate 2** | Fulfillment gate — human attests each control MET. |
-| **BOM** | Bill of Materials — machine-readable proof, content-addressed. |
-| **SSP** | System Security Plan — human-readable government document. |
-| **SPRS** | DoD scoreboard: 110 = clean, 88–109 = conditional, <88 = ineligible. |
-| **NON-EVIDENTIARY** | Mock/practice artifact — not a real submission. |
-| **False Claims Act** | Knowingly certifying false compliance = federal offense. |
-| **C3PAO** | Certified Third-Party Assessment Organization — the outside auditor. |
-| **SHA-256** | Cryptographic hash — a file's identity and tamper check. |
-"""
-                    ),
-                }
             ),
         ]
     )
@@ -296,1031 +301,948 @@ def _(
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# Tab 1: The Contract — what must be true
+# Station 0 - the whole picture, the two ideas, the honest limits
 # ═══════════════════════════════════════════════════════════════════════════════
 
 @app.cell
 def _(mo):
-    mo.md("## \U0001f4cb The Contract  \u2014  _What must be true_")
-    return
+    s0_open = mo.vstack(
+        [
+            mo.md(
+                "# One contract, followed end to end\n\n"
+                "This notebook takes a single artifact — a signed defense contract — "
+                "and follows it down the whole assembly line, watching it change shape at "
+                "each station until it comes out the far end as the documents an assessor "
+                "reads. Every number and payload below is produced by running the **real "
+                "engine**; nothing here is mocked-up narration. Change the **Scenario** in "
+                "the sidebar and the entire chain re-executes."
+            ),
+            mo.callout(
+                mo.md(
+                    "**The two ideas that do the work.**\n\n"
+                    "1. **Provisioning and proving are the same action.** The environment is "
+                    "described by a signed Order, and the proof of compliance is produced "
+                    "from that same description — not gathered afterward by inspection. "
+                    "The description and the proof cannot drift apart because they are not "
+                    "two separate things.\n\n"
+                    "2. **The attested-reference model.** Every control — whether a "
+                    "machine can measure it or only a person can vouch for it — points "
+                    "at an *authoritative source* where its truth actually lives, and carries "
+                    "a *reference* into that source. The engine runs one uniform check "
+                    "(registered, resolves, fresh, signed by the right role); a human makes "
+                    "the final MET call. Because that check does not depend on the control "
+                    "being machine-measurable, coverage reaches all **110** controls, not "
+                    "just the technical subset."
+                ),
+                kind="info",
+            ),
+        ]
+    )
+    return (s0_open,)
 
 
 @app.cell
 def _(mo):
-    tab1_intro = mo.vstack(
+    s0_map = mo.vstack(
         [
-            mo.callout(
-                mo.md(
-                    "**The story.** The U.S. Department of Defense awards a contract "
-                    "to a small business. The contract says: _\"This work handles CUI "
-                    "(Controlled Unclassified Information). You must meet CMMC Level 2.\"_\n\n"
-                    "That one sentence triggers **110 security rules** from NIST SP 800-171. "
-                    "This demo contract \u2014 **NV012** \u2014 scopes to **22** of them for a "
-                    "Tier-1 IL4 CUI enclave.\n\n"
-                    "The question: **how do you prove you followed all 22 rules?** "
-                    "The answer: **you don't prove it separately \u2014 building the "
-                    "environment and documenting that you built it are the same action. "
-                    "The environment IS the evidence; human attestation turns evidence into proof.**"
-                ),
-                kind="info",
+            mo.md("### The line, at a glance"),
+            mo.md(
+                "Two machines, one seam. The **Order Compiler** decides *what must be true* "
+                "and emits a signed Order. The **Runtime** (the Factory) makes it true and "
+                "proves it. The Order is the only thing that passes between them."
             ),
             mo.mermaid(
                 """
                 flowchart LR
-                    CONTRACT["Contract<br/>(NV012 SBIR)"] --> OBL["9 Obligations<br/>CMMC L2 · Identity · Crypto · Residency · Audit · Config · Monitor · Phys · Deliverable"]
-                    OBL --> CTRL["22 Required<br/>Controls"]
-                    CTRL --> COP["COP Attestation<br/>Compliance Officer signs"]
-                    COP --> G1{{"GATE 1<br/>planning coverage"}}
-                    G1 -->|pass| ORD["Signed Order<br/>10 modules<br/>fingerprinted"]
-                    G1 -->|refuse| STOP["REFUSED<br/>names missing control"]
-                    ORD --> FAC["Factory<br/>plan · evidence · oracles"]
-                    FAC --> G2{{"GATE 2<br/>human attests MET"}}
-                    G2 --> PROOF["BOM + SSP + SPRS<br/>the proof"]
+                    C["Contract<br/>(NV012)"] --> O["Obligations"]
+                    O --> R["Required<br/>controls"]
+                    R --> COP["COP signed<br/>(Compliance Officer)"]
+                    COP --> G1{{"Gate 1<br/>planning coverage"}}
+                    G1 -->|pass| ORD["Signed Order<br/>hash-referenced"]
+                    G1 -->|refuse| STOP["REFUSED<br/>names the gap"]
+                    ORD ==>|the seam| RT["Runtime<br/>plan / evidence / oracles"]
+                    RT --> G2{{"Gate 2<br/>human attests MET"}}
+                    G2 --> P["Audit + SPRS<br/>+ BOM + SSP"]
+                    P --> V["Reproduction<br/>C3PAO re-derives"]
                 """
-            ),
-            mo.md(
-                "### Where the obligations come from\n\n"
-                "Every obligation is extracted from real contract text \u2014 not invented. "
-                "The NV012 SBIR solicitation, its Q&A clarifications, and the DFARS clauses "
-                "in the contract body are the source material. A Compliance Officer reads them, "
-                "extracts the obligations, and attests: _\"Yes, these are what this contract requires.\"_"
             ),
             mo.callout(
                 mo.md(
-                    "**The DFARS clauses.** Every CMMC-required DoD contract includes two clauses: "
-                    "**DFARS 252.204-7012** (\"_The Contractor shall implement NIST SP 800-171..._\" — "
-                    "safeguarding and incident reporting) and **DFARS 252.204-7021** "
-                    "(\"_Contractor Compliance with the Cybersecurity Maturity Model Certification "
-                    "Level Requirement_\" — the clause that specifically mandates CMMC Level 2). "
-                    "Together they are the legal hook. It's why all 110 controls matter."
+                    "**Honest limits, stated up front.** Every run today is "
+                    "**NON-EVIDENTIARY**: evidence is fixture-backed, terraform runs in "
+                    "preview with mock providers, references resolve against local files, and "
+                    "attestations are not yet cryptographically signed (trust rests on the "
+                    "git history of the attestation file). The engine records claims; it does "
+                    "not make an organization compliant. A false claim still passes here — "
+                    "the human signer carries the accountability, and an assessor catches it. "
+                    "None of this is hidden: the mechanism is wired end to end and stamps its "
+                    "own outputs so a practice run is never mistaken for a submission."
                 ),
-                kind="neutral",
+                kind="warn",
             ),
         ]
     )
-    return (tab1_intro,)
+    return (s0_map,)
 
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Station 1 - the contract
+# ═══════════════════════════════════════════════════════════════════════════════
 
 @app.cell
-def _(join, md_table, mo, obl_rows):
+def _(io_flow, join, mo, obl_rows, order, order_ok, station, table):
     _rows = [
         {
             "Obligation": r["obligation"],
             "Type": r["type"],
-            "Marker": r["data_marker"] or "\u2014",
+            "Data marker": r["data_marker"] or "—",
             "Resolves to": join(r["controls"]),
             "Note": r["note"] or "",
         }
         for r in obl_rows
     ]
+    _n_obl = len(obl_rows)
+    _contract = order.contract if order_ok else "NV012"
+    _il = getattr(order, "impact_level", "IL4") if order_ok else "IL4"
 
-    tab1_obligations = mo.vstack(
+    s1 = mo.vstack(
         [
-            mo.md("### Step 1 \u2014 The contract's obligations"),
+            station("1", "The contract",
+                    "A signed contract enters. It carries security obligations that must "
+                    "be satisfied and proven."),
             mo.md(
-                "Nine obligations are extracted from the NV012 contract, grouped under three "
-                "top-level requirements: CMMC Level 2, US-persons identity, and US-soil data "
-                "residency. Each obligation expands to the specific controls it demands. "
-                "A deliverable obligation trips a spillover guard \u2014 it never resolves silently."
+                f"The demonstration contract is **{_contract}**, a Tier-1 {_il} CUI enclave. "
+                "One sentence in the contract body — *\"this work handles Controlled "
+                "Unclassified Information; you must meet CMMC Level 2\"* — is the legal "
+                "hook. It is carried by two DFARS clauses that appear in every CMMC-required "
+                "DoD contract: **252.204-7012** (safeguard CUI, report incidents) and "
+                "**252.204-7021** (comply with CMMC Level 2). Software drafts the specific "
+                "obligations from that text; a human attests them at Station 3."
             ),
-            mo.md(md_table(_rows)),
-            mo.callout(
-                mo.md(
-                    "**What this means.** The nine NV012 obligations expand to **22 specific "
-                    "security rules** that this Phase I demo implements. The other 88 controls "
-                    "in NIST 800-171 are required by the contract (DFARS 252.204-7021 mandates "
-                    "all 110) but are not yet claimed by any Tier-1 module \u2014 they are "
-                    "out of scope for *this demo*, not out of scope for the contract."
-                ),
-                kind="info",
+            io_flow(
+                "contract text",
+                "The NV012 solicitation, its Q&A clarifications, and the DFARS clauses in "
+                "the contract body.",
+                "obligations",
+                "A structured list of what the contract requires, ready to resolve into "
+                "controls.",
             ),
+            mo.md(f"### The {_n_obl} obligations the engine extracted"),
+            mo.md(
+                "Each obligation names a type and, where relevant, the data marker that "
+                "triggers it. A CUI or ITAR *deliverable* obligation trips a spillover guard "
+                "so a requirement can never be dropped silently."
+            ),
+            table(_rows),
         ]
     )
-    return (tab1_obligations,)
+    return (s1,)
 
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Station 2 - obligations become the required-control set
+# ═══════════════════════════════════════════════════════════════════════════════
 
 @app.cell
-def _(mo, required):
-    tab1_controls = mo.vstack(
+def _(io_flow, mo, required, station):
+    _ctrl_list = ", ".join(sorted(required)) if required else "—"
+    s2 = mo.vstack(
         [
-            mo.md("### Step 2 \u2014 The required control set"),
+            station("2", "Obligations become controls",
+                    "A rule library expands each obligation into the specific NIST "
+                    "SP 800-171 controls it demands."),
             mo.md(
-                f"The 22 controls required by NV012 (of 110 in the full catalog):\n\n"
-                f"`{', '.join(sorted(required))}`"
+                "The Order Compiler runs the same resolver the production compiler uses "
+                "(`rule_library.resolve`). The union of every obligation's controls is the "
+                "**required set** — the exact list this Order must cover, end to end."
             ),
-            mo.hstack(
-                [
-                    mo.stat(value=str(len(required)), label="Required", caption="of 110 total", bordered=True),
-                    mo.stat(value="88", label="Demo scope", caption="required but not yet covered", bordered=True),
-                ],
-                justify="center",
-                gap="2rem",
+            io_flow(
+                "obligations", "The structured obligations from Station 1.",
+                "required controls", f"**{len(required)}** controls this Order must satisfy.",
+            ),
+            mo.md(
+                f"### The {len(required)} controls required by this Order\n\n"
+                f"<span style='font-family:monospace;font-size:0.9em'>{_ctrl_list}</span>"
             ),
             mo.callout(
                 mo.md(
-                    "**Key honesty point.** The SPRS score (110 / Final) is computed over "
-                    "**these 22 controls**, not all 110. \"110\" means \"all 22 required "
-                    "controls are MET\" \u2014 not \"all 110 were tested.\""
+                    "**Scope, stated honestly.** The full catalog is **110** controls, and "
+                    "the structural model claims all 110 (Station 12). This demonstration "
+                    "Order exercises a runnable **slice** of that model. Everything scored "
+                    "downstream — the SPRS number in particular — is computed over "
+                    "*these* required controls, not all 110."
                 ),
                 kind="warn",
             ),
         ]
     )
-    return (tab1_controls,)
+    return (s2,)
 
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Station 3 - the Compliance Officer signs the COP (first human hop)
+# ═══════════════════════════════════════════════════════════════════════════════
 
 @app.cell
-def _(mo):
-    tab1_cop_sign = mo.vstack(
+def _(cop_att, io_flow, mo, station):
+    _officer = getattr(cop_att, "officer", "—")
+    _mode = getattr(cop_att, "mode", "—")
+    _affirmations = getattr(cop_att, "affirmations", None)
+    _n_aff = len(_affirmations) if _affirmations is not None else "—"
+    _spillovers = getattr(cop_att, "acknowledged_spillovers", None)
+    _n_spill = len(_spillovers) if _spillovers is not None else 0
+    _attested = getattr(cop_att, "is_attested", True)
+
+    s3 = mo.vstack(
         [
-            mo.md("### Step 3 \u2014 The Compliance Officer signs the COP"),
+            station("3", "The Compliance Officer signs the COP",
+                    "The first human judgment: someone reviews the machine-drafted "
+                    "obligations against the real contract and signs."),
             mo.md(
-                "Before anything is built, a human reviews the extracted obligations against "
-                "the source contract and signs. This is the **only human judgment** in the "
-                "Order Compiler \u2014 everything downstream is automatic."
+                "This is the **only** human step inside the Order Compiler; everything "
+                "downstream of it is automatic. The signed object is the Contract Obligation "
+                "Profile (COP). Its real fields from this run:"
+            ),
+            mo.hstack(
+                [
+                    mo.stat(value=str(_officer), label="Officer", caption="signer of record", bordered=True),
+                    mo.stat(value=str(_mode), label="Attestation mode", caption="how it was signed", bordered=True),
+                    mo.stat(value=str(_n_aff), label="Affirmations", caption="obligations affirmed", bordered=True),
+                    mo.stat(value=str(_n_spill), label="Spillovers ack'd", caption="deliverable guards", bordered=True),
+                    mo.stat(value=str(_attested), label="Attested", caption="COP is signed", bordered=True),
+                ],
+                justify="center", gap="1.25rem",
+            ),
+            io_flow(
+                "drafted obligations", "The machine's extraction from the contract text.",
+                "signed COP", "A human's affirmation that the obligations are correct.",
             ),
             mo.callout(
                 mo.md(
-                    "**COP Attestation Screen**\n\n"
-                    "> **Compliance Officer:** J. Chen  \n"
-                    "> **Contract:** NV012 (SBIR Phase I)  \n"
-                    "> **Date:** 2026-06-15 14:32 UTC\n\n"
-                    "| Obligation | Source |\n"
-                    "|---|---|\n"
-                    "| CMMC Level 2 required | SBIR Topic Text \u00a7 3.2, DFARS 252.204-7012 + 252.204-7021 |\n"
-                    "| US Persons only (ITAR) | Q&A Clarification #7 |\n"
-                    "| US Soil data residency (ITAR) | Q&A Clarification #7 |\n\n"
-                    "_\"I attest that these obligations accurately reflect the requirements "
-                    "of contract NV012. I understand that under the False Claims Act "
-                    "(31 U.S.C. \u00a7 3729), knowingly certifying false information to the "
-                    "U.S. government is a federal offense carrying treble damages and civil "
-                    "penalties of $13,946\u2013$27,894 per claim "
-                    "(adjusted annually by DOJ under 28 CFR \u00a785.5; verify current rates).\"_\n\n"
-                    "**[ \u2705 I ATTEST ]**  (signed)"
-                ),
-                kind="success",
-            ),
-            mo.callout(
-                mo.md(
-                    "**In this demo:** the Compliance Officer auto-affirms (AI-assisted draft "
-                    "pre-approved). A real run requires a manual signature carrying "
-                    "False-Claims-Act accountability."
+                    f"**Mode `{_mode}` in this demo.** `semiAuto` means an AI-assisted draft "
+                    "was auto-affirmed so the chain runs unattended. A real run records "
+                    "`manual`: a person signs, and that signature carries accountability "
+                    "under the False Claims Act (31 U.S.C. § 3729) and 18 U.S.C. "
+                    "§ 1001 for false statements to the government."
                 ),
                 kind="info",
             ),
         ]
     )
-    return (tab1_cop_sign,)
+    return (s3,)
 
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Station 4 - Gate 1: planning coverage
+# ═══════════════════════════════════════════════════════════════════════════════
 
 @app.cell
-def _(g1, mo, required):
+def _(g1, mo, station):
     _stats = mo.hstack(
         [
-            mo.stat(value=g1.forward.summary(), label="Forward", caption="control \u2192 module", bordered=True),
-            mo.stat(value=g1.backward.summary(), label="Backward", caption="module \u2192 control", bordered=True),
-            mo.stat(value=g1.untestable.summary(), label="Testable", caption="every claim checkable", bordered=True),
+            mo.stat(value=g1.forward.summary(), label="Forward", caption="every control has a module", bordered=True),
+            mo.stat(value=g1.backward.summary(), label="Backward", caption="every module traces to a control", bordered=True),
+            mo.stat(value=g1.untestable.summary(), label="Testable", caption="every claim names a method", bordered=True),
         ],
-        justify="center",
-        gap="2rem",
+        justify="center", gap="1.5rem",
     )
 
     if g1.passed:
-        _verdict = mo.vstack(
-            [
-                mo.callout(
-                    mo.md(
-                        "**Gate 1 PASSES** \u2014 every required control is covered by a "
-                        "testable module. The Order may emit."
-                    ),
-                    kind="success",
-                ),
-                mo.md(
-                    "The plan covers all **22 required controls** with **10 modules** "
-                    "(MFA enforcement, encryption keys, IAM groups, DLP rules, US-region "
-                    "policy, audit-log export, least-functionality enforcement, "
-                    "CSP-inherited physical controls, monitoring, "
-                    "and baseline Terraform config). Every module traces back to a required "
-                    "control, and every claim has a verification method."
-                ),
-            ]
+        _verdict = mo.callout(
+            mo.md(
+                "**Gate 1 PASSES.** Every required control is covered by a module that "
+                "names a verification method, and every included module traces back to a "
+                "required control. The Order may be emitted."
+            ),
+            kind="success",
         )
     else:
         _gaps = ", ".join(g1.gap_controls())
         _verdict = mo.callout(
             mo.md(
-                f"**Gate 1 REFUSES** \u2014 the plan has a hole.\n\n"
-                f"**Uncovered control: `{_gaps}`**\n\n"
-                f"This control is required by the contract but no module claims to satisfy it. "
-                f"The Order is **not emitted**. Nothing is built. You cannot proceed \u2014 "
-                f"the machine would rather stop and name the problem than build something "
-                f"unproven.\n\n"
-                f"_Next step: add a module that satisfies `{_gaps}`, or document a scope "
-                f"exclusion, then recompile._"
+                f"**Gate 1 REFUSES.** The plan has a hole.\n\n"
+                f"**Uncovered control:** `{_gaps}`\n\n"
+                f"This control is required but no module claims it. The Order is **not "
+                f"emitted** and nothing is built. The machine stops and names the problem "
+                f"rather than build something it cannot prove. Add a module that satisfies "
+                f"`{_gaps}` (or document a scope exclusion) and recompile."
             ),
             kind="danger",
         )
 
-    tab1_gate1 = mo.vstack(
+    s4 = mo.vstack(
         [
-            mo.md("### Step 4 \u2014 Gate 1: planning coverage"),
+            station("4", "Gate 1 — planning coverage",
+                    "Before anything is built, the compiler refuses to proceed on an "
+                    "incomplete plan."),
             mo.md(
-                "**Before anything is built**, the system refuses to proceed unless:  \n"
-                "1. Every required control has a module claiming it (forward).  \n"
-                "2. Every module traces back to a required control (backward).  \n"
-                "3. Every claim has a testable verification method."
+                "Gate 1 enforces three things at once: **forward** (every required control "
+                "has at least one claiming module), **backward** (every included module "
+                "traces to a required control), and **no untestable claim** (every claiming "
+                "module names how it will be verified). Its code is "
+                "`src/compliance_engine/order_compiler/gate1.py`."
             ),
             _stats,
             _verdict,
         ]
     )
-    return (tab1_gate1,)
+    return (s4,)
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# Tab 2: The Factory — make it true and prove it
+# Station 5 - the signed Order (the seam between the two machines)
 # ═══════════════════════════════════════════════════════════════════════════════
 
 @app.cell
-def _(mo):
-    mo.md("## \U0001f3ed The Factory  \u2014  _Make it true + prove it_")
-    return
-
-
-@app.cell
-def _(factory_ok, mo, order_ok):
+def _(io_flow, join, mo, order, order_ok, short, station):
     if not order_ok:
-        tab2_empty = mo.callout(
-            mo.md(
-                "**The Factory never ran.** Gate 1 refused the Order, so nothing was built. "
-                "Switch to the **all-covered** or **contradiction** scenario to see the "
-                "Factory in action."
-            ),
-            kind="danger",
+        s5 = mo.vstack(
+            [
+                station("5", "The signed Order",
+                        "No Order was emitted — Gate 1 refused this scenario."),
+                mo.callout(
+                    mo.md("Switch to **all-covered** or **contradiction** in the sidebar to "
+                          "watch a signed Order pass through the seam and drive the Runtime."),
+                    kind="danger",
+                ),
+            ]
         )
     else:
-        tab2_empty = mo.md("")
-
-    tab2_header = mo.vstack(
-        [
-            mo.callout(
+        _mods = join(sorted(order.included_modules))
+        s5 = mo.vstack(
+            [
+                station("5", "The signed Order",
+                        "The one artifact that passes between the two machines. "
+                        "Hash-referenced, so any later change is detectable."),
                 mo.md(
-                    "The **Factory** is an assembly line. It takes the signed Order and "
-                    "executes 7 stages: load \u2192 fetch \u2192 plan \u2192 policy check "
-                    "\u2192 mock apply \u2192 evidence collection \u2192 oracle checks. "
-                    "**It never declares a control MET** \u2014 it only gathers facts and "
-                    "runs automated checks. The final call belongs to a human."
+                    "\"Signed\" here means **hash-referenced**: the Order is fixed to a "
+                    "SHA-256 fingerprint (true cryptographic signing is deferred). The "
+                    "Runtime does not care how the Order was written — it just executes "
+                    "it. That clean seam is what lets each machine be audited on its own."
                 ),
-                kind="info",
-            ),
-            tab2_empty,
-        ]
-    )
-    return (tab2_empty, tab2_header)
-
-
-@app.cell
-def _(factory_ok, factory_state, join, md_table, mo, order_ok, short):
-    mo.stop(not order_ok)
-
-    _st = factory_state
-
-    # --- Evidence table ---
-    _ev_rows = [
-        {
-            "Evidence": short(str(e["iri"]).rsplit("/", 1)[-1]),
-            "Controls addressed": join(e["controls"]),
-            "Summary keys": join(list(e["summary"].keys())[:4]),
-        }
-        for e in _st.evidence_index
-    ]
-
-    # --- Oracle outcomes ---
-    _or_rows = [
-        {"Control": c, "Oracle outcome": o}
-        for c, o in sorted(_st.oracles.outcomes.items())
-    ]
-
-    # --- Modules fetched ---
-    _mod_rows = [
-        {"Module": m, "Content hash": short(h)}
-        for m, h in sorted(_st.fetch.module_hashes.items())
-    ]
-
-    _oracle_count = len(_st.oracles.outcomes)
-
-    tab2_factory = mo.vstack(
-        [
-            mo.md("### The assembly line"),
-            mo.mermaid(
-                """
-                flowchart LR
-                    L["1. Load Order<br/>re-check fingerprints"] --> F["2. Fetch Modules<br/>verify by hash"]
-                    F --> P["3. Terraform Plan<br/>mock providers"]
-                    P --> PC["4. Policy Check<br/>US-region, etc."]
-                    PC --> A["5. Mock Apply<br/>no cloud touched"]
-                    A --> E["6. Collect Evidence<br/>7 artifacts"]
-                    E --> O["7. Run Oracles<br/>pass / fail / cantTell"]
-                """
-            ),
-            mo.hstack(
-                [
-                    mo.stat(value=len(_st.fetch.module_hashes), label="Modules fetched", bordered=True),
-                    mo.stat(value=len(_st.plan.resource_ids), label="Planned resources", bordered=True),
-                    mo.stat(value="PASS" if _st.policy_check.passed else "FAIL", label="Pre-apply policy", bordered=True),
-                    mo.stat(value=_st.evidence.evidence_node_count, label="Evidence nodes", bordered=True),
-                    mo.stat(value=_oracle_count, label="Machine oracles", bordered=True),
-                ],
-                justify="center",
-                gap="1.5rem",
-            ),
-            mo.callout(
-                mo.md(
-                    "**Terraform runs in preview only, with mock providers.** No cloud is "
-                    "contacted. No credentials are used. Nothing is deployed. You get a "
-                    "genuine, detailed preview of what *would* be built \u2014 without "
-                    "building anything."
+                mo.hstack(
+                    [
+                        mo.stat(value=short(order.order_hash, 12), label="Order hash", caption="SHA-256 fingerprint", bordered=True),
+                        mo.stat(value=str(len(order.required_controls)), label="Required controls", caption="the Order's scope", bordered=True),
+                        mo.stat(value=str(len(order.included_modules)), label="Included modules", caption="build blocks", bordered=True),
+                        mo.stat(value=str(getattr(order, "impact_level", "—")), label="Impact level", caption="enclave tier", bordered=True),
+                    ],
+                    justify="center", gap="1.5rem",
                 ),
-                kind="warn",
-            ),
-            mo.accordion(
-                {
-                    "Evidence artifacts (each addresses \u22651 control)": mo.md(md_table(_ev_rows)),
-                    "Oracle outcomes (pass / fail / cantTell)": mo.md(md_table(_or_rows)),
-                    "Modules fetched by content hash": mo.md(md_table(_mod_rows)),
-                }
-            ),
-            mo.callout(
-                mo.md(
-                    f"**{_oracle_count}** oracle checks run: IAM access control "
-                    f"(AC.L2-3.1.1), MFA enforcement (IA.L2-3.5.3), FIPS-validated "
-                    f"crypto (SC.L2-3.13.11), CUI encryption at rest (SC.L2-3.13.16), "
-                    f"US-region policy (SC.L2-3.13.1, returns cantTell), and ITAR "
-                    f"US-persons check. The remaining required controls have "
-                    f"**no machine test** \u2014 the oracle honestly returns **cantTell** "
-                    f"rather than faking a check it can't run. Those controls are for a "
-                    f"human to judge."
+                io_flow(
+                    "signed COP + required set + modules",
+                    "Everything Gate 1 just proved complete.",
+                    "signed Order",
+                    "A fingerprinted build order the Runtime can execute and re-verify.",
                 ),
-                kind="info",
-            ),
-        ]
-    )
-    return (tab2_factory,)
-
-
-@app.cell
-def _(attested, factory_ok, mo, order_ok, required):
-    mo.stop(not order_ok)
-
-    tab2_attest = mo.vstack(
-        [
-            mo.md("### The human signs \u2014 Gate 2"),
-            mo.md(
-                "A machine can gather evidence and run checks, but it can **never** declare "
-                "a control satisfied. Only the **Affirming Official** does that \u2014 and "
-                "they carry the legal accountability."
-            ),
-            mo.callout(
-                mo.md(
-                    "**Control Attestation Screen**  \n\n"
-                    "> **Affirming Official:** M. Rivera  \n"
-                    "> **Control:** IA.L2-3.5.3 \u2014 _\"Use multi-factor authentication "
-                    "for local and network access to privileged accounts.\"_  \n"
-                    "> **Evidence:** MFA config export (hash: `4bba2d0a...`), Oracle: **passed**\n\n"
-                    "**Adequacy justification:** _\"Google Workspace 2-Step Verification "
-                    "enforced on the CUI users group. Hardware security keys required for "
-                    "privileged accounts.\"_\n\n"
-                    "**Sufficiency justification:** _\"MFA config export shows enforcement "
-                    "policy is active. Oracle confirms mfa_enforced_privileged = true.\"_\n\n"
-                    "---\n\n"
-                    "_\"I certify that control IA.L2-3.5.3 is MET. I understand that under "
-                    "the False Claims Act (31 U.S.C. \u00a7 3729), knowingly certifying false "
-                    "information to the U.S. government is a federal offense.\"_\n\n"
-                    "**[ \u2705 I CERTIFY THIS CONTROL IS MET ]**  (signed, 2026-06-15 14:45 UTC)"
-                ),
-                kind="success",
-            ),
-            mo.callout(
-                mo.md(
-                    "**What happens when oracle says FAIL but the human signs MET anyway?**  \n"
-                    "A third field appears: **Override Justification** (required). The human "
-                    "must explain: _\"The oracle checks X, but we satisfy the control a "
-                    "different way, documented here.\"_ If this field is left blank, the "
-                    "system **flags a contradiction** in the audit \u2014 even if the score "
-                    "is 110 / Final."
-                ),
-                kind="warn",
-            ),
-            mo.callout(
-                mo.md(
-                    f"**{attested} of {len(required)} controls attested MET** by the NV012 "
-                    f"Affirming Official \u2014 each with a written adequacy + sufficiency "
-                    f"rationale. Machine-checked controls carry their real oracle outcome. "
-                    f"A MET-over-failed-check without written justification becomes a "
-                    f"visible contradiction in the audit."
-                ),
-                kind="success",
-            ),
-            mo.callout(
-                mo.md(
-                    "### \u26a0\ufe0f The False Claims Act\n\n"
-                    "**31 U.S.C. \u00a7 3729.** Knowingly submitting a false claim to the U.S. "
-                    "government carries:\n"
-                    "- **Treble damages** (3x the government's loss)\n"
-                    "- **$13,946\u2013$27,894** civil penalty **per false claim** "
-                    "(adjusted annually by DOJ under 28 CFR \u00a785.5)\n\n"
-                    "An SPRS submission is **one** claim to the government. Each control "
-                    "you falsely attest MET is evidence of that claim's falsity \u2014 and "
-                    "every MET that can't be substantiated compounds your exposure. "
-                    "**A single dishonest submission isn't a slap on the wrist \u2014 it's "
-                    "potential bankruptcy and prison.** This is why the system refuses to let "
-                    "a machine sign. Only a human, with their name and accountability on the "
-                    "line, can mark a control MET."
-                ),
-                kind="danger",
-            ),
-        ]
-    )
-    return (tab2_attest,)
+                mo.md(f"**Modules in this Order:** {_mods}"),
+            ]
+        )
+    return (s5,)
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# Tab 3: The Proof — here's what we can show
+# Station 6 - the Runtime (the Factory)
 # ═══════════════════════════════════════════════════════════════════════════════
 
 @app.cell
-def _(mo):
-    mo.md("## \U0001f512 The Proof  \u2014  _Here's what we can show_")
-    return
-
-
-@app.cell
-def _(audit_report, factory_ok, mo, order_ok):
-    mo.stop(not order_ok)
-
-    if not factory_ok or audit_report is None:
-        tab3_header = mo.callout(
-            mo.md("_The Factory halted before producing proof artifacts._"),
-            kind="danger",
+def _(factory_ok, factory_state, join, mo, order_ok, short, station, table):
+    if not order_ok:
+        s6 = mo.vstack(
+            [
+                station("6", "The Runtime",
+                        "The Runtime never ran — Gate 1 refused, so there was no Order "
+                        "to execute."),
+                mo.callout(mo.md("Nothing was built. This is the point of Gate 1."), kind="danger"),
+            ]
         )
     else:
-        tab3_header = mo.md("")
-
-    tab3_intro = mo.vstack(
-        [
-            mo.callout(
-                mo.md(
-                    "**Four outputs, one chain.** The Factory produces an **audit** "
-                    "(is the paper trail unbroken?), an **SPRS score** (the DoD scoreboard), "
-                    "a content-addressed **BOM** (the tamper-evident proof file), and a "
-                    "byte-stable **SSP** (the human-readable government document). All four "
-                    "are compiled from the same RDF knowledge graph \u2014 they can't "
-                    "disagree. And because every artifact is content-addressed by SHA-256, "
-                    "an auditor can **re-verify everything without trusting you.**"
-                ),
-                kind="info",
-            ),
-            tab3_header,
+        _st = factory_state
+        _ev_rows = [
+            {
+                "Evidence": short(str(e["iri"]).rsplit("/", 1)[-1], 20),
+                "Addresses controls": join(e["controls"]),
+                "Summary keys": join(list(e["summary"].keys())[:4]),
+            }
+            for e in _st.evidence_index
         ]
-    )
-    return (tab3_header, tab3_intro)
+        _or_rows = [
+            {"Control": c, "Oracle outcome": o}
+            for c, o in sorted(_st.oracles.outcomes.items())
+        ]
+        _mod_rows = [
+            {"Module": m, "Content hash": short(h, 18)}
+            for m, h in sorted(_st.fetch.module_hashes.items())
+        ]
 
+        s6 = mo.vstack(
+            [
+                station("6", "The Runtime executes the Order",
+                        "An assembly line of seven stages that gathers facts and runs "
+                        "automated checks. It never declares a control MET."),
+                mo.mermaid(
+                    """
+                    flowchart LR
+                        L["1. Load Order<br/>re-check hashes"] --> F["2. Fetch modules<br/>verify by hash"]
+                        F --> P["3. Terraform plan<br/>mock providers"]
+                        P --> PC["4. Policy check<br/>+ residency hard gate"]
+                        PC --> A["5. Mock apply<br/>no cloud touched"]
+                        A --> E["6. Collect evidence"]
+                        E --> O["7. Run oracles<br/>passed / failed / needsAction"]
+                    """
+                ),
+                mo.hstack(
+                    [
+                        mo.stat(value=len(_st.fetch.module_hashes), label="Modules fetched", bordered=True),
+                        mo.stat(value=len(_st.plan.resource_ids), label="Planned resources", bordered=True),
+                        mo.stat(value="PASS" if _st.policy_check.passed else "FAIL", label="Pre-apply policy", bordered=True),
+                        mo.stat(value=_st.evidence.evidence_node_count, label="Evidence nodes", bordered=True),
+                        mo.stat(value=len(_st.oracles.outcomes), label="Oracle outcomes", bordered=True),
+                    ],
+                    justify="center", gap="1.25rem",
+                ),
+                mo.callout(
+                    mo.md(
+                        "**Terraform runs in preview only, with mock providers.** No cloud is "
+                        "contacted, no credentials are used, nothing is deployed. The plan is "
+                        "a genuine, detailed preview of what *would* be built. The evidence "
+                        "the oracles read is fixture-backed, which is why every downstream "
+                        "artifact is stamped NON-EVIDENTIARY."
+                    ),
+                    kind="warn",
+                ),
+                mo.md("### What the Runtime produced (real payload)"),
+                mo.accordion(
+                    {
+                        "Modules fetched by content hash": table(_mod_rows, page_size=10),
+                        "Evidence artifacts (each addresses at least one control)": table(_ev_rows, page_size=10),
+                        "Oracle outcomes (passed / failed / cantTell / needsAction)": table(_or_rows, page_size=12),
+                    }
+                ),
+                mo.callout(
+                    mo.md(
+                        "**The oracle never fakes a check it cannot run.** Where a machine "
+                        "genuinely cannot measure a control, it returns `cantTell`; where a "
+                        "control has an authoritative source but is missing a registered, "
+                        "fresh, or signed reference, it returns `needsAction` with a concrete "
+                        "reason. Neither is silently counted as MET — that call belongs "
+                        "to a human at Station 8."
+                    ),
+                    kind="info",
+                ),
+            ]
+        )
+    return (s6,)
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Station 7 - the attested-reference model (the centerpiece)
+# ═══════════════════════════════════════════════════════════════════════════════
 
 @app.cell
-def _(audit_report, factory_ok, md_table, mo, order_ok):
-    mo.stop(not order_ok or not factory_ok)
-
-    _sprs = audit_report.sprs
-    _con = audit_report.contradictions
-
-    # --- SPRS score dashboard ---
-    _score_color = "success" if _sprs.score >= 110 else ("warn" if _sprs.score >= 88 else "danger")
-
-    _sprs_stats = mo.hstack(
-        [
-            mo.stat(
-                value=str(_sprs.score),
-                label="SPRS Score",
-                caption=_sprs.status,
-                bordered=True,
-            ),
-            mo.stat(
-                value=str(_sprs.valid_submission),
-                label="Valid Submission",
-                caption="POA&M rules satisfied",
-                bordered=True,
-            ),
-            mo.stat(
-                value=str(audit_report.proven.machine_count),
-                label="Machine-Proven",
-                caption="oracle passed + human attested",
-                bordered=True,
-            ),
-            mo.stat(
-                value=str(audit_report.proven.human_count),
-                label="Human-Attested Only",
-                caption="no machine check available",
-                bordered=True,
-            ),
-            mo.stat(
-                value=str(len(_con)),
-                label="Contradictions",
-                caption="MET over failed oracle",
-                bordered=True,
-            ),
-        ],
-        justify="center",
-        gap="1.5rem",
-    )
-
-    # --- Proven-vs-attested visual ---
-    _machine = audit_report.proven.machine_count
-    _human = audit_report.proven.human_count
-    _total = _machine + _human
-    _bar_width = 40
-    _machine_bar = int(_machine / _total * _bar_width) if _total else 0
-    _bar = "\u2588" * _machine_bar + "\u2591" * (_bar_width - _machine_bar)
-
-    _proven_viz = mo.md(
-        f"### Proven vs. Attested\n\n"
-        f"`{_bar}`\n\n"
-        f"**{_machine}** machine-proven (oracle passed + human attested)  \n"
-        f"**{_human}** human-attested only (documentary, inherited, or no oracle)\n\n"
-        f"_Most \"MET\"s in a real assessment are human-judged, not machine-proven. "
-        f"The system doesn't blur this \u2014 it counts and prints the split._"
-    )
-
-    # --- Contradiction flag ---
-    if _con:
-        _con_rows = [
-            {"Control": c.control, "Oracle": c.oracle_outcome, "Override?": str(c.has_override)}
-            for c in _con
-        ]
-        _con_flag = mo.callout(
-            mo.md(
-                "### \u26a0\ufe0f CONTRADICTION FLAGGED\n\n"
-                "A human attested MET while the machine oracle **failed**, with no written "
-                "override justification. The score does **not** silently absorb this \u2014 "
-                "a 110 here is **not clean**.\n\n"
-                + md_table(_con_rows)
-            ),
-            kind="danger",
-        )
-    else:
-        _con_flag = mo.callout(
-            mo.md("**No contradictions.** Every human MET call agrees with (or has no) machine check."),
-            kind="success",
-        )
-
-    tab3_audit = mo.vstack(
-        [
-            mo.md("### The Audit + SPRS Score"),
-            _sprs_stats,
-            _proven_viz,
-            _con_flag,
-            mo.callout(
-                mo.md(
-                    "**Score key:** 110 = Final (all required controls MET). 88\u2013109 = "
-                    "Conditional (POA&M fix-it plan allowed for 1-point controls only). "
-                    "Below 88 = Ineligible.  \n"
-                    "**POA&M legality:** Only 1-point controls may be deferred. Putting a "
-                    "3- or 5-point control (or one of six excluded 1-pointers) on a POA&M "
-                    "makes the submission automatically invalid \u2014 regardless of the score."
-                ),
-                kind="info",
-            ),
-        ]
-    )
-    return (tab3_audit,)
-
-
-@app.cell
-def _(bom_result, factory_ok, md_table, mo, order_ok, short):
-    mo.stop(not order_ok or not factory_ok)
-
-    _map = [
+def _(mo, reference_rows, sources, station, table):
+    _src_rows = [
+        {"Authoritative source": s["source"], "Controls drawing on it": s["controls"], "What it owns": s["note"]}
+        for s in sources
+    ]
+    _ref_rows = [
         {
-            "Control": r.control_id,
-            "Status": r.status,
-            "Oracle": r.oracle_outcome or "\u2014",
-            "Attestation": r.attestation_outcome or "\u2014",
-            "# Evidence": str(len(r.evidence_hashes)),
+            "Control": r["control"],
+            "Authoritative source": r["source"],
+            "Freshness": r["freshness"],
+            "Last verified": (r["last_verified"] or "—")[:10],
+            "Required role": r["role"],
+            "Custodian": r["custodian"],
         }
-        for r in bom_result.control_mapping
+        for r in reference_rows
     ]
 
-    tab3_bom = mo.vstack(
+    s7 = mo.vstack(
         [
-            mo.md("### The BOM \u2014 Bill of Materials"),
+            station("7", "The attested-reference model",
+                    "The idea that lets one uniform check cover a firewall rule and a "
+                    "written incident-response plan on equal footing."),
+            mo.md(
+                "Every control points at an **authoritative source** — the system that "
+                "owns the ground truth for a whole class of evidence — and carries a "
+                "**reference** into it. The reference is a resolvable pointer with a URI, a "
+                "freshness window, a last-verified timestamp, a named custodian (\"where bob "
+                "logs it\"), and a required signer role. The engine runs the *same* four-part "
+                "check on every control:"
+            ),
             mo.hstack(
                 [
-                    mo.stat(value=short(bom_result.bom_hash), label="BOM hash", bordered=True),
-                    mo.stat(value=bom_result.evidentiary_status, label="Evidentiary status", bordered=True),
-                    mo.stat(value=str(len(bom_result.control_mapping)), label="Controls mapped", bordered=True),
+                    mo.stat(value="1", label="Registered", caption="the reference exists", bordered=True),
+                    mo.stat(value="2", label="Resolves", caption="the URI points at real content", bordered=True),
+                    mo.stat(value="3", label="Fresh", caption="within its freshness window", bordered=True),
+                    mo.stat(value="4", label="Signed by role", caption="right official attested it", bordered=True),
                 ],
-                justify="center",
-                gap="2rem",
+                justify="center", gap="1.25rem",
             ),
             mo.callout(
                 mo.md(
-                    "The **BOM** (`bom.json`) is the machine-readable proof file. For each "
-                    "required control it records: resource \u2192 evidence hash \u2192 oracle "
-                    "outcome \u2192 attestation outcome \u2192 status \u2192 who signed. "
-                    "It is stored **write-once** under its own SHA-256 hash in a "
-                    "content-addressed registry \u2014 change one byte and the address no "
-                    "longer matches. Tampering is instantly detectable."
+                    "**Why this is the whole point.** A config-check oracle resolves a "
+                    "**machine** control's reference into a cloud API and measures the "
+                    "setting. An attested-reference oracle resolves a **human** control's "
+                    "reference into a document repository, LMS, or HR system and confirms a "
+                    "role signed it. The check is identical; only the source differs. That is "
+                    "how coverage reaches all 110 controls instead of just the "
+                    "machine-measurable ones — without ever pretending a machine "
+                    "measured a policy."
                 ),
                 kind="info",
             ),
-            mo.callout(
-                mo.md(
-                    f"**Evidentiary status: `{bom_result.evidentiary_status}`.** The BOM "
-                    f"inherits the weakest mark from its inputs. Because this run uses "
-                    f"fixture-backed (mock) evidence, the entire BOM is stamped **mock** "
-                    f"\u2014 not submittable. You cannot launder pretend evidence into a "
-                    f"real-looking BOM."
-                ),
-                kind="warn",
-            ),
-            mo.accordion(
-                {"Control mapping (control \u2192 status \u2192 evidence)": mo.md(md_table(_map))}
-            ),
-        ]
-    )
-    return (tab3_bom,)
-
-
-@app.cell
-def _(factory_ok, mo, order_ok, ssp_md):
-    mo.stop(not order_ok or not factory_ok)
-
-    _banner = "NON-EVIDENTIARY" in ssp_md
-    _head = "\n".join(ssp_md.splitlines()[:30])
-
-    tab3_ssp = mo.vstack(
-        [
-            mo.md("### The SSP \u2014 System Security Plan"),
-            mo.callout(
-                mo.md(
-                    "The **SSP** (`ssp.md`) is the human-readable government document. Its "
-                    "centerpiece is the **110-row traceability matrix** (VCRM) \u2014 one row "
-                    "per NIST 800-171 control, listing implementation, responsible party, "
-                    "evidence hash, status, and POA&M reference.\n\n"
-                    "It is **not hand-written.** It's compiled deterministically from the "
-                    "same RDF graph as the BOM, so it can't disagree with the data. Identical "
-                    "inputs produce a byte-for-byte identical document. And it **structurally "
-                    "cannot omit** its NON-EVIDENTIARY banner when mock evidence is present."
-                ),
-                kind="info",
-            ),
-            mo.callout(
-                mo.md(
-                    f"NON-EVIDENTIARY banner present: **{_banner}**. There is no switch to "
-                    f"turn it off."
-                ),
-                kind="warn" if _banner else "danger",
-            ),
-            mo.accordion(
-                {"SSP preview (first 30 lines)": mo.md("```\n" + _head + "\n```")}
-            ),
-        ]
-    )
-    return (tab3_ssp,)
-
-
-@app.cell
-def _(audit_report, bom_result, factory_ok, mo, order_ok, short):
-    mo.stop(not order_ok or not factory_ok)
-
-    tab3_auditor = mo.vstack(
-        [
-            mo.md("### The Auditor's View \u2014 Proof by Reproduction"),
+            mo.md("### The authoritative sources behind the attested (Track B) controls"),
+            table(_src_rows),
             mo.md(
-                "The core claim: **an auditor doesn't have to trust you.** A C3PAO assessor "
-                "receives the BOM and can re-verify everything independently."
+                f"### The {len(reference_rows)} attested-reference records the oracle checks\n\n"
+                "Each row is a real reference from `data/structural/references.ttl`: the "
+                "control it backs, the system where its truth lives, how often it must be "
+                "re-verified, when it last was, who must sign it, and who keeps it current."
             ),
-            mo.callout(
-                mo.md(
-                    "**C3PAO Re-Verification Screen**\n\n"
-                    "```\n"
-                    "$ uv run python cli.py verify --output-dir output/\n\n"
-                    "Re-hashing all evidence nodes in the audit dataset...\n"
-                    "  Checking SHACL shapes for attestation completeness...\n\n"
-                    "Dataset intact. No tampering detected. SHACL shapes conform.\n"
-                    "```\n\n"
-                    "The `verify` subcommand re-hashes every evidence node stored in the "
-                    "RDF dataset and checks that content hashes still match \u2014 then runs "
-                    "the SHACL attestation suite. Any altered byte in any evidence node "
-                    "causes a mismatch and exits with code 1.\n\n"
-                    "_Time elapsed: 3 seconds. Manual equivalent: ~2 weeks of inspection._"
-                ),
-                kind="success",
-            ),
-            mo.callout(
-                mo.md(
-                    "**What if someone tampered with the BOM?**\n\n"
-                    "```\n"
-                    "BOM hash:  4483673449ac...\n"
-                    "Recomputed: a1b2c3d4e5f6...\n\n"
-                    "TAMPERING DETECTED.\n"
-                    "This BOM has been altered since it was signed.\n"
-                    "```\n\n"
-                    "Change one byte \u2014 even a single character in a justification text "
-                    "\u2014 and the SHA-256 hash changes completely. The math catches it "
-                    "instantly. **The fingerprint IS the proof of integrity.**"
-                ),
-                kind="danger",
-            ),
-            mo.callout(
-                mo.md(
-                    "### Why this beats a folder of screenshots\n\n"
-                    "**The old way:** a compliance officer takes screenshots of admin console "
-                    "settings, pastes them into a Word document, assembles a 3-ring binder. "
-                    "It's slow, error-prone, and goes stale the moment someone changes a "
-                    "setting. An auditor has to trust that the screenshots are real and "
-                    "current.\n\n"
-                    "**This system:** the environment is built from a signed plan. The act of "
-                    "building it IS the proof. Every artifact is content-addressed. The "
-                    "auditor doesn't trust you \u2014 they trust the math. They re-run the "
-                    "same checks, re-compute the same hashes, and the fingerprints either "
-                    "match or they don't."
-                ),
-                kind="info",
-            ),
+            table(_ref_rows, page_size=12),
         ]
     )
-    return (tab3_auditor,)
+    return (s7,)
 
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Station 8 - Gate 2: the human attests MET
+# ═══════════════════════════════════════════════════════════════════════════════
 
 @app.cell
-def _(factory_ok, graph_counts, md_table, mo, order_ok):
-    mo.stop(not order_ok)
+def _(attested, audit_report, bom_result, factory_ok, illustration, io_flow, mo, order_ok, required, station, table):
+    if not order_ok or not factory_ok:
+        s8 = mo.vstack(
+            [
+                station("8", "Gate 2 — the human attests MET",
+                        "No attestations — the Runtime did not produce evidence to sign."),
+                mo.callout(mo.md("Run a scenario that passes Gate 1 to reach the human sign-off."), kind="danger"),
+            ]
+        )
+    else:
+        _con = audit_report.contradictions if audit_report else []
+        _map_rows = [
+            {
+                "Control": r.control_id,
+                "Oracle": r.oracle_outcome or "—",
+                "Attestation": r.attestation_outcome or "—",
+                "Status": r.status,
+            }
+            for r in bom_result.control_mapping
+        ]
 
+        if _con:
+            _con_rows = [
+                {"Control": c.control, "Oracle": c.oracle_outcome, "Written override": str(c.has_override)}
+                for c in _con
+            ]
+            _con_block = mo.vstack(
+                [
+                    mo.callout(
+                        mo.md(
+                            "**Contradiction flagged.** A human attested MET while the machine "
+                            "oracle failed, with no written override justification. The score "
+                            "does not silently absorb this — it is surfaced on its own line "
+                            "so an unexplained human-over-machine call cannot hide inside a "
+                            "passing number."
+                        ),
+                        kind="danger",
+                    ),
+                    table(_con_rows),
+                ]
+            )
+        else:
+            _con_block = mo.callout(
+                mo.md("**No contradictions.** Every human MET call agrees with its machine "
+                      "check, or the control had no machine check to disagree with."),
+                kind="success",
+            )
+
+        s8 = mo.vstack(
+            [
+                station("8", "Gate 2 — the human attests MET",
+                        "A machine gathers evidence and runs checks. It can never declare a "
+                        "control satisfied. Only a named human does that."),
+                mo.md(
+                    "A control is recorded MET only when its evidence passes its oracle "
+                    "**and** the Affirming Official attests it in the required role. In the "
+                    "data model, evidence *addresses* a control and only a human attestation "
+                    "*attests* it — enforced in the graph, not merely by policy."
+                ),
+                mo.hstack(
+                    [
+                        mo.stat(value=f"{attested} / {len(required)}", label="Controls attested MET", caption="by the Affirming Official", bordered=True),
+                        mo.stat(value=str(audit_report.proven.machine_count), label="Machine-proven", caption="oracle passed + attested", bordered=True),
+                        mo.stat(value=str(audit_report.proven.human_count), label="Human-attested only", caption="no machine measurement", bordered=True),
+                        mo.stat(value=str(len(_con)), label="Contradictions", caption="MET over failed check", bordered=True),
+                    ],
+                    justify="center", gap="1.25rem",
+                ),
+                io_flow(
+                    "evidence + oracle outcomes",
+                    "What the Runtime measured, plus the reference checks.",
+                    "signed attestations",
+                    "A human's MET call per control, carrying the oracle's real outcome.",
+                ),
+                illustration(
+                    "When an oracle returns **failed** but the signer still judges the "
+                    "control MET, a required **override justification** field appears: the "
+                    "signer must explain why the control is satisfied another way. Leave it "
+                    "blank and the audit flags a contradiction — even if the score reads "
+                    "110. This is the exact case the **contradiction** scenario exercises."
+                ),
+                mo.callout(
+                    mo.md(
+                        "**Why no machine is allowed to sign.** The Affirming Official's "
+                        "signature carries personal legal accountability under the False "
+                        "Claims Act (31 U.S.C. § 3729) and 18 U.S.C. § 1001. "
+                        "Knowingly certifying false information to the federal government is "
+                        "an offense. Accountability cannot rest on a machine, so the machine "
+                        "is not permitted to make the call."
+                    ),
+                    kind="warn",
+                ),
+                _con_block,
+                mo.md("### Per-control result (real BOM mapping)"),
+                table(_map_rows, page_size=12),
+            ]
+        )
+    return (s8,)
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Station 9 - the proof outputs
+# ═══════════════════════════════════════════════════════════════════════════════
+
+@app.cell
+def _(audit_report, bom_result, factory_ok, mo, order_ok, short, ssp_md, station):
+    if not order_ok or not factory_ok:
+        s9 = mo.vstack(
+            [
+                station("9", "The proof outputs",
+                        "No proof — the Runtime halted before producing artifacts."),
+                mo.callout(mo.md("Run a passing scenario to see the audit, SPRS score, BOM, and SSP."), kind="danger"),
+            ]
+        )
+    else:
+        _sprs = audit_report.sprs
+        _banner = "NON-EVIDENTIARY" in ssp_md
+        _ssp_head = "\n".join(ssp_md.splitlines()[:24])
+
+        s9 = mo.vstack(
+            [
+                station("9", "The proof outputs",
+                        "Two checks and two documents, all compiled from one dataset, so "
+                        "they cannot disagree."),
+                mo.md("### The audit and the SPRS score"),
+                mo.md(
+                    "The **audit** walks the evidence chain forward and backward (Gate 2 at "
+                    "BOM close), prints the proven-vs-attested split, and lists "
+                    "contradictions separately. The **SPRS score** is "
+                    "`110 - (weights of not-met controls)`, banded Final (110) / Conditional "
+                    "(88–109, with a legal POA&M) / Ineligible (below 88), and computed "
+                    "over *this Order's* required set."
+                ),
+                mo.hstack(
+                    [
+                        mo.stat(value=str(_sprs.score), label="SPRS score", caption=_sprs.status, bordered=True),
+                        mo.stat(value=str(_sprs.valid_submission), label="Valid submission", caption="POA&M rules satisfied", bordered=True),
+                        mo.stat(value=f"{audit_report.proven.machine_count} / {audit_report.proven.human_count}", label="Machine / human", caption="proven vs attested", bordered=True),
+                        mo.stat(value=str(len(audit_report.contradictions)), label="Contradictions", caption="read with the score", bordered=True),
+                    ],
+                    justify="center", gap="1.25rem",
+                ),
+                mo.callout(
+                    mo.md(
+                        "**Read both lines together.** A score of 110 / Final with a nonzero "
+                        "contradiction count is **not** a clean result. The score and the "
+                        "contradiction list are kept separate on purpose so a number can "
+                        "never quietly absorb an unexplained human-over-machine override. "
+                        "**POA&M legality:** only 1-point controls may be deferred; deferring "
+                        "a 3- or 5-point control (or one of six excluded 1-pointers) sets "
+                        "`valid_submission=False` regardless of the number."
+                    ),
+                    kind="info",
+                ),
+                mo.md("### The BOM and the SSP"),
+                mo.hstack(
+                    [
+                        mo.stat(value=short(bom_result.bom_hash, 12), label="BOM hash", caption="SHA-256, write-once", bordered=True),
+                        mo.stat(value=bom_result.evidentiary_status, label="Evidentiary status", caption="weakest input wins", bordered=True),
+                        mo.stat(value=str(len(bom_result.control_mapping)), label="Controls mapped", caption="one row each", bordered=True),
+                        mo.stat(value=str(_banner), label="NON-EVIDENTIARY banner", caption="structural, no off switch", bordered=True),
+                    ],
+                    justify="center", gap="1.25rem",
+                ),
+                mo.md(
+                    "The **BOM** (`bom.json`) is the machine-readable, content-addressed "
+                    "record: one row per control mapping resource → evidence hash "
+                    "→ oracle outcome → attestation → status. It is stored "
+                    "write-once under its own SHA-256 and inherits the weakest evidentiary "
+                    "status present (`mock` here). The **SSP** (`ssp.md`) is the deterministic, "
+                    "byte-stable government document compiled from the *same* dataset, so the "
+                    "two cannot disagree; its NON-EVIDENTIARY banner is emitted structurally "
+                    "whenever any input is mock."
+                ),
+                mo.accordion({"SSP preview (first 24 lines)": mo.md("```\n" + _ssp_head + "\n```")}),
+            ]
+        )
+    return (s9,)
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Station 10 - proof by reproduction
+# ═══════════════════════════════════════════════════════════════════════════════
+
+@app.cell
+def _(factory_ok, illustration, mo, order_ok, station):
+    _body = [
+        station("10", "Proof by reproduction",
+                "The reason this beats a folder of screenshots: an assessor does not have "
+                "to trust the party that produced the delivery."),
+        mo.md(
+            "Given a delivered BOM, a C3PAO assessor can re-derive the whole record: "
+            "**resolve** every artifact by its hash from the write-once registry, "
+            "**re-hash** each one to confirm the fingerprint matches, and **re-run** the "
+            "plan-level checks to confirm the oracle outcomes agree. If every fingerprint "
+            "matches and every re-run agrees, the delivery is exactly what was signed and "
+            "its checks reproduce. The operator command is `ce verify --output-dir <dir>`."
+        ),
+        illustration(
+            "```\n"
+            "$ ce verify --output-dir output/\n"
+            "Re-hashing every evidence node in the audit dataset...\n"
+            "Checking SHACL shapes for attestation completeness...\n"
+            "Dataset intact. No tampering detected. SHACL shapes conform.\n"
+            "```\n\n"
+            "Change one byte — even a single character in a justification — and "
+            "the SHA-256 no longer matches, and `verify` exits nonzero. The fingerprint is "
+            "the proof of integrity."
+        ),
+        mo.callout(
+            mo.md(
+                "**What reproduction does and does not prove.** It confirms the delivered "
+                "record is internally consistent and untampered, and that its automated "
+                "checks re-run to the same outcomes. It does **not** by itself make an "
+                "organization compliant — a false claim can still pass the engine. The "
+                "human signer carries the accountability; the assessor's reproduction plus "
+                "review is what catches a false claim."
+            ),
+            kind="info",
+        ),
+    ]
+    if not order_ok or not factory_ok:
+        _body.insert(1, mo.callout(
+            mo.md("_This scenario produced no artifacts to reproduce; the mechanism is shown "
+                  "for reference._"), kind="warn"))
+    s10 = mo.vstack(_body)
+    return (s10,)
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Station 11 - the substrate (one queryable knowledge graph)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+@app.cell
+def _(graph_counts, mo, station, table):
     _rows = [
-        {"Named Graph": f"<ce:{r['layer']}>", "Triples": str(r["triples"])}
+        {"Named graph": f"ce:{r['layer']}", "Triples": r["triples"]}
         for r in graph_counts
     ]
-
-    tab3_substrate = mo.vstack(
+    s11 = mo.vstack(
         [
-            mo.md("### The Substrate \u2014 One queryable knowledge graph"),
+            station("11", "The substrate",
+                    "Every station above wrote into one place: a single RDF dataset of "
+                    "named graphs, separated by layer but queryable together."),
             mo.md(
-                "Every stage writes its own **named graph** into one RDF dataset \u2014 "
-                "controls, the Order, evidence, attestations, the audit \u2014 all separated "
-                "but queryable together. This is what makes the whole chain re-executable "
-                "and tamper-evident."
+                "Controls, the plan, the Order, evidence, attestations, the plan execution, "
+                "and the audit each live in their own named graph inside one dataset. That "
+                "is what makes the whole chain re-executable and tamper-evident — and "
+                "what lets the BOM and SSP be compiled from the exact same triples. Live "
+                "triple counts for this run:"
             ),
-            mo.md(md_table(_rows)),
+            table(_rows),
             mo.callout(
                 mo.md(
-                    "### The timeline\n\n"
-                    "```\n"
-                    "Contract Award \u2500\u2500\u25b6 COP Signing \u2500\u2500\u25b6 Environment Build \u2500\u2500\u25b6 Assessment \u2500\u2500\u25b6 Delivery\n"
-                    "                      \u2191                  \u2191                   \u2191\n"
-                    "                 Compliance            Factory               C3PAO\n"
-                    "                 Officer               runs here             verifies\n"
-                    "                 signs here\n"
-                    "```\n\n"
-                    "**Roles:**  \n"
-                    "- **Compliance Officer** \u2014 reads the contract, extracts obligations, signs the COP.  \n"
-                    "- **Order Compiler** (machine) \u2014 obligations \u2192 controls \u2192 modules, runs Gate 1.  \n"
-                    "- **Factory** (machine) \u2014 executes the Order, gathers evidence, runs oracles.  \n"
-                    "- **Affirming Official** (human) \u2014 signs each control MET, carries legal accountability.  \n"
-                    "- **C3PAO Assessor** (human) \u2014 re-verifies the BOM by hash, re-runs checks."
+                    "**The five roles on the line.** *Compliance Officer* — extracts "
+                    "obligations, signs the COP (Station 3). *Order Compiler* (machine) "
+                    "— obligations to controls to modules, runs Gate 1. *Runtime* "
+                    "(machine) — executes the Order, gathers evidence, runs oracles. "
+                    "*Affirming Official* (human) — signs each control MET, carries the "
+                    "accountability (Station 8). *C3PAO assessor* (human) — re-verifies "
+                    "the BOM by hash and re-runs the checks (Station 10)."
                 ),
                 kind="neutral",
             ),
         ]
     )
-    return (tab3_substrate,)
+    return (s11,)
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# Tab 4: Coverage — what the engine handles vs. what's on you
+# Station 12 - full coverage of all 110 controls
 # ═══════════════════════════════════════════════════════════════════════════════
 
-@app.cell(hide_code=True)
-def _(engine):
-    coverage = engine.get_coverage_data()
-    cov_families = ["All"] + sorted({r["family"] for r in coverage})
-    return coverage, cov_families
-
-
-@app.cell(hide_code=True)
-def _(cov_families, mo):
-    cov_family = mo.ui.dropdown(options=cov_families, value="All", label="Family")
+@app.cell
+def _(coverage, mo):
+    _families = ["All"] + sorted({r["family"] for r in coverage})
+    cov_family = mo.ui.dropdown(options=_families, value="All", label="Family")
     cov_status = mo.ui.dropdown(
-        options=["All", "covered", "machine", "human"],
-        value="All",
-        label="Status",
+        options=["All", "machine", "attested", "inherited"],
+        value="All", label="Verification kind",
     )
     return cov_family, cov_status
 
 
-@app.cell(hide_code=True)
-def _(coverage, cov_family, cov_status, md_table, mo):
-    _STATUS_LABEL = {
-        "covered": "✅ Covered",
-        "machine": "🔧 Machine-possible",
-        "human":   "📋 Human-only",
-    }
-    _WHO_LABEL = {
-        "covered": "engine",
-        "machine": "wire it",
-        "human":   "you",
-    }
+@app.cell
+def _(coverage, cov_family, cov_status, engine, mo, station, table):
+    _KIND = engine.KIND_LABEL
+
+    _n_mac = sum(1 for r in coverage if r["status"] == "machine")
+    _n_att = sum(1 for r in coverage if r["status"] == "attested")
+    _n_inh = sum(1 for r in coverage if r["status"] == "inherited")
 
     _filtered = [
         r for r in coverage
         if (cov_family.value == "All" or r["family"] == cov_family.value)
         and (cov_status.value == "All" or r["status"] == cov_status.value)
     ]
-
-    _n_cov = sum(1 for r in coverage if r["status"] == "covered")
-    _n_mac = sum(1 for r in coverage if r["status"] == "machine")
-    _n_hum = sum(1 for r in coverage if r["status"] == "human")
-
     _table_rows = [
         {
             "Control": r["id"],
-            "Wt": str(r["weight"]),
-            "Status": _STATUS_LABEL[r["status"]],
-            "Handled by": _WHO_LABEL[r["status"]],
+            "Wt": r["weight"],
+            "Verified by": _KIND[r["status"]],
             "No POA&M": "yes" if r["non_deferrable"] else "",
             "CSP": "inherited" if r["inherited"] else "",
-            "Requirement": (r["text"][:110] + "…") if len(r["text"]) > 110 else r["text"],
+            "Requirement": (r["text"][:96] + "…") if len(r["text"]) > 96 else r["text"],
         }
         for r in _filtered
     ]
 
-    # Per-family summary scorecard (all 110, ignores filter)
-    _families_order = ["AC", "AT", "AU", "CA", "CM", "IA", "IR", "MA", "MP", "PE", "PS", "RA", "SC", "SI"]
-    _scorecard_rows = []
-    for _fam in _families_order:
+    _fam_order = ["AC", "AT", "AU", "CA", "CM", "IA", "IR", "MA", "MP", "PE", "PS", "RA", "SC", "SI"]
+    _score_rows = []
+    for _fam in _fam_order:
         _fc = [r for r in coverage if r["family"] == _fam]
-        _scorecard_rows.append({
+        if not _fc:
+            continue
+        _score_rows.append({
             "Family": _fam,
-            "Total": str(len(_fc)),
-            "✅ Covered": str(sum(1 for r in _fc if r["status"] == "covered")),
-            "🔧 Wire it": str(sum(1 for r in _fc if r["status"] == "machine")),
-            "📋 You": str(sum(1 for r in _fc if r["status"] == "human")),
-            "Max pts at risk": str(sum(r["weight"] for r in _fc if r["status"] != "covered")),
+            "Total": len(_fc),
+            "Machine": sum(1 for r in _fc if r["status"] == "machine"),
+            "Attested": sum(1 for r in _fc if r["status"] == "attested"),
+            "Inherited": sum(1 for r in _fc if r["status"] == "inherited"),
         })
 
-    tab4_coverage = mo.vstack(
+    s12 = mo.vstack(
         [
+            station("12", "Full coverage — all 110 controls",
+                    "The demonstration Order ran a slice. The structural model claims the "
+                    "whole catalog. Here is how each of the 110 is verified."),
             mo.callout(
                 mo.md(
-                    "**Three categories across all 110 CMMC Level 2 controls.**\n\n"
-                    "✅ **Covered** — the engine checks this today: Terraform config, "
-                    "oracle criteria, and attestation are all wired.\n\n"
-                    "🔧 **Machine-possible** — no evidence generator yet, but a GCP / "
-                    "Workspace / GitHub / EDR API call could verify this automatically. "
-                    "See `docs/plans/2026-07-03-002-path-to-self-assessment.md` Track A.\n\n"
-                    "📋 **Human-only** — policy, training record, physical inspection, or "
-                    "signed procedure. The oracle always returns **cantTell**. On you."
+                    "**Three verification kinds, derived live from the graph.** "
+                    "**Machine-verified** — a config-check oracle measures it from "
+                    "configuration. **Attested-reference** — a registered, fresh, "
+                    "role-signed reference into an authoritative source (Station 7). "
+                    "**CSP-inherited** — satisfied by the cloud provider and inherited. "
+                    "Every control below is classified by its claiming module's verification "
+                    "method, not by a hand-maintained list."
                 ),
                 kind="info",
             ),
-            mo.callout(
-                mo.md(
-                    "**Column guide:**  \n"
-                    "**Wt** — SPRS points deducted if NOT MET (`110 − Σ weight` = your score).  \n"
-                    "**No POA&M** — if \"yes\", this control cannot be deferred. NOT MET at "
-                    "submission makes the entire filing invalid regardless of score. Applies "
-                    "to all 5-pt and 3-pt controls, plus six specific 1-pt controls.  \n"
-                    "**CSP** — \"inherited\" means Google IL4 handles this physically; you "
-                    "attest it as inherited rather than self-implementing.  \n"
-                    "**Handled by** — \"engine\" = automated today; \"wire it\" = add an "
-                    "evidence generator; \"you\" = write the policy or procedure."
-                ),
-                kind="neutral",
-            ),
             mo.hstack(
                 [
-                    mo.stat(value=str(_n_cov), label="✅ Covered", caption="engine checks today", bordered=True),
-                    mo.stat(value=str(_n_mac), label="🔧 Wire it", caption="add evidence generators", bordered=True),
-                    mo.stat(value=str(_n_hum), label="📋 On you", caption="policy & procedure", bordered=True),
+                    mo.stat(value=str(_n_mac), label="Machine-verified", caption="config-check oracle", bordered=True),
+                    mo.stat(value=str(_n_att), label="Attested-reference", caption="reference + role sign-off", bordered=True),
+                    mo.stat(value=str(_n_inh), label="CSP-inherited", caption="provider handles it", bordered=True),
+                    mo.stat(value=str(len(coverage)), label="Total claimed", caption="every control has a module", bordered=True),
                 ],
-                justify="center",
-                gap="1.5rem",
+                justify="center", gap="1.25rem",
             ),
             mo.hstack([cov_family, cov_status], gap="2rem"),
-            mo.md(f"**{len(_filtered)} of 110 controls** shown"),
-            mo.md(md_table(
-                _table_rows,
-                columns=["Control", "Wt", "Status", "Handled by", "No POA&M", "CSP", "Requirement"],
-            )),
-            mo.md("### Summary by family"),
-            mo.md(md_table(
-                _scorecard_rows,
-                columns=["Family", "Total", "✅ Covered", "🔧 Wire it", "📋 You", "Max pts at risk"],
-            )),
-            mo.callout(
-                mo.md(
-                    "**Max pts at risk** = total SPRS weight across all uncovered controls "
-                    "in that family. Getting to 110/Final means driving this to zero across "
-                    "every family — by wiring evidence generators (Track A) and completing "
-                    "the human attestation program (Track B)."
-                ),
-                kind="neutral",
-            ),
-        ],
-        gap=1.5,
+            mo.md(f"**{len(_filtered)} of {len(coverage)} controls** shown. "
+                  "**Wt** is the SPRS weight deducted if the control is not met; "
+                  "**No POA&M** marks controls that cannot be deferred."),
+            table(_table_rows, page_size=15),
+            mo.md("### Summary by control family"),
+            table(_score_rows),
+        ]
     )
-    return (tab4_coverage,)
+    return (s12,)
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# Assemble the four tabs
-# ═══════════════════════════════════════════════════════════════════════════════
-
-@app.cell
-def _(
-    mo,
-    tab1_controls,
-    tab1_cop_sign,
-    tab1_gate1,
-    tab1_intro,
-    tab1_obligations,
-    tab2_attest,
-    tab2_factory,
-    tab2_header,
-    tab3_audit,
-    tab3_auditor,
-    tab3_bom,
-    tab3_intro,
-    tab3_ssp,
-    tab3_substrate,
-    tab4_coverage,
-):
-    mo.ui.tabs(
-        {
-            "\U0001f4cb The Contract": mo.vstack(
-                [
-                    tab1_intro,
-                    tab1_obligations,
-                    tab1_controls,
-                    tab1_cop_sign,
-                    tab1_gate1,
-                ],
-                gap=1.5,
-            ),
-            "\U0001f3ed The Factory": mo.vstack(
-                [
-                    tab2_header,
-                    tab2_factory,
-                    tab2_attest,
-                ],
-                gap=1.5,
-            ),
-            "\U0001f512 The Proof": mo.vstack(
-                [
-                    tab3_intro,
-                    tab3_audit,
-                    tab3_bom,
-                    tab3_ssp,
-                    tab3_auditor,
-                    tab3_substrate,
-                ],
-                gap=1.5,
-            ),
-            "\U0001f4ca Coverage": tab4_coverage,
-        }
-    )
-    return
-
-
-# ═══════════════════════════════════════════════════════════════════════════════
-# Footer — honesty panel
+# Footer - what is real vs mock
 # ═══════════════════════════════════════════════════════════════════════════════
 
 @app.cell
 def _(mo):
-    mo.callout(
+    footer = mo.callout(
         mo.md(
-            """
-            ### What's real vs. mock right now
-
-            This is **Phase I**. The software spine is fully wired end to end, but:
-
-            - **Evidence is fixture-backed**, not pulled from a live cloud → every artifact
-              is `mock` and every BOM/SSP is **NON-EVIDENTIARY** (not submittable).
-            - **Terraform runs in preview only, with mock providers** — nothing is deployed,
-              no credentials.
-            - **Only 6 oracle checks run** (4 CMMC controls pass; 1 returns cantTell; 1 is an
-              ITAR policy-marker check); the rest ride on human attestation.
-              The SPRS score covers only the **22 required** for this Phase I demo — the other
-              **88** are required by the contract but not yet covered by any Tier-1 module.
-            - **Deferred:** cryptographic signing (Sigstore), live `terraform apply` + live
-              compliance tests, IL5, and actual SPRS/PIEE submission.
-
-            None of this is hidden — the banner, the `mock` stamp, and the machine-vs-human
-            split are all there to keep the demo honest. The *mechanism* is fully wired;
-            only the evidence is stand-in.
-            """
+            "### What is real vs. mock right now\n\n"
+            "The software spine is wired end to end, but every run is a practice run:\n\n"
+            "- **Evidence is fixture-backed**, not pulled from a live cloud, so every "
+            "artifact is `mock` and every BOM/SSP is **NON-EVIDENTIARY** (not submittable).\n"
+            "- **Terraform runs in preview only, with mock providers** — nothing is "
+            "deployed, no credentials are used.\n"
+            "- **References resolve against local files and fixtures**, not the live "
+            "authoritative sources.\n"
+            "- **Attestations are not yet cryptographically signed** — trust rests on "
+            "the git history of the attestation file (Sigstore/cosign is scaffolded).\n"
+            "- **The engine does not talk to SPRS**; a human files the computed score.\n"
+            "- **The SPRS score covers this Order's required set**, not all 110 (Station 12 "
+            "shows the full model).\n\n"
+            "None of this is hidden — the banner, the `mock` stamp, and the "
+            "proven-vs-attested split all keep the demonstration honest. The mechanism is "
+            "fully wired; only the evidence is stand-in."
         ),
         kind="neutral",
+    )
+    return (footer,)
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Assemble the single end-to-end scroll
+# ═══════════════════════════════════════════════════════════════════════════════
+
+@app.cell
+def _(
+    footer,
+    mo,
+    s0_map,
+    s0_open,
+    s1,
+    s10,
+    s11,
+    s12,
+    s2,
+    s3,
+    s4,
+    s5,
+    s6,
+    s7,
+    s8,
+    s9,
+):
+    mo.vstack(
+        [
+            s0_open, s0_map,
+            mo.md("---"), s1,
+            mo.md("---"), s2,
+            mo.md("---"), s3,
+            mo.md("---"), s4,
+            mo.md("---"), s5,
+            mo.md("---"), s6,
+            mo.md("---"), s7,
+            mo.md("---"), s8,
+            mo.md("---"), s9,
+            mo.md("---"), s10,
+            mo.md("---"), s11,
+            mo.md("---"), s12,
+            mo.md("---"), footer,
+        ],
+        gap=1.75,
     )
     return
 

@@ -1,17 +1,17 @@
 """Adapter layer between the marimo walkthrough notebook and the real engine.
 
 The notebook is a *viewport* onto the running compliance engine, not a fork of it.
-Every function here calls the same code the operator CLI (`cli.py`) calls — it just
-exposes each stage at a finer grain and returns plain data (dicts / dataclasses /
-engine objects) so the notebook cells can render the intermediate artifacts.
+Every function here calls the same code the operator CLI (`ce`, i.e.
+`compliance_engine.cli`) calls — it just exposes each stage at a finer grain and
+returns plain data (dicts / dataclasses / engine objects) so the notebook cells
+can render the intermediate artifacts.
 
 Nothing in this module builds UI. It is import-safe and unit-testable on its own:
 `run_pipeline(scenario)` drives the whole chain and returns a structured record.
 
-Path setup: importing this module makes the repo root and the (hyphenated)
-`order-compiler` directory importable, then imports `cli`, which is the single
-source of truth for how the stages wire together over one shared rdflib Dataset
-with a fixed run seed for determinism.
+Path setup: importing this module puts `src/` on the path, then imports
+`compliance_engine.cli`, which is the single source of truth for how the stages
+wire together over one shared rdflib Dataset with a fixed run seed for determinism.
 """
 
 from __future__ import annotations
@@ -120,6 +120,11 @@ def obligation_rows(obligations: dict[str, Any]) -> list[dict[str, Any]]:
                 row["note"] = "policy markers: " + ", ".join(markers)
         except rl.SpilloverReviewRequired:
             row["note"] = "CUI/ITAR deliverable — requires explicit spillover ack"
+        except rl.UnknownControlError:
+            # The `gap` scenario injects an obligation citing a control that is not
+            # in the catalog. Surface it as a note rather than crashing the view;
+            # Gate 1 is where the refusal is meant to land.
+            row["note"] = "cites a control outside the 110-control catalog — Gate 1 refuses"
         rows.append(row)
     return rows
 
@@ -264,12 +269,17 @@ def named_graph_counts(ds) -> list[dict[str, Any]]:
 
 
 # ---------------------------------------------------------------------------
-# Coverage data — all 110 controls with status classification
+# Structural model — how each of the 110 controls is verified
 # ---------------------------------------------------------------------------
-
-# Controls that already have evidence generators + oracle criteria in this engine.
-# Derived from structural/tier1.ttl at call time; listed here for reference only.
-# _COVERED is computed dynamically from the tier1 graph.
+#
+# Every fact below is read from the graph at call time (tier1.ttl + references.ttl
+# + the attestation-refs vocabulary), never hardcoded. The *kind* of verification
+# for a control is derived purely from its claiming module's cmmc:verificationMethod:
+#   - an  ce:oracle-attested-reference  IRI  -> "attested"  (Track B: reference into
+#     an authoritative source, signed by a role)
+#   - any other ce:oracle-* IRI               -> "machine"   (Track A / Tier-1:
+#     config-check oracle over a config export)
+#   - an  "inherited:…"  literal              -> "inherited" (CSP handles it)
 
 # The 6 non-deferrable 1-point controls (cannot be on POA&M even though weight=1).
 _NON_DEF_ONE_POINTERS: frozenset[str] = frozenset({
@@ -277,80 +287,183 @@ _NON_DEF_ONE_POINTERS: frozenset[str] = frozenset({
     "PE.L2-3.10.3", "PE.L2-3.10.4", "PE.L2-3.10.5",
 })
 
-# The 2 CSP-inherited controls (Google IL4 handles physical security).
-_CSP_INHERITED: frozenset[str] = frozenset({
-    "PE.L2-3.10.1", "PE.L2-3.10.2",
-})
+# Verification kinds, with the plain labels the notebook prints.
+KIND_LABEL: dict[str, str] = {
+    "machine": "Machine-verified",
+    "attested": "Attested-reference",
+    "inherited": "CSP-inherited",
+    "unclaimed": "Unclaimed",
+}
 
-# Controls where a machine evidence generator *could* be wired (cloud/EDR/GitHub APIs)
-# but none exists yet. Editorial classification; see docs/plans/2026-07-03-002.
-_MACHINE_POSSIBLE: frozenset[str] = frozenset({
-    "AC.L2-3.1.6", "AC.L2-3.1.7", "AC.L2-3.1.8", "AC.L2-3.1.10", "AC.L2-3.1.11",
-    "AC.L2-3.1.12", "AC.L2-3.1.13", "AC.L2-3.1.14", "AC.L2-3.1.17", "AC.L2-3.1.19",
-    "AC.L2-3.1.20",
-    "AU.L2-3.3.4", "AU.L2-3.3.7", "AU.L2-3.3.8", "AU.L2-3.3.9",
-    "CM.L2-3.4.3", "CM.L2-3.4.5", "CM.L2-3.4.8",
-    "IA.L2-3.5.1", "IA.L2-3.5.5", "IA.L2-3.5.6", "IA.L2-3.5.7", "IA.L2-3.5.8",
-    "IA.L2-3.5.9", "IA.L2-3.5.10",
-    "MA.L2-3.7.5",
-    "MP.L2-3.8.7",
-    "RA.L2-3.11.2",
-    "SC.L2-3.13.3", "SC.L2-3.13.4", "SC.L2-3.13.5", "SC.L2-3.13.6", "SC.L2-3.13.7",
-    "SC.L2-3.13.8", "SC.L2-3.13.9", "SC.L2-3.13.15",
-    "SI.L2-3.14.1", "SI.L2-3.14.2", "SI.L2-3.14.4", "SI.L2-3.14.5", "SI.L2-3.14.7",
-})
+
+def _cid(node: Any) -> str:
+    """Bare control id from a cmmc: IRI (e.g. cmmc:AC.L2-3.1.1 -> AC.L2-3.1.1)."""
+    return str(node).split("#")[-1].split("/")[-1]
+
+
+def _freshness_label(days: int) -> str:
+    """Plain-English name for a freshness window in days."""
+    return {
+        0: "event-based (per event)",
+        30: "monthly",
+        90: "quarterly",
+        180: "semi-annual",
+        365: "annual",
+    }.get(days, f"every {days} days")
+
+
+def _load_structural_graph():
+    """tier1.ttl (module topology) + references.ttl + the attestation-refs
+    vocabulary, merged into one Graph so module -> reference -> source -> role
+    resolves in a single pass. Read-only; independent of any pipeline run.
+    """
+    from rdflib import Graph
+
+    g = Graph()
+    g.parse(_REPO_ROOT / "data" / "structural" / "tier1.ttl", format="turtle")
+    g.parse(_REPO_ROOT / "data" / "structural" / "references.ttl", format="turtle")
+    g.parse(_REPO_ROOT / "data" / "ontology" / "ce-attestation-refs.ttl", format="turtle")
+    return g
+
+
+def _module_verification_kind(g, module) -> str:
+    """Classify one module by its cmmc:verificationMethod (see module header)."""
+    from compliance_engine.ontology.prefixes import CMMC
+
+    vm = g.value(module, CMMC.verificationMethod)
+    vm_str = str(vm) if vm is not None else ""
+    if vm_str.endswith("oracle-attested-reference"):
+        return "attested"
+    if vm_str.startswith("inherited"):
+        return "inherited"
+    return "machine"
+
+
+def get_reference_data() -> list[dict[str, Any]]:
+    """The attested-reference records: for every Track B control, the full chain
+    the attested-reference oracle checks — authoritative source, resolvable
+    reference URI, freshness window, last-verified timestamp, custodian ("bob"),
+    and the required signer role.
+
+    Returns one row per control, sorted by family then id. This is the concrete
+    face of the attested-reference model: the same four-part check (registered,
+    resolves, fresh, signed-by-role) that lets the engine cover policy-and-records
+    controls on the same footing as machine ones.
+    """
+    from compliance_engine.ontology.prefixes import CE, CMMC
+    from rdflib import RDFS
+
+    g = _load_structural_graph()
+    rows: list[dict[str, Any]] = []
+
+    for module in g.subjects(CMMC.verificationMethod, CE["oracle-attested-reference"]):
+        module_label = str(g.value(module, RDFS.label) or _cid(module))
+        controls = sorted(_cid(c) for c in g.objects(module, CMMC.controlsSatisfied))
+
+        src = g.value(module, CE.authoritativeSource)
+        src_label = str(g.value(src, RDFS.label) or _cid(src)) if src else ""
+        src_comment = str(g.value(src, RDFS.comment) or "") if src else ""
+
+        ref = g.value(module, CE.reference)
+        uri = str(g.value(ref, CE.uri) or "") if ref else ""
+        try:
+            fresh_days = int(str(g.value(ref, CE.freshnessDays) or "0")) if ref else 0
+        except (ValueError, TypeError):
+            fresh_days = 0
+        last_verified = str(g.value(ref, CE.lastVerified) or "") if ref else ""
+        custodian = str(g.value(ref, CE.custodian) or "") if ref else ""
+
+        role = g.value(module, CE.attestationRole)
+        role_label = str(g.value(role, RDFS.label) or _cid(role)) if role else ""
+
+        for cid in controls:
+            rows.append({
+                "control": cid,
+                "family": cid.split(".")[0],
+                "module": module_label,
+                "source": src_label,
+                "source_note": src_comment,
+                "uri": uri,
+                "freshness_days": fresh_days,
+                "freshness": _freshness_label(fresh_days),
+                "last_verified": last_verified,
+                "custodian": custodian,
+                "role": role_label,
+            })
+
+    rows.sort(key=lambda r: (r["family"], r["control"]))
+    return rows
+
+
+def authoritative_sources() -> list[dict[str, Any]]:
+    """The distinct authoritative sources cited by attested-reference modules —
+    the systems where the ground truth actually lives ("where bob logs it").
+    Returns `[{source, note, controls}]`, controls = how many controls draw on it.
+    """
+    from collections import Counter
+
+    counts: Counter[str] = Counter()
+    notes: dict[str, str] = {}
+    for r in get_reference_data():
+        counts[r["source"]] += 1
+        notes.setdefault(r["source"], r["source_note"])
+    return [
+        {"source": s, "note": notes.get(s, ""), "controls": n}
+        for s, n in sorted(counts.items(), key=lambda kv: (-kv[1], kv[0]))
+    ]
 
 
 def get_coverage_data() -> list[dict[str, Any]]:
-    """All 110 CMMC L2 controls with live status classification.
+    """All 110 CMMC L2 controls, each classified by how it is verified.
 
-    Status values:
-      "covered"  — engine checks this today (in structural/tier1.ttl)
-      "machine"  — could be machine-checked; no evidence generator yet
-      "human"    — requires policy/procedure/physical inspection; always cantTell
+    Status values (derived from the claiming module's verificationMethod):
+      "machine"    — a config-check oracle measures it from configuration.
+      "attested"   — a registered, fresh, role-signed reference into an
+                     authoritative source (the attested-reference model).
+      "inherited"  — satisfied by the cloud service provider and inherited.
+      "unclaimed"  — no claiming module (should not occur; all 110 are claimed).
     """
     from rdflib import Graph, RDF
     from compliance_engine.ontology.prefixes import CMMC
 
-    g = Graph()
-    g.parse(_REPO_ROOT / "data" / "ontology" / "cmmc-edit.ttl", format="turtle")
+    catalog = Graph()
+    catalog.parse(_REPO_ROOT / "data" / "ontology" / "cmmc-edit.ttl", format="turtle")
 
-    tier1 = Graph()
-    tier1.parse(_REPO_ROOT / "data" / "structural" / "tier1.ttl", format="turtle")
+    struct = _load_structural_graph()
 
-    claimed: set[str] = set()
-    for _s, _p, _o in tier1.triples((None, CMMC.controlsSatisfied, None)):
-        _cid = str(_o).split("#")[-1].split("/")[-1]
-        claimed.add(_cid)
+    # control id -> set of verification kinds across all claiming modules
+    kinds: dict[str, set[str]] = {}
+    for module, _p, ctrl in struct.triples((None, CMMC.controlsSatisfied, None)):
+        kinds.setdefault(_cid(ctrl), set()).add(_module_verification_kind(struct, module))
+
+    def classify(cid: str) -> str:
+        ks = kinds.get(cid)
+        if not ks:
+            return "unclaimed"
+        if "attested" in ks:
+            return "attested"
+        if "inherited" in ks and ks == {"inherited"}:
+            return "inherited"
+        return "machine"
 
     rows: list[dict[str, Any]] = []
-    for ctrl in g.subjects(RDF.type, CMMC.Control):
-        cid = str(g.value(ctrl, CMMC.controlId) or "")
+    for ctrl in catalog.subjects(RDF.type, CMMC.Control):
+        cid = str(catalog.value(ctrl, CMMC.controlId) or "")
         if not cid:
             continue
-        text = str(g.value(ctrl, CMMC.text) or "")
+        text = str(catalog.value(ctrl, CMMC.text) or "")
         try:
-            weight = int(str(g.value(ctrl, CMMC.weight) or "1"))
+            weight = int(str(catalog.value(ctrl, CMMC.weight) or "1"))
         except (ValueError, TypeError):
             weight = 1
-        family = cid.split(".")[0]
-        non_def = weight > 1 or cid in _NON_DEF_ONE_POINTERS
-        inherited = cid in _CSP_INHERITED
-
-        if cid in claimed:
-            status = "covered"
-        elif cid in _MACHINE_POSSIBLE:
-            status = "machine"
-        else:
-            status = "human"
-
+        status = classify(cid)
         rows.append({
             "id": cid,
-            "family": family,
+            "family": cid.split(".")[0],
             "weight": weight,
             "status": status,
-            "non_deferrable": non_def,
-            "inherited": inherited,
+            "non_deferrable": weight > 1 or cid in _NON_DEF_ONE_POINTERS,
+            "inherited": status == "inherited",
             "text": text,
         })
 

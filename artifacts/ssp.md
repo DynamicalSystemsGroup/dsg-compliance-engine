@@ -10,23 +10,23 @@
 
 ## 1. System identification and CUI boundary
 
-| Field | Value |
-| --- | --- |
-| Document ID | SSP-NV012 |
-| System | NV012 Tier 1 IL4 CUI enclave |
-| CUI boundary | Google Workspace Enterprise Plus + GCP Assured Workloads (IL4) |
-| Dataset | artifacts/engine.trig |
-| Dataset SHA-256 | 9f8a10d798583e6e77119e4ff5571bb0ebb02a81e676eaae8d0ac0d6c48f5086 |
-| Quad count | 2455 |
-| Document date | 2026-07-03T19:49:50.719092+00:00 |
-| Evidentiary status | NON-EVIDENTIARY (mock) |
-| Compiler | documents/ssp.py |
+| Field              | Value                                                            |
+| ------------------ | ---------------------------------------------------------------- |
+| Document ID        | SSP-NV012                                                        |
+| System             | NV012 Tier 1 IL4 CUI enclave                                     |
+| CUI boundary       | Google Workspace Enterprise Plus + GCP Assured Workloads (IL4)   |
+| Dataset            | artifacts/engine.trig                                            |
+| Dataset SHA-256    | 9f8a10d798583e6e77119e4ff5571bb0ebb02a81e676eaae8d0ac0d6c48f5086 |
+| Quad count         | 2455                                                             |
+| Document date      | 2026-07-03T19:49:50.719092+00:00                                 |
+| Evidentiary status | NON-EVIDENTIARY (mock)                                           |
+| Compiler           | documents/ssp.py                                                 |
 
 ## 2. Framework applicability
 
 Scope: NIST SP 800-171 Rev. 2 / CMMC Level 2 (110 controls). Status is the
 recorded human attestation (EARL outcome via `STATUS_LABEL`); evidence
-*addresses* controls but never *attests* them. The machine-checkable subset
+_addresses_ controls but never _attests_ them. The machine-checkable subset
 is verified by oracles; the remainder is human-attested from documentary
 evidence.
 
@@ -35,118 +35,118 @@ evidence.
 One row per control (all 110). Status is the attestation outcome; a control
 with no attestation is PLANNED (a gap).
 
-| Control | Implementation | Responsible party | Evidence location | Evidence hash | Status | Gap notes | POA&M ref |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| AC.L2-3.1.1 | IAM groups + least-privilege role bindings for CUI access | NV012 Affirming Official | nv012/contradiction/gcp_iam_bindings.json | 4bba2d0adcbb, 6c69bdddaea3 | MET | - | - |
-| AC.L2-3.1.10 | Cloud Identity session control + failed-login lockout | - | - | - | PLANNED | not attested (planned) | - |
-| AC.L2-3.1.11 | Cloud Identity session control + failed-login lockout | - | - | - | PLANNED | not attested (planned) | - |
-| AC.L2-3.1.12 | BeyondCorp Enterprise remote access + TLS enforcement | - | - | - | PLANNED | not attested (planned) | - |
-| AC.L2-3.1.13 | BeyondCorp Enterprise remote access + TLS enforcement | - | - | - | PLANNED | not attested (planned) | - |
-| AC.L2-3.1.14 | BeyondCorp Enterprise remote access + TLS enforcement | - | - | - | PLANNED | not attested (planned) | - |
-| AC.L2-3.1.15 | Remote access authorization (SSP appendix) | - | - | - | PLANNED | not attested (planned) | - |
-| AC.L2-3.1.16 | Chrome Cloud Management + Endpoint Verification (MDM) | - | - | - | PLANNED | not attested (planned) | - |
-| AC.L2-3.1.17 | Chrome Cloud Management + Endpoint Verification (MDM) | - | - | - | PLANNED | not attested (planned) | - |
-| AC.L2-3.1.18 | Chrome Cloud Management + Endpoint Verification (MDM) | - | - | - | PLANNED | not attested (planned) | - |
-| AC.L2-3.1.19 | Chrome Cloud Management + Endpoint Verification (MDM) | - | - | - | PLANNED | not attested (planned) | - |
-| AC.L2-3.1.2 | IAM groups + least-privilege role bindings for CUI access | NV012 Affirming Official | - | - | MET | - | - |
-| AC.L2-3.1.20 | VPC Service Controls perimeter — external system authorization | - | - | - | PLANNED | not attested (planned) | - |
-| AC.L2-3.1.21 | Remote access authorization (SSP appendix) | - | - | - | PLANNED | not attested (planned) | - |
-| AC.L2-3.1.22 | Remote access authorization (SSP appendix) | - | - | - | PLANNED | not attested (planned) | - |
-| AC.L2-3.1.3 | Drive + Gmail DLP rules (control the flow of CUI) | NV012 Affirming Official | - | - | MET | - | - |
-| AC.L2-3.1.4 | Separation of duties (RACI matrix) | - | - | - | PLANNED | not attested (planned) | - |
-| AC.L2-3.1.5 | IAM groups + least-privilege role bindings for CUI access | NV012 Affirming Official | - | - | MET | - | - |
-| AC.L2-3.1.6 | GCP IAM policy + audit-log signals for privileged use | - | - | - | PLANNED | not attested (planned) | - |
-| AC.L2-3.1.7 | GCP IAM policy + audit-log signals for privileged use | - | - | - | PLANNED | not attested (planned) | - |
-| AC.L2-3.1.8 | Cloud Identity session control + failed-login lockout | - | - | - | PLANNED | not attested (planned) | - |
-| AC.L2-3.1.9 | Login banner policy (system-use notification) | - | - | - | PLANNED | not attested (planned) | - |
-| AT.L2-3.2.1 | Annual security awareness + role-based training program | - | - | - | PLANNED | not attested (planned) | - |
-| AT.L2-3.2.2 | Annual security awareness + role-based training program | - | - | - | PLANNED | not attested (planned) | - |
-| AT.L2-3.2.3 | Annual security awareness + role-based training program | - | - | - | PLANNED | not attested (planned) | - |
-| AU.L2-3.3.1 | Workspace + GCP audit log export to retained Cloud Storage bucket | NV012 Affirming Official | - | - | MET | - | - |
-| AU.L2-3.3.2 | Workspace + GCP audit log export to retained Cloud Storage bucket | NV012 Affirming Official | - | - | MET | - | - |
-| AU.L2-3.3.3 | Audit management procedure (log review cadence + reports) | - | - | - | PLANNED | not attested (planned) | - |
-| AU.L2-3.3.4 | Cloud Logging sinks + NTP + IAM on log buckets | - | - | - | PLANNED | not attested (planned) | - |
-| AU.L2-3.3.5 | Workspace + GCP audit log export to retained Cloud Storage bucket | NV012 Affirming Official | - | - | MET | - | - |
-| AU.L2-3.3.6 | Audit management procedure (log review cadence + reports) | - | - | - | PLANNED | not attested (planned) | - |
-| AU.L2-3.3.7 | Cloud Logging sinks + NTP + IAM on log buckets | - | - | - | PLANNED | not attested (planned) | - |
-| AU.L2-3.3.8 | Cloud Logging sinks + NTP + IAM on log buckets | - | - | - | PLANNED | not attested (planned) | - |
-| AU.L2-3.3.9 | Cloud Logging sinks + NTP + IAM on log buckets | - | - | - | PLANNED | not attested (planned) | - |
-| CA.L2-3.12.1 | Continuous monitoring: engine run history + POA&M tracker | - | - | - | PLANNED | not attested (planned) | - |
-| CA.L2-3.12.2 | Continuous monitoring: engine run history + POA&M tracker | - | - | - | PLANNED | not attested (planned) | - |
-| CA.L2-3.12.3 | Continuous monitoring: engine run history + POA&M tracker | - | - | - | PLANNED | not attested (planned) | - |
-| CA.L2-3.12.4 | System Security Plan supplement (system description) | - | - | - | PLANNED | not attested (planned) | - |
-| CM.L2-3.4.1 | Terraform baseline configuration + resource inventory (IaC) | NV012 Affirming Official | - | - | MET | - | - |
-| CM.L2-3.4.2 | Terraform baseline configuration + resource inventory (IaC) | NV012 Affirming Official | - | - | MET | - | - |
-| CM.L2-3.4.3 | GitHub branch protection + required reviews | - | - | - | PLANNED | not attested (planned) | - |
-| CM.L2-3.4.4 | Configuration management: security impact analysis procedure | - | - | - | PLANNED | not attested (planned) | - |
-| CM.L2-3.4.5 | GitHub branch protection + required reviews | - | - | - | PLANNED | not attested (planned) | - |
-| CM.L2-3.4.6 | Disable non-FedRAMP-authorized services for the CUI OU (least functionality) | NV012 Affirming Official | - | - | MET | - | - |
-| CM.L2-3.4.7 | Disable non-FedRAMP-authorized services for the CUI OU (least functionality) | NV012 Affirming Official | - | - | MET | - | - |
-| CM.L2-3.4.8 | Binary Authorization — image allowlist / user-installed software | - | - | - | PLANNED | not attested (planned) | - |
-| CM.L2-3.4.9 | Binary Authorization — image allowlist / user-installed software | - | - | - | PLANNED | not attested (planned) | - |
-| IA.L2-3.5.1 | Workspace Admin identity lifecycle + password policy | - | - | - | PLANNED | not attested (planned) | - |
-| IA.L2-3.5.10 | Workspace Admin identity lifecycle + password policy | - | - | - | PLANNED | not attested (planned) | - |
-| IA.L2-3.5.11 | Workspace Admin identity lifecycle + password policy | - | - | - | PLANNED | not attested (planned) | - |
-| IA.L2-3.5.2 | Google Workspace 2-Step Verification (phishing-resistant) enforced on CUI OU | NV012 Affirming Official | - | - | MET | - | - |
-| IA.L2-3.5.3 | Google Workspace 2-Step Verification (phishing-resistant) enforced on CUI OU | NV012 Affirming Official | nv012/contradiction/workspace_2sv.json | 191fda68120a | MET | - | - |
-| IA.L2-3.5.4 | Google Workspace 2-Step Verification (phishing-resistant) enforced on CUI OU | NV012 Affirming Official | - | - | MET | - | - |
-| IA.L2-3.5.5 | Workspace Admin identity lifecycle + password policy | - | - | - | PLANNED | not attested (planned) | - |
-| IA.L2-3.5.6 | Workspace Admin identity lifecycle + password policy | - | - | - | PLANNED | not attested (planned) | - |
-| IA.L2-3.5.7 | Workspace Admin identity lifecycle + password policy | - | - | - | PLANNED | not attested (planned) | - |
-| IA.L2-3.5.8 | Workspace Admin identity lifecycle + password policy | - | - | - | PLANNED | not attested (planned) | - |
-| IA.L2-3.5.9 | Workspace Admin identity lifecycle + password policy | - | - | - | PLANNED | not attested (planned) | - |
-| IR.L2-3.6.1 | Incident Response Plan + annual tabletop exercise | - | - | - | PLANNED | not attested (planned) | - |
-| IR.L2-3.6.2 | Incident Response Plan + annual tabletop exercise | - | - | - | PLANNED | not attested (planned) | - |
-| IR.L2-3.6.3 | Incident Response Plan + annual tabletop exercise | - | - | - | PLANNED | not attested (planned) | - |
-| MA.L2-3.7.1 | Maintenance policy: approved vendor list + maintenance log | - | - | - | PLANNED | not attested (planned) | - |
-| MA.L2-3.7.2 | Maintenance policy: approved vendor list + maintenance log | - | - | - | PLANNED | not attested (planned) | - |
-| MA.L2-3.7.3 | Maintenance policy: approved vendor list + maintenance log | - | - | - | PLANNED | not attested (planned) | - |
-| MA.L2-3.7.4 | Maintenance policy: approved vendor list + maintenance log | - | - | - | PLANNED | not attested (planned) | - |
-| MA.L2-3.7.5 | Cloud Identity MFA for ops / break-glass roles | - | - | - | PLANNED | not attested (planned) | - |
-| MA.L2-3.7.6 | Maintenance policy: approved vendor list + maintenance log | - | - | - | PLANNED | not attested (planned) | - |
-| MP.L2-3.8.1 | Media protection: labeling, storage, sanitization (NIST SP 800-88) | - | - | - | PLANNED | not attested (planned) | - |
-| MP.L2-3.8.2 | Media protection: labeling, storage, sanitization (NIST SP 800-88) | - | - | - | PLANNED | not attested (planned) | - |
-| MP.L2-3.8.3 | Media protection: labeling, storage, sanitization (NIST SP 800-88) | - | - | - | PLANNED | not attested (planned) | - |
-| MP.L2-3.8.4 | Media protection: labeling, storage, sanitization (NIST SP 800-88) | - | - | - | PLANNED | not attested (planned) | - |
-| MP.L2-3.8.5 | Media protection: labeling, storage, sanitization (NIST SP 800-88) | - | - | - | PLANNED | not attested (planned) | - |
-| MP.L2-3.8.6 | Media protection: labeling, storage, sanitization (NIST SP 800-88) | - | - | - | PLANNED | not attested (planned) | - |
-| MP.L2-3.8.7 | Chrome Cloud Management + Endpoint Verification (MDM) | - | - | - | PLANNED | not attested (planned) | - |
-| MP.L2-3.8.8 | Media protection: labeling, storage, sanitization (NIST SP 800-88) | - | - | - | PLANNED | not attested (planned) | - |
-| MP.L2-3.8.9 | Media protection: labeling, storage, sanitization (NIST SP 800-88) | - | - | - | PLANNED | not attested (planned) | - |
-| PE.L2-3.10.1 | CSP-inherited physical protection (Google IL4 data-center controls) | NV012 Affirming Official | - | - | MET | - | - |
-| PE.L2-3.10.2 | CSP-inherited physical protection (Google IL4 data-center controls) | NV012 Affirming Official | - | - | MET | - | - |
-| PE.L2-3.10.3 | Physical access (visitor log + badge + WFH agreements) | - | - | - | PLANNED | not attested (planned) | - |
-| PE.L2-3.10.4 | Physical access (visitor log + badge + WFH agreements) | - | - | - | PLANNED | not attested (planned) | - |
-| PE.L2-3.10.5 | Physical access (visitor log + badge + WFH agreements) | - | - | - | PLANNED | not attested (planned) | - |
-| PE.L2-3.10.6 | Physical access (visitor log + badge + WFH agreements) | - | - | - | PLANNED | not attested (planned) | - |
-| PS.L2-3.9.1 | Personnel security: background screening + offboarding | - | - | - | PLANNED | not attested (planned) | - |
-| PS.L2-3.9.2 | Personnel security: background screening + offboarding | - | - | - | PLANNED | not attested (planned) | - |
-| RA.L2-3.11.1 | Formal risk assessment + finding tracker | - | - | - | PLANNED | not attested (planned) | - |
-| RA.L2-3.11.2 | GCP Security Command Center — vulnerability management | - | - | - | PLANNED | not attested (planned) | - |
-| RA.L2-3.11.3 | Formal risk assessment + finding tracker | - | - | - | PLANNED | not attested (planned) | - |
-| SC.L2-3.13.1 | GCP Org Policy: US-only resource locations + restricted service usage | NV012 Affirming Official | nv012/contradiction/gcp_org_policy_region.json | 385f07ca2e58, 5f8e7ef2f8ff | MET | - | - |
-| SC.L2-3.13.10 | Cloud KMS CMEK + Workspace CSE key management (FIPS-validated crypto) | NV012 Affirming Official | - | - | MET | - | - |
-| SC.L2-3.13.11 | Cloud KMS CMEK + Workspace CSE key management (FIPS-validated crypto) | NV012 Affirming Official | nv012/contradiction/gcp_kms_cmvp.json | 3c4af60bc144 | MET | - | - |
-| SC.L2-3.13.12 | Collaborative computing / mobile code / VoIP policies | - | - | - | PLANNED | not attested (planned) | - |
-| SC.L2-3.13.13 | Collaborative computing / mobile code / VoIP policies | - | - | - | PLANNED | not attested (planned) | - |
-| SC.L2-3.13.14 | Collaborative computing / mobile code / VoIP policies | - | - | - | PLANNED | not attested (planned) | - |
-| SC.L2-3.13.15 | VPC network segmentation (subnetworks + firewalls + Cloud Armor) | - | - | - | PLANNED | not attested (planned) | - |
-| SC.L2-3.13.16 | Cloud KMS CMEK + Workspace CSE key management (FIPS-validated crypto) | NV012 Affirming Official | nv012/contradiction/gcp_cmek_at_rest.json | 52eb61a61772 | MET | - | - |
-| SC.L2-3.13.2 | Security engineering principles (NIST SP 800-160 Vol.1) | - | - | - | PLANNED | not attested (planned) | - |
-| SC.L2-3.13.3 | VPC network segmentation (subnetworks + firewalls + Cloud Armor) | - | - | - | PLANNED | not attested (planned) | - |
-| SC.L2-3.13.4 | VPC network segmentation (subnetworks + firewalls + Cloud Armor) | - | - | - | PLANNED | not attested (planned) | - |
-| SC.L2-3.13.5 | VPC network segmentation (subnetworks + firewalls + Cloud Armor) | - | - | - | PLANNED | not attested (planned) | - |
-| SC.L2-3.13.6 | VPC network segmentation (subnetworks + firewalls + Cloud Armor) | - | - | - | PLANNED | not attested (planned) | - |
-| SC.L2-3.13.7 | VPC network segmentation (subnetworks + firewalls + Cloud Armor) | - | - | - | PLANNED | not attested (planned) | - |
-| SC.L2-3.13.8 | VPC network segmentation (subnetworks + firewalls + Cloud Armor) | - | - | - | PLANNED | not attested (planned) | - |
-| SC.L2-3.13.9 | VPC network segmentation (subnetworks + firewalls + Cloud Armor) | - | - | - | PLANNED | not attested (planned) | - |
-| SI.L2-3.14.1 | GCP Security Command Center — vulnerability management | - | - | - | PLANNED | not attested (planned) | - |
-| SI.L2-3.14.2 | CrowdStrike Falcon EDR — malware + endpoint integrity | - | - | - | PLANNED | not attested (planned) | - |
-| SI.L2-3.14.3 | Cloud Monitoring + Workspace Alert Center (security alert monitoring/response) | NV012 Affirming Official | - | - | MET | - | - |
-| SI.L2-3.14.4 | CrowdStrike Falcon EDR — malware + endpoint integrity | - | - | - | PLANNED | not attested (planned) | - |
-| SI.L2-3.14.5 | GCP Security Command Center — vulnerability management | - | - | - | PLANNED | not attested (planned) | - |
-| SI.L2-3.14.6 | Cloud Monitoring + Workspace Alert Center (security alert monitoring/response) | NV012 Affirming Official | - | - | MET | - | - |
-| SI.L2-3.14.7 | CrowdStrike Falcon EDR — malware + endpoint integrity | - | - | - | PLANNED | not attested (planned) | - |
+| Control       | Implementation                                                                 | Responsible party        | Evidence location                              | Evidence hash              | Status  | Gap notes              | POA&M ref |
+| ------------- | ------------------------------------------------------------------------------ | ------------------------ | ---------------------------------------------- | -------------------------- | ------- | ---------------------- | --------- |
+| AC.L2-3.1.1   | IAM groups + least-privilege role bindings for CUI access                      | NV012 Affirming Official | nv012/contradiction/gcp_iam_bindings.json      | 4bba2d0adcbb, 6c69bdddaea3 | MET     | -                      | -         |
+| AC.L2-3.1.10  | Cloud Identity session control + failed-login lockout                          | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| AC.L2-3.1.11  | Cloud Identity session control + failed-login lockout                          | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| AC.L2-3.1.12  | BeyondCorp Enterprise remote access + TLS enforcement                          | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| AC.L2-3.1.13  | BeyondCorp Enterprise remote access + TLS enforcement                          | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| AC.L2-3.1.14  | BeyondCorp Enterprise remote access + TLS enforcement                          | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| AC.L2-3.1.15  | Remote access authorization (SSP appendix)                                     | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| AC.L2-3.1.16  | Chrome Cloud Management + Endpoint Verification (MDM)                          | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| AC.L2-3.1.17  | Chrome Cloud Management + Endpoint Verification (MDM)                          | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| AC.L2-3.1.18  | Chrome Cloud Management + Endpoint Verification (MDM)                          | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| AC.L2-3.1.19  | Chrome Cloud Management + Endpoint Verification (MDM)                          | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| AC.L2-3.1.2   | IAM groups + least-privilege role bindings for CUI access                      | NV012 Affirming Official | -                                              | -                          | MET     | -                      | -         |
+| AC.L2-3.1.20  | VPC Service Controls perimeter — external system authorization                 | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| AC.L2-3.1.21  | Remote access authorization (SSP appendix)                                     | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| AC.L2-3.1.22  | Remote access authorization (SSP appendix)                                     | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| AC.L2-3.1.3   | Drive + Gmail DLP rules (control the flow of CUI)                              | NV012 Affirming Official | -                                              | -                          | MET     | -                      | -         |
+| AC.L2-3.1.4   | Separation of duties (RACI matrix)                                             | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| AC.L2-3.1.5   | IAM groups + least-privilege role bindings for CUI access                      | NV012 Affirming Official | -                                              | -                          | MET     | -                      | -         |
+| AC.L2-3.1.6   | GCP IAM policy + audit-log signals for privileged use                          | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| AC.L2-3.1.7   | GCP IAM policy + audit-log signals for privileged use                          | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| AC.L2-3.1.8   | Cloud Identity session control + failed-login lockout                          | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| AC.L2-3.1.9   | Login banner policy (system-use notification)                                  | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| AT.L2-3.2.1   | Annual security awareness + role-based training program                        | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| AT.L2-3.2.2   | Annual security awareness + role-based training program                        | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| AT.L2-3.2.3   | Annual security awareness + role-based training program                        | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| AU.L2-3.3.1   | Workspace + GCP audit log export to retained Cloud Storage bucket              | NV012 Affirming Official | -                                              | -                          | MET     | -                      | -         |
+| AU.L2-3.3.2   | Workspace + GCP audit log export to retained Cloud Storage bucket              | NV012 Affirming Official | -                                              | -                          | MET     | -                      | -         |
+| AU.L2-3.3.3   | Audit management procedure (log review cadence + reports)                      | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| AU.L2-3.3.4   | Cloud Logging sinks + NTP + IAM on log buckets                                 | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| AU.L2-3.3.5   | Workspace + GCP audit log export to retained Cloud Storage bucket              | NV012 Affirming Official | -                                              | -                          | MET     | -                      | -         |
+| AU.L2-3.3.6   | Audit management procedure (log review cadence + reports)                      | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| AU.L2-3.3.7   | Cloud Logging sinks + NTP + IAM on log buckets                                 | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| AU.L2-3.3.8   | Cloud Logging sinks + NTP + IAM on log buckets                                 | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| AU.L2-3.3.9   | Cloud Logging sinks + NTP + IAM on log buckets                                 | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| CA.L2-3.12.1  | Continuous monitoring: engine run history + POA&M tracker                      | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| CA.L2-3.12.2  | Continuous monitoring: engine run history + POA&M tracker                      | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| CA.L2-3.12.3  | Continuous monitoring: engine run history + POA&M tracker                      | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| CA.L2-3.12.4  | System Security Plan supplement (system description)                           | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| CM.L2-3.4.1   | Terraform baseline configuration + resource inventory (IaC)                    | NV012 Affirming Official | -                                              | -                          | MET     | -                      | -         |
+| CM.L2-3.4.2   | Terraform baseline configuration + resource inventory (IaC)                    | NV012 Affirming Official | -                                              | -                          | MET     | -                      | -         |
+| CM.L2-3.4.3   | GitHub branch protection + required reviews                                    | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| CM.L2-3.4.4   | Configuration management: security impact analysis procedure                   | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| CM.L2-3.4.5   | GitHub branch protection + required reviews                                    | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| CM.L2-3.4.6   | Disable non-FedRAMP-authorized services for the CUI OU (least functionality)   | NV012 Affirming Official | -                                              | -                          | MET     | -                      | -         |
+| CM.L2-3.4.7   | Disable non-FedRAMP-authorized services for the CUI OU (least functionality)   | NV012 Affirming Official | -                                              | -                          | MET     | -                      | -         |
+| CM.L2-3.4.8   | Binary Authorization — image allowlist / user-installed software               | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| CM.L2-3.4.9   | Binary Authorization — image allowlist / user-installed software               | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| IA.L2-3.5.1   | Workspace Admin identity lifecycle + password policy                           | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| IA.L2-3.5.10  | Workspace Admin identity lifecycle + password policy                           | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| IA.L2-3.5.11  | Workspace Admin identity lifecycle + password policy                           | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| IA.L2-3.5.2   | Google Workspace 2-Step Verification (phishing-resistant) enforced on CUI OU   | NV012 Affirming Official | -                                              | -                          | MET     | -                      | -         |
+| IA.L2-3.5.3   | Google Workspace 2-Step Verification (phishing-resistant) enforced on CUI OU   | NV012 Affirming Official | nv012/contradiction/workspace_2sv.json         | 191fda68120a               | MET     | -                      | -         |
+| IA.L2-3.5.4   | Google Workspace 2-Step Verification (phishing-resistant) enforced on CUI OU   | NV012 Affirming Official | -                                              | -                          | MET     | -                      | -         |
+| IA.L2-3.5.5   | Workspace Admin identity lifecycle + password policy                           | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| IA.L2-3.5.6   | Workspace Admin identity lifecycle + password policy                           | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| IA.L2-3.5.7   | Workspace Admin identity lifecycle + password policy                           | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| IA.L2-3.5.8   | Workspace Admin identity lifecycle + password policy                           | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| IA.L2-3.5.9   | Workspace Admin identity lifecycle + password policy                           | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| IR.L2-3.6.1   | Incident Response Plan + annual tabletop exercise                              | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| IR.L2-3.6.2   | Incident Response Plan + annual tabletop exercise                              | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| IR.L2-3.6.3   | Incident Response Plan + annual tabletop exercise                              | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| MA.L2-3.7.1   | Maintenance policy: approved vendor list + maintenance log                     | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| MA.L2-3.7.2   | Maintenance policy: approved vendor list + maintenance log                     | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| MA.L2-3.7.3   | Maintenance policy: approved vendor list + maintenance log                     | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| MA.L2-3.7.4   | Maintenance policy: approved vendor list + maintenance log                     | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| MA.L2-3.7.5   | Cloud Identity MFA for ops / break-glass roles                                 | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| MA.L2-3.7.6   | Maintenance policy: approved vendor list + maintenance log                     | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| MP.L2-3.8.1   | Media protection: labeling, storage, sanitization (NIST SP 800-88)             | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| MP.L2-3.8.2   | Media protection: labeling, storage, sanitization (NIST SP 800-88)             | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| MP.L2-3.8.3   | Media protection: labeling, storage, sanitization (NIST SP 800-88)             | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| MP.L2-3.8.4   | Media protection: labeling, storage, sanitization (NIST SP 800-88)             | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| MP.L2-3.8.5   | Media protection: labeling, storage, sanitization (NIST SP 800-88)             | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| MP.L2-3.8.6   | Media protection: labeling, storage, sanitization (NIST SP 800-88)             | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| MP.L2-3.8.7   | Chrome Cloud Management + Endpoint Verification (MDM)                          | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| MP.L2-3.8.8   | Media protection: labeling, storage, sanitization (NIST SP 800-88)             | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| MP.L2-3.8.9   | Media protection: labeling, storage, sanitization (NIST SP 800-88)             | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| PE.L2-3.10.1  | CSP-inherited physical protection (Google IL4 data-center controls)            | NV012 Affirming Official | -                                              | -                          | MET     | -                      | -         |
+| PE.L2-3.10.2  | CSP-inherited physical protection (Google IL4 data-center controls)            | NV012 Affirming Official | -                                              | -                          | MET     | -                      | -         |
+| PE.L2-3.10.3  | Physical access (visitor log + badge + WFH agreements)                         | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| PE.L2-3.10.4  | Physical access (visitor log + badge + WFH agreements)                         | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| PE.L2-3.10.5  | Physical access (visitor log + badge + WFH agreements)                         | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| PE.L2-3.10.6  | Physical access (visitor log + badge + WFH agreements)                         | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| PS.L2-3.9.1   | Personnel security: background screening + offboarding                         | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| PS.L2-3.9.2   | Personnel security: background screening + offboarding                         | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| RA.L2-3.11.1  | Formal risk assessment + finding tracker                                       | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| RA.L2-3.11.2  | GCP Security Command Center — vulnerability management                         | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| RA.L2-3.11.3  | Formal risk assessment + finding tracker                                       | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| SC.L2-3.13.1  | GCP Org Policy: US-only resource locations + restricted service usage          | NV012 Affirming Official | nv012/contradiction/gcp_org_policy_region.json | 385f07ca2e58, 5f8e7ef2f8ff | MET     | -                      | -         |
+| SC.L2-3.13.10 | Cloud KMS CMEK + Workspace CSE key management (FIPS-validated crypto)          | NV012 Affirming Official | -                                              | -                          | MET     | -                      | -         |
+| SC.L2-3.13.11 | Cloud KMS CMEK + Workspace CSE key management (FIPS-validated crypto)          | NV012 Affirming Official | nv012/contradiction/gcp_kms_cmvp.json          | 3c4af60bc144               | MET     | -                      | -         |
+| SC.L2-3.13.12 | Collaborative computing / mobile code / VoIP policies                          | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| SC.L2-3.13.13 | Collaborative computing / mobile code / VoIP policies                          | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| SC.L2-3.13.14 | Collaborative computing / mobile code / VoIP policies                          | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| SC.L2-3.13.15 | VPC network segmentation (subnetworks + firewalls + Cloud Armor)               | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| SC.L2-3.13.16 | Cloud KMS CMEK + Workspace CSE key management (FIPS-validated crypto)          | NV012 Affirming Official | nv012/contradiction/gcp_cmek_at_rest.json      | 52eb61a61772               | MET     | -                      | -         |
+| SC.L2-3.13.2  | Security engineering principles (NIST SP 800-160 Vol.1)                        | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| SC.L2-3.13.3  | VPC network segmentation (subnetworks + firewalls + Cloud Armor)               | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| SC.L2-3.13.4  | VPC network segmentation (subnetworks + firewalls + Cloud Armor)               | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| SC.L2-3.13.5  | VPC network segmentation (subnetworks + firewalls + Cloud Armor)               | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| SC.L2-3.13.6  | VPC network segmentation (subnetworks + firewalls + Cloud Armor)               | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| SC.L2-3.13.7  | VPC network segmentation (subnetworks + firewalls + Cloud Armor)               | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| SC.L2-3.13.8  | VPC network segmentation (subnetworks + firewalls + Cloud Armor)               | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| SC.L2-3.13.9  | VPC network segmentation (subnetworks + firewalls + Cloud Armor)               | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| SI.L2-3.14.1  | GCP Security Command Center — vulnerability management                         | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| SI.L2-3.14.2  | CrowdStrike Falcon EDR — malware + endpoint integrity                          | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| SI.L2-3.14.3  | Cloud Monitoring + Workspace Alert Center (security alert monitoring/response) | NV012 Affirming Official | -                                              | -                          | MET     | -                      | -         |
+| SI.L2-3.14.4  | CrowdStrike Falcon EDR — malware + endpoint integrity                          | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| SI.L2-3.14.5  | GCP Security Command Center — vulnerability management                         | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
+| SI.L2-3.14.6  | Cloud Monitoring + Workspace Alert Center (security alert monitoring/response) | NV012 Affirming Official | -                                              | -                          | MET     | -                      | -         |
+| SI.L2-3.14.7  | CrowdStrike Falcon EDR — malware + endpoint integrity                          | -                        | -                                              | -                          | PLANNED | not attested (planned) | -         |
 
 ## 4. Per-control detail
 
@@ -159,9 +159,9 @@ with no attestation is PLANNED (a gap).
 - Verification method: oracle-iam-least-privilege
 
 - Attestation: ATT-AC.L2-3.1.1 — **MET** by NV012 Affirming Official
-  - Timestamp: 2026-07-03T19:49:50.578804+00:00
-  - Adequacy assumption: Implementation reviewed against the provisioned configuration.
-  - Sufficiency justification: Machine oracle + config evidence sufficient for the Phase-I mock run.
+    - Timestamp: 2026-07-03T19:49:50.578804+00:00
+    - Adequacy assumption: Implementation reviewed against the provisioned configuration.
+    - Sufficiency justification: Machine oracle + config evidence sufficient for the Phase-I mock run.
 
 ### AC.L2-3.1.2
 
@@ -172,9 +172,9 @@ with no attestation is PLANNED (a gap).
 - Verification method: oracle-iam-least-privilege
 
 - Attestation: ATT-AC.L2-3.1.2 — **MET** by NV012 Affirming Official
-  - Timestamp: 2026-07-03T19:49:50.586380+00:00
-  - Adequacy assumption: Implementation reviewed; control met by human/inherited determination.
-  - Sufficiency justification: No machine oracle for this control; attested MET on documentary/CSP basis.
+    - Timestamp: 2026-07-03T19:49:50.586380+00:00
+    - Adequacy assumption: Implementation reviewed; control met by human/inherited determination.
+    - Sufficiency justification: No machine oracle for this control; attested MET on documentary/CSP basis.
 
 ### AC.L2-3.1.3
 
@@ -185,9 +185,9 @@ with no attestation is PLANNED (a gap).
 - Verification method: oracle-drive-dlp-rules
 
 - Attestation: ATT-AC.L2-3.1.3 — **MET** by NV012 Affirming Official
-  - Timestamp: 2026-07-03T19:49:50.592924+00:00
-  - Adequacy assumption: Implementation reviewed; control met by human/inherited determination.
-  - Sufficiency justification: No machine oracle for this control; attested MET on documentary/CSP basis.
+    - Timestamp: 2026-07-03T19:49:50.592924+00:00
+    - Adequacy assumption: Implementation reviewed; control met by human/inherited determination.
+    - Sufficiency justification: No machine oracle for this control; attested MET on documentary/CSP basis.
 
 ### AC.L2-3.1.5
 
@@ -198,9 +198,9 @@ with no attestation is PLANNED (a gap).
 - Verification method: oracle-iam-least-privilege
 
 - Attestation: ATT-AC.L2-3.1.5 — **MET** by NV012 Affirming Official
-  - Timestamp: 2026-07-03T19:49:50.599470+00:00
-  - Adequacy assumption: Implementation reviewed; control met by human/inherited determination.
-  - Sufficiency justification: No machine oracle for this control; attested MET on documentary/CSP basis.
+    - Timestamp: 2026-07-03T19:49:50.599470+00:00
+    - Adequacy assumption: Implementation reviewed; control met by human/inherited determination.
+    - Sufficiency justification: No machine oracle for this control; attested MET on documentary/CSP basis.
 
 ### AU.L2-3.3.1
 
@@ -211,9 +211,9 @@ with no attestation is PLANNED (a gap).
 - Verification method: oracle-auditlog-export
 
 - Attestation: ATT-AU.L2-3.3.1 — **MET** by NV012 Affirming Official
-  - Timestamp: 2026-07-03T19:49:50.605940+00:00
-  - Adequacy assumption: Implementation reviewed; control met by human/inherited determination.
-  - Sufficiency justification: No machine oracle for this control; attested MET on documentary/CSP basis.
+    - Timestamp: 2026-07-03T19:49:50.605940+00:00
+    - Adequacy assumption: Implementation reviewed; control met by human/inherited determination.
+    - Sufficiency justification: No machine oracle for this control; attested MET on documentary/CSP basis.
 
 ### AU.L2-3.3.2
 
@@ -224,9 +224,9 @@ with no attestation is PLANNED (a gap).
 - Verification method: oracle-auditlog-export
 
 - Attestation: ATT-AU.L2-3.3.2 — **MET** by NV012 Affirming Official
-  - Timestamp: 2026-07-03T19:49:50.613077+00:00
-  - Adequacy assumption: Implementation reviewed; control met by human/inherited determination.
-  - Sufficiency justification: No machine oracle for this control; attested MET on documentary/CSP basis.
+    - Timestamp: 2026-07-03T19:49:50.613077+00:00
+    - Adequacy assumption: Implementation reviewed; control met by human/inherited determination.
+    - Sufficiency justification: No machine oracle for this control; attested MET on documentary/CSP basis.
 
 ### AU.L2-3.3.5
 
@@ -237,9 +237,9 @@ with no attestation is PLANNED (a gap).
 - Verification method: oracle-auditlog-export
 
 - Attestation: ATT-AU.L2-3.3.5 — **MET** by NV012 Affirming Official
-  - Timestamp: 2026-07-03T19:49:50.619624+00:00
-  - Adequacy assumption: Implementation reviewed; control met by human/inherited determination.
-  - Sufficiency justification: No machine oracle for this control; attested MET on documentary/CSP basis.
+    - Timestamp: 2026-07-03T19:49:50.619624+00:00
+    - Adequacy assumption: Implementation reviewed; control met by human/inherited determination.
+    - Sufficiency justification: No machine oracle for this control; attested MET on documentary/CSP basis.
 
 ### CM.L2-3.4.1
 
@@ -250,9 +250,9 @@ with no attestation is PLANNED (a gap).
 - Verification method: oracle-terraform-baseline
 
 - Attestation: ATT-CM.L2-3.4.1 — **MET** by NV012 Affirming Official
-  - Timestamp: 2026-07-03T19:49:50.626063+00:00
-  - Adequacy assumption: Implementation reviewed; control met by human/inherited determination.
-  - Sufficiency justification: No machine oracle for this control; attested MET on documentary/CSP basis.
+    - Timestamp: 2026-07-03T19:49:50.626063+00:00
+    - Adequacy assumption: Implementation reviewed; control met by human/inherited determination.
+    - Sufficiency justification: No machine oracle for this control; attested MET on documentary/CSP basis.
 
 ### CM.L2-3.4.2
 
@@ -263,9 +263,9 @@ with no attestation is PLANNED (a gap).
 - Verification method: oracle-terraform-baseline
 
 - Attestation: ATT-CM.L2-3.4.2 — **MET** by NV012 Affirming Official
-  - Timestamp: 2026-07-03T19:49:50.632624+00:00
-  - Adequacy assumption: Implementation reviewed; control met by human/inherited determination.
-  - Sufficiency justification: No machine oracle for this control; attested MET on documentary/CSP basis.
+    - Timestamp: 2026-07-03T19:49:50.632624+00:00
+    - Adequacy assumption: Implementation reviewed; control met by human/inherited determination.
+    - Sufficiency justification: No machine oracle for this control; attested MET on documentary/CSP basis.
 
 ### CM.L2-3.4.6
 
@@ -276,9 +276,9 @@ with no attestation is PLANNED (a gap).
 - Verification method: oracle-restrict-service-usage
 
 - Attestation: ATT-CM.L2-3.4.6 — **MET** by NV012 Affirming Official
-  - Timestamp: 2026-07-03T19:49:50.639008+00:00
-  - Adequacy assumption: Implementation reviewed; control met by human/inherited determination.
-  - Sufficiency justification: No machine oracle for this control; attested MET on documentary/CSP basis.
+    - Timestamp: 2026-07-03T19:49:50.639008+00:00
+    - Adequacy assumption: Implementation reviewed; control met by human/inherited determination.
+    - Sufficiency justification: No machine oracle for this control; attested MET on documentary/CSP basis.
 
 ### CM.L2-3.4.7
 
@@ -289,9 +289,9 @@ with no attestation is PLANNED (a gap).
 - Verification method: oracle-restrict-service-usage
 
 - Attestation: ATT-CM.L2-3.4.7 — **MET** by NV012 Affirming Official
-  - Timestamp: 2026-07-03T19:49:50.645492+00:00
-  - Adequacy assumption: Implementation reviewed; control met by human/inherited determination.
-  - Sufficiency justification: No machine oracle for this control; attested MET on documentary/CSP basis.
+    - Timestamp: 2026-07-03T19:49:50.645492+00:00
+    - Adequacy assumption: Implementation reviewed; control met by human/inherited determination.
+    - Sufficiency justification: No machine oracle for this control; attested MET on documentary/CSP basis.
 
 ### IA.L2-3.5.2
 
@@ -302,9 +302,9 @@ with no attestation is PLANNED (a gap).
 - Verification method: oracle-mfa-2sv-enforced
 
 - Attestation: ATT-IA.L2-3.5.2 — **MET** by NV012 Affirming Official
-  - Timestamp: 2026-07-03T19:49:50.652417+00:00
-  - Adequacy assumption: Implementation reviewed; control met by human/inherited determination.
-  - Sufficiency justification: No machine oracle for this control; attested MET on documentary/CSP basis.
+    - Timestamp: 2026-07-03T19:49:50.652417+00:00
+    - Adequacy assumption: Implementation reviewed; control met by human/inherited determination.
+    - Sufficiency justification: No machine oracle for this control; attested MET on documentary/CSP basis.
 
 ### IA.L2-3.5.3
 
@@ -315,9 +315,9 @@ with no attestation is PLANNED (a gap).
 - Verification method: oracle-mfa-2sv-enforced
 
 - Attestation: ATT-IA.L2-3.5.3 — **MET** by NV012 Affirming Official
-  - Timestamp: 2026-07-03T19:49:50.658905+00:00
-  - Adequacy assumption: Implementation reviewed against the provisioned configuration.
-  - Sufficiency justification: Machine oracle + config evidence sufficient for the Phase-I mock run.
+    - Timestamp: 2026-07-03T19:49:50.658905+00:00
+    - Adequacy assumption: Implementation reviewed against the provisioned configuration.
+    - Sufficiency justification: Machine oracle + config evidence sufficient for the Phase-I mock run.
 
 ### IA.L2-3.5.4
 
@@ -328,9 +328,9 @@ with no attestation is PLANNED (a gap).
 - Verification method: oracle-mfa-2sv-enforced
 
 - Attestation: ATT-IA.L2-3.5.4 — **MET** by NV012 Affirming Official
-  - Timestamp: 2026-07-03T19:49:50.665403+00:00
-  - Adequacy assumption: Implementation reviewed; control met by human/inherited determination.
-  - Sufficiency justification: No machine oracle for this control; attested MET on documentary/CSP basis.
+    - Timestamp: 2026-07-03T19:49:50.665403+00:00
+    - Adequacy assumption: Implementation reviewed; control met by human/inherited determination.
+    - Sufficiency justification: No machine oracle for this control; attested MET on documentary/CSP basis.
 
 ### PE.L2-3.10.1
 
@@ -341,9 +341,9 @@ with no attestation is PLANNED (a gap).
 - Verification method: inherited:google-workspace-crm
 
 - Attestation: ATT-PE.L2-3.10.1 — **MET** by NV012 Affirming Official
-  - Timestamp: 2026-07-03T19:49:50.672110+00:00
-  - Adequacy assumption: Implementation reviewed; control met by human/inherited determination.
-  - Sufficiency justification: No machine oracle for this control; attested MET on documentary/CSP basis.
+    - Timestamp: 2026-07-03T19:49:50.672110+00:00
+    - Adequacy assumption: Implementation reviewed; control met by human/inherited determination.
+    - Sufficiency justification: No machine oracle for this control; attested MET on documentary/CSP basis.
 
 ### PE.L2-3.10.2
 
@@ -354,9 +354,9 @@ with no attestation is PLANNED (a gap).
 - Verification method: inherited:google-workspace-crm
 
 - Attestation: ATT-PE.L2-3.10.2 — **MET** by NV012 Affirming Official
-  - Timestamp: 2026-07-03T19:49:50.678559+00:00
-  - Adequacy assumption: Implementation reviewed; control met by human/inherited determination.
-  - Sufficiency justification: No machine oracle for this control; attested MET on documentary/CSP basis.
+    - Timestamp: 2026-07-03T19:49:50.678559+00:00
+    - Adequacy assumption: Implementation reviewed; control met by human/inherited determination.
+    - Sufficiency justification: No machine oracle for this control; attested MET on documentary/CSP basis.
 
 ### SC.L2-3.13.1
 
@@ -367,9 +367,9 @@ with no attestation is PLANNED (a gap).
 - Verification method: oracle-orgpolicy-us-residency
 
 - Attestation: ATT-SC.L2-3.13.1 — **MET** by NV012 Affirming Official
-  - Timestamp: 2026-07-03T19:49:50.684995+00:00
-  - Adequacy assumption: Implementation reviewed against the provisioned configuration.
-  - Sufficiency justification: Machine oracle + config evidence sufficient for the Phase-I mock run.
+    - Timestamp: 2026-07-03T19:49:50.684995+00:00
+    - Adequacy assumption: Implementation reviewed against the provisioned configuration.
+    - Sufficiency justification: Machine oracle + config evidence sufficient for the Phase-I mock run.
 
 ### SC.L2-3.13.10
 
@@ -380,9 +380,9 @@ with no attestation is PLANNED (a gap).
 - Verification method: oracle-cmek-fips-keyring
 
 - Attestation: ATT-SC.L2-3.13.10 — **MET** by NV012 Affirming Official
-  - Timestamp: 2026-07-03T19:49:50.691990+00:00
-  - Adequacy assumption: Implementation reviewed; control met by human/inherited determination.
-  - Sufficiency justification: No machine oracle for this control; attested MET on documentary/CSP basis.
+    - Timestamp: 2026-07-03T19:49:50.691990+00:00
+    - Adequacy assumption: Implementation reviewed; control met by human/inherited determination.
+    - Sufficiency justification: No machine oracle for this control; attested MET on documentary/CSP basis.
 
 ### SC.L2-3.13.11
 
@@ -393,9 +393,9 @@ with no attestation is PLANNED (a gap).
 - Verification method: oracle-cmek-fips-keyring
 
 - Attestation: ATT-SC.L2-3.13.11 — **MET** by NV012 Affirming Official
-  - Timestamp: 2026-07-03T19:49:50.698520+00:00
-  - Adequacy assumption: Implementation reviewed against the provisioned configuration.
-  - Sufficiency justification: Machine oracle + config evidence sufficient for the Phase-I mock run.
+    - Timestamp: 2026-07-03T19:49:50.698520+00:00
+    - Adequacy assumption: Implementation reviewed against the provisioned configuration.
+    - Sufficiency justification: Machine oracle + config evidence sufficient for the Phase-I mock run.
 
 ### SC.L2-3.13.16
 
@@ -406,9 +406,9 @@ with no attestation is PLANNED (a gap).
 - Verification method: oracle-cmek-fips-keyring
 
 - Attestation: ATT-SC.L2-3.13.16 — **MET** by NV012 Affirming Official
-  - Timestamp: 2026-07-03T19:49:50.705265+00:00
-  - Adequacy assumption: Implementation reviewed against the provisioned configuration.
-  - Sufficiency justification: Machine oracle + config evidence sufficient for the Phase-I mock run.
+    - Timestamp: 2026-07-03T19:49:50.705265+00:00
+    - Adequacy assumption: Implementation reviewed against the provisioned configuration.
+    - Sufficiency justification: Machine oracle + config evidence sufficient for the Phase-I mock run.
 
 ### SI.L2-3.14.3
 
@@ -419,9 +419,9 @@ with no attestation is PLANNED (a gap).
 - Verification method: oracle-monitoring-alerts
 
 - Attestation: ATT-SI.L2-3.14.3 — **MET** by NV012 Affirming Official
-  - Timestamp: 2026-07-03T19:49:50.711911+00:00
-  - Adequacy assumption: Implementation reviewed; control met by human/inherited determination.
-  - Sufficiency justification: No machine oracle for this control; attested MET on documentary/CSP basis.
+    - Timestamp: 2026-07-03T19:49:50.711911+00:00
+    - Adequacy assumption: Implementation reviewed; control met by human/inherited determination.
+    - Sufficiency justification: No machine oracle for this control; attested MET on documentary/CSP basis.
 
 ### SI.L2-3.14.6
 
@@ -432,22 +432,22 @@ with no attestation is PLANNED (a gap).
 - Verification method: oracle-monitoring-alerts
 
 - Attestation: ATT-SI.L2-3.14.6 — **MET** by NV012 Affirming Official
-  - Timestamp: 2026-07-03T19:49:50.719092+00:00
-  - Adequacy assumption: Implementation reviewed; control met by human/inherited determination.
-  - Sufficiency justification: No machine oracle for this control; attested MET on documentary/CSP basis.
+    - Timestamp: 2026-07-03T19:49:50.719092+00:00
+    - Adequacy assumption: Implementation reviewed; control met by human/inherited determination.
+    - Sufficiency justification: No machine oracle for this control; attested MET on documentary/CSP basis.
 
 ## 5. Colophon
 
-| Layer | Named graph | Triples |
-| --- | --- | --- |
-| attestations | `http://dynamicalsystems.group/compliance-engine/attestations` | 432 |
-| audit | `http://dynamicalsystems.group/compliance-engine/audit` | 115 |
-| evidence | `http://dynamicalsystems.group/compliance-engine/evidence` | 149 |
-| ontology | `http://dynamicalsystems.group/compliance-engine/ontology` | 1057 |
-| order | `http://dynamicalsystems.group/compliance-engine/order` | 150 |
-| plan | `http://dynamicalsystems.group/compliance-engine/plan` | 0 |
-| plan_execution | `http://dynamicalsystems.group/compliance-engine/plan-execution` | 36 |
-| structural | `http://dynamicalsystems.group/compliance-engine/structural` | 516 |
+| Layer          | Named graph                                                      | Triples |
+| -------------- | ---------------------------------------------------------------- | ------- |
+| attestations   | `http://dynamicalsystems.group/compliance-engine/attestations`   | 432     |
+| audit          | `http://dynamicalsystems.group/compliance-engine/audit`          | 115     |
+| evidence       | `http://dynamicalsystems.group/compliance-engine/evidence`       | 149     |
+| ontology       | `http://dynamicalsystems.group/compliance-engine/ontology`       | 1057    |
+| order          | `http://dynamicalsystems.group/compliance-engine/order`          | 150     |
+| plan           | `http://dynamicalsystems.group/compliance-engine/plan`           | 0       |
+| plan_execution | `http://dynamicalsystems.group/compliance-engine/plan-execution` | 36      |
+| structural     | `http://dynamicalsystems.group/compliance-engine/structural`     | 516     |
 
 Dataset SHA-256: `9f8a10d798583e6e77119e4ff5571bb0ebb02a81e676eaae8d0ac0d6c48f5086`
 
