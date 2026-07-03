@@ -508,6 +508,12 @@ def bom_cmd(output_dir: _OUT = "output") -> None:
 @app.command("verify")
 def verify_cmd(output_dir: _OUT = "output") -> None:
     """Re-verify the output dataset: re-hash evidence nodes and check SHACL shapes for tampering."""
+    # KNOWN ISSUE (KI-1, see docs/KNOWN-ISSUES.md): this bare import is a
+    # pre-existing bug — it should be `from compliance_engine.traceability import
+    # verification`. As written it raises ModuleNotFoundError, so this command
+    # currently crashes before running. It is also unrelated to `ce verify-package`
+    # (the Phase E audit-package check, which works). Left as-is (out of scope);
+    # KI-1 has the fix.
     import traceability.verification
 
     out = _ensure_out(output_dir)
