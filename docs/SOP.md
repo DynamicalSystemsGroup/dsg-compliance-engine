@@ -19,7 +19,7 @@ The point isn't "we replaced the SSP writer." It's "we turned compliance from a 
 - **One private GitHub repo per environment.** For DSG that's likely one repo covering the Tier-1 IL4 CUI enclave. If you later win a Tier-2 (IL5/GCC High) contract, that becomes a _separate_ repo with its own tier2.ttl, its own attestations, its own signed run history. Cross-tier only exchanges BOM hashes.
 - **Branches:** `main` (submittable state), feature branches for policy churn (`add-ir-plan-v2`, `refresh-training-records-2027`), and a `submissions/YYYY-QQ` tag for every SPRS filing.
 - **Not a monorepo with your product code.** This lives alongside your product code but stays out of it. Compliance state changes on a very different clock than product state.
-- **Runs on your laptop or a CI runner.** No servers. `uv run python -m cli demo` produces the output directory. CI can re-run on every commit to catch drift.
+- **Runs on your laptop or a CI runner.** No servers. `uv run ce demo` produces the output directory. CI can re-run on every commit to catch drift.
 
 **Who has access:**
 
@@ -39,7 +39,7 @@ Four rhythms, each on a different clock. Everyone's in the same repo but nobody 
 
 ### 3a. Every commit (product engineers) — automatic
 
-You've committed a config change. CI runs `cli demo --evidence-set all-covered`. If your commit introduced a non-US GCP region, or dropped a firewall rule, or removed a module claim, the residency + Gate-1 gates halt and CI turns red. This catches drift _when it happens_, not at audit time.
+You've committed a config change. CI runs `uv run ce demo --evidence-set all-covered`. If your commit introduced a non-US GCP region, or dropped a firewall rule, or removed a module claim, the residency + Gate-1 gates halt and CI turns red. This catches drift _when it happens_, not at audit time.
 
 Engineers don't need to know CMMC. They see a red build; they revert; done.
 
@@ -56,7 +56,7 @@ Cycle time: 20 minutes if the policy is already written.
 
 ### 3c. Every quarter (Security Officer) — proactive
 
-Run `cli demo` locally with today's date. Any references past their freshness window flip to `NEEDS_ACTION` with a specific reason ("stale: 172d>90d"). You get an actionable list of what needs a refresh. Fix them, get attestations, commit. This is the "keep the SSP always current" loop.
+Run `uv run ce demo` locally with today's date. Any references past their freshness window flip to `NEEDS_ACTION` with a specific reason ("stale: 172d>90d"). You get an actionable list of what needs a refresh. Fix them, get attestations, commit. This is the "keep the SSP always current" loop.
 
 For your event-based references (offboarding tickets, media sanitization records), you're not on a clock — you re-attest when the event happens. But the quarterly run surfaces missing events too (e.g., "the offboarding for last month's contractor termination has no attestation record yet").
 
@@ -65,9 +65,9 @@ For your event-based references (offboarding tickets, media sanitization records
 This is the big one — SPRS filing.
 
 1. Confirm your contract's COP is up to date (the `cop_draft.ttl` for this contract).
-2. Run `cli demo --evidence-set all-covered` one more time with a locked timestamp.
-3. Run `ce verify` — it does a hard tamper check (re-hashes evidence) plus the SHACL closure suite (advisory on NON-EVIDENTIARY runs).
-4. Run `ce package` to build and sign the audit deliverable (the signed manifest over BOM, SSP, audit + SPRS, full-chain provenance, and per-control chains); `ce verify-package` re-verifies it offline.
+2. Run `uv run ce demo --evidence-set all-covered` one more time with a locked timestamp.
+3. Run `uv run ce verify` — it does a hard tamper check (re-hashes evidence) plus the SHACL closure suite (advisory on NON-EVIDENTIARY runs).
+4. Run `uv run ce package` to build and sign the audit deliverable (the signed manifest over BOM, SSP, audit + SPRS, full-chain provenance, and per-control chains); `uv run ce verify-package` re-verifies it offline.
 5. Copy `output/ssp.md`, `output/bom.json`, the signed audit package, and the score to a submission tag: `git tag submissions/2026-Q3`.
 6. Go to sprs.pmrt.mil, enter the score. Retain the SSP in contractor records. Notify the CO per DFARS 252.204-7020.
 
@@ -87,14 +87,14 @@ CMMC L2 self-assessment: you submit your own score, the C3PAO is optional (until
 
 - Read access to the repo. They browse it themselves.
 - Show them the git log: every reference update, every attestation, every module change is a commit with an author and a timestamp.
-- Run `cli demo` in front of them. It's deterministic; they see the same hashes you signed.
+- Run `uv run ce demo` in front of them. It's deterministic; they see the same hashes you signed.
 - Every `ce:Reference` URI resolves — they click the training LMS link, they see the report; they open the IR plan Markdown, they see the plan.
 - Every `attestations/tier1.jsonl` line names a signer, a role, a date, and carries a cryptographic signature (Ed25519 today) that is verified at load and fails closed on tamper. Cosign + KMS (Phase 2) adds the production key path.
-- You hand them the signed audit package: run `ce package` to build and sign a manifest (BOM, SSP, audit + SPRS, full-chain provenance, per-control control-attestation-policy chain, signed-policy inventory), and they run `ce verify-package` to re-verify it offline (signature + artifact re-hash + chain).
+- You hand them the signed audit package: run `uv run ce package` to build and sign a manifest (BOM, SSP, audit + SPRS, full-chain provenance, per-control control-attestation-policy chain, signed-policy inventory), and they run `uv run ce verify-package` to re-verify it offline (signature + artifact re-hash + chain).
 
 **The re-execution (their comfort level):**
 
-- A C3PAO who wants to be thorough clones the repo, runs `cli demo`, compares byte-for-byte against what you submitted. Any drift is a red flag. This is the whole point of the deterministic build.
+- A C3PAO who wants to be thorough clones the repo, runs `uv run ce demo`, compares byte-for-byte against what you submitted. Any drift is a red flag. This is the whole point of the deterministic build.
 - For contested claims (they say "prove this Firewall rule was deployed on 2026-05-14"), they trace the module → reference → the git commit that updated the reference → the authoritative source at that commit's URL/RID.
 
 **What auditors specifically care about that this handles well:**
@@ -169,12 +169,12 @@ Assuming you (DSG) decide to adopt this on 2026-07-04:
 
 **Week 4 — First honest run.**
 
-- Run `cli demo` with your real data. Look at the SPRS score. It's probably NOT 110. That's the point — you now know exactly where you stand.
+- Run `uv run ce demo` with your real data. Look at the SPRS score. It's probably NOT 110. That's the point — you now know exactly where you stand.
 - Every `NEEDS_ACTION` and `FAIL` is a punch list. Work it.
 
 **Week 6 — Wire the automation.**
 
-- GitHub Actions running `cli demo` on every commit.
+- GitHub Actions running `uv run ce demo` on every commit.
 - A nightly job that refreshes references (once resolvers exist) and pings you if anything went stale.
 
 **Month 3 — Consider first live evidence resolver.**

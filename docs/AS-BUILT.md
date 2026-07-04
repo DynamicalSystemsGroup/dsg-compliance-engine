@@ -141,12 +141,12 @@ R3's end-to-end chain runs via `cli.py demo` and is exercised by
 
 ```
 # The one-command NV012 demo (compile-order → run-factory → attest → audit → bom → ssp-hook):
-uv run python cli.py demo --evidence-set all-covered      # happy path: Order emits, chain completes, mock BOM
-uv run python cli.py demo --evidence-set gap              # Gate 1 REFUSES — Order not emitted, exit 2, no bom.json
-uv run python cli.py demo --evidence-set contradiction    # completes with an R13 contradiction in the audit
+uv run ce demo --evidence-set all-covered      # happy path: Order emits, chain completes, mock BOM
+uv run ce demo --evidence-set gap              # Gate 1 REFUSES — Order not emitted, exit 2, no bom.json
+uv run ce demo --evidence-set contradiction    # completes with an R13 contradiction in the audit
 
 # Render the deterministic SSP + Traceability Matrix from a run's dataset (carries the NON-EVIDENTIARY banner):
-uv run python -m documents.ssp build --input output/engine.trig [--check]
+uv run python -m compliance_engine.documents.ssp build --input output/engine.trig [--check]
 ```
 
 `cli.py demo` writes `bom.json`, the engine `.trig`, and run state under

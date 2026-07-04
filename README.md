@@ -1,11 +1,3 @@
-<!--
-  Draft replacement for README.md, written against the restructured layout
-  (src/compliance_engine/ package, data/ inputs, infrastructure/terraform/).
-  Verify cross-links to docs/ against the final structure before publishing;
-  a few doc files (ARCHITECTURE, ROADMAP, COVERAGE) may have moved during the
-  restructure.
--->
-
 # Compliance Engine
 
 The Compliance Engine ingests a signed description of what a contract requires and a signed set of statements about how an organization satisfies each requirement, and it emits a System Security Plan (SSP), a Bill of Materials (BOM) of the supporting evidence, and a Supplier Performance Risk System (SPRS) score. Every automated check, every piece of evidence, and every human sign-off is content-addressed and cross-linked, and no requirement is recorded as met until a named, role-appropriate human signs a statement to that effect.
@@ -18,12 +10,13 @@ This repository is a working prototype. Before adapting it, understand what it d
 
 - **Every run today is non-evidentiary.** Evidence is fixture-backed and Terraform runs in plan/preview mode with mock providers. Every output carries an `evidentiary_status` of `mock`, `mock-plan`, or `attested-reference-mock`, and every generated SSP carries a `NON-EVIDENTIARY` banner. Nothing here is a submittable government artifact yet.
 - **It does not make an organization compliant.** It records and organizes claims. If a claim is false, the engine will still pass it; a human signer carries the legal accountability, and an assessor will catch the discrepancy.
-- **References are not resolved live yet.** The model assumes each control points at an authoritative source (a cloud API, a training system, a document repository). Today those references resolve against local files and fixtures; the live API resolvers are not built.
-- **Attestations are not cryptographically signed yet.** The signing schema is in place (`sig_algo` field), but the default trust model is the Git history of the attestation file. Sigstore/cosign integration is future work.
+- **References are not resolved live yet.** The model assumes each control points at an authoritative source (a cloud API, a training system, a document repository). Today those references resolve against local files and fixtures; the live API resolvers are not built. References now carry a pinned version and a signature field for the signed-policy model, but the live resolvers are still future work.
+- **Attestation signing is real, but the production key path is deferred.** The engine signs and verifies attestation records with real Ed25519 signatures today, and rejects a tampered or unverifiable signed record at load (fail-closed). The production cosign + FIPS-KMS path is implemented behind a probe and switches on when the cosign binary and KMS key are present. The demonstration runs unsigned (`sig_algo=none`, Git-history trust) and stays non-evidentiary.
+- **The append-only tier of record is wired, but the live server is deferred.** A Flexo MMS backend persists each run to an append-only, versioned store (`--store-backend flexo`); it is offline-simulated here, with the local registry retained as the cache/fallback tier. Standing up a live in-enclave Flexo server is deferred.
 - **It does not talk to SPRS.** SPRS has no public API. The engine computes the score; a human still enters it at the government portal.
 - **The shipped policy documents are scaffolding.** The 16 files under `src/compliance_engine/documents/policies/` are placeholder text. An adopting organization must replace each with its own adopted, followed policy.
 
-See [Roadmap and what is not built](#roadmap-and-what-is-not-built) for the full list.
+What is now real end to end, in addition to the two-machine flow below: full-chain provenance (contract to BOM/SSP, modeled with the P-Plan ontology and checked for SOP adherence), cryptographically-signed attestations, an append-only storage tier, and a single signed **audit package** (`uv run ce package` / `uv run ce verify-package`) that an assessor can re-verify offline. See [Roadmap and what is not built](#roadmap-and-what-is-not-built) for the full deferred list.
 
 ## Contents
 
@@ -234,7 +227,27 @@ What to expect:
 
 Exit codes: **0** success; **1** runtime safety-valve halt (a pre-apply policy check failed, for example a non-US region, and nothing was applied); **2** Gate 1 refusal or bad arguments.
 
-Individual stages are available as subcommands (`compile-order`, `run-factory`, `attest`, `audit`, `bom`, `ssp`) operating against `--output-dir`. Run `uv run ce --help` for the full list.
+The `demo` also assembles and signs an **audit package** as its final step. To build and re-verify it independently, or to persist a run to the append-only tier:
+
+```bash
+# build + sign the audit package (a manifest bundling the BOM, SSP, audit + SPRS,
+# full-chain provenance, and the per-control control-to-signed-policy chain)
+uv run ce package --output-dir output
+
+# re-verify that signed package offline (the assessor's one-command check):
+# manifest signature + re-hash every bundled artifact + confirm the chain
+uv run ce verify-package --output-dir output
+
+# re-verify the run dataset: hard tamper check (re-hash evidence) plus the SHACL
+# closure suite (advisory on a non-evidentiary run)
+uv run ce verify --output-dir output
+
+# persist the run to the append-only, versioned Flexo tier (offline-simulated;
+# the local registry remains the cache/fallback tier)
+uv run ce demo --store-backend flexo --output-dir output
+```
+
+Individual stages are available as subcommands (`compile-order`, `run-factory`, `attest`, `audit`, `bom`, `ssp`) operating against `--output-dir`, alongside `package`, `verify`, and `verify-package`. Run `uv run ce --help` for the full list.
 
 Every demonstration run is non-evidentiary: evidence is fixture-backed and provisioning is mock, so every artifact carries a mock evidentiary status and the SSP carries a `NON-EVIDENTIARY` banner.
 
@@ -248,6 +261,8 @@ A completed run writes these artifacts to the directory passed as `--output-dir`
 | `ssp.md`                    | The System Security Plan: the human-readable government document with the per-control traceability matrix. |
 | `audit.md` and `audit.json` | The bidirectional audit plus the SPRS score, POA&M-legality result, and the contradiction list.            |
 | `registry/`                 | The write-once, content-addressed object store with a two-level index (contract to BOM to artifacts).      |
+| `package/`                  | The signed audit package: `manifest.json` (BOM, SSP, audit + SPRS, full-chain provenance, per-control control-to-signed-policy chain, signed-policy inventory), its `manifest.sig`, and copies of the bundled artifacts. Re-verified by `uv run ce verify-package`. |
+| `flexo/`                    | Present only with `--store-backend flexo`: the append-only, versioned store of record (offline-simulated). |
 | `engine.trig`               | The full RDF named-graph dataset for the run.                                                              |
 | `run_state.json`            | The finalized run-state summary, per stage.                                                                |
 
@@ -294,7 +309,7 @@ The vocabulary is assembled from established standards rather than invented: PRO
 
 ## Testing
 
-The engine ships with a full automated test suite (340-plus tests) covering the ontology, Order compilation and Gate 1, the residency hard gate, evidence and oracles, the attested-reference machinery (freshness windows, the seven-branch oracle, the attestation store, role gating), Gate 2 attestation, the audit and SPRS scoring, the BOM and registry, and the deterministic SSP.
+The engine ships with a full automated test suite (390-plus tests) covering the ontology, Order compilation and Gate 1, the residency hard gate, evidence and oracles, the attested-reference machinery (freshness windows, the seven-branch oracle, the attestation store, role gating), Gate 2 attestation, the audit and SPRS scoring, the BOM and registry, the deterministic SSP, the signing package, the Flexo append-only backend, the full-chain provenance and SOP-adherence check, the override-evidence rule, the signed audit package, and the `verify` / `verify-package` commands.
 
 ```bash
 uv run pytest -q
@@ -308,10 +323,12 @@ The design supports a live path; the following are the concrete steps from the c
 
 - **Live provisioning.** Real `terraform apply` against an IL4 GCP and Google Workspace environment, with real credentials (Workload Identity Federation preferred), a remote state backend, and state locking.
 - **Live evidence resolvers.** A resolver per authoritative source that fetches the real artifact (a training report, a firewall config, a branch-protection setting), updates the reference's last-verified date, and commits, replacing the fixture path.
-- **Cryptographic signing.** Wiring the `sig_algo` field to Sigstore cosign and Rekor so attestations are independently verifiable, rather than trusted by Git history.
-- **Cloud registry backends.** A GCS (and later Azure) write-once registry, replacing the local store, so Tier-1 state is never held in a lower environment.
+- **Production signing key path.** Attestation and audit-package signing already run on real Ed25519 today. What remains is wiring the production cosign + FIPS-KMS path (implemented behind a probe) and, if adopted, a self-hosted, in-enclave Rekor transparency log — never the public instance, for CUI.
+- **Live storage tier.** The append-only, versioned Flexo backend is wired and offline-simulated today (`--store-backend flexo`), with the local registry as the cache/fallback tier. What remains is a live in-enclave Flexo MMS server, and GCS/Azure Blob backends, so Tier-1 state is never held in a lower environment.
 - **Approval gate.** A GitHub pull-request plus OIDC approval boundary before any live apply.
 - **Continuous compliance.** Drift detection that rebuilds and compares live state against recorded state, and re-provisioning on policy change.
+
+Already built in the current tree, beyond the mock/plan baseline: real Ed25519 attestation signing (verified at load, fail-closed), the append-only Flexo tier (offline-simulated), full-chain P-Plan provenance with an SOP-adherence check, the override-requires-evidence rule, and the signed, offline-re-verifiable audit package (`uv run ce package` / `uv run ce verify-package`).
 
 ## Where to go next
 

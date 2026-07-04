@@ -54,7 +54,7 @@ The registry is a content-addressed store rooted at a delivered directory. Open
 it and walk the **two-level index**:
 
 ```python
-from pipeline.registry import Registry
+from compliance_engine.pipeline.registry import Registry
 
 reg = Registry("<delivered-registry-dir>")     # probes the root (fails fast if unwritable)
 
@@ -85,7 +85,7 @@ this is the **same** SHA‑256 that produced every `ce:contentHash` in the graph
 no separate hash is invented).
 
 ```python
-from traceability.bom import verify_bom
+from compliance_engine.traceability.bom import verify_bom
 
 reg.verify(bom_hash)          # re-hash the stored BOM bytes; True iff sha256(bytes) == key
 all(reg.verify(h) for h in artifacts if reg.has(h))   # re-hash every stored artifact
@@ -148,7 +148,7 @@ signal only. A control is MET **only** where a human **attested** it:
 Run the audit and review two things:
 
 ```python
-from traceability.audit import audit
+from compliance_engine.traceability.audit import audit
 report = audit(ds)                     # AuditReport
 report.contradictions                  # list[ContradictionRow]
 report.proven.summary()                # "N MET-by-machine / M MET-by-human-only"
@@ -187,7 +187,7 @@ graph, not a hand-written narrative. Two checks:
   proves the delivered document still matches the dataset:
 
   ```bash
-  uv run python -m documents.ssp build --input <dataset.trig> --output <ssp.md> --check
+  uv run python -m compliance_engine.documents.ssp build --input <dataset.trig> --output <ssp.md> --check
   # exit 0 = up to date · exit 1 = drifted from the dataset · exit 2 = output/input missing
   ```
 
