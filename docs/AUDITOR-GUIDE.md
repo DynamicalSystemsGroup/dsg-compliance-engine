@@ -45,13 +45,17 @@ steps below:
   (which carry no addressing evidence yet) are reported as an expected advisory,
   not a failure; on real evidence they are hard failures.
 
-- **`ce report --output-dir <delivered-dir>`** renders the package into a
-  human-readable audit report: a self-contained `report.html`, plus a paged
-  `report.pdf` when the `weasyprint` binary is installed. It carries the executive
-  summary, the integrity/verification block, the provenance result, the control
-  traceability matrix, the signed-policy inventory, and the full 110-control catalog
-  appendix. The report is a rendering of the signed manifest; its cover and footer
-  carry the manifest hash and signature so you can re-verify the underlying package.
+- The **human-readable report** is written into `package/` automatically by
+  `ce package` (and by `demo`): a self-contained `report.html`, plus a paged
+  `report.pdf` when the `weasyprint` binary is installed. `ce report --output-dir
+  <delivered-dir>` re-renders it on demand. It is written for a mixed audience: it
+  opens with a plain-language verdict and a glossary so a contracting officer can
+  read the first pages and know what the package says and whether to trust it, then
+  a family-level coverage rollup, the integrity/verification block, and the
+  provenance result; the dense per-control matrix, signed-policy inventory, and full
+  110-control catalog are moved to appendices. The report is a rendering of the
+  signed manifest; its cover and footer carry the manifest hash and signature so you
+  can re-verify the underlying package.
 
 The manual Steps 1–6 below are the same reproduction done by hand, for when you
 want to inspect each link yourself.

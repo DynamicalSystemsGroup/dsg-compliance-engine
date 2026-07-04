@@ -612,6 +612,14 @@ def package_cmd(output_dir: _OUT = "output") -> None:
         f"Audit package: {pkg.package_dir / 'manifest.json'} signed "
         f"({pkg.sig_algo}, key={pkg.key_id[:12]}) and self-verified."
     )
+    # Render the human-readable report into the package so it travels with the manifest.
+    from compliance_engine.documents.report import render_report
+
+    res = render_report(pkg.package_dir)
+    if res.pdf_path:
+        typer.echo(f"Report: {res.pdf_path.name} + {res.html_path.name} in {pkg.package_dir}.")
+    else:
+        typer.echo(f"Report: {res.html_path.name} in {pkg.package_dir} (HTML only). {res.note}")
 
 
 @app.command("verify-package")

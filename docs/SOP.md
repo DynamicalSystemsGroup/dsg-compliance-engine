@@ -67,7 +67,7 @@ This is the big one — SPRS filing.
 1. Confirm your contract's COP is up to date (the `cop_draft.ttl` for this contract).
 2. Run `uv run ce demo --evidence-set all-covered` one more time with a locked timestamp.
 3. Run `uv run ce verify` — it does a hard tamper check (re-hashes evidence) plus the SHACL closure suite (advisory on NON-EVIDENTIARY runs).
-4. Run `uv run ce package` to build and sign the audit deliverable (the signed manifest over BOM, SSP, audit + SPRS, full-chain provenance, and per-control chains); `uv run ce verify-package` re-verifies it offline. Run `uv run ce report` to render the human report (`report.html`, plus `report.pdf` when weasyprint is installed).
+4. Run `uv run ce package` to build and sign the audit deliverable (the signed manifest over BOM, SSP, audit + SPRS, full-chain provenance, and per-control chains) and render the human report into `package/` (`report.html`, plus `report.pdf` when weasyprint is installed); `uv run ce verify-package` re-verifies the package offline. `uv run ce report` re-renders the report on demand.
 5. Copy `output/ssp.md`, `output/bom.json`, the signed audit package, and the score to a submission tag: `git tag submissions/2026-Q3`.
 6. Go to sprs.pmrt.mil, enter the score. Retain the SSP in contractor records. Notify the CO per DFARS 252.204-7020.
 

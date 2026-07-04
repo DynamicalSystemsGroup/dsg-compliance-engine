@@ -26,11 +26,15 @@ from compliance_engine.order_compiler import compiler, cop
 runner = CliRunner()
 
 _SECTIONS = [
-    "CMMC Level 2 Audit Package",
-    "Executive summary",
+    "Audit Package",
+    "What this report says",
+    "How to read this report",
+    "The score",
+    "How each control was verified",
     "Integrity and verification",
     "Provenance",
-    "Control traceability matrix",
+    "Contradictions and overrides",
+    "Control-by-control detail",
     "Full control catalog",
 ]
 
@@ -98,8 +102,21 @@ def test_build_report_html_from_synthetic_manifest():
         "policies": [], "artifacts": [{"name": "bom.json", "sha256": "deadbeef"}],
     }
     html = build_report_html(manifest, {"sig_algo": "ed25519-v1", "key_id": "d8ec6f0e"})
-    assert "NON-EVIDENTIARY" in html  # mock -> banner
+    assert "NON-EVIDENTIARY" in html.upper()  # mock -> banner
     assert "AC.L2-3.1.1" in html and "ed25519-v1" in html
+    # Plain-language verdict is rendered from the numbers, not a static string.
+    assert "1 of 1" in html and "Access Control" in html
+
+
+def test_ce_package_writes_report_into_package_dir():
+    """`ce package` renders the report into package/ so it travels with the manifest."""
+    out = pathlib.Path(tempfile.mkdtemp(prefix="ce-pkg-"))
+    assert runner.invoke(cli.app, ["demo", "--output-dir", str(out)]).exit_code == 0
+    result = runner.invoke(cli.app, ["package", "--output-dir", str(out)])
+    assert result.exit_code == 0, result.output
+    assert (out / "package" / "report.html").exists()
+    if weasyprint_available():
+        assert (out / "package" / "report.pdf").exists()
 
 
 def test_ce_demo_full_produces_110_control_package():

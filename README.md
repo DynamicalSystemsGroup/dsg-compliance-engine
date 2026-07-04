@@ -231,7 +231,9 @@ The `demo` also assembles and signs an **audit package** as its final step. To b
 
 ```bash
 # build + sign the audit package (a manifest bundling the BOM, SSP, audit + SPRS,
-# full-chain provenance, and the per-control control-to-signed-policy chain)
+# full-chain provenance, and the per-control control-to-signed-policy chain). This
+# also renders the human report into package/ (report.html, plus report.pdf when
+# the weasyprint binary is installed) so the package carries its own rendering.
 uv run ce package --output-dir output
 
 # re-verify that signed package offline (the assessor's one-command check):
@@ -246,8 +248,8 @@ uv run ce verify --output-dir output
 # the local registry remains the cache/fallback tier)
 uv run ce demo --store-backend flexo --output-dir output
 
-# render the human audit-package report (a self-contained HTML report, plus a paged
-# PDF when the `weasyprint` binary is installed)
+# re-render the human audit-package report on demand (ce package already writes it
+# into package/; run this to regenerate after installing weasyprint, for example)
 uv run ce report --output-dir output
 
 # run the FULL 110-control catalog instead of the NV012 22-control slice, and render
@@ -255,7 +257,7 @@ uv run ce report --output-dir output
 uv run ce demo --full --report --output-dir output
 ```
 
-The demo defaults to the NV012 contract's 22-control slice (the score is computed over that required set). `--full` requires the entire NIST SP 800-171 catalog (all 110), which scores 110/Final over the whole catalog. PDF rendering is optional: `ce report` always writes `report.html`; it also writes `report.pdf` when the [`weasyprint`](https://weasyprint.org) binary is on the PATH, and otherwise tells you to install it or print the HTML.
+The demo defaults to the NV012 contract's 22-control slice (the score is computed over that required set). `--full` requires the entire NIST SP 800-171 catalog (all 110), which scores 110/Final over the whole catalog. The report is written into `package/` by `ce package` (and by `demo`), so a built package always carries its own human-readable rendering; `ce report` re-renders it on demand. It opens with a plain-language verdict and glossary for a non-technical reader (a contracting officer can stop after the summary and know the answer), then a family-level coverage rollup, and moves the dense per-control tables into appendices. PDF rendering is optional: the report always writes `report.html`; it also writes `report.pdf` when the [`weasyprint`](https://weasyprint.org) binary is on the PATH, and otherwise tells you to install it or print the HTML.
 
 Individual stages are available as subcommands (`compile-order`, `run-factory`, `attest`, `audit`, `bom`, `ssp`) operating against `--output-dir`, alongside `package`, `verify`, `verify-package`, and `report`. Run `uv run ce --help` for the full list.
 
@@ -271,7 +273,7 @@ A completed run writes these artifacts to the directory passed as `--output-dir`
 | `ssp.md`                    | The System Security Plan: the human-readable government document with the per-control traceability matrix.                                                                                                                                                          |
 | `audit.md` and `audit.json` | The bidirectional audit plus the SPRS score, POA&M-legality result, and the contradiction list.                                                                                                                                                                     |
 | `registry/`                 | The write-once, content-addressed object store with a two-level index (contract to BOM to artifacts).                                                                                                                                                               |
-| `package/`                  | The signed audit package: `manifest.json` (BOM, SSP, audit + SPRS, full-chain provenance, per-control control-to-signed-policy chain, signed-policy inventory), its `manifest.sig`, and copies of the bundled artifacts. Re-verified by `uv run ce verify-package`. With `ce report` (or `demo --report`) it also holds `report.html` and, when weasyprint is installed, `report.pdf`. |
+| `package/`                  | The signed audit package: `manifest.json` (BOM, SSP, audit + SPRS, full-chain provenance, per-control control-to-signed-policy chain, signed-policy inventory), its `manifest.sig`, copies of the bundled artifacts, and the human-readable `report.html` (plus `report.pdf` when weasyprint is installed), rendered automatically by `uv run ce package`. Re-verified by `uv run ce verify-package`. |
 | `flexo/`                    | Present only with `--store-backend flexo`: the append-only, versioned store of record (offline-simulated).                                                                                                                                                          |
 | `engine.trig`               | The full RDF named-graph dataset for the run.                                                                                                                                                                                                                       |
 | `run_state.json`            | The finalized run-state summary, per stage.                                                                                                                                                                                                                         |

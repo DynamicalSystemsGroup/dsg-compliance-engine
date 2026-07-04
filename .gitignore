@@ -16,8 +16,6 @@ __pycache__/
 # Secrets / env (OIDC short-lived only; no long-lived creds committed)
 .env
 
-# Output / generated artifacts (NOT committed)
-output/
 
 # Never commit CUI or live evidence exports
 *.cui
