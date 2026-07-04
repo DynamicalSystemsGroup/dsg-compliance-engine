@@ -301,6 +301,72 @@ def _(
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
+# Prologue - how this notebook is built (design rationale)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+@app.cell(hide_code=True)
+def _(mo):
+    prologue = mo.vstack(
+        [
+            mo.md("## How this notebook is built"),
+            mo.accordion(
+                {
+                    "Why RDF, not a database": mo.md(
+                        "Bidirectional audit requires graph traversal. SPARQL can ask "
+                        "*\"what evidence addresses this control?\"* and "
+                        "*\"what controls does this evidence support?\"* in the same "
+                        "query over a single named graph. A relational database requires "
+                        "two separate queries joined by a foreign key — and that join can "
+                        "go stale if either side is updated independently. The RDF dataset "
+                        "here is not a convenience; it is the mechanism that keeps the BOM "
+                        "and the SSP byte-for-byte consistent with the attestation records "
+                        "that produced them."
+                    ),
+                    "Why EARL outcomes, not pass/fail": mo.md(
+                        "`cantTell` is not the same as `failed`. A machine that cannot "
+                        "measure a control should say so rather than return false assurance "
+                        "in either direction. `needsAction` is *actionable*: the oracle "
+                        "found a registered reference but it is stale, unsigned, or "
+                        "unresolvable — a concrete remediation exists. `cantTell` is "
+                        "*structural*: the control has no machine-checkable oracle at all, "
+                        "and only a human attestation can establish MET. Binary pass/fail "
+                        "collapses this distinction and either inflates the score (by "
+                        "counting untestable controls as passed) or deflates it (by "
+                        "counting them as failed). Neither is honest."
+                    ),
+                    "Why SHACL shapes": mo.md(
+                        "SHACL shapes are machine-enforceable closure rules that any "
+                        "C3PAO can run independently. The shapes define what a "
+                        "well-formed attestation looks like — required predicates, "
+                        "allowed value ranges, mandatory signer roles — and running them "
+                        "produces the same result regardless of who runs them or on whose "
+                        "hardware. A prose policy document requires a human to decide "
+                        "whether a given record conforms; a SHACL shape makes that "
+                        "decision reproducible and auditable. The shapes live in "
+                        "`ce:ontology` and are applied by `ce verify-package`."
+                    ),
+                }
+            ),
+            mo.md(
+                "### The 8 named graphs in this dataset\n\n"
+                "| Named graph | Content |\n"
+                "|---|---|\n"
+                "| `ce:ontology` | TBox — control catalog, shape definitions |\n"
+                "| `ce:plan` | P-PLAN process model (one step per stage) |\n"
+                "| `ce:structural` | SysML-style module + control claims |\n"
+                "| `ce:order` | The signed Order for this run |\n"
+                "| `ce:evidence` | Evidence artifacts with content hashes |\n"
+                "| `ce:attestations` | EARL attestation records |\n"
+                "| `ce:plan_execution` | P-PLAN Activity instances (per stage) |\n"
+                "| `ce:audit` | Forward/backward audit summary |\n"
+            ),
+        ],
+        gap=1.0,
+    )
+    return (prologue,)
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
 # Station 0 - the whole picture, the two ideas, the honest limits
 # ═══════════════════════════════════════════════════════════════════════════════
 
@@ -925,6 +991,60 @@ def _(attested, audit_report, bom_result, factory_ok, illustration, io_flow, mo,
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
+# Station 8b - control interrogation (ask: how do we know this is met?)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+@app.cell
+def _(mo, required):
+    _sorted = sorted(required) if required else []
+    control_picker = mo.ui.dropdown(
+        options=_sorted,
+        value=_sorted[0] if _sorted else "",
+        label="Control to interrogate",
+    )
+    return (control_picker,)
+
+
+@app.cell
+def _(audit_report, bom_result, control_picker, factory_ok, factory_state):
+    import _interrogate  # noqa: PLC0415
+
+    control_explanation = None
+    if factory_ok and control_picker.value:
+        control_explanation = _interrogate.explain_control(
+            control_picker.value,
+            factory_state,
+            audit_report,
+            bom_result,
+        )
+    return (control_explanation,)
+
+
+@app.cell(hide_code=True)
+def _(control_explanation, control_picker, factory_ok, mo, station):
+    if factory_ok and control_explanation is not None:
+        _body = mo.md("```\n" + control_explanation + "\n```")
+    else:
+        _body = mo.callout(
+            mo.md("Run a passing scenario to see control interrogation."),
+            kind="warn",
+        )
+
+    s8b = mo.vstack(
+        [
+            station(
+                "8b",
+                "Control interrogation",
+                "Ask: how do we know this control is met?",
+            ),
+            control_picker,
+            _body,
+        ]
+    )
+    return (s8b,)
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
 # Station 9 - the proof outputs
 # ═══════════════════════════════════════════════════════════════════════════════
 
@@ -1005,6 +1125,38 @@ def _(audit_report, bom_result, factory_ok, mo, order_ok, short, ssp_md, station
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
+# Station 9b - per-control SPRS breakdown table
+# ═══════════════════════════════════════════════════════════════════════════════
+
+@app.cell
+def _(audit_report, factory_ok, required):
+    import _interrogate  # noqa: PLC0415
+
+    sprs_rows = None
+    if factory_ok and audit_report is not None:
+        sprs_rows = _interrogate.sprs_breakdown(audit_report, required)
+    return (sprs_rows,)
+
+
+@app.cell(hide_code=True)
+def _(factory_ok, mo, sprs_rows, table):
+    if factory_ok and sprs_rows:
+        _content = table(sprs_rows, page_size=15)
+    else:
+        _content = mo.md(
+            "_(Run a passing scenario to see the per-control SPRS breakdown.)_"
+        )
+
+    s9_breakdown = mo.vstack(
+        [
+            mo.md("### Per-control SPRS breakdown"),
+            _content,
+        ]
+    )
+    return (s9_breakdown,)
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
 # Station 10 - proof by reproduction
 # ═══════════════════════════════════════════════════════════════════════════════
 
@@ -1051,6 +1203,68 @@ def _(factory_ok, illustration, mo, order_ok, station):
                   "for reference._"), kind="warn"))
     s10 = mo.vstack(_body)
     return (s10,)
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Station 10b - live hash-chain tamper demo
+# ═══════════════════════════════════════════════════════════════════════════════
+
+@app.cell
+def _(factory_ok, factory_state):
+    import _interrogate  # noqa: PLC0415
+
+    hash_demo = None
+    if factory_ok:
+        hash_demo = _interrogate.live_hash_demo(factory_state)
+    return (hash_demo,)
+
+
+@app.cell(hide_code=True)
+def _(factory_ok, hash_demo, mo, station):
+    if factory_ok and hash_demo is not None:
+        s10b = mo.vstack(
+            [
+                station(
+                    "10b",
+                    "Hash chain demo",
+                    "Watch the fingerprint break when one byte changes",
+                ),
+                mo.md(
+                    f"**Evidence node:** `{hash_demo['node_id']}`\n\n"
+                    f"**Recorded hash:** `{hash_demo['recorded_hash'][:24]}...`\n\n"
+                    f"**Tampered hash (one byte flipped):** "
+                    f"`{hash_demo['tampered_hash'][:24]}...`"
+                ),
+                mo.callout(
+                    mo.md(
+                        "**TAMPERING DETECTED — hash mismatch.** "
+                        "Changing a single byte in any evidence artifact produces a "
+                        "completely different SHA-256 fingerprint. The two hashes above "
+                        "diverge at the first character; `ce verify` would exit "
+                        "nonzero and name this node."
+                    ),
+                    kind="danger",
+                ),
+            ]
+        )
+    else:
+        s10b = mo.vstack(
+            [
+                station(
+                    "10b",
+                    "Hash chain demo",
+                    "Watch the fingerprint break when one byte changes",
+                ),
+                mo.callout(
+                    mo.md(
+                        "Run a passing scenario (**all-covered** or **contradiction**) "
+                        "to see the live hash-tamper demonstration."
+                    ),
+                    kind="warn",
+                ),
+            ]
+        )
+    return (s10b,)
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -1229,10 +1443,12 @@ def _(mo):
 def _(
     footer,
     mo,
+    prologue,
     s0_map,
     s0_open,
     s1,
     s10,
+    s10b,
     s11,
     s12,
     s2,
@@ -1242,11 +1458,14 @@ def _(
     s6,
     s7,
     s8,
+    s8b,
     s9,
+    s9_breakdown,
 ):
     mo.vstack(
         [
             s0_open, s0_map,
+            mo.md("---"), prologue,
             mo.md("---"), s1,
             mo.md("---"), s2,
             mo.md("---"), s3,
@@ -1255,8 +1474,11 @@ def _(
             mo.md("---"), s6,
             mo.md("---"), s7,
             mo.md("---"), s8,
+            mo.md("---"), s8b,
             mo.md("---"), s9,
+            mo.md("---"), s9_breakdown,
             mo.md("---"), s10,
+            mo.md("---"), s10b,
             mo.md("---"), s11,
             mo.md("---"), s12,
             mo.md("---"), footer,

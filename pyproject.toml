@@ -23,6 +23,8 @@ dev = [
 ]
 notebook = [
     "marimo>=0.9",
+    "matplotlib>=3.9",
+    "networkx>=3.3",
 ]
 
 [tool.pytest.ini_options]
