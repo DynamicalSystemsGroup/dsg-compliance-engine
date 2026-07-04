@@ -14,15 +14,39 @@ the content** — a single changed byte changes the key.
 > Provisioning runs at **`terraform plan` level with mock providers** (no cloud,
 > no live `apply`) and evidence is **fixture-backed**, so a delivered run is
 > flagged **NON-EVIDENTIARY** and is **not a submittable SSP**. Content
-> references are bare SHA‑256 (`registry://<hash>`); cryptographic signing
-> (Sigstore) is deferred. See "What the auditor cannot yet do" at the end.
+> references are content-addressed by SHA‑256 (`registry://<hash>`). Attestation
+> records and the audit-package manifest are now **cryptographically signed**
+> (real Ed25519 today; the production **cosign + FIPS-KMS** path is wired behind a
+> probe and deferred). See "What the auditor cannot yet do" at the end.
 
 Everything below is verified against the committed code — the modules cited are
 `pipeline/registry.py`, `traceability/bom.py`, `evidence/hashing.py`,
-`documents/ssp.py`, `traceability/audit.py`, `traceability/sprs.py`, and
-`terraform/tier1/` + `pipeline/provision/terraform.py`.
+`documents/ssp.py`, `traceability/audit.py`, `traceability/sprs.py`,
+`traceability/package.py`, and `terraform/tier1/` + `pipeline/provision/terraform.py`.
 
 ---
+
+## The one-command paths (start here)
+
+Two commands do the whole re-verification for you before you drop to the manual
+steps below:
+
+- **`ce verify-package --output-dir <delivered-dir>`** re-verifies the signed
+  **audit package** offline. It checks the manifest's Ed25519 signature, re-hashes
+  every bundled artifact (BOM, SSP) against the recorded hashes, and confirms the
+  per-control **control → attestation → signed-policy** chain is complete. The
+  manifest (`package/manifest.json`, produced by `ce package`) bundles the BOM, the
+  SSP, the audit + SPRS verdict, the full-chain provenance (the SOP-adherence
+  result), the signed per-control chain, and the signed-policy inventory. A single
+  altered byte, a broken signature, or a broken chain link fails the check.
+- **`ce verify --output-dir <delivered-dir>`** runs the tamper check (re-hash every
+  evidence node — always a hard failure on a mismatch) plus the SHACL closure
+  suite. On a NON-EVIDENTIARY (mock) run, closure findings for human-only controls
+  (which carry no addressing evidence yet) are reported as an expected advisory,
+  not a failure; on real evidence they are hard failures.
+
+The manual Steps 1–6 below are the same reproduction done by hand, for when you
+want to inspect each link yourself.
 
 ## Step 1 — Resolve: contract → BOM → artifacts (two-level index)
 
@@ -132,11 +156,13 @@ report.proven.summary()                # "N MET-by-machine / M MET-by-human-only
 
 - **Contradictions.** `report.contradictions` flags every
   **MET-over-failed-oracle**: an `earl:passed` attestation whose backing oracle is
-  `failed` (or asserted-but-absent) **and** which carries **no**
-  `cmmc:overrideJustification`. Each `ContradictionRow` names the `attestation`,
-  `control`, and `oracle_outcome`. These are the human calls that override machine
-  evidence without a stated justification — scrutinize them. Adding an override
-  justification is what clears the flag.
+  `failed` (or asserted-but-absent) and which is **not** backed by BOTH a written
+  `cmmc:overrideJustification` **and** appended `ce:overrideEvidence`. Each
+  `ContradictionRow` names the `attestation`, `control`, and `oracle_outcome`. These
+  are the human calls that override machine evidence — scrutinize them. A
+  justification alone no longer clears the flag: overruling a failed machine check
+  requires concrete, resolvable appended evidence (enforced at the write path and by
+  the tightened `ContradictionShape`).
 - **Proven-vs-attested split.** `report.proven` (`ProvenVsAttested`) gives
   `met_by_machine` (attested MET *and* oracle passed) vs `met_by_human_only`
   (attested MET on human judgement alone). The `summary()` string is
@@ -144,9 +170,12 @@ report.proven.summary()                # "N MET-by-machine / M MET-by-human-only
   of the score rests on attestation rather than reproducible machine checks.
 
 BOM rows record both sides honestly: `ControlMappingRow` carries `oracle_outcome`
-**and** `attestation_outcome`, and its `status` is driven by the attestation
-(`MET | NOT MET | N/A | PLANNED | CANT TELL`). `AttestationRecord` carries the
-`official`, `role`, `outcome`, and any `override_justification`.
+**and** `attestation_outcome`, an **`evidence_backing`** field (`machine` — the
+sign-off is backed by a passing oracle over resolvable evidence; `override` — MET
+over a failed check; `human-only` — no passing machine measurement), and its
+`status` is driven by the attestation (`MET | NOT MET | N/A | PLANNED | CANT TELL`).
+`AttestationRecord` carries the `official`, `role`, `outcome`, and any
+`override_justification` + `override_evidence`.
 
 ## Step 5 — SSP cross-check (no drift)
 
@@ -206,9 +235,15 @@ with a non-empty `illegal_poam` is an invalid submission, not a passing one.
   test** against a real tenant. Evidence is **fixture-backed** → every run carries
   the `mock` / `mock-plan` evidentiary marker and the **NON-EVIDENTIARY** SSP
   banner. You are reproducing the *plan-time* proof, not a live-cloud state.
-- **No cryptographic signatures.** Artifacts are referenced by bare SHA‑256
-  (`registry://<hash>`). `hash_reference(...)` is explicitly a content reference,
-  **not** a signature; Sigstore signing is a deferred work item.
+- **Signatures are real, but the production key path is deferred.** Attestation
+  records and the audit-package manifest are signed with real **Ed25519** and
+  verified offline (`ce verify-package`); a tampered or unverifiable signed record
+  is rejected at load. What is deferred is the production **cosign + FIPS-KMS**
+  signing path (implemented behind a probe, switches on when the cosign binary and
+  KMS key are present) and a transparency log (**Rekor**, which would be
+  self-hosted in-enclave if ever adopted — never the public instance, for CUI).
+  Registry artifacts are still referenced by bare SHA‑256 (`registry://<hash>`);
+  `hash_reference(...)` is a content reference, not a signature.
 - **Coverage is scoped.** The score and the machine-checkable evidence cover the
   automatable subset; the remaining controls are **human-attested** from
   documentary evidence and carry no `ce:contentHash`. Gate 1 guarantees no *silent

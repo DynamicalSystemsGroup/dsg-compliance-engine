@@ -66,8 +66,10 @@ This is the big one — SPRS filing.
 
 1. Confirm your contract's COP is up to date (the `cop_draft.ttl` for this contract).
 2. Run `cli demo --evidence-set all-covered` one more time with a locked timestamp.
-3. Copy `output/ssp.md`, `output/bom.json`, and the score to a submission tag: `git tag submissions/2026-Q3`.
-4. Go to sprs.pmrt.mil, enter the score. Retain the SSP in contractor records. Notify the CO per DFARS 252.204-7020.
+3. Run `ce verify` — it does a hard tamper check (re-hashes evidence) plus the SHACL closure suite (advisory on NON-EVIDENTIARY runs).
+4. Run `ce package` to build and sign the audit deliverable (the signed manifest over BOM, SSP, audit + SPRS, full-chain provenance, and per-control chains); `ce verify-package` re-verifies it offline.
+5. Copy `output/ssp.md`, `output/bom.json`, the signed audit package, and the score to a submission tag: `git tag submissions/2026-Q3`.
+6. Go to sprs.pmrt.mil, enter the score. Retain the SSP in contractor records. Notify the CO per DFARS 252.204-7020.
 
 The engine produces the artifacts. You still have to click the buttons at sprs.pmrt.mil — no way around that.
 
@@ -87,7 +89,8 @@ CMMC L2 self-assessment: you submit your own score, the C3PAO is optional (until
 - Show them the git log: every reference update, every attestation, every module change is a commit with an author and a timestamp.
 - Run `cli demo` in front of them. It's deterministic; they see the same hashes you signed.
 - Every `ce:Reference` URI resolves — they click the training LMS link, they see the report; they open the IR plan Markdown, they see the plan.
-- Every `attestations/tier1.jsonl` line names a signer, a role, a date. When cosign lands (Phase 2), the signatures are cryptographically verifiable independently.
+- Every `attestations/tier1.jsonl` line names a signer, a role, a date, and carries a cryptographic signature (Ed25519 today) that is verified at load and fails closed on tamper. Cosign + KMS (Phase 2) adds the production key path.
+- You hand them the signed audit package: run `ce package` to build and sign a manifest (BOM, SSP, audit + SPRS, full-chain provenance, per-control control-attestation-policy chain, signed-policy inventory), and they run `ce verify-package` to re-verify it offline (signature + artifact re-hash + chain).
 
 **The re-execution (their comfort level):**
 
@@ -139,7 +142,7 @@ Read this section twice.
 
 - **It does not make you compliant.** It records claims. If you claim training is complete and it isn't, the engine passes and the C3PAO catches you. § 1001 liability is on the AO signature, not on the tool.
 - **It does not resolve references live yet.** Today all references resolve against `file://` paths or a fixture URI. The "call the KnowBe4 API and confirm this report exists" resolver is a phase-2 build.
-- **It does not sign attestations cryptographically yet.** Today `sig_algo="none"` means "trust the git history." Cosign integration is scaffolded (`sig_algo="cosign-v1"`) but not wired.
+- **It signs attestations cryptographically.** Real Ed25519 signing (`sig_algo="ed25519-v1"`) is wired via the `compliance_engine.signing` package; signed records are verified at load and fail closed on tamper. The demo runs `sig_algo="none"` (trust the git history), which is still NON-EVIDENTIARY. Cosign + FIPS-KMS (`sig_algo="cosign-v1"`) is the deferred production signing path.
 - **It does not talk to SPRS.** SPRS has no public API. You still copy-paste the score into their web form.
 - **It doesn't handle contracts across CMMC L1 or L3.** Just L2 today. The framework generalizes; the catalog doesn't.
 - **It doesn't write your policies.** The Markdown documents under `documents/policies/` are placeholder scaffolding a subagent generated. YOU need to replace each with your organization's actual, adopted, followed policy. If your training program is real, the doc reflects real curriculum; if it isn't, no signature makes it real.

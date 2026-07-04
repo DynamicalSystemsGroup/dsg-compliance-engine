@@ -17,7 +17,7 @@ The Terraform step that actually creates or changes real infrastructure. In this
 > In this repo: `src/compliance_engine/pipeline/runner.py`.
 
 ### attestation
-A signed human statement that a requirement is satisfied. An attestation is recorded as a manual assertion in the data model. A control is only marked met when a role-appropriate human attests it; evidence alone never marks a control met. In the graph, evidence "addresses" a control while a human attestation "attests" it, and that distinction is enforced by the shapes, not by policy. Attestations are not cryptographically signed yet; today the trust anchor is the Git history of the attestation record.
+A signed human statement that a requirement is satisfied. An attestation is recorded as a manual assertion in the data model. A control is only marked met when a role-appropriate human attests it; evidence alone never marks a control met. In the graph, evidence "addresses" a control while a human attestation "attests" it, and that distinction is enforced by the shapes, not by policy. Attestation records now carry a real cryptographic signature (Ed25519), verified at load and failing closed on tamper; the demo runs `sig_algo=none`, where the trust anchor is the Git history of the record. See also **Ed25519 / attestation signing**.
 > In this repo: attestation logic in `src/compliance_engine/traceability/attestation.py` and `src/compliance_engine/traceability/attestation_store.py`; the shipped demo records in `data/attestations/tier1.jsonl`.
 
 ### attested reference (the model)
@@ -31,6 +31,10 @@ The oracle that evaluates the attested-reference model. It walks a fixed decisio
 ### audit
 The bidirectional check that the delivered result matches what the Order required. It confirms, forward and backward, that every required control maps to something in the Bill of Materials and that nothing in the Bill of Materials fails to trace back to a required control. The audit also produces the SPRS score, the POA&M-legality judgment, and the contradiction list.
 > In this repo: `src/compliance_engine/traceability/audit.py`; outputs `audit.md` and `audit.json`. See [04-the-proof.md](04-the-proof.md).
+
+### audit package
+The signed manifest deliverable an assessor re-verifies offline. It bundles and signs the BOM, the SSP, the audit and SPRS score, the full-chain P-Plan provenance, a per-control control-to-attestation-to-signed-policy chain, and the signed-policy inventory. Re-verification checks the signature, re-hashes every artifact, and walks the chain, without contacting any live service. Built by `ce package`; re-verified by `ce verify-package`. See also **P-Plan** and **audit**.
+> In this repo: `src/compliance_engine/traceability/package.py`.
 
 ### authoritative source
 The system that owns the ground truth for a class of evidence: a cloud API, a learning-management system, an HR system, a document repository, or the engine's own run history. Every module names an authoritative source so that its reference points at the place where the truth of that control actually lives.
@@ -91,6 +95,9 @@ The point value assigned to each control for scoring, either 1, 3, or 5. The SPR
 The compiled statement of what the contract obliges the organization to do, produced upstream in the Order Compiler. Software drafts the obligations from the contract, and a Compliance Officer attests them; the required-control set is then derived from those obligations. The demo's COP draft is a fixture input.
 > In this repo: `src/compliance_engine/order_compiler/cop.py`; demo draft `fixtures/nv012/cop_draft.ttl`. See [01-the-order.md](01-the-order.md).
 
+### cosign + KMS
+The deferred production signing path (`sig_algo="cosign-v1"`), where attestation signatures are produced by cosign against a FIPS-validated Key Management Service key rather than a local developer key. The Ed25519 developer signer works today; cosign + KMS is the production key path and is not yet wired. See also **Ed25519 / attestation signing** and **Rekor**.
+
 ### CUI (Controlled Unclassified Information)
 Government information that is not classified but still requires safeguarding. Contractors that handle CUI must meet CMMC Level 2. A CUI (or ITAR) deliverable cannot silently drop a requirement: a spillover guard forces human review rather than dropping controls.
 
@@ -118,9 +125,16 @@ One of the standards the vocabulary is assembled from. Dublin Core supplies the 
 The Evaluation and Report Language, one of the standards the vocabulary is assembled from. EARL supplies the assertion pattern (an assertion has a subject, a test, an outcome, and who made it) and the outcome values the oracles use.
 > In this repo: assertion handling in `src/compliance_engine/oracles/assertion.py`.
 
+### Ed25519 / attestation signing
+The signing scheme now wired for attestation records. Each record carries a `sig_algo` in `{none, ed25519-v1, cosign-v1}`; an `ed25519-v1` record holds a real Ed25519 signature that is verified when the record is loaded and fails closed if the record has been tampered with. The demo ships with `sig_algo=none` (git-trust), which is still non-evidentiary. Cosign + a FIPS Key Management Service is the deferred production path. See also **cosign + KMS** and **attestation**.
+> In this repo: `src/compliance_engine/signing/`.
+
 ### evidence
 Machine-readable facts that address controls. Evidence supports a human judgment; it never marks a control met on its own. Today all evidence is fixture-backed and therefore non-evidentiary. In the data model, evidence "addresses" a control while a human attestation "attests" it.
 > In this repo: evidence binding and generation under `src/compliance_engine/pipeline/evidence/`; demo fixtures in `fixtures/nv012/`.
+
+### evidence backing
+How each control's MET rests on evidence: machine (an oracle measured it), override (a human override that must carry appended justification evidence), or human-only (a role-appropriate attestation with no machine measurement). The audit and BOM report the split so that a MET is never presented without stating what backs it. See also **override evidence** and **contradiction (R13)**.
 
 ### evidentiary status (mock / mock-plan / attested-reference-mock)
 A tag on each piece of evidence describing how real it is. "mock" is a fixture config export; "mock-plan" is derived from the real Terraform plan run against mock providers; "attested-reference-mock" is a fixture attestation for a Track B control. All three are non-evidentiary. If any weak status is present, the whole BOM and SSP are stamped NON-EVIDENTIARY and are not submittable, and there is no switch to remove the banner while mock inputs are present.
@@ -133,6 +147,10 @@ A tag on each piece of evidence describing how real it is. "mock" is a fixture c
 ### Factory (the runtime)
 The name used in the code for the runtime pipeline. The Factory consumes a signed Order and runs its stages in sequence: load the Order (recompute and re-check its hashes), fetch each module by hash, run a real Terraform plan against mock providers, run a policy-as-code check including the data-residency hard gate, run a mock apply, collect evidence, and run the oracles.
 > In this repo: `src/compliance_engine/pipeline/runner.py`. See [02-the-factory.md](02-the-factory.md).
+
+### Flexo (Flexo MMS)
+The append-only, versioned RDF quadstore intended as the remote tier of record for stored artifacts. The backend is wired (`--store-backend flexo`), but a live in-enclave Flexo server is deferred; today it is offline-simulated by a deterministic, append-only `FakeFlexoStore`. The local write-once registry serves as the cache/fallback tier beside it. See also **registry**.
+> In this repo: `src/compliance_engine/pipeline/backends/flexo.py`.
 
 ### freshness / freshness window
 The maximum age a reference may reach before it is considered stale. Each reference carries a freshness window; the attested-reference oracle fails a reference that is past it. The named policies are annual = 365 days, semi-annual = 180, quarterly = 90, monthly = 30, and event-based = 0 (never expires on time alone, used for records that only need to exist per event).
@@ -237,6 +255,9 @@ The signed handoff from the planning side to the runtime. It carries the require
 The upstream machine that turns a contract into a signed Order. It drafts obligations (software drafts, a Compliance Officer attests), derives the required-control set via the rule library, runs Gate 1, and emits the signed Order. If Gate 1 fails, no Order is emitted and the gap is named.
 > In this repo: `src/compliance_engine/order_compiler/` (`gate1.py`, `compiler.py`, `cop.py`, `rule_library.py`). See [01-the-order.md](01-the-order.md).
 
+### override evidence
+The justification a human must append when overriding a machine result — for example attesting a control MET while its oracle failed. Modeled as `ce:overrideEvidence`: an override is not accepted on assertion alone; it must carry appended evidence for the override. Without it, the human-over-machine call is surfaced as a contradiction rather than cleared. See also **contradiction (R13)** and **evidence backing**.
+
 ---
 
 ## P
@@ -248,6 +269,10 @@ The Terraform step that computes what would change without changing anything. Th
 ### POA&M (Plan of Action and Milestones)
 A record of a not-yet-met control with a plan to fix it, permitted for a Conditional submission. POA&M legality is strict: only 1-point controls may be deferred. Deferring a 3- or 5-point control, or one of six specifically excluded 1-pointers, sets `valid_submission=False` regardless of the numeric score.
 > In this repo: `src/compliance_engine/traceability/sprs.py`.
+
+### P-Plan
+The plan-and-execution provenance ontology used to express the full compliance chain. Each step — contract, obligations, controls, COP, Order, evidence, oracle assertions, attestations, and the BOM/SSP — is modeled as a p-plan Variable realized by an Entity, giving an end-to-end, traceable provenance graph (with an upstream `ce:SOP-ORDER-COMPILE` plan). A `check_sop_adherence` deviation check flags divergence from the declared plan. See also **audit package** and **provisioning**.
+> In this repo: `src/compliance_engine/traceability/provenance.py`; `plan.ttl`.
 
 ### PROV-O
 The W3C Provenance Ontology, one of the standards the vocabulary is assembled from. PROV-O supplies the provenance model that records who or what produced each artifact and how.
@@ -267,6 +292,9 @@ A resolvable pointer into an authoritative source. A reference carries a URI, a 
 ### registry
 The write-once, content-addressed object store, plus a two-level index (contract -> BOM -> artifact hashes). Every artifact is stored by its hash so it can be re-resolved and re-hashed during reproduction.
 > In this repo: `src/compliance_engine/pipeline/registry.py`; output under `artifacts/registry/`.
+
+### Rekor
+The transparency-log component of the Sigstore toolchain, which would provide a tamper-evident public record of signatures. It is deferred, and would be self-hosted if ever adopted. See also **cosign + KMS** and **Sigstore**.
 
 ### residency gate
 A hard policy gate in the runtime that halts the run before apply if any planned region is non-US, or if the plan carries no region signals at all. It is the safety valve that prevents building in a disallowed location. A residency-gate halt exits with code 1 and applies nothing.
@@ -296,7 +324,7 @@ The oracle kind that checks a detached signature over an artifact, used for sign
 > In this repo: `src/compliance_engine/oracles/`.
 
 ### Sigstore
-The signing toolchain (with its `cosign` tool) intended to provide true cryptographic signing of Orders and attestations. It is scaffolded (there is a `sig_algo` field) but not yet wired. Until it is, an Order is "signed" by SHA-256 hash-reference and an attestation's trust anchor is the Git history of its record.
+The signing toolchain (with its `cosign` tool and its `Rekor` transparency log) intended to provide the production cryptographic-signing path for attestations. It is the deferred production path (`sig_algo="cosign-v1"`, cosign + KMS); Rekor is deferred. Attestation signing itself is already real today via Ed25519, not Sigstore. The Order, separately, is "signed" by SHA-256 hash-reference. See also **Ed25519 / attestation signing**, **cosign + KMS**, and **Rekor**.
 
 ### SPRS (Supplier Performance Risk System)
 The government scoring system for supplier compliance. The engine computes an SPRS score as 110 minus the sum of the weights of the controls that are not met (weights are 1, 3, or 5). A score of 110 is Final; 88 to 109 is Conditional (permitted with a POA&M); below 88 is Ineligible. The score is computed over the Order's required set (22 controls for NV012), not all 110. The engine does not talk to SPRS; a human files the computed score at the government portal.

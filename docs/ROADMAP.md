@@ -29,6 +29,7 @@ The separate upstream tool (`order-compiler/`).
 ## Phase 1 — Real Tier 1 evidence (weeks 2–4)
 
 - [ ] Implement config-export + policy-as-code generators for the **63 non-deferrable** controls first, then toward the 50+ success-criterion target.
+- [x] Append-only, versioned Flexo MMS store backend landed (`pipeline/backends/flexo.py`, `--store-backend flexo`) — **offline-simulated** via a deterministic `FakeFlexoStore`; a live in-enclave Flexo server is still deferred. The local write-once registry remains the cache/fallback tier.
 - [ ] Wire `GCSBackend` (IL4 registry) and the GitHub PR + OIDC approval gate as the Stage-6 boundary.
 - [ ] First real attestation session: the Affirming Official walks the coverage matrix; MET/NOT MET recorded as EARL outcomes with gap notes. Output feeds the SPRS self-assessment.
 
@@ -37,7 +38,10 @@ The separate upstream tool (`order-compiler/`).
 ## Phase 2 — SPRS + C3PAO hardening (weeks 5–6)
 
 - [ ] `traceability/sprs.py`: SPRS-score audit + **POA&M-legality gate** (hard-fail any 3-/5-point control on a POA&M).
-- [ ] Bolt on Sigstore cosign + Rekor (content authenticity) — required before handing a C3PAO re-executable evidence.
+- [x] Cryptographic attestation signing landed: real Ed25519 signatures via the `compliance_engine.signing` package (`Ed25519LocalSigner` dev key, `NullSigner`, `CosignKmsSigner`). Attestation records carry `sig_algo` in `{none, ed25519-v1, cosign-v1}`; signed records are verified at load and **fail closed** (a tampered/unverifiable signed record is rejected). The demo still runs `sig_algo=none` (git-trust) and stays NON-EVIDENTIARY.
+- [ ] Bolt on Sigstore cosign + FIPS-KMS signing (the production key path) + Rekor (content authenticity) — required before handing a C3PAO re-executable evidence. cosign+KMS is implemented behind a probe (switches on when the cosign binary + KMS key are present); Rekor remains deferred (and if adopted would be self-hosted in-enclave for CUI, never the public instance).
+- [x] Full-chain P-Plan provenance landed (`traceability/provenance.py`, `plan.ttl` extended with an upstream `ce:SOP-ORDER-COMPILE` plan + Variables): the whole lineage (contract → obligations → controls → COP → Order → evidence → oracle assertions → attestations → BOM/SSP) is modeled as p-plan Variables realized by Entities, with a `check_sop_adherence` deviation check.
+- [x] Signed audit package landed: `ce package` builds and signs a manifest bundling the BOM, SSP, audit + SPRS, full-chain provenance, the per-control control→attestation→signed-policy chain, and the signed-policy inventory; `ce verify-package` re-verifies it offline (manifest signature + artifact re-hash + chain). Code: `traceability/package.py`.
 - [ ] Wire the Terraform reproducibility loop (ADCS `compute.reproduce` retargeted): rebuild + diff live state vs. recorded state for the `/verify` path.
 
 **Exit:** an internal SPRS score ≥88 (target 110) with a legal POA&M; a C3PAO can retrieve a BOM and re-execute.

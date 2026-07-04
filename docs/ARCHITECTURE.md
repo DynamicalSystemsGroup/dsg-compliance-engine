@@ -59,23 +59,24 @@ flowchart TB
         F5 --> F6["6 · assemble BOM<br/>control-mapping: resource → control → evidence"]
         F6 --> G2{{"GATE 2 — fulfillment<br/>human ATTESTS each control MET"}}
         G2 --> F8["7 · store BOM write-once → BOM hash"]
-        F8 --> F9["sign BOM (Sigstore)"]
+        F8 --> F9["sign attestations (Ed25519 today;<br/>cosign+KMS deferred)"]
     end
 
     classDef now fill:#dcfce7,stroke:#16a34a,color:#14532d;
     classDef later fill:#fef9c3,stroke:#ca8a04,color:#713f12;
     classDef gate fill:#dbeafe,stroke:#2563eb,color:#1e3a8a;
     classDef stop fill:#fee2e2,stroke:#dc2626,color:#7f1d1d;
-    class C,COP,RC,MOD,ORD,AP,F1,F2,F6,F8 now;
-    class F4,F5,F9 later;
+    class C,COP,RC,MOD,ORD,AP,F1,F2,F6,F8,F9 now;
+    class F4,F5 later;
     class G1,G2,F3 gate;
     class X1,STOP stop;
 ```
 
 **Legend:** 🟩 runs today · 🟨 Phase II · 🔷 gate/check · 🟥 hard stop. Today the
 Factory runs `terraform plan` at **preview level with mock providers** (no
-cloud, no credentials); **apply, live compliance tests, and Sigstore signing are
-Phase II**, and evidence is fixture-backed (→ NON-EVIDENTIARY).
+cloud, no credentials); **apply and live compliance tests are Phase II**, and
+evidence is fixture-backed (→ NON-EVIDENTIARY). Attestation signing is real
+today (Ed25519); **cosign + FIPS-KMS is the deferred production signing path**.
 
 There are exactly **two numbered gates** — Gate 1 (planning coverage, Compiler)
 and Gate 2 (human attestation, Factory). The pre-apply policy check is a safety
@@ -106,8 +107,13 @@ judgment at the front:
    names what's missing**. Pass ⇒ a signed Order: required controls, chosen
    modules, and SHA-256 fingerprints of its own contents.
 
-"Signed" today means **fingerprinted** (hash-referenced, tamper-evident);
-cryptographic signing (Sigstore) is Phase II.
+"Signed" for the Order today means **fingerprinted** (hash-referenced,
+tamper-evident). Attestation records, by contrast, carry a real cryptographic
+signature: Ed25519 (`sig_algo=ed25519-v1`) via the `compliance_engine.signing`
+package, verified at load and **failing closed on tamper**. The demo runs
+`sig_algo=none` (git-trust) and remains NON-EVIDENTIARY; **cosign + FIPS-KMS
+(`sig_algo=cosign-v1`) is the deferred production path**, and Rekor transparency
+logging is deferred.
 
 For the demo's NV012 contract: **22 required controls**, covered by **10
 modules**, out of the 110-control catalog — the other 88 are out of this
@@ -233,6 +239,18 @@ disagree with each other:
 | `<ce:plan-execution>` | per-stage provenance (`p-plan`/`prov:` activities)   | `pipeline/plan_execution.py`        |
 | `<ce:audit>`        | oracle assertions + bidirectional audit + SPRS         | `oracles/` + `traceability/`        |
 
+The `<ce:plan>` graph now carries a **full-chain P-Plan provenance** model: the
+whole chain — contract → obligations → controls → COP → Order → evidence →
+oracle assertions → attestations → BOM/SSP — is expressed as p-plan Variables
+realized by Entities, with an upstream `ce:SOP-ORDER-COMPILE` plan; `plan.ttl`
+is extended accordingly and a `check_sop_adherence` deviation check flags
+divergence (`traceability/provenance.py`). The signed **audit package** (`ce
+package` / `ce verify-package`, `traceability/package.py`) builds and signs a
+manifest over the BOM, SSP, audit + SPRS, this full-chain provenance, a
+per-control control→attestation→signed-policy chain, and the signed-policy
+inventory; `ce verify-package` re-verifies it offline (signature + artifact
+re-hash + chain).
+
 Component-by-component detail (predicates, files, what's real vs. deferred) is
 in [`docs/AS-BUILT.md`](docs/AS-BUILT.md).
 
@@ -243,7 +261,7 @@ Each tier provisions the next; sensitive data never flows _down_:
 ```mermaid
 flowchart LR
     T0["Tier 0<br/>Workspace + GitHub · no CUI<br/>approves + dispatches Orders"]
-    T1["Tier 1 · IL4 / CMMC L2<br/>builds CUI environments<br/>write-once registry (local today, GCS planned)"]
+    T1["Tier 1 · IL4 / CMMC L2<br/>builds CUI environments<br/>append-only Flexo MMS tier (offline-simulated)<br/>local write-once registry as cache/fallback"]
     T2["Tier 2 · IL5 / ITAR<br/>builds high-side environments<br/>Azure Blob registry (planned)"]
     T0 ==>|Order| T1
     T1 ==>|Order| T2
@@ -255,18 +273,24 @@ flowchart LR
     class T1,T2 later;
 ```
 
-Phase I builds for **Tier 1 (IL4/CMMC L2)** with a **local** write-once
-registry; the GCS (Tier 1) and Azure Blob (Tier 2) backends are planned, not
-built. Tier 2 returns only a BOM hash to Tier 1 — the proof crosses the
-boundary, the CUI never does.
+Phase I builds for **Tier 1 (IL4/CMMC L2)**. The append-only **Flexo MMS**
+store backend is wired (`--store-backend flexo`, `pipeline/backends/flexo.py`)
+as the remote tier of record, but is **offline-simulated** today via a
+deterministic `FakeFlexoStore`; a live in-enclave Flexo server is deferred. The
+**local write-once registry** serves as the cache/fallback tier. The GCS (Tier
+1) and Azure Blob (Tier 2) backends remain planned, not built. Tier 2 returns
+only a BOM hash to Tier 1 — the proof crosses the boundary, the CUI never does.
 
 ## 9. Bare now vs. bolted on later
 
-- **Now:** bare SHA-256 (content identity); local write-once registry; mock
-  provisioning + fixture evidence (NON-EVIDENTIARY).
+- **Now:** bare SHA-256 (content identity); local write-once registry plus the
+  wired append-only Flexo MMS backend (offline-simulated); real Ed25519
+  attestation signing (fail-closed on tamper); the signed audit package (`ce
+  package` / `ce verify-package`); mock provisioning + fixture evidence
+  (NON-EVIDENTIARY).
 - **Phase II:** live `terraform apply` + live compliance tests; real evidence
-  collectors; GCS/Azure registry backends; Sigstore cosign + Rekor
-  (authenticity / non-repudiation of Orders and BOMs) — required before a C3PAO
-  re-executes.
+  collectors; a live in-enclave Flexo server; GCS/Azure registry backends;
+  cosign + FIPS-KMS production signing (Rekor deferred, self-hosted if ever
+  adopted) — required before a C3PAO re-executes.
 - **Phase II+:** authority/credential model binding the Affirming Official's
   SPRS identity + role to each attestation.
