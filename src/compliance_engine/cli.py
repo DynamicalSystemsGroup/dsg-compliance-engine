@@ -562,14 +562,32 @@ def verify_cmd(output_dir: _OUT = "output") -> None:
     typer.echo("Dataset intact. No tampering detected. SHACL shapes conform.")
 
 
+def _require_completed_run(out: Path) -> None:
+    """`ce package` builds from a completed run's artifacts. Fail early and clearly
+    if the output dir does not contain one, instead of a raw FileNotFoundError."""
+    needed = ["engine.trig", "run_state.json", "bom.json", "ssp.md"]
+    missing = [f for f in needed if not (out / f).exists()]
+    if missing:
+        typer.echo(
+            f"No completed run in {out}: missing {', '.join(missing)}. "
+            f"Run `uv run ce demo --output-dir {out}` first (or the individual "
+            f"stages through `ssp`), then `ce package`."
+        )
+        raise typer.Exit(code=2)
+
+
 @app.command("package")
 def package_cmd(output_dir: _OUT = "output") -> None:
     """Assemble + sign the audit package: one manifest bundling the BOM, SSP, audit,
     SPRS, full-chain provenance, and the per-control control->signed-policy chain."""
     from compliance_engine.traceability.bom import build_bom
-    from compliance_engine.traceability.package import build_audit_package
+    from compliance_engine.traceability.package import (
+        build_audit_package,
+        verify_audit_package,
+    )
 
     out = _ensure_out(output_dir)
+    _require_completed_run(out)
     ds = _load_ds(out)
     state = _load_run_state(ds, out)
     report = _do_audit(ds, out)
@@ -577,9 +595,16 @@ def package_cmd(output_dir: _OUT = "output") -> None:
     pkg = build_audit_package(
         ds, out, CONTRACT_ID, audit_report=report, bom_hash=bom_hash,
     )
+    # Self-verify: confirm the package we just signed re-verifies. If it does not,
+    # something is wrong with the signing environment — surface it now, loudly,
+    # rather than letting a bad package reach an assessor.
+    check = verify_audit_package(pkg.package_dir)
+    if not check.ok:
+        typer.echo(f"ERROR: the package just built does not verify: {check.summary()}")
+        raise typer.Exit(code=1)
     typer.echo(
         f"Audit package: {pkg.package_dir / 'manifest.json'} signed "
-        f"({pkg.sig_algo}, key={pkg.key_id[:12]})."
+        f"({pkg.sig_algo}, key={pkg.key_id[:12]}) and self-verified."
     )
 
 
@@ -593,6 +618,12 @@ def verify_package_cmd(output_dir: _OUT = "output") -> None:
     result = verify_audit_package(out / "package")
     typer.echo(result.summary())
     if not result.ok:
+        if not result.signature_ok or not result.artifacts_ok:
+            typer.echo(
+                "Hint: if you rebuilt the run or changed code since this package was "
+                f"signed, it is stale — rebuild it with `uv run ce package "
+                f"--output-dir {out}`. Otherwise the package has been tampered with."
+            )
         raise typer.Exit(code=1)
 
 

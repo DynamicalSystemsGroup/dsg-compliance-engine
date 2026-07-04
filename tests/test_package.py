@@ -69,6 +69,16 @@ def test_tampered_artifact_is_detected():
     assert not result.artifacts_ok
 
 
+def test_ce_package_on_incomplete_dir_errors_clearly(tmp_path):
+    from typer.testing import CliRunner
+
+    from compliance_engine.cli import app
+
+    result = CliRunner().invoke(app, ["package", "--output-dir", str(tmp_path / "empty")])
+    assert result.exit_code == 2
+    assert "No completed run" in result.output  # not a raw traceback
+
+
 def test_tampered_manifest_breaks_signature():
     _out, pkg = _run_and_package()
     manifest = pkg.package_dir / "manifest.json"
