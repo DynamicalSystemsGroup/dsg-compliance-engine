@@ -85,7 +85,7 @@ Both audiences need these terms. They are used precisely throughout the codebase
 - **Attestation.** A signed statement by a named person, in a specific role, that a set of controls is met, covering a set of references, as of a specific date.
 - **Role.** The capacity in which a person signs: Affirming Official, Security Officer, IT Administrator, or Operations. The Affirming Official may attest anything; other roles are bounded to their domain, which lets an assessor detect the wrong kind of person signing the wrong kind of evidence.
 - **Oracle.** An automated check. The engine has a small number of oracle kinds: a config-check oracle for machine-measurable controls, and an attested-reference oracle for controls backed by a reference plus a signature.
-- **Outcome.** The result of an oracle: `passed`, `failed`, `cantTell` (genuinely unknowable), or `needsAction` (a concrete, actionable gap such as a missing or stale reference). Every `needsAction` and `failed` carries a machine-readable reason. Track B (policy/human) controls now get a real `passed` / `needsAction` / `failed` from the attested-reference oracle, not a bare `cantTell`.
+- **Outcome.** The result of an oracle: `passed`, `failed`, or `needsAction` (a concrete, actionable gap such as a missing or stale reference). Every `needsAction` and `failed` carries a machine-readable reason. Track B (policy/human) controls get a real `passed` / `needsAction` / `failed` from the attested-reference oracle. Every required control resolves to one of these three concrete outcomes.
 - **Evidence.** A recorded observation that addresses a control. Evidence supports an attestation; it never, by itself, marks a control met. For a Track B control, a `ce:DocumentEvidence` node records that the control's reference was resolved to a real document on disk, SHA-256 hashed, tagged with the git commit that last changed it (author and date), and bound to a signed upload receipt.
 - **Order.** A signed, hash-referenced file that states which controls a specific contract requires and which modules will satisfy them. It is the input to the runtime.
 - **COP (Contract Obligation Profile).** The upstream description of a contract's obligations, from which the required-control set is derived and an Order is compiled.
@@ -151,7 +151,7 @@ Each module carries three facts: an authoritative source, a reference into that 
 
 Only when all seven conditions hold is the outcome `passed`. A signer's own declined outcome (a `failed` or `needsAction` attestation) is propagated rather than overridden.
 
-The `needsAction` outcome is deliberately distinct from `cantTell`. A checklist tool collapses "we cannot know" and "we have not done the paperwork yet" into one ambiguous status. Here, `cantTell` means genuinely unknowable, and `needsAction` means there is a concrete, named next step. That distinction turns the audit output into a work list.
+The `needsAction` outcome is deliberately concrete. A checklist tool leaves "we have not done the paperwork yet" as an ambiguous status; here, `needsAction` always names the specific next step (register a reference, refresh a stale one, obtain a signature, fix a role). That specificity turns the audit output into a work list. Every required control resolves to one of the three concrete outcomes — `passed`, `failed`, or `needsAction` — so nothing lands on a vague or unresolved result.
 
 ## Coverage today
 

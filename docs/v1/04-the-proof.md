@@ -185,7 +185,7 @@ required control and what supports it. Each required control gets one row.
 | control             | The control ID from the catalog.                           |
 | resource / module   | The claiming module (and the resource it maps to).         |
 | evidence hashes     | The content-address(es) of the supporting evidence.        |
-| oracle outcome      | passed, failed, cantTell, or needsAction.                  |
+| oracle outcome      | passed, failed, or needsAction.                            |
 | attestation outcome | The human sign-off result and the signer's role.           |
 | status              | The control's overall status and evidentiary status.       |
 

@@ -136,9 +136,9 @@ later stages execute.
      source is registered, resolves, is fresh, and is signed by a human in the
      required role.
 
-   Each oracle returns one of four outcomes: **`passed`**, **`failed`**,
-   **`cantTell`** (genuinely unknowable), or **`needsAction`** (a concrete, actionable
-   gap that always carries a reason). These outcomes are recorded as automatic
+   Each oracle returns one of three outcomes: **`passed`**, **`failed`**, or
+   **`needsAction`** (a concrete, actionable gap that always carries a reason). Every
+   required control resolves to one of these. These outcomes are recorded as automatic
    assertions in the run record. The full mechanics of the attested-reference oracle —
    its decision sequence, its roles, and its specific failure reasons — belong to
    [03-machine-vs-human.md](03-machine-vs-human.md); here it is enough to know the
@@ -197,7 +197,7 @@ modules by hash, run a real `terraform plan` under mock providers so no cloud is
 touched, run a policy check whose data-residency hard gate reads that real plan and
 halts before apply on any non-US or region-less plan, run a mock apply, collect
 evidence that only *addresses* controls, and run the config-check and
-attested-reference oracles to record `passed` / `failed` / `cantTell` / `needsAction`
+attested-reference oracles to record `passed` / `failed` / `needsAction`
 outcomes. Because inputs are fixture-backed and providers are mock, every stamp is
 weak and the whole run comes out `NON-EVIDENTIARY`. What the Factory emits is a run
 record (a PipelineState summarized in `run_state.json`, with the full dataset in

@@ -52,9 +52,10 @@ All four hold. No traceability claim failed spot-check.
   clean-looking 110 from hiding a failing oracle). Reviewers must read the
   contradiction count alongside the score; a `110/Final` with `contradictions ≥ 1`
   is **not** clean.
-- **Most MET controls are human-only** (18–19 of 22): only ~6 controls have a
-  machine oracle in the covered set, so the rest resolve human-only (`cantTell`),
-  consistent with R4/R13.
+- **Most MET controls are human-only** (17–18 of 22): only the machine-oracle
+  controls resolve from a config check, so the rest resolve human-only through
+  the attested-reference oracle (`passed` / `needsAction` / `failed`) — every
+  required control lands on a concrete outcome, consistent with R4/R13.
 - All demo output carries `evidentiary_status=mock` / the NON-EVIDENTIARY banner —
   a compiled **demo** BOM/SSP, never a submittable one (R12 working as designed).
 

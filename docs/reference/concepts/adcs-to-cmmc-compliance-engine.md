@@ -41,8 +41,8 @@ Every load-bearing concept in the ADCS demo has a one-to-one image in the CMMC p
 | `rtm:Evidence` (`ProofArtifact`, `SimulationResult`) | `evidence/binding.py` | **Compliance evidence artifacts** (config export, scan result, MFA policy JSON, CMVP cert) | Document 2 (evidence location) |
 | Hash chain: `model_hash → proof_hash → evidence_hash` | `evidence/hashing.py` | The **content-addressed BOM** (Merkle tree of proofs) | Document 2 (evidence hash column) |
 | `rtm:Attestation` = adequacy `gsn:Assumption` + sufficiency `gsn:Justification` + EARL outcome | `traceability/attestation.py` | **Affirming Official's control determination** (MET / NOT MET) with rationale | Document 2 (status + gap notes) |
-| Behavior oracle: metric vs machine-readable criterion → `earl:passed/failed/cantTell` | `analysis/oracle.py` | **Automated control check** ("MFA enforced?", "region == US?", "FIPS module present?") → PASS/FAIL/INDETERMINATE | Document 2 (feeds status) |
-| `earl:cantTell` when no criterion exists (REQ-004) | `analysis/oracle.py` | A control with **no machine-checkable form** (policy/training) → must be attested from documentary evidence, never auto-passed | Both |
+| Behavior oracle: metric vs machine-readable criterion → `earl:passed/failed` | `analysis/oracle.py` | **Automated control check** ("MFA enforced?", "region == US?", "FIPS module present?") → PASS/FAIL | Document 2 (feeds status) |
+| `earl:needsAction` when no criterion exists (REQ-004) | `analysis/oracle.py` | A control with **no machine-checkable form** (policy/training) → must be attested from documentary evidence, never auto-passed | Both |
 | Forward / backward / bidirectional audit | `traceability/audit.py` | **SPRS completeness + C3PAO traceability**: every control reached by evidence (forward), every attestation backed by addressing evidence (backward) | Document 2 |
 | Coverage matrix (`covered+passed`, `uncovered`) | `traceability/audit.py` | **SPRS scorecard**: which of 110 controls are MET, which are gaps | Document 2 |
 | `documents/design_description.py` → **DDVS-001**, compiled deterministically from the graph | `documents/` | The **System Security Plan (SSP)** compiled from the graph — "the BOM *is* the SSP" | Both (the join) |
@@ -140,7 +140,7 @@ Each generator hashes its output with `evidence/hashing.py` unchanged and binds 
 "SC.L2-3.13.11": Criterion(metric_key="fips_module_present",  comparator="eq", threshold=True),
 "ITAR-120.54":   Criterion(metric_key="key_admin_region",     comparator="eq", threshold="US"),
 ```
-Controls with no machine-checkable form (policy documents, training records, IR tabletop) correctly return `earl:cantTell` — the oracle *refuses to auto-pass what it cannot compute*, forcing a human attestation from documentary evidence. This is the guardrail against the "we say we do it vs. we can prove it" gap the guides warn about.
+Controls with no machine-checkable form (policy documents, training records, IR tabletop) are routed to the attested-reference oracle, which returns `earl:passed`/`earl:needsAction`/`earl:failed` against a registered, resolving, fresh, role-signed document reference — the oracle *refuses to auto-pass what it cannot compute*, forcing a human attestation from documentary evidence. This is the guardrail against the "we say we do it vs. we can prove it" gap the guides warn about.
 
 ### Addition 1 — Registry backends: GCS (Tier 1) + Azure Blob (Tier 2)
 The demo already abstracts persistence behind `pipeline/backends/` (Local / Flexo / Fuseki) with a preflight `probe()` and fail-fast. Add `GCSBackend` and `AzureBlobBackend` implementing the same interface, with write-once/immutable semantics (requirements doc §13.3). The tiered "Tier 2 returns only the BOM hash to Tier 1" flow is the demo's existing per-substrate `rtm:operatedBy` auspices + named-graph partitioning.
@@ -180,7 +180,7 @@ This aligns with the requirements doc's phasing (§18) and the July 22 / Nov 10 
 
 ## 6. Risks & honest limits
 
-- **Not every control is machine-checkable.** ~40 of 110 (policy, training, PS, IR, physical) resolve to `earl:cantTell` and *must* be human-attested from documents. The engine's value there is the audit trail and the deterministic SSP, not automation. Don't oversell auto-coverage.
+- **Not every control is machine-checkable.** ~40 of 110 (policy, training, PS, IR, physical) run through the attested-reference oracle (`earl:passed`/`earl:needsAction`/`earl:failed`) and *must* be human-attested from documents. The engine's value there is the audit trail and the deterministic SSP, not automation. Don't oversell auto-coverage.
 - **The oracle verifies a *model-level* claim, never physical satisfaction.** "Azure Policy reports MFA enforced" is evidence, not truth; the official still attests. Preserve this discipline verbatim — it is both the demo's ethic and CMMC's legal reality.
 - **Reproducibility of *cloud* state is harder than rebuilding a Docker image.** Terraform re-apply against a live tenant has side effects; the `/verify` path should read-and-diff, not re-apply. Scope carefully in Phase 2.
 - **This is research tooling, not a C3PAO-blessed product.** A C3PAO may still want a traditional PDF SSP alongside the compiled one (requirements doc risk table). The compiler gives you that PDF *for free and always current* — lead with that, don't fight the assessor's format.

@@ -25,7 +25,7 @@ The uniform verification model that lets the engine cover every control, not onl
 > In this repo: see [03-machine-vs-human.md](03-machine-vs-human.md).
 
 ### attested-reference oracle
-The oracle that evaluates the attested-reference model. It walks a fixed decision sequence and stops at the first failure, returning a specific machine-readable reason. In order, it checks: reference not registered (`needsAction`, "reference-missing"); reference has no URI (`failed`, "reference-unresolvable"); reference never verified (`needsAction`, "reference-never-verified"); reference past its freshness window (`failed`, for example "stale:172d>90d"); no attestation covers the control (`needsAction`, "awaiting-attestation"); signer role neither Affirming Official nor the required role (`failed`, for example "signer-role-mismatch:Role_ITAdmin!=Role_SecurityOfficer"); attestation predates the reference's last verification (`failed`, "attestation-predates-reference"). Only if every condition holds does it return `passed`. A signer's own declined outcome (`failed`, `cantTell`, or `needsAction`) is propagated, not overridden.
+The oracle that evaluates the attested-reference model. It walks a fixed decision sequence and stops at the first failure, returning a specific machine-readable reason. In order, it checks: reference not registered (`needsAction`, "reference-missing"); reference has no URI (`failed`, "reference-unresolvable"); reference never verified (`needsAction`, "reference-never-verified"); reference past its freshness window (`failed`, for example "stale:172d>90d"); no attestation covers the control (`needsAction`, "awaiting-attestation"); signer role neither Affirming Official nor the required role (`failed`, for example "signer-role-mismatch:Role_ITAdmin!=Role_SecurityOfficer"); attestation predates the reference's last verification (`failed`, "attestation-predates-reference"). Only if every condition holds does it return `passed`. A signer's own declined outcome (`failed` or `needsAction`) is propagated, not overridden.
 > In this repo: `src/compliance_engine/oracles/attested_reference.py`.
 
 ### audit
@@ -55,9 +55,6 @@ The itemized record of the evidence supporting each required control. For every 
 ### C3PAO
 A Certified Third-Party Assessment Organization: the independent assessor that certifies a defense contractor against CMMC. An assessor uses proof by reproduction to re-resolve every artifact by its hash, re-hash it to confirm the fingerprint, and re-run the plan-level checks to confirm the record.
 > In this repo: the step-by-step reproduction procedure is in `docs/AUDITOR-GUIDE.md`.
-
-### cantTell
-An oracle outcome meaning the answer is genuinely unknowable. It is distinct from `needsAction`: `cantTell` means "no way to know", while `needsAction` means "here is the specific next step". See also **oracle outcomes**.
 
 ### ce: namespace
 One of the two local RDF namespaces. `ce:` holds the engine's instance data: orders, evidence, BOMs, attestations, references, authoritative sources, and roles. Contrast with the **cmmc: namespace**. In this repo: bound in `src/compliance_engine/ontology/prefixes.py`.
@@ -214,7 +211,7 @@ A partition of the RDF dataset, one per lifecycle layer (ontology, plan, structu
 > In this repo: `src/compliance_engine/ontology/prefixes.py`; the full run dataset is emitted as `engine.trig`.
 
 ### needsAction
-An oracle outcome meaning there is a concrete, actionable gap, and it always carries a reason. It is distinct from `cantTell`: `needsAction` names the specific next step (register a reference, refresh a stale one, obtain a signature, fix a role), which is what turns the audit output into a work list. See also **oracle outcomes**.
+An oracle outcome meaning there is a concrete, actionable gap, and it always carries a reason. `needsAction` names the specific next step (register a reference, refresh a stale one, obtain a signature, fix a role), which is what turns the audit output into a work list. See also **oracle outcomes**.
 
 ### NIST SP 800-171
 NIST Special Publication 800-171 Rev. 2, the standard whose 110 controls define what CMMC Level 2 requires for protecting CUI. The engine's catalog is these 110 controls.
@@ -237,7 +234,7 @@ A single requirement drawn from the contract, produced in the Order Compiler. So
 > In this repo: obligation logic in `src/compliance_engine/order_compiler/`. See [01-the-order.md](01-the-order.md).
 
 ### oracle
-The component that evaluates whether a control's evidence and attestations satisfy that control, returning one of the four outcomes. There are three oracle kinds (config-check, attested-reference, and signed-artifact), and across 39 modules the oracles cover all 110 controls: 65 machine-verified by config-check, 43 by attested-reference, and 2 CSP-inherited.
+The component that evaluates whether a control's evidence and attestations satisfy that control, returning one of the three outcomes. There are three oracle kinds (config-check, attested-reference, and signed-artifact), and across 39 modules the oracles cover all 110 controls: 65 machine-verified by config-check, 43 by attested-reference, and 2 CSP-inherited.
 > In this repo: `src/compliance_engine/oracles/`. See [03-machine-vs-human.md](03-machine-vs-human.md).
 
 ### oracle kinds
@@ -245,7 +242,7 @@ The three families of oracle: config-check (machine-measurable controls), attest
 > In this repo: `src/compliance_engine/oracles/`.
 
 ### oracle outcomes
-The four possible results an oracle can return: `passed`, `failed`, `cantTell` (genuinely unknowable), and `needsAction` (a concrete, actionable gap that always carries a reason). `needsAction` is distinct from `cantTell`: the first names a next step, the second says there is no way to know. See also the individual entries **cantTell** and **needsAction**.
+The three possible results an oracle can return: `passed`, `failed`, and `needsAction` (a concrete, actionable gap that always carries a reason). Every required control resolves to one of these concrete outcomes. See also the individual entry **needsAction**.
 
 ### Order
 The signed handoff from the planning side to the runtime. It carries the required-control set, the modules that claim those controls, and their references, and the runtime consumes it. "Signed" means hash-referenced by SHA-256; true cryptographic signing (Sigstore/cosign) is future work. Loading the Order in the runtime recomputes and re-checks its hashes.

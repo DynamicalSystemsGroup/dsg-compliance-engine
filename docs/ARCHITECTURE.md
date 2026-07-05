@@ -134,7 +134,7 @@ an assembly line:
 | 4 · Policy check    | policy-as-code over the plan (e.g. US-region residency); violation **halts**     | reads the actual plan, not a human's checkbox   |
 | 5 · Apply           | mock today; Phase II builds the live environment                                 | —                                               |
 | 6 · Collect evidence| machine-readable facts, each **addressing** the control(s) it is about           | fixture-backed today ⇒ stamped mock             |
-| 7 · Run oracles     | per-control automated checks → pass / fail / **can't tell**                      | no fake checks: no criterion ⇒ `cantTell`       |
+| 7 · Run oracles     | per-control automated checks → pass / fail (policy controls → needsAction/failed) | no fake checks: every required control lands on a concrete outcome |
 
 The output is a **run record, not a verdict**: the Factory never declares a
 control MET. That call is the next section.
@@ -161,9 +161,12 @@ not a convention.
 
 Two consequences the system surfaces rather than hides:
 
-- **Most METs are human, not machine-proven.** Only 7 controls have an oracle;
-  the rest honestly return `cantTell`. The audit prints the split — demo:
-  `4 MET-by-machine / 18 MET-by-human-only`.
+- **Most METs are human, not machine-proven.** Machine controls carry a config
+  oracle; the rest route through the attested-reference oracle, which resolves,
+  freshness-checks, and role-verifies a document reference and returns
+  `passed` / `needsAction` / `failed`. Every required control resolves to a
+  concrete outcome. The audit prints
+  the split — demo: `5 MET-by-machine / 17 MET-by-human-only`.
 - **The contradiction check.** A human attests MET while the machine oracle for
   that control **failed**, with no written override justification ⇒ flagged as
   a first-class contradiction in the audit and the SSP. An override

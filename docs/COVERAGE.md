@@ -12,7 +12,7 @@ Every control now has a claiming module. Machine-covered controls still emit con
 
 - **Covered** — machine-checked today via Terraform/oracle + attestation
 - **Machine-possible** — no current evidence generator, but could be automated (cloud API, scanner, config check)
-- **Human-only** — requires policy, procedure, training record, or physical inspection; oracle returns `cantTell`
+- **Human-only** — requires policy, procedure, training record, or physical inspection; the attested-reference oracle returns `passed` / `needsAction` / `failed`
 - **CSP-inherited** — Google IL4 / your cloud provider handles this; you attest it as inherited
 - **Non-deferrable** — cannot be put on a POA&M (six specific 1-pointers plus all 5-point controls by regulation)
 - **Wt** = SPRS weight (points deducted if not MET; `110 − Σ weight` = your score)

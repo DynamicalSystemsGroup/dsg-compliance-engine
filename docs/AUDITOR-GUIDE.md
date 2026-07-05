@@ -183,7 +183,7 @@ report.proven.summary()                # "N MET-by-machine / M MET-by-human-only
 
 BOM rows record both sides honestly: `ControlMappingRow` carries `oracle_outcome`
 **and** `attestation_outcome`, an **`evidence_backing`** field, and its
-`status` is driven by the attestation (`MET | NOT MET | N/A | PLANNED | CANT TELL`).
+`status` is driven by the attestation (`MET | NOT MET | N/A | PLANNED | NEEDS ACTION`).
 `AttestationRecord` carries the `official`, `role`, `outcome`, and any
 `override_justification` + `override_evidence`.
 

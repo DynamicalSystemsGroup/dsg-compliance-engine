@@ -185,9 +185,9 @@ Two details worth stating plainly:
 - Step 7 matters because an attestation must be *about* the current state of the
   reference. If someone signed before the reference was last verified, the signature
   cannot cover what the reference says now.
-- If a signer's own declared outcome is a decline (`failed`, `cantTell`, or
-  `needsAction`), that declined outcome is propagated, not overridden. The oracle does
-  not upgrade a human's "no" into a "yes."
+- If a signer's own declared outcome is a decline (`failed` or `needsAction`), that
+  declined outcome is propagated, not overridden. The oracle does not upgrade a human's
+  "no" into a "yes."
 
 ### Why the same check covers all 110 controls
 
@@ -210,22 +210,18 @@ The split across the catalog:
 
 ## Oracle outcomes
 
-An oracle can return one of four outcomes:
+An oracle can return one of three outcomes:
 
 - **passed** — the check succeeded.
 - **failed** — the check ran and the answer is no.
-- **cantTell** — the answer is genuinely unknowable; there is no way to determine it.
 - **needsAction** — there is a concrete, actionable gap, and it *always* carries a
   reason.
 
-The important distinction is between `cantTell` and `needsAction`, because they look
-similar and mean opposite things:
+Every required control resolves to one of these concrete outcomes. The value of
+`needsAction` is that it names the specific next step — register a reference, refresh a
+stale one, obtain a signature, or fix a role — rather than leaving the result vague.
 
-- `cantTell` means "there is no way to know."
-- `needsAction` means "here is the specific next step" — register a reference, refresh
-  a stale one, obtain a signature, or fix a role.
-
-That distinction is what turns the audit output into a work list. A run full of
+That specificity is what turns the audit output into a work list. A run full of
 `needsAction` outcomes is not a failure report; it is a to-do list, and every item
 names the exact next action (from the reasons in the seven-step table above).
 
@@ -294,9 +290,9 @@ data model — evidence `ce:addresses` a control, but only a human attestation
 `ce:attests` it — so no amount of evidence can flip a control to met on its own. The
 attested-reference model gives every control the same shape of check (a registered,
 resolving, in-freshness reference signed by a human in the required role), which is why
-coverage reaches all 110 controls and not just the machine-measurable ones. Oracle
-outcomes distinguish the genuinely unknowable (`cantTell`) from an actionable gap
-(`needsAction`), turning the audit into a work list, and the contradiction guard makes
+coverage reaches all 110 controls and not just the machine-measurable ones. Every
+required control resolves to a concrete outcome, and `needsAction` names an actionable
+gap, turning the audit into a work list, and the contradiction guard makes
 sure an unexplained human-over-machine "met" can never hide inside a passing score.
 
 **Next:** [04-the-proof.md](04-the-proof.md) — the outputs (audit, SPRS, BOM, SSP) and
