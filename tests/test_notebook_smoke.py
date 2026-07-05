@@ -30,8 +30,10 @@ def test_all_covered_completes_with_full_score():
     assert audit.sprs.status == "Final"
     assert audit.sprs.valid_submission is True
     assert len(audit.contradictions) == 0
-    assert audit.proven.machine_count == 4
-    assert audit.proven.human_count == 18
+    # SC.L2-3.13.1 (boundary/residency) is machine-proven via its data_region
+    # criterion — it used to lack a criterion and return no config result.
+    assert audit.proven.machine_count == 5
+    assert audit.proven.human_count == 17
 
     assert r["bom"].evidentiary_status == "mock"
     assert "NON-EVIDENTIARY" in r["ssp"]
@@ -55,8 +57,9 @@ def test_contradiction_completes_but_flags_one_contradiction():
     audit = r["audit"]
     assert audit.sprs.score == 110
     assert len(audit.contradictions) == 1
-    assert audit.proven.machine_count == 3
-    assert audit.proven.human_count == 19
+    # SC.L2-3.13.1 now machine-resolved (data_region criterion).
+    assert audit.proven.machine_count == 4
+    assert audit.proven.human_count == 18
 
 
 def test_run_is_deterministic():

@@ -20,23 +20,22 @@
 @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
 
 #################################################################
-# ce:needsAction — new outcome distinct from earl:cantTell.
+# ce:needsAction — the engine's outcome for a concrete, actionable gap.
 #
-# EARL's built-in lattice: passed, failed, cantTell, inapplicable, untested.
-# cantTell is "the machine genuinely cannot know" — for us, that's a copout:
-# under the attested-reference model every control has SOMEWHERE bob logs it,
-# so 'unknowable' becomes 'no reference registered yet'. ce:needsAction is a
-# first-class outcome that names the concrete missing piece — an unregistered
-# reference, a stale reference past its freshness window, or a reference
-# awaiting AO attestation. Consumers (SPRS gate, SSP, BOM, audit) treat it as
-# distinct from cantTell so 'needs attestation' doesn't get lumped with
-# 'genuinely unknowable'. Subclass of earl:OutcomeValue so existing EARL
+# Every control resolves to passed, failed, or needsAction — the oracle never
+# shrugs. Under the attested-reference model every control has SOMEWHERE bob logs
+# it, so what would once be "unknowable" becomes a named, fixable gap: an
+# unregistered reference, a stale reference past its freshness window, a
+# reference awaiting AO attestation, or a control routed to the config oracle
+# with no criterion. needsAction is a first-class outcome that names that piece
+# and always carries a machine-readable reason. Consumers (SPRS gate, SSP, BOM,
+# audit) treat it distinctly. Subclass of earl:OutcomeValue so existing EARL
 # consumers still see it as a valid outcome value.
 #################################################################
 
 ce:needsAction a earl:OutcomeValue ;
     rdfs:label "needs action" ;
-    rdfs:comment "The control has a claimable module and an authoritative source, but is missing something concrete and actionable: no reference registered, a stale reference, or a reference awaiting AO attestation. Distinct from cantTell (genuinely unknowable) — needsAction always carries a machine-readable reason describing the missing piece." .
+    rdfs:comment "The control has a claimable module and an authoritative source, but is missing something concrete and actionable: no reference registered, a stale reference, a reference awaiting AO attestation, or no config criterion. needsAction always carries a machine-readable reason describing the missing piece." .
 
 ce:outcomeReason a owl:DatatypeProperty ;
     rdfs:label "outcome reason" ;

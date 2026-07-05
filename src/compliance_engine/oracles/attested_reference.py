@@ -173,7 +173,7 @@ def evaluate_attested_reference(
             reason="attestation-predates-reference",
         )
 
-    # The attestation itself may be declined (outcome=failed / cantTell /
+    # The attestation itself may be declined (outcome=failed /
     # needsAction). Propagate — the reference is fresh but the AO did not
     # attest MET.
     if picked.outcome != OUTCOME_PASSED:

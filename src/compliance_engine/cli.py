@@ -320,7 +320,6 @@ def _do_attest(ds, state) -> int:
     outcome_iri = {
         "passed": EARL.passed,
         "failed": EARL.failed,
-        "cantTell": EARL.cantTell,
         "needsAction": CE.needsAction,
     }
     required = state.load_order.required_controls if state.load_order else ()

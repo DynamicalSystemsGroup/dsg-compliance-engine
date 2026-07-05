@@ -109,10 +109,6 @@
     dcterms:description "where the test was carried out automatically by the software tool and without any human intervention"@en ;
     dcterms:title "Automatic"@en .
 
-<http://www.w3.org/ns/earl#cantTell> a <http://www.w3.org/ns/earl#CannotTell> ;
-    dcterms:description "it is unclear if the subject passed or failed the test"@en ;
-    dcterms:title "Cannot tell"@en .
-
 <http://www.w3.org/ns/earl#failed> a <http://www.w3.org/ns/earl#Fail> ;
     dcterms:description "the subject failed the test"@en ;
     dcterms:title "Failed"@en .

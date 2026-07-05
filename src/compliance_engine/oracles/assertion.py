@@ -41,13 +41,11 @@ ORACLE_AGENT = URIRef("urn:ce:agent:control-oracle")
 CONTROL_CHECK_TEST = URIRef("urn:ce:test:control-check")
 
 # String outcome (oracles.criteria) -> outcome IRI. ce:needsAction is a
-# compliance-engine-local outcome value (subclass of earl:OutcomeValue) —
-# distinct from cantTell so 'action required' doesn't get lumped with
-# 'genuinely unknowable'. See ontology/ce-attestation-refs.ttl.
+# compliance-engine-local outcome value (subclass of earl:OutcomeValue) that names
+# a concrete, actionable gap. See ontology/ce-attestation-refs.ttl.
 _OUTCOME_IRI = {
     "passed": EARL.passed,
     "failed": EARL.failed,
-    "cantTell": EARL.cantTell,
     "needsAction": CE.needsAction,
 }
 
@@ -111,7 +109,7 @@ def emit_control_check_assertion(
 
     # Comparison provenance. Metric value keeps its native type — a boolean
     # serializes as xsd:boolean, a string as xsd:string, a number as its
-    # inferred numeric type — NEVER coerced to xsd:decimal. Omitted on cantTell
+    # inferred numeric type — NEVER coerced to xsd:decimal. Omitted on needsAction
     # where the value is typically absent.
     if criterion is not None:
         g.add((assertion, CE.metricKey, Literal(criterion.metric_key)))

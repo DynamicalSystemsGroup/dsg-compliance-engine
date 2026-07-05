@@ -154,7 +154,8 @@ class TestAttestedReferenceOracle:
         assert r.outcome == "failed" and r.reason == "attestation-predates-reference"
 
     def test_declined_attestation_propagates(self):
-        for declined in ("failed", "cantTell"):
+        # needsAction has its own propagation test below (test_declined_needsAction_propagates).
+        for declined in ("failed",):
             adequacy = "not ready" if declined == "failed" else "ok"
             sufficiency = "not ready" if declined == "failed" else ""
             r = evaluate_attested_reference(

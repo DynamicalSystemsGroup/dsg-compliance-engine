@@ -38,8 +38,7 @@ OUTCOME_PASSED = EARL.passed          # MET
 OUTCOME_FAILED = EARL.failed          # NOT MET
 OUTCOME_INAPPLICABLE = EARL.inapplicable  # N/A
 OUTCOME_UNTESTED = EARL.untested      # PLANNED
-OUTCOME_CANT_TELL = EARL.cantTell     # (declined on sufficiency)
-OUTCOME_NEEDS_ACTION = CE.needsAction  # actionable missing piece under attested-ref model
+OUTCOME_NEEDS_ACTION = CE.needsAction  # actionable missing piece (e.g. declined on sufficiency)
 
 # Outcome IRI -> CMMC determination label (consumed by SPRS audit + SSP compiler).
 STATUS_LABEL: dict[URIRef, str] = {
@@ -47,7 +46,6 @@ STATUS_LABEL: dict[URIRef, str] = {
     OUTCOME_FAILED: "NOT MET",
     OUTCOME_INAPPLICABLE: "N/A",
     OUTCOME_UNTESTED: "PLANNED",
-    OUTCOME_CANT_TELL: "CANT TELL",
     OUTCOME_NEEDS_ACTION: "NEEDS ACTION",
 }
 
@@ -121,7 +119,7 @@ def request_attestation(
     `oracle_outcome` directly). `override_justification` → `cmmc:overrideJustification`
     (this is what clears ContradictionShape when attesting MET over a failing oracle).
 
-    Declined attestations (earl:failed / earl:cantTell) are well-formed too. The
+    Declined attestations (earl:failed / ce:needsAction) are well-formed too. The
     interactive path prompts the official; `auto_attest=True` requires the two
     judgement texts up front and records earl:semiAuto.
 
@@ -150,7 +148,7 @@ def request_attestation(
             if sufficiency_in.lower() in ("no", "n", ""):
                 adequacy = adequacy_in
                 sufficiency = "Evidence deemed insufficient to conclude MET."
-                outcome = OUTCOME_CANT_TELL
+                outcome = OUTCOME_NEEDS_ACTION
             else:
                 adequacy, sufficiency = adequacy_in, sufficiency_in
                 outcome = OUTCOME_PASSED

@@ -16,7 +16,7 @@ Schema (per line):
       "signed_at": "2026-07-03T12:00:00+00:00", # required, ISO-8601 with tz
       "covers": ["<ref-id>", ...],              # required, ≥1 ce:Reference IDs
       "controls_attested": ["IR.L2-3.6.1", ...], # required, ≥1 control ids
-      "outcome": "passed" | "failed" | "cantTell" | "needsAction",  # required
+      "outcome": "passed" | "failed" | "needsAction",  # required
       "adequacy": "...",                        # required for outcome=passed
       "sufficiency": "...",                     # required for outcome=passed
       "sig": null | "<base64>",                 # optional; detached signature

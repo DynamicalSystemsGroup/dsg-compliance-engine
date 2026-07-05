@@ -48,11 +48,9 @@ _SHORT_STATUS = {
     "failed": "NOT MET",
     "inapplicable": "N/A",
     "untested": "PLANNED",
-    "cantTell": "CANT TELL",
-    # ce:needsAction — a concrete missing piece under the attested-reference
-    # model (unregistered reference, stale reference, or awaiting attestation).
-    # Distinct from CANT TELL: it's actionable, and the audit trail carries the
-    # specific reason.
+    # ce:needsAction — a concrete, actionable missing piece: an unregistered or
+    # stale reference, a metric absent from evidence, or a control routed to the
+    # config oracle with no criterion. The audit trail carries the specific reason.
     "needsAction": "NEEDS ACTION",
 }
 # A control with no attestation is NOT MET (MET requires a human attestation).
@@ -77,7 +75,7 @@ class ControlMappingRow:
     evidence_hashes: tuple[str, ...]
     oracle_outcome: str | None
     attestation_outcome: str | None      # earl short name, or None
-    status: str                          # MET | NOT MET | N/A | PLANNED | CANT TELL
+    status: str                          # MET | NOT MET | N/A | PLANNED | NEEDS ACTION
     reference_id: str | None = None      # ce:Reference behind a Track B control
     git_commit: str | None = None        # commit that produced the document evidence
     git_committed_at: str | None = None
@@ -99,7 +97,7 @@ class ControlMappingRow:
           - "override"          : attested MET while the machine oracle FAILED — the
                                   human overruled the machine (must carry an override
                                   justification + appended evidence; see R13).
-          - "human-only"        : no machine evidence at all (cantTell / needsAction /
+          - "human-only"        : no machine evidence at all (needsAction /
                                   inherited / none) — rests purely on human judgment.
         """
         if self.attestation_outcome == "passed" and self.oracle_outcome == "failed":

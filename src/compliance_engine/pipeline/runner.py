@@ -395,7 +395,7 @@ def _run_attested_reference_pass(
     ev_graph = graph_for(state.ds, "evidence")
     for cid, ac in sorted(attested.items()):
         # A control already resolved by the Track A config oracle keeps that result;
-        # attested-reference is for the policy/human controls Track A returns cantTell for.
+        # attested-reference is for the policy/human controls Track A has no criterion for.
         if outcomes.get(cid) in {"passed", "failed"}:
             continue
 

@@ -15,7 +15,7 @@ from rdflib.namespace import RDF, XSD
 
 from compliance_engine.oracles.criteria import (
     CRITERIA,
-    OUTCOME_CANTTELL,
+    OUTCOME_NEEDS_ACTION,
     OUTCOME_FAILED,
     OUTCOME_PASSED,
     Criterion,
@@ -41,19 +41,21 @@ def test_mfa_false_fails():
     assert result.outcome == OUTCOME_FAILED
 
 
-def test_no_criterion_cant_tell():
+def test_no_criterion_needs_action():
     # AT.L2-3.2.1 (training) has no automatable signal -> absent from CRITERIA.
     assert "AT.L2-3.2.1" not in CRITERIA
     result = evaluate({"anything": 1}, "AT.L2-3.2.1")
-    assert result.outcome == OUTCOME_CANTTELL
+    assert result.outcome == OUTCOME_NEEDS_ACTION
+    assert result.reason == "no-machine-criterion"
     assert "criterion" in result.detail
 
 
-def test_criterion_present_metric_absent_cant_tell():
-    # Criterion exists for IA.L2-3.5.3 but the metric key is missing -> cantTell,
+def test_criterion_present_metric_absent_needs_action():
+    # Criterion exists for IA.L2-3.5.3 but the metric key is missing -> needsAction,
     # never fabricated as pass/fail.
     result = evaluate({"unrelated_key": True}, "IA.L2-3.5.3")
-    assert result.outcome == OUTCOME_CANTTELL
+    assert result.outcome == OUTCOME_NEEDS_ACTION
+    assert result.reason == "metric-absent"
     assert "absent" in result.detail
     assert result.metric_value is None
 
@@ -84,7 +86,7 @@ def test_evaluate_backward_compatible_signature():
     # explicit criteria arg still works (backward compat)
     custom = {"X.L2-3.9.9": Criterion("X.L2-3.9.9", "k", "eq", 1)}
     assert evaluate({"k": 1}, "X.L2-3.9.9", custom).outcome == OUTCOME_PASSED
-    assert evaluate({"k": 1}, "IA.L2-3.5.3", custom).outcome == OUTCOME_CANTTELL
+    assert evaluate({"k": 1}, "IA.L2-3.5.3", custom).outcome == OUTCOME_NEEDS_ACTION
 
 
 # ---------------------------------------------------------------------------
@@ -129,11 +131,11 @@ def test_emit_failed_outcome():
     assert (result_node, EARL.outcome, EARL.failed) in g
 
 
-def test_emit_canttell_outcome_no_metric_value():
+def test_emit_needsaction_outcome_no_metric_value():
     ds, assertion, _ = _emit({"unrelated": 1})
     g = ds.graph(URIRef(G_AUDIT))
     result_node = g.value(assertion, EARL.result)
-    assert (result_node, EARL.outcome, EARL.cantTell) in g
+    assert (result_node, EARL.outcome, CE.needsAction) in g
     # no fabricated metric value
     assert g.value(assertion, CE.metricValue) is None
 

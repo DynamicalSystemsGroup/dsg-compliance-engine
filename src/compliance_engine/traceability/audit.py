@@ -13,7 +13,7 @@ Two CMMC-specific dimensions are added on top of the ADCS template:
     and which carry no cmmc:overrideJustification — the FCA "clean 110 over
     failing evidence" fraud pattern.
   - Proven-vs-attested split: how many MET controls are backed by a passing
-    machine oracle vs marked MET by human judgement only (cantTell/absent oracle).
+    machine oracle vs marked MET by human judgement only (no config oracle result).
 
 The SPRS score + POA&M-legality gate (traceability.sprs) is wired in: met_control_ids
 is derived from the attestation graph (every ce:attests with earl:passed).
@@ -94,7 +94,7 @@ class ContradictionRow:
 class ProvenVsAttested:
     """The MET split: machine-proven (passing oracle) vs human-only."""
     met_by_machine: list[str] = field(default_factory=list)   # oracle earl:passed
-    met_by_human_only: list[str] = field(default_factory=list)  # cantTell / absent / etc.
+    met_by_human_only: list[str] = field(default_factory=list)  # no config oracle result
 
     @property
     def machine_count(self) -> int:
@@ -113,7 +113,7 @@ class ProvenVsAttested:
 class CoverageCell:
     control: str
     evidence: str
-    status: str        # covered+passed | covered+failed | covered+cantTell | covered+unattested | uncovered
+    status: str        # covered+passed | covered+failed | covered+needsAction | covered+unattested | uncovered
 
 
 @dataclass
@@ -275,7 +275,7 @@ def contradictions_and_split(
 
     Contradiction = MET (earl:passed) AND no cmmc:overrideJustification AND the
     backing oracle is failed OR asserted-but-absent (ce:backedBy present with no
-    resolvable outcome). A cantTell oracle or no backing at all is NOT a
+    resolvable outcome). A needsAction oracle or no backing at all is NOT a
     contradiction — it is legitimate human-only judgement.
     """
     rows: list[ContradictionRow] = []
@@ -327,11 +327,10 @@ def coverage_matrix(ds: Graph | Dataset) -> list[CoverageCell]:
             status = "covered+passed"
         elif outcome == EARL.failed:
             status = "covered+failed"
-        elif outcome == EARL.cantTell:
-            status = "covered+cantTell"
         elif outcome is None:
             status = "covered+unattested"
         else:
+            # ce:needsAction and any other outcome IRI render by local name.
             status = f"covered+{_local(str(outcome))}"
         cells.append(CoverageCell(control=cid, evidence=_local(ev), status=status))
     cells.sort(key=lambda c: (c.control, c.evidence))

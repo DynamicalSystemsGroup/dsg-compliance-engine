@@ -83,7 +83,7 @@ def test_happy_path_runs_all_stages():
     assert state.evidence.evidence_node_count > 0
     assert len(state.evidence.evidence_hashes) == state.evidence.evidence_node_count
     assert state.oracles.outcomes  # non-empty control set
-    assert set(state.oracles.outcomes.values()) <= {"passed", "failed", "cantTell"}
+    assert set(state.oracles.outcomes.values()) <= {"passed", "failed", "needsAction"}
     assert any(v == "passed" for v in state.oracles.outcomes.values())
 
 def test_each_stage_emits_one_plan_activity():

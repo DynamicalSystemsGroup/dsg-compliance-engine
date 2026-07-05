@@ -61,7 +61,7 @@ class PolicyFinding:
 class PolicyCheckResult:
     passed: bool
     findings: tuple[PolicyFinding, ...]
-    oracle_outcomes: dict[str, str]        # control_id -> passed|failed|cantTell
+    oracle_outcomes: dict[str, str]        # control_id -> passed|failed|needsAction
 
 
 @dataclass(frozen=True)
@@ -80,7 +80,7 @@ class EvidenceStageResult:
 
 @dataclass(frozen=True)
 class OracleStageResult:
-    outcomes: dict[str, str]               # control_id -> passed|failed|cantTell
+    outcomes: dict[str, str]               # control_id -> passed|failed|needsAction
     assertion_iris: tuple[str, ...]
 
 
@@ -90,7 +90,7 @@ class AttestedRefResult:
     document evidence behind a human attestation, plus the oracle's verdict."""
     control_id: str
     reference_id: str
-    outcome: str                           # passed|failed|needsAction|cantTell
+    outcome: str                           # passed|failed|needsAction
     reason: str | None
     sha256: str | None                     # content hash of the resolved document
     git_commit: str | None

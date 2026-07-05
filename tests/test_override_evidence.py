@@ -78,7 +78,7 @@ def test_audit_clears_override_with_evidence():
 @pytest.mark.parametrize("oracle,attest,evidence,expected", [
     ("passed", "passed", ("h1",), "machine"),
     ("failed", "passed", ("h1",), "override"),
-    ("cantTell", "passed", (), "human-only"),
+    ("needsAction", "passed", (), "human-only"),
     (None, "passed", (), "human-only"),
 ])
 def test_evidence_backing_property(oracle, attest, evidence, expected):

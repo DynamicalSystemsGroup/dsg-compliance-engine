@@ -4,9 +4,9 @@ SCAFFOLD, patterned on ADCS-lifecycle-demo/analysis/oracle.py.
 
 An oracle pulls `metric_key` from an evidence artifact's `summary` dict and
 compares it to `threshold` via `comparator`. A control with NO criterion here
-returns `cantTell` on purpose: it must be human-attested from documentary
-evidence. The oracle NEVER asserts a control is MET — only the Affirming
-Official does that.
+returns `needsAction` with a concrete reason (register a criterion, or route the
+control to the attested-reference oracle): the config oracle never shrugs. The
+oracle NEVER asserts a control is MET — only the Affirming Official does that.
 """
 
 from __future__ import annotations
@@ -16,11 +16,10 @@ from typing import Any
 
 OUTCOME_PASSED = "passed"
 OUTCOME_FAILED = "failed"
-OUTCOME_CANTTELL = "cantTell"
 OUTCOME_NEEDS_ACTION = "needsAction"
 
 VALID_OUTCOMES: frozenset[str] = frozenset({
-    OUTCOME_PASSED, OUTCOME_FAILED, OUTCOME_CANTTELL, OUTCOME_NEEDS_ACTION,
+    OUTCOME_PASSED, OUTCOME_FAILED, OUTCOME_NEEDS_ACTION,
 })
 
 _COMPARATORS = {
@@ -45,7 +44,7 @@ class Criterion:
 class OracleResult:
     control_id: str
     metric_value: Any
-    outcome: str             # passed | failed | cantTell | needsAction
+    outcome: str             # passed | failed | needsAction
     detail: str
     reason: str | None = None  # machine-readable reason (required for needsAction)
 
@@ -59,9 +58,14 @@ class OracleResult:
 
 # Single source of truth for machine-checkable controls. This is the
 # Tier 1-mapped machine set: it aligns 1:1 with the `ce:oracle-*`
-# verificationMethod IRIs in structural/tier1.ttl (agent-1). The ~40 controls
-# with no automatable signal (policy / training / PS / IR / physical) are
-# intentionally ABSENT → evaluate() returns cantTell for them (never fabricate).
+# verificationMethod IRIs in structural/tier1.ttl (agent-1). Controls with no
+# automatable signal (policy / training / PS / IR / physical) are ABSENT here on
+# purpose — but they are NO LONGER left to shrug: they route through the
+# attested-reference oracle (oracles/attested_reference.py, wired into
+# run_stage_oracles) which resolves + freshness-checks + role-verifies their
+# document reference and returns passed / needsAction / failed. A control routed
+# to THIS table with no criterion returns needsAction("no-machine-criterion") —
+# a concrete modeling gap to fix, never a silent shrug.
 #
 # Every metric_key is a real or plausible evidence-summary export field. The
 # five confirmed keys emitted by the evidence generators are:
@@ -96,6 +100,12 @@ CRITERIA: dict[str, Criterion] = {
     # ITAR residency (modelled as a pseudo-control id, not a NIST 800-171 control)
     "ITAR-120.54":   Criterion("ITAR-120.54", "data_region", "eq", "US",
                                "data residency US-only"),
+    # SC.L2-3.13.1 (boundary protection) is region-gated by the same org-policy
+    # signal and is addressed by the mock_policy evidence (data_region). Without a
+    # criterion here the oracle could not interpret evidence it could actually read —
+    # the criterion makes it resolve to passed/failed like any machine control.
+    "SC.L2-3.13.1":  Criterion("SC.L2-3.13.1", "data_region", "eq", "US",
+                               "boundary protection: CUI data resident in US region"),
     # --- VPC segmentation (oracle-vpc-segmentation) --------------------------
     # One config-check criterion per SC.13 control the module claims. The
     # keys mirror fixtures/nv012/all-covered/gcp_vpc_segmentation.json summary.
@@ -209,11 +219,16 @@ def evaluate(summary: dict[str, Any], control_id: str,
     """Evaluate one control's criterion against an evidence summary dict."""
     crit = criteria.get(control_id)
     if crit is None:
-        return OracleResult(control_id, None, OUTCOME_CANTTELL,
-                            "no machine-readable criterion — requires human attestation")
+        return OracleResult(
+            control_id, None, OUTCOME_NEEDS_ACTION,
+            "no machine-readable criterion for a control routed to the config oracle "
+            "— register a criterion or route it to the attested-reference oracle",
+            reason="no-machine-criterion")
     if crit.metric_key not in summary:
-        return OracleResult(control_id, None, OUTCOME_CANTTELL,
-                            f"metric {crit.metric_key!r} absent from evidence")
+        return OracleResult(
+            control_id, None, OUTCOME_NEEDS_ACTION,
+            f"metric {crit.metric_key!r} absent from evidence",
+            reason="metric-absent")
     value = summary[crit.metric_key]
     ok = _COMPARATORS[crit.comparator](value, crit.threshold)
     return OracleResult(

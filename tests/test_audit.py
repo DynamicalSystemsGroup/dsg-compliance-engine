@@ -144,11 +144,11 @@ def test_override_clears_contradiction():
     assert report.proven.machine_count == 0
 
 
-def test_cant_tell_is_human_only_not_contradiction():
+def test_needs_action_is_human_only_not_contradiction():
     ds = _ds()
     ev = _evidence(ds, "AT.L2-3.2.1")
     _require(ds, "AT.L2-3.2.1"); _module(ds, "AT.L2-3.2.1")
-    _attest(ds, "AT.L2-3.2.1", oracle=EARL.cantTell, evidence=ev)
+    _attest(ds, "AT.L2-3.2.1", oracle=CE.needsAction, evidence=ev)
     report = audit(ds, catalog=_catalog(("AT.L2-3.2.1", 5)))
     assert report.contradictions == []
     assert report.proven.met_by_human_only == ["AT.L2-3.2.1"]
