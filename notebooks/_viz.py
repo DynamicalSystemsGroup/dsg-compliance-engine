@@ -3,7 +3,7 @@
 Provides four matplotlib-based chart factories consumed by the walkthrough notebook:
 
     sprs_gauge           -- semicircular gauge for the 0-110 SPRS score
-    oracle_outcomes_chart -- horizontal bar chart of pass/fail/cantTell/needsAction counts
+    oracle_outcomes_chart -- horizontal bar chart of pass/fail/needsAction counts
     traceability_graph   -- networkx directed graph: order -> modules -> controls
     coverage_family_chart -- stacked horizontal bar chart of coverage by CMMC family
 
@@ -194,7 +194,6 @@ def oracle_outcomes_chart(outcomes: dict[str, str]) -> "Figure":
     OUTCOME_COLORS = {
         "passed":      "#27ae60",
         "failed":      "#e74c3c",
-        "cantTell":    "#f39c12",
         "needsAction": "#e67e22",
     }
     DEFAULT_COLOR = "#95a5a6"
@@ -202,7 +201,7 @@ def oracle_outcomes_chart(outcomes: dict[str, str]) -> "Figure":
     counts = Counter(outcomes.values())
 
     # Preferred display order
-    order = ["passed", "failed", "cantTell", "needsAction"]
+    order = ["passed", "failed", "needsAction"]
     other = sorted(k for k in counts if k not in order)
     display_order = [k for k in order if k in counts] + [k for k in other if k in counts]
 
@@ -284,7 +283,7 @@ def traceability_graph(
     -----
     Order node   -- blue
     Module nodes -- purple
-    Control nodes -- green (passed), red (failed), amber (cantTell/needsAction), gray (no oracle)
+    Control nodes -- green (passed), red (failed), amber (needsAction), gray (no oracle)
 
     Edges
     -----
@@ -380,7 +379,7 @@ def traceability_graph(
                 node_colors.append("#27ae60")
             elif outcome == "failed":
                 node_colors.append("#e74c3c")
-            elif outcome in ("cantTell", "needsAction"):
+            elif outcome == "needsAction":
                 node_colors.append("#f39c12")
             else:
                 node_colors.append("#bdc3c7")
@@ -443,7 +442,7 @@ def traceability_graph(
         mpatches.Patch(color="#8e44ad",  label="Module"),
         mpatches.Patch(color="#27ae60",  label="passed"),
         mpatches.Patch(color="#e74c3c",  label="failed"),
-        mpatches.Patch(color="#f39c12",  label="cantTell / needsAction"),
+        mpatches.Patch(color="#f39c12",  label="needsAction"),
         mpatches.Patch(color="#bdc3c7",  label="no oracle result"),
     ]
     if contradiction_ids:

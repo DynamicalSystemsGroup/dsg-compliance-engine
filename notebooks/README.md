@@ -8,7 +8,10 @@ SPRS score, BOM, and SSP an assessor reads.
 
 It is one continuous scroll, not a set of tabs. Each station shows what goes **in**
 and what comes **out**, in plain English on top and with the real engine payload
-underneath. A sidebar rail tracks where the artifact currently is.
+underneath. Four live charts — an SPRS gauge, the oracle-outcome bars, the
+Order-to-controls traceability graph, and coverage by family — are drawn by the
+`_viz` factories over the current run. The scenario picker sits at the very top, and
+a bold SPRS badge tracks the headline result in the sidebar.
 
 Pick a scenario in the sidebar and the whole chain re-executes on the real code:
 
@@ -61,11 +64,13 @@ but cold-start is slower than the server-backed `marimo run`.
 
 ### Sidebar (always visible)
 
-- **Scenario selector** — switch between all-covered, gap, and contradiction.
-- **Where the artifact is** — a "you are here" rail over the ten stations, marking how
-  far this run travelled (and where Gate 1 stopped it, in the gap scenario).
-- **Live indicators** — controls required, modules claimed, Gate 1 status, SPRS score,
-  the machine-vs-human split, and the contradiction count.
+- **Scenario selector** — switch between all-covered, gap, and contradiction (also
+  mirrored at the very top of the scroll, so it is the first thing you touch).
+- **SPRS badge** — the headline result, colour-coded: green `SPRS 110 · Final`, amber
+  for Conditional, red `SPRS — · REFUSED` when Gate 1 stops the line — plus a compact
+  one-line progress trail.
+- **Live indicators** — controls required, modules claimed, Gate 1 status, the
+  machine-vs-human split, and the contradiction count.
 - **NON-EVIDENTIARY notice.**
 
 ### The scroll (twelve stations)

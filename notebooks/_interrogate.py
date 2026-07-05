@@ -84,7 +84,7 @@ def explain_control(
     Format::
 
         {control_id} — {short requirement text}
-          Oracle outcome : {passed/failed/cantTell/not run}
+          Oracle outcome : {passed/failed/needsAction/not run}
           Attestation    : {MET/NOT MET/not attested}
           Evidence nodes : {count}
             {ev_hash[:16]}... -> {summary key preview}
@@ -147,17 +147,14 @@ def explain_control(
 
         if ev_hashes:
             for i, h in enumerate(ev_hashes[:3]):
-                summary_preview = "—"
+                addresses = "—"
                 if i < len(ev_entries_for_control):
-                    summary = ev_entries_for_control[i].get("summary") or {}
-                    if summary:
-                        keys = list(summary.keys())[:2]
-                        summary_preview = ", ".join(
-                            f"{k}={str(summary[k])!r}" for k in keys
-                        )
-                ev_lines.append(f"    {h[:16]}... -> {summary_preview}")
+                    ctrls = ev_entries_for_control[i].get("controls") or []
+                    if ctrls:
+                        addresses = ", ".join(ctrls[:3]) + ("..." if len(ctrls) > 3 else "")
+                ev_lines.append(f"hash: {h[:12]}...  addresses: {addresses}")
             if len(ev_hashes) > 3:
-                ev_lines.append(f"    ... ({len(ev_hashes) - 3} more)")
+                ev_lines.append(f"... ({len(ev_hashes) - 3} more)")
         elif ev_entries_for_control:
             # No BOM row but have evidence_index entries (e.g. halted pipeline)
             for entry in ev_entries_for_control[:3]:
@@ -185,26 +182,59 @@ def explain_control(
         ctrl_info = coverage.get(control_id, {})
         weight = ctrl_info.get("weight", "?")
         non_def = ctrl_info.get("non_deferrable", None)
-        non_def_str = "yes" if non_def is True else ("no" if non_def is False else "?")
+
+        # --- Track B provenance: reference + git commit behind the sign-off ---
+        reference_id = _safe_get(bom_row, "reference_id") if bom_row is not None else None
+        git_commit = _safe_get(bom_row, "git_commit") if bom_row is not None else None
 
         # --- Short requirement text (first 80 chars of catalog text) ---
         text: str = ctrl_info.get("text", "") or ""
-        if text:
-            header_suffix = f" — {text[:80]}{'...' if len(text) > 80 else ''}"
-        else:
-            header_suffix = ""
+        header_suffix = f" — {text[:80]}{'...' if len(text) > 80 else ''}" if text else ""
 
-        lines = [
-            f"{control_id}{header_suffix}",
-            f"  Oracle outcome : {oracle_str}",
-            f"  Attestation    : {attestation_str}",
-            f"  Evidence nodes : {ev_count}",
-            *ev_lines,
-            f"  Backing        : {backing_str}",
-            f"  SPRS weight    : {weight}",
-            f"  Non-deferrable : {non_def_str}",
+        # A human-readable gloss on the attestation column.
+        backing_gloss = {
+            "machine": "machine-proven",
+            "attested-evidenced": "human, machine-backed",
+            "override": "human override of a failed check",
+            "human-only": "human judgment only",
+        }.get(backing_str, "")
+        att_line = attestation_str + (f" ({backing_gloss})" if backing_gloss else "")
+
+        weight_note = "  (non-deferrable — cannot be POA&M'd)" if non_def is True else \
+                      ("  (deferrable — may be POA&M'd)" if non_def is False else "")
+
+        # --- Assemble the tree (ADCS-style, box-drawing connectors) ---
+        branches: list[tuple[str, str]] = [
+            ("Oracle outcome", oracle_str),
+            ("Attestation", att_line),
+            ("SPRS weight", f"{weight}{weight_note}"),
         ]
-        return "\n".join(lines)
+        if reference_id:
+            ref_val = reference_id
+            if git_commit:
+                ref_val += f" @ git {git_commit[:8]}"
+            ref_val += "  (resolved, hashed, role-signed)"
+            branches.append(("Reference", ref_val))
+        branches.append(("__evidence__", f"Evidence ({ev_count} artifact{'s' if ev_count != 1 else ''})"))
+        branches.append(("Backing", backing_str))
+
+        out: list[str] = [f"{control_id}{header_suffix}"]
+        for i, (label, value) in enumerate(branches):
+            last = i == len(branches) - 1
+            stem = "└──" if last else "├──"
+            if label == "__evidence__":
+                out.append(f"{stem} {value}:")
+                cont = "    " if last else "│   "
+                if ev_lines:
+                    for j, ev in enumerate(ev_lines):
+                        ev_last = j == len(ev_lines) - 1
+                        ev_stem = "└──" if ev_last else "├──"
+                        out.append(f"{cont}{ev_stem} {ev.strip()}")
+                else:
+                    out.append(f"{cont}└── (no addressing evidence — human-attested)")
+            else:
+                out.append(f"{stem} {label}: {value}")
+        return "\n".join(out)
 
     except Exception as exc:
         return f"— explain_control error for {control_id}: {exc} —"
@@ -349,7 +379,7 @@ def sprs_breakdown(audit_report: Any, required: list[str]) -> list[dict]:
             elif cid in contradiction_oracle:
                 oracle = contradiction_oracle[cid]     # "failed" or "absent"
             elif cid in met_by_human:
-                oracle = "cantTell"
+                oracle = "—"     # no config oracle result — human/inherited determination
             else:
                 oracle = "—"
 

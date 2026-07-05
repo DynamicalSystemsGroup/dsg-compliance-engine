@@ -113,6 +113,37 @@ def _(engine, mo):
     return (scenario,)
 
 
+@app.cell(hide_code=True)
+def _(mo, scenario):
+    # The header: the scenario picker sits at the very top. Changing it re-executes
+    # the whole chain on the real engine — the arc is the point.
+    header = mo.vstack(
+        [
+            mo.md("# One contract, followed end to end"),
+            mo.md(
+                "<span style='font-size:1.05rem;opacity:0.85'>A signed defense contract "
+                "enters at Station 1 and is followed down the whole assembly line until it "
+                "comes out as the documents an assessor reads. Every number below is produced "
+                "by running the <b>real engine</b>.</span>"
+            ),
+            scenario,
+            mo.callout(
+                mo.md(
+                    "**Pick a scenario — the whole notebook re-executes.**  \n"
+                    "- **`all-covered`** — the full chain proves out: SPRS 110, Final.  \n"
+                    "- **`gap`** — Gate 1 refuses. Nothing is built, nothing is proven.  \n"
+                    "- **`contradiction`** — a human signs MET over a failed machine check; "
+                    "the audit surfaces it on its own line.  \n\n"
+                    "The arc *is* the point: change the input, watch the line respond."
+                ),
+                kind="info",
+            ),
+        ],
+        gap=0.6,
+    )
+    return (header,)
+
+
 @app.cell
 def _(engine, scenario):
     ds, obligations = engine.build_dataset(scenario.value)
@@ -197,7 +228,56 @@ def _(engine):
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# Sidebar - scenario selector + "you are here" rail + live indicators
+# Figures - each chart is produced by a real _viz factory over the live run.
+# The code that builds each figure is left visible on purpose (ADCS-style): the
+# function call tells you exactly where the picture comes from.
+# ═══════════════════════════════════════════════════════════════════════════════
+
+@app.cell
+def _(factory_ok, factory_state, mo):
+    import _viz  # noqa: PLC0415
+
+    oracle_fig = None
+    if factory_ok and factory_state is not None:
+        oracle_fig = mo.as_html(_viz.oracle_outcomes_chart(factory_state.oracles.outcomes))
+    return (oracle_fig,)
+
+
+@app.cell
+def _(audit_report, factory_ok, mo):
+    import _viz  # noqa: PLC0415
+
+    sprs_fig = None
+    if factory_ok and audit_report is not None:
+        sprs_fig = mo.as_html(_viz.sprs_gauge(audit_report.sprs.score, audit_report.sprs.status))
+    return (sprs_fig,)
+
+
+@app.cell
+def _(audit_report, factory_ok, factory_state, mo, order, order_ok, required):
+    import _viz  # noqa: PLC0415
+
+    graph_fig = None
+    if factory_ok and order_ok and audit_report is not None:
+        graph_fig = mo.as_html(_viz.traceability_graph(
+            list(required),
+            factory_state.oracles.outcomes,
+            list(order.included_modules),
+            audit_report.contradictions,
+        ))
+    return (graph_fig,)
+
+
+@app.cell
+def _(coverage, mo):
+    import _viz  # noqa: PLC0415
+
+    coverage_fig = mo.as_html(_viz.coverage_family_chart(coverage))
+    return (coverage_fig,)
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Sidebar - scenario selector + compact progress + SPRS badge + live indicators
 # ═══════════════════════════════════════════════════════════════════════════════
 
 @app.cell
@@ -211,35 +291,24 @@ def _(
     required,
     scenario,
 ):
-    # --- "you are here" rail: mark how far the artifact travelled this run ---
-    _rail_steps = [
-        ("1", "Contract"),
-        ("2", "Required controls"),
-        ("3", "COP signed"),
-        ("4", "Gate 1 (planning)"),
-        ("5", "Signed Order"),
-        ("6", "The Runtime"),
-        ("7", "Attested-reference"),
-        ("8", "Gate 2 (human MET)"),
-        ("9", "Proof outputs"),
-        ("10", "Reproduction"),
-    ]
-    if order_ok and factory_ok:
-        _reached = {s[0] for s in _rail_steps}          # whole line ran
-        _stop = None
+    # --- SPRS badge: the single headline number, colour-coded ---
+    if factory_ok and audit_report is not None:
+        _s = audit_report.sprs
+        _bg = "#27ae60" if str(_s.status).lower().startswith("final") else (
+            "#f39c12" if str(_s.status).lower().startswith("condition") else "#e74c3c")
+        _badge_txt = f"SPRS {_s.score} &middot; {_s.status}"
     else:
-        _reached = {"1", "2", "3"}                       # up to the COP
-        _stop = "4"                                      # Gate 1 refused here
+        _bg, _badge_txt = "#e74c3c", "SPRS &mdash; &middot; REFUSED"
+    _badge = mo.md(
+        f"<div style='background:{_bg};color:white;font-weight:700;font-size:1.15rem;"
+        f"text-align:center;padding:.5rem;border-radius:6px;letter-spacing:.02em'>"
+        f"{_badge_txt}</div>"
+    )
 
-    _rail_lines = []
-    for _num, _name in _rail_steps:
-        if _num == _stop:
-            _rail_lines.append(f"■ **{_num}. {_name} — REFUSED**")
-        elif _num in _reached:
-            _rail_lines.append(f"● {_num}. {_name}")
-        else:
-            _rail_lines.append(f"<span style='opacity:0.4'>○ {_num}. {_name}</span>")
-    _rail = mo.md("  \n".join(_rail_lines))
+    # --- compact one-line progress (replaces the full rail; the stations ARE the rail) ---
+    _progress = ("Contract &rarr; Controls &rarr; COP &rarr; **Gate 1 PASS** &rarr; Order "
+                 "&rarr; Runtime &rarr; **Gate 2** &rarr; Proof") if (order_ok and factory_ok) \
+        else "Contract &rarr; Controls &rarr; COP &rarr; **Gate 1 REFUSED** &mdash; line stops"
 
     # --- live indicators ---
     _stat_items = [
@@ -254,13 +323,7 @@ def _(
         ),
     ]
     if factory_ok and audit_report is not None:
-        _s = audit_report.sprs
         _stat_items += [
-            mo.stat(
-                value=f"{_s.score}", label="SPRS score",
-                caption=f"{_s.status} · {'valid' if _s.valid_submission else 'invalid'}",
-                bordered=True,
-            ),
             mo.stat(
                 value=f"{audit_report.proven.machine_count} / {audit_report.proven.human_count}",
                 label="Machine / human", caption="proven vs attested", bordered=True,
@@ -278,14 +341,9 @@ def _(
                   "proving it is compliant are one action.</span>"),
             mo.md("---"),
             scenario,
-            mo.md(
-                "**all-covered** — the full chain completes.  \n"
-                "**gap** — Gate 1 refuses; nothing is built.  \n"
-                "**contradiction** — a human signs MET over a failed machine check."
-            ),
             mo.md("---"),
-            mo.md("### Where the artifact is"),
-            _rail,
+            _badge,
+            mo.md(f"<span style='font-size:0.82rem;opacity:0.8'>{_progress}</span>"),
             mo.md("---"),
             mo.md("### Live indicators"),
             mo.vstack(_stat_items, gap=0.4),
@@ -305,7 +363,8 @@ def _(
 # ═══════════════════════════════════════════════════════════════════════════════
 
 @app.cell(hide_code=True)
-def _(mo):
+def _(graph_counts, mo):
+    _total_triples = sum(int(r.get("triples", 0)) for r in graph_counts)
     prologue = mo.vstack(
         [
             mo.md("## How this notebook is built"),
@@ -323,16 +382,15 @@ def _(mo):
                         "that produced them."
                     ),
                     "Why EARL outcomes, not pass/fail": mo.md(
-                        "`cantTell` is not the same as `failed`. A machine that cannot "
-                        "measure a control should say so rather than return false assurance "
-                        "in either direction. `needsAction` is *actionable*: the oracle "
-                        "found a registered reference but it is stale, unsigned, or "
-                        "unresolvable — a concrete remediation exists. `cantTell` is "
-                        "*structural*: the control has no machine-checkable oracle at all, "
-                        "and only a human attestation can establish MET. Binary pass/fail "
-                        "collapses this distinction and either inflates the score (by "
-                        "counting untestable controls as passed) or deflates it (by "
-                        "counting them as failed). Neither is honest."
+                        "Every control resolves to a *concrete* outcome — the engine never "
+                        "shrugs. A machine control returns `passed` / `failed` from its config "
+                        "oracle. A policy control returns `passed` / `needsAction` / `failed` "
+                        "from the attested-reference oracle: `needsAction` is *actionable* — a "
+                        "registered reference is stale, unsigned, or unresolvable, and names the "
+                        "concrete remediation. Binary pass/fail would collapse this and either "
+                        "inflate the score (counting untested controls as passed) or deflate it "
+                        "(counting them as failed); neither is honest. Every required control "
+                        "lands on exactly one of `passed` / `failed` / `needsAction`."
                     ),
                     "Why SHACL shapes": mo.md(
                         "SHACL shapes are machine-enforceable closure rules that any "
@@ -360,6 +418,14 @@ def _(mo):
                 "| `ce:plan_execution` | P-PLAN Activity instances (per stage) |\n"
                 "| `ce:audit` | Forward/backward audit summary |\n"
             ),
+            mo.callout(
+                mo.md(
+                    f"**This run produced {_total_triples:,} triples across "
+                    f"{len(graph_counts)} named graphs** — live, from the scenario selected "
+                    "above. Every station below reads from this one dataset."
+                ),
+                kind="neutral",
+            ),
         ],
         gap=1.0,
     )
@@ -375,13 +441,12 @@ def _(mo):
     s0_open = mo.vstack(
         [
             mo.md(
-                "# One contract, followed end to end\n\n"
+                "## Station 0 — the whole picture\n\n"
                 "This notebook takes a single artifact — a signed defense contract — "
                 "and follows it down the whole assembly line, watching it change shape at "
                 "each station until it comes out the far end as the documents an assessor "
                 "reads. Every number and payload below is produced by running the **real "
-                "engine**; nothing here is mocked-up narration. Change the **Scenario** in "
-                "the sidebar and the entire chain re-executes."
+                "engine**; nothing here is mocked-up narration."
             ),
             mo.callout(
                 mo.md(
@@ -626,17 +691,26 @@ def _(g1, mo, station):
         )
     else:
         _gaps = ", ".join(g1.gap_controls())
-        _verdict = mo.callout(
+        _verdict = mo.vstack([
             mo.md(
-                f"**Gate 1 REFUSES.** The plan has a hole.\n\n"
-                f"**Uncovered control:** `{_gaps}`\n\n"
-                f"This control is required but no module claims it. The Order is **not "
-                f"emitted** and nothing is built. The machine stops and names the problem "
-                f"rather than build something it cannot prove. Add a module that satisfies "
-                f"`{_gaps}` (or document a scope exclusion) and recompile."
+                f"<div style='background:#e74c3c;color:white;font-weight:700;font-size:1.2rem;"
+                f"padding:.7rem 1rem;border-radius:6px'>GATE 1 REFUSES &mdash; the plan has a hole. "
+                f"The assembly line stops here.</div>"
             ),
-            kind="danger",
-        )
+            mo.callout(
+                mo.md(
+                    f"**Uncovered control:** `{_gaps}`\n\n"
+                    f"This control is required by the Order, but **no module claims it**. "
+                    f"Nothing downstream runs: no Order is emitted, nothing is built, nothing "
+                    f"is proven. The machine refuses to build something it cannot prove, and "
+                    f"names the exact gap instead.\n\n"
+                    f"Add a module that satisfies `{_gaps}` (or document a scope exclusion) and "
+                    f"recompile &mdash; or switch the scenario above to **all-covered** / "
+                    f"**contradiction** to watch the whole line run."
+                ),
+                kind="danger",
+            ),
+        ], gap=0.5)
 
     s4 = mo.vstack(
         [
@@ -714,7 +788,7 @@ def _(io_flow, join, mo, order, order_ok, short, station):
 # ═══════════════════════════════════════════════════════════════════════════════
 
 @app.cell
-def _(factory_ok, factory_state, join, mo, order_ok, short, station, table):
+def _(factory_ok, factory_state, join, mo, oracle_fig, order_ok, short, station, table):
     if not order_ok:
         s6 = mo.vstack(
             [
@@ -779,22 +853,31 @@ def _(factory_ok, factory_state, join, mo, order_ok, short, station, table):
                     ),
                     kind="warn",
                 ),
-                mo.md("### What the Runtime produced (real payload)"),
+                mo.md("### Oracle outcomes — what the machine found"),
+                mo.md(
+                    "The bars are the split at a glance: **passed** (green), **failed** (red), "
+                    "**needsAction** (orange). This is the config oracle *and* the "
+                    "attested-reference oracle over this run — every control resolves to a "
+                    "concrete outcome."
+                ),
+                oracle_fig if oracle_fig is not None
+                else mo.md("_(run a passing scenario to see the chart)_"),
+                mo.md("### The full payload (collapsible detail)"),
                 mo.accordion(
                     {
                         "Modules fetched by content hash": table(_mod_rows, page_size=10),
                         "Evidence artifacts (each addresses at least one control)": table(_ev_rows, page_size=10),
-                        "Oracle outcomes (passed / failed / cantTell / needsAction)": table(_or_rows, page_size=12),
+                        "Oracle outcomes (passed / failed / needsAction)": table(_or_rows, page_size=12),
                     }
                 ),
                 mo.callout(
                     mo.md(
-                        "**The oracle never fakes a check it cannot run.** Where a machine "
-                        "genuinely cannot measure a control, it returns `cantTell`; where a "
-                        "control has an authoritative source but is missing a registered, "
-                        "fresh, or signed reference, it returns `needsAction` with a concrete "
-                        "reason. Neither is silently counted as MET — that call belongs "
-                        "to a human at Station 8."
+                        "**The oracle never fakes a check, and never shrugs.** A machine control "
+                        "returns `passed` / `failed` from its config check; a policy control "
+                        "returns `passed` / `needsAction` / `failed` from the attested-reference "
+                        "oracle — where a reference is missing, stale, or unsigned it returns "
+                        "`needsAction` with the concrete reason. Neither is silently counted as "
+                        "MET — that call belongs to a human at Station 8."
                     ),
                     kind="info",
                 ),
@@ -894,17 +977,37 @@ def _(attested, audit_report, bom_result, factory_ok, illustration, io_flow, mo,
         )
     else:
         _con = audit_report.contradictions if audit_report else []
-        _map_rows = [
-            {
-                "Control": r.control_id,
-                "Oracle": r.oracle_outcome or "—",
-                "Attestation": r.attestation_outcome or "—",
-                "Evidence backing": r.evidence_backing,
-                "Evidence": (sorted(r.evidence_hashes)[0][:12] + "…") if r.evidence_hashes else "—",
-                "Status": r.status,
-            }
-            for r in bom_result.control_mapping
-        ]
+        # Colour each row by how the human sign-off is backed (left border).
+        _backing_color = {
+            "machine": "#27ae60",              # green  — config oracle passed
+            "attested-evidenced": "#16a085",   # teal   — human, machine-recorded doc
+            "override": "#e74c3c",             # red    — MET over a failed check
+            "human-only": "#f39c12",           # amber  — human judgment only
+        }
+        _th = ("<th style='text-align:left;padding:4px 10px;border-bottom:2px solid #1f3a5f'>"
+               "{}</th>")
+        _head = "".join(_th.format(h) for h in
+                        ["Control", "Oracle", "Attestation", "Backing", "Evidence", "Status"])
+        _body = ""
+        for r in bom_result.control_mapping:
+            _c = _backing_color.get(r.evidence_backing, "#95a5a6")
+            _ev = (sorted(r.evidence_hashes)[0][:12] + "…") if r.evidence_hashes else "—"
+            _cells = [r.control_id, r.oracle_outcome or "—", r.attestation_outcome or "—",
+                      r.evidence_backing, _ev, r.status]
+            _tds = "".join(
+                f"<td style='padding:3px 10px;font-size:0.85rem'>{v}</td>" for v in _cells)
+            _body += (f"<tr style='border-left:4px solid {_c}'>{_tds}</tr>")
+        _map_html = (
+            f"<div style='overflow-x:auto'><table style='border-collapse:collapse;width:100%'>"
+            f"<thead><tr>{_head}</tr></thead><tbody>{_body}</tbody></table></div>"
+        )
+        _map_legend = (
+            "<span style='font-size:0.8rem'>"
+            "<b style='color:#27ae60'>&#9646; machine</b> &nbsp; "
+            "<b style='color:#16a085'>&#9646; attested-evidenced</b> &nbsp; "
+            "<b style='color:#f39c12'>&#9646; human-only</b> &nbsp; "
+            "<b style='color:#e74c3c'>&#9646; override</b></span>"
+        )
 
         if _con:
             _con_rows = [
@@ -992,7 +1095,8 @@ def _(attested, audit_report, bom_result, factory_ok, illustration, io_flow, mo,
                     "**override** means the human attested MET over a failed machine check "
                     "(which must carry a written justification and appended evidence)."
                 ),
-                table(_map_rows, page_size=12),
+                mo.md(_map_legend),
+                mo.md(_map_html),
             ]
         )
     return (s8,)
@@ -1057,7 +1161,7 @@ def _(control_explanation, control_picker, factory_ok, mo, station):
 # ═══════════════════════════════════════════════════════════════════════════════
 
 @app.cell
-def _(audit_report, bom_result, factory_ok, mo, order_ok, short, ssp_md, station):
+def _(audit_report, bom_result, coverage, factory_ok, mo, order_ok, short, sprs_fig, ssp_md, station):
     if not order_ok or not factory_ok:
         s9 = mo.vstack(
             [
@@ -1071,20 +1175,38 @@ def _(audit_report, bom_result, factory_ok, mo, order_ok, short, ssp_md, station
         _banner = "NON-EVIDENTIARY" in ssp_md
         _ssp_head = "\n".join(ssp_md.splitlines()[:24])
 
+        # The arithmetic, spelled out: 110 minus the weight of each not-met control.
+        _wt = {c["id"]: int(c.get("weight", 1) or 1) for c in coverage}
+        _unmet = sorted(
+            ((r.control_id, _wt.get(r.control_id, 1)) for r in bom_result.control_mapping
+             if r.status != "MET"),
+            key=lambda x: -x[1],
+        )
+        if _unmet:
+            _terms = " ".join(f"− {w} ({cid})" for cid, w in _unmet[:8])
+            _more = f" − … ({len(_unmet) - 8} more)" if len(_unmet) > 8 else ""
+            _arith = f"SPRS = 110 {_terms}{_more} = {_sprs.score}"
+        else:
+            _arith = (f"SPRS = 110 − 0 = {_sprs.score}   "
+                      "(every required control is MET — nothing is deducted)")
+
         s9 = mo.vstack(
             [
                 station("9", "The proof outputs",
                         "Two checks and two documents, all compiled from one dataset, so "
                         "they cannot disagree."),
                 mo.md("### The audit and the SPRS score"),
+                sprs_fig if sprs_fig is not None else mo.md(""),
                 mo.md(
                     "The **audit** walks the evidence chain forward and backward (Gate 2 at "
                     "BOM close), prints the proven-vs-attested split, and lists "
                     "contradictions separately. The **SPRS score** is "
                     "`110 - (weights of not-met controls)`, banded Final (110) / Conditional "
                     "(88–109, with a legal POA&M) / Ineligible (below 88), and computed "
-                    "over *this Order's* required set."
+                    "over *this Order's* required set. The subtraction, for this run:"
                 ),
+                mo.md(f"<div style='font-family:monospace;font-size:1.02rem;background:#f5f7f9;"
+                      f"padding:.6rem .8rem;border-radius:6px'>{_arith}</div>"),
                 mo.hstack(
                     [
                         mo.stat(value=str(_sprs.score), label="SPRS score", caption=_sprs.status, bordered=True),
@@ -1280,7 +1402,7 @@ def _(factory_ok, hash_demo, mo, station):
 # ═══════════════════════════════════════════════════════════════════════════════
 
 @app.cell
-def _(graph_counts, mo, station, table):
+def _(graph_counts, graph_fig, mo, station, table):
     _rows = [
         {"Named graph": f"ce:{r['layer']}", "Triples": r["triples"]}
         for r in graph_counts
@@ -1294,9 +1416,18 @@ def _(graph_counts, mo, station, table):
                 "Controls, the plan, the Order, evidence, attestations, the plan execution, "
                 "and the audit each live in their own named graph inside one dataset. That "
                 "is what makes the whole chain re-executable and tamper-evident — and "
-                "what lets the BOM and SSP be compiled from the exact same triples. Live "
-                "triple counts for this run:"
+                "what lets the BOM and SSP be compiled from the exact same triples."
             ),
+            mo.md("### The traceability graph — Order &rarr; Modules &rarr; Controls"),
+            mo.md(
+                "Blue = the Order, purple = claiming modules, control nodes coloured by "
+                "oracle outcome (green passed / red failed / amber needsAction / "
+                "grey no result). Orange halos mark contradictions. This is the picture the "
+                "audit walks, forward and backward."
+            ),
+            graph_fig if graph_fig is not None
+            else mo.md("_(run a passing scenario to see the traceability graph)_"),
+            mo.md("### Live triple counts (collapsible detail)"),
             table(_rows),
             mo.callout(
                 mo.md(
@@ -1331,7 +1462,7 @@ def _(coverage, mo):
 
 
 @app.cell
-def _(coverage, cov_family, cov_status, engine, mo, station, table):
+def _(coverage, cov_family, cov_status, coverage_fig, engine, mo, station, table):
     _KIND = engine.KIND_LABEL
 
     _n_mac = sum(1 for r in coverage if r["status"] == "machine")
@@ -1395,6 +1526,13 @@ def _(coverage, cov_family, cov_status, engine, mo, station, table):
                 ],
                 justify="center", gap="1.25rem",
             ),
+            mo.md("### Coverage by family — the whole catalog at a glance"),
+            mo.md(
+                "Fourteen families &times; three verification kinds (blue machine / orange "
+                "attested-reference / teal CSP-inherited). The stacked bars show the "
+                "structural coverage of all 110 controls before you drill into the table."
+            ),
+            coverage_fig,
             mo.hstack([cov_family, cov_status], gap="2rem"),
             mo.md(f"**{len(_filtered)} of {len(coverage)} controls** shown. "
                   "**Wt** is the SPRS weight deducted if the control is not met; "
@@ -1457,6 +1595,7 @@ def _(mo):
 @app.cell
 def _(
     footer,
+    header,
     mo,
     prologue,
     s0_map,
@@ -1479,7 +1618,8 @@ def _(
 ):
     mo.vstack(
         [
-            s0_open, s0_map,
+            header,
+            mo.md("---"), s0_open, s0_map,
             mo.md("---"), prologue,
             mo.md("---"), s1,
             mo.md("---"), s2,
