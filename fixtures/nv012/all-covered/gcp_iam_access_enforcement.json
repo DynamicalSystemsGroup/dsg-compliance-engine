@@ -1,0 +1,19 @@
+{
+  "source_system": "gcp.iam",
+  "export_command": "gcloud projects get-iam-policy nv012-cui --format=json | opa eval -d access_policy.rego",
+  "collected_at": "2026-07-02T00:00:00Z",
+  "collector_version": "mock-0.1.0",
+  "controls": ["AC.L2-3.1.2", "AC.L2-3.1.3", "AC.L2-3.1.5"],
+  "evidentiary_status": "mock",
+  "raw": {
+    "kind": "iam#accessPolicy",
+    "transactionTypeBindings": {"enforced": true, "denyByDefault": true},
+    "cuiFlowControls": {"vpcServiceControlsPerimeter": true, "dlpEgressRules": true},
+    "roleBindings": {"aboveLeastPrivilegeBaseline": 0}
+  },
+  "summary": {
+    "transaction_type_restrictions_enforced": true,
+    "cui_flow_control_enforced": true,
+    "overprivileged_bindings": 0
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "source_system": "gcp.cloud_logging",
+  "export_command": "gcloud logging sinks describe cui-audit-sink --format=json",
+  "collected_at": "2026-07-02T00:00:00Z",
+  "collector_version": "mock-0.1.0",
+  "controls": ["AU.L2-3.3.1", "AU.L2-3.3.2", "AU.L2-3.3.5"],
+  "evidentiary_status": "mock",
+  "raw": {
+    "kind": "logging#sink",
+    "auditLogExport": {"enabled": true, "retentionDays": 400, "destination": "bq://cui_audit"},
+    "userAttribution": {"principalEmailLogged": true},
+    "reviewCorrelation": {"scc_correlation": true, "logAnalyticsLinked": true}
+  },
+  "summary": {
+    "audit_log_export_enabled": true,
+    "audit_user_attribution_enabled": true,
+    "audit_correlation_enabled": true
+  }
+}

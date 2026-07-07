@@ -19,9 +19,9 @@ uv run pytest -q
 
 | Scenario (`cli.py demo --evidence-set …`) | Gate 1 / SPRS | Exit | Artifacts | Verdict vs criterion |
 | --- | --- | --- | --- | --- |
-| **all-covered** | Gate 1 PASS (Order = 22 controls); **SPRS 110 / Final / valid_submission=True**; R13 contradictions **0**; proven 4 machine / 18 human-only | **0** | `bom.json` (`evidentiary_status=mock`), `audit.{md,json}`, `ssp.md` (NON-EVIDENTIARY banner **present**; VCRM = **110** control rows), `engine.trig`, `run_state.json`, `registry/{objects,index.json}` | **PASS** — Gate 1 pass, SPRS 110/Final/valid, R12 banner present, VCRM covers the graph |
+| **all-covered** | Gate 1 PASS (Order = 22 controls); **SPRS 110 / Final / valid_submission=True**; R13 contradictions **0**; proven 20 machine / 2 CSP-inherited | **0** | `bom.json` (`evidentiary_status=mock`), `audit.{md,json}`, `ssp.md` (NON-EVIDENTIARY banner **present**; VCRM = **110** control rows), `engine.trig`, `run_state.json`, `registry/{objects,index.json}` | **PASS** — Gate 1 pass, SPRS 110/Final/valid, R12 banner present, VCRM covers the graph |
 | **gap** | **Gate 1 REFUSED — Order NOT emitted**, names missing module for **AC.L2-3.1.12** | **2** | none (Factory never ran; no `bom.json`) | **PASS** — refusal names the control, exit 2, Factory never runs |
-| **contradiction** | Gate 1 PASS; SPRS 110 / Final / valid; **R13 contradictions = 1**; proven 3 machine / 19 human-only | **0** | full set incl. `ssp.md`; colophon: *"…contradictions: 1."* | **PASS** — R13 flagged (count ≥ 1) and surfaced in `audit.md` + SSP colophon |
+| **contradiction** | Gate 1 PASS; **SPRS 105 / Conditional / valid_submission=False** (the contradicted control's weight is deducted); **R13 contradictions = 1**; proven 19 machine / 3 human | **0** | full set incl. `ssp.md`; colophon: *"…contradictions: 1."* | **PASS** — R13 flagged (count ≥ 1), the score drops and the submission is invalid, surfaced in `audit.md` + SSP colophon |
 
 **SSP wiring has landed** — `cli.py demo` produces `ssp.md` directly (not a stub);
 it carries the NON-EVIDENTIARY banner and colophon on every mock run.

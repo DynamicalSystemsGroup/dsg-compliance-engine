@@ -211,6 +211,37 @@ CRITERIA: dict[str, Criterion] = {
                                "non-privileged accounts used for non-security work"),
     "AC.L2-3.1.7":   Criterion("AC.L2-3.1.7", "privileged_actions_logged", "eq", True,
                                "non-admin attempts to run privileged functions logged"),
+    # --- Access enforcement (oracle-iam-least-privilege / -access-mediation) ---
+    "AC.L2-3.1.2":   Criterion("AC.L2-3.1.2", "transaction_type_restrictions_enforced", "eq", True,
+                               "access limited to permitted transaction types / functions"),
+    "AC.L2-3.1.3":   Criterion("AC.L2-3.1.3", "cui_flow_control_enforced", "eq", True,
+                               "approved authorizations control the flow of CUI"),
+    # --- Audit & accountability (oracle-auditlog-export) --------------------
+    "AU.L2-3.3.2":   Criterion("AU.L2-3.3.2", "audit_user_attribution_enabled", "eq", True,
+                               "actions traceable to individual users for accountability"),
+    "AU.L2-3.3.5":   Criterion("AU.L2-3.3.5", "audit_correlation_enabled", "eq", True,
+                               "audit review/analysis/reporting correlated across the estate"),
+    # --- Configuration management (oracle-terraform-baseline / -restrict-service-usage) ---
+    "CM.L2-3.4.1":   Criterion("CM.L2-3.4.1", "config_baseline_established", "eq", True,
+                               "baseline configuration established and maintained"),
+    "CM.L2-3.4.2":   Criterion("CM.L2-3.4.2", "config_change_enforcement_active", "eq", True,
+                               "security configuration settings enforced"),
+    "CM.L2-3.4.6":   Criterion("CM.L2-3.4.6", "least_functionality_enforced", "eq", True,
+                               "least functionality: essential capabilities only"),
+    "CM.L2-3.4.7":   Criterion("CM.L2-3.4.7", "nonessential_services_disabled", "eq", True,
+                               "nonessential programs / ports / protocols / services disabled"),
+    # --- Identification & authentication (oracle-mfa-2sv-enforced) ----------
+    "IA.L2-3.5.2":   Criterion("IA.L2-3.5.2", "device_authentication_required", "eq", True,
+                               "users, processes, and devices authenticated before access"),
+    "IA.L2-3.5.4":   Criterion("IA.L2-3.5.4", "replay_resistant_auth_enabled", "eq", True,
+                               "replay-resistant authentication for network access"),
+    # --- Crypto key management + system integrity (oracle-cmek-fips-keyring / -monitoring-alerts) ---
+    "SC.L2-3.13.10": Criterion("SC.L2-3.13.10", "key_management_established", "eq", True,
+                               "cryptographic key establishment and management"),
+    "SI.L2-3.14.3":  Criterion("SI.L2-3.14.3", "security_alert_response_enabled", "eq", True,
+                               "security alerts and advisories monitored and acted upon"),
+    "SI.L2-3.14.6":  Criterion("SI.L2-3.14.6", "network_attack_monitoring_active", "eq", True,
+                               "communications monitored for attacks and indicators"),
 }
 
 

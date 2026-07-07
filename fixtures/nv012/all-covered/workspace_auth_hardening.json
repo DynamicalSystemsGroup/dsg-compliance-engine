@@ -1,0 +1,17 @@
+{
+  "source_system": "workspace.security",
+  "export_command": "gam print settings | opa eval -d ia_auth.rego",
+  "collected_at": "2026-07-02T00:00:00Z",
+  "collector_version": "mock-0.1.0",
+  "controls": ["IA.L2-3.5.2", "IA.L2-3.5.4"],
+  "evidentiary_status": "mock",
+  "raw": {
+    "kind": "security#authPolicy",
+    "deviceAuth": {"contextAwareAccess": true, "managedDevicesOnly": true},
+    "replayResistance": {"protocol": "OIDC+PKCE", "nonceEnforced": true, "hardwareKeys": true}
+  },
+  "summary": {
+    "device_authentication_required": true,
+    "replay_resistant_auth_enabled": true
+  }
+}

@@ -75,22 +75,37 @@ class Generator(Protocol):
         ...
 
 
-def _load_fixture_files(ctx: GeneratorContext) -> list[tuple[Path, dict]]:
-    """Read every ``*.json`` export in the selected set, sorted for determinism.
+_BASE_SET = "all-covered"
 
-    Returns ``(path, parsed_json)`` pairs. A missing set dir yields ``[]`` so a
-    ``gap`` set that omits a file simply produces less evidence (no raise).
+
+def _load_fixture_files(ctx: GeneratorContext) -> list[tuple[Path, dict]]:
+    """Read the ``*.json`` exports for the selected set, sorted for determinism.
+
+    Scenario sets LAYER over the ``all-covered`` base: a scenario is "all-covered
+    but with these files changed". The base set's files load first, then the
+    selected set's files override by filename (so ``contradiction/workspace_2sv.json``
+    replaces the base's, flipping just the one metric while every other control keeps
+    its passing evidence). ``all-covered`` itself is the base and uses no overlay.
+
+    Returns ``(path, parsed_json)`` pairs. A missing set dir yields the base alone.
     """
     import json
 
-    set_dir = ctx.set_dir()
-    if not set_dir.is_dir():
-        return []
-    out: list[tuple[Path, dict]] = []
-    for path in sorted(set_dir.glob("*.json")):
-        with path.open(encoding="utf-8") as fh:
-            out.append((path, json.load(fh)))
-    return out
+    root = Path(ctx.fixtures_root)
+    merged: dict[str, tuple[Path, dict]] = {}
+
+    def _read_dir(d: Path) -> None:
+        if not d.is_dir():
+            return
+        for path in sorted(d.glob("*.json")):
+            with path.open(encoding="utf-8") as fh:
+                merged[path.name] = (path, json.load(fh))
+
+    if ctx.evidence_set != _BASE_SET:
+        _read_dir(root / _BASE_SET)      # base coverage
+    _read_dir(ctx.set_dir())             # scenario overrides (by filename)
+
+    return [merged[name] for name in sorted(merged)]
 
 
 def _metadata_from_envelope(doc: dict) -> CollectionMetadata:

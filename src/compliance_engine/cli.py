@@ -302,15 +302,19 @@ def _do_attest(ds, state) -> int:
         wrong-signer reference yields needsAction/failed and is NOT marked MET. The MET
         attestation uses the real Affirming-Official judgement text and links the
         machine-recorded ce:DocumentEvidence (sha256 + git commit + signed upload).
-      * Human/inherited: a control with no machine oracle and no reference is attested
-        MET on a documentary/CSP basis (no `ce:oracleOutcome`).
+      * CSP-inherited: a control whose module verification method is `inherited:*`
+        is attested MET with an explicit `ce:inherited` oracle outcome (the CSP
+        satisfies it under shared responsibility).
+      * No result at all: a control that claims a machine method but produced no
+        evidence this run is attested `needsAction` and is NOT marked MET — nothing
+        passes without a concrete result behind it.
     """
     from pathlib import Path
 
     from rdflib import URIRef
 
     import compliance_engine
-    from compliance_engine.ontology.prefixes import CE, EARL
+    from compliance_engine.ontology.prefixes import CE, CMMC, EARL
     from compliance_engine.traceability.attestation import (
         OUTCOME_PASSED,
         request_attestation,
@@ -325,6 +329,16 @@ def _do_attest(ds, state) -> int:
     required = state.load_order.required_controls if state.load_order else ()
     outcomes = state.oracles.outcomes if state.oracles else {}
     attested_refs = getattr(state, "attested_refs", {}) or {}
+
+    # Controls satisfied by a CSP-inherited module (verificationMethod inherited:*).
+    def _ln(node) -> str:
+        return str(node).rsplit("/", 1)[-1].rsplit("#", 1)[-1]
+
+    inherited_controls: set[str] = set()
+    for module, _p, vm in ds.triples((None, CMMC.verificationMethod, None)):
+        if _ln(vm).startswith("inherited"):
+            for _s, _pp, ctrl in ds.triples((module, CMMC.controlsSatisfied, None)):
+                inherited_controls.add(_ln(ctrl))
 
     # Real AO sign-offs (adequacy/sufficiency/signer) behind the Track B controls.
     att_dir = Path(compliance_engine.__file__).resolve().parent.parent.parent / "data" / "attestations"
@@ -363,26 +377,35 @@ def _do_attest(ds, state) -> int:
 
         oracle_outcome = outcomes.get(control_id)
         if oracle_outcome is not None:
-            adequacy = "Implementation reviewed against the provisioned configuration."
-            sufficiency = (
-                "Machine oracle + config evidence sufficient for the Phase-I mock run."
+            # Track A machine control — carries its real oracle outcome.
+            request_attestation(
+                ds, control_id, "NV012 Affirming Official", auto_attest=True,
+                adequacy="Implementation reviewed against the provisioned configuration.",
+                sufficiency="Machine oracle + config evidence sufficient for the Phase-I mock run.",
+                outcome=OUTCOME_PASSED,
+                oracle_outcome=outcome_iri.get(oracle_outcome),
             )
+            n += 1
+        elif control_id in inherited_controls:
+            # CSP-inherited — MET with an explicit inherited basis, not a silent pass.
+            request_attestation(
+                ds, control_id, "NV012 Affirming Official", auto_attest=True,
+                adequacy="Control satisfied by the cloud service provider and inherited.",
+                sufficiency="CSP shared-responsibility inheritance; no customer-side machine check applies.",
+                outcome=OUTCOME_PASSED, oracle_outcome=CE.inherited,
+            )
+            n += 1
         else:
-            adequacy = (
-                "Implementation reviewed; control met by human/inherited determination."
+            # Claims a machine method but produced no evidence this run -> NOT MET.
+            # Nothing passes without a concrete result behind it.
+            request_attestation(
+                ds, control_id, "NV012 Affirming Official", auto_attest=True,
+                adequacy="No machine evidence was produced for this control in this run.",
+                sufficiency=("Control claims a config oracle but no evidence generator emitted "
+                             "its metric; produce evidence or attest on a documentary basis."),
+                outcome=CE.needsAction, oracle_outcome=CE.needsAction,
             )
-            sufficiency = "No machine oracle for this control; attested MET on documentary/CSP basis."
-        request_attestation(
-            ds,
-            control_id,
-            "NV012 Affirming Official",
-            auto_attest=True,
-            adequacy=adequacy,
-            sufficiency=sufficiency,
-            outcome=OUTCOME_PASSED,
-            oracle_outcome=outcome_iri.get(oracle_outcome) if oracle_outcome else None,
-        )
-        n += 1
+            # not counted as MET
     return n
 
 

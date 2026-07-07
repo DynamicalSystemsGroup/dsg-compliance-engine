@@ -57,6 +57,19 @@ _ORACLE_KEYS = {
     "external_system_perimeter_defined",
     # IAMRoles_Privilege (2)
     "non_privileged_accounts_used_for_non_security", "privileged_actions_logged",
+    # Access enforcement (3)
+    "transaction_type_restrictions_enforced", "cui_flow_control_enforced",
+    "overprivileged_bindings",
+    # Audit & accountability (3)
+    "audit_log_export_enabled", "audit_user_attribution_enabled", "audit_correlation_enabled",
+    # Configuration management (4)
+    "config_baseline_established", "config_change_enforcement_active",
+    "least_functionality_enforced", "nonessential_services_disabled",
+    # Identification & authentication (2)
+    "device_authentication_required", "replay_resistant_auth_enabled",
+    # Crypto KM + system integrity (3)
+    "key_management_established", "security_alert_response_enabled",
+    "network_attack_monitoring_active",
 }
 
 
@@ -76,8 +89,10 @@ class TestProtocolConformance:
 class TestMockConfigExportGenerator:
     def test_all_covered_emits_every_criterion(self):
         arts = MockConfigExportGenerator().collect(GeneratorContext(evidence_set="all-covered"))
-        # 5 tier-1 fixtures + 13 Track A fixtures = 18 artifacts.
-        assert len(arts) == 5 + 13 == 18
+        # 18 original fixtures + 5 coverage-completing fixtures = 23 artifacts.
+        assert len(arts) == 18 + 5 == 23
+        # Every machine criterion's metric appears in some fixture summary — no
+        # control claims a config oracle without evidence to feed it.
         assert _summary_keys(arts) == _ORACLE_KEYS
 
     def test_artifact_shape(self):
@@ -92,13 +107,14 @@ class TestMockConfigExportGenerator:
         # raw_bytes round-trips to JSON (used by binding for hashing).
         assert isinstance(json.loads(a.raw_bytes.decode()), dict)
 
-    def test_gap_set_omits_fips_control(self):
+    def test_gap_set_layers_over_base(self):
+        # Scenario sets layer over all-covered, so gap inherits full evidence
+        # coverage. The gap SCENARIO refuses at Gate 1 structurally (it injects a
+        # non-catalog control with no claiming module), not by omitting evidence.
         arts = MockConfigExportGenerator().collect(GeneratorContext(evidence_set="gap"))
         addressed = {c for a in arts for c in a.controls}
-        # gap/ drops the FIPS export -> SC.L2-3.13.11 is unaddressed (Gate-1 refusal).
-        assert "SC.L2-3.13.11" not in addressed
-        assert "fips_module_present" not in _summary_keys(arts)
-        # The other four criteria are still present.
+        assert "SC.L2-3.13.11" in addressed          # FIPS inherited from base
+        assert "fips_module_present" in _summary_keys(arts)
         assert "IA.L2-3.5.3" in addressed
 
     def test_contradiction_set_has_failing_mfa(self):
@@ -106,9 +122,12 @@ class TestMockConfigExportGenerator:
         mfa = [a for a in arts if "mfa_enforced_privileged" in a.summary]
         assert mfa and mfa[0].summary["mfa_enforced_privileged"] is False
 
-    def test_missing_set_dir_is_empty_not_error(self):
+    def test_missing_set_dir_falls_back_to_base(self):
+        # A non-base set that has no dir of its own layers over all-covered, so it
+        # yields the base coverage rather than raising or coming back empty.
         arts = MockConfigExportGenerator().collect(GeneratorContext(evidence_set="does-not-exist"))
-        assert arts == []
+        base = MockConfigExportGenerator().collect(GeneratorContext(evidence_set="all-covered"))
+        assert len(arts) == len(base) and len(arts) > 0
 
 
 class TestMockPolicyCheckGenerator:

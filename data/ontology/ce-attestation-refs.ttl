@@ -37,6 +37,10 @@ ce:needsAction a earl:OutcomeValue ;
     rdfs:label "needs action" ;
     rdfs:comment "The control has a claimable module and an authoritative source, but is missing something concrete and actionable: no reference registered, a stale reference, a reference awaiting AO attestation, or no config criterion. needsAction always carries a machine-readable reason describing the missing piece." .
 
+ce:inherited a earl:OutcomeValue ;
+    rdfs:label "inherited" ;
+    rdfs:comment "The control is satisfied by the cloud service provider under the shared-responsibility model and inherited by the customer. A concrete, explicit basis for MET (no customer-side machine check applies) — distinct from a silent human determination." .
+
 ce:outcomeReason a owl:DatatypeProperty ;
     rdfs:label "outcome reason" ;
     rdfs:range xsd:string ;

@@ -1,0 +1,19 @@
+{
+  "source_system": "gcp.security",
+  "export_command": "gcloud kms keyrings list && gcloud scc notifications list --format=json",
+  "collected_at": "2026-07-02T00:00:00Z",
+  "collector_version": "mock-0.1.0",
+  "controls": ["SC.L2-3.13.10", "SI.L2-3.14.3", "SI.L2-3.14.6"],
+  "evidentiary_status": "mock",
+  "raw": {
+    "kind": "sc_si#monitoring",
+    "keyManagement": {"cmekEstablished": true, "rotationDays": 90, "hsmBacked": true},
+    "alertResponse": {"sccNotificationsWired": true, "cisaAdvisoryFeed": true, "playbookLinked": true},
+    "attackMonitoring": {"idsEnabled": true, "flowLogsAnalyzed": true, "cloudArmorPolicies": 6}
+  },
+  "summary": {
+    "key_management_established": true,
+    "security_alert_response_enabled": true,
+    "network_attack_monitoring_active": true
+  }
+}

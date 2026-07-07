@@ -20,20 +20,18 @@ def test_all_covered_completes_with_full_score():
     assert r["order"].order_hash
     assert len(r["required_controls"]) == 22
     assert len(r["order"].required_controls) == 22
-    # 6 tier-1 outcomes + 45 Track A criteria = 51 oracle outcomes.
-    assert len(r["factory_state"].oracles.outcomes) == 6 + 45 == 51
-    # 7 tier-1 evidence nodes + 13 Track A config exports = 20 evidence nodes.
-    assert r["factory_state"].evidence.evidence_node_count == 7 + 13 == 20
+    assert len(r["factory_state"].oracles.outcomes) == 66
+    assert r["factory_state"].evidence.evidence_node_count == 25
 
     audit = r["audit"]
     assert audit.sprs.score == 110
     assert audit.sprs.status == "Final"
     assert audit.sprs.valid_submission is True
     assert len(audit.contradictions) == 0
-    # SC.L2-3.13.1 (boundary/residency) is machine-proven via its data_region
-    # criterion — it used to lack a criterion and return no config result.
-    assert audit.proven.machine_count == 5
-    assert audit.proven.human_count == 17
+    # Every required control now has a real (mock) oracle result: 20 machine-proven
+    # + 2 CSP-inherited = 22 MET. Nothing is attested MET without a concrete result.
+    assert audit.proven.machine_count == 20
+    assert audit.proven.human_count == 2
 
     assert r["bom"].evidentiary_status == "mock"
     assert "NON-EVIDENTIARY" in r["ssp"]
@@ -63,9 +61,9 @@ def test_contradiction_drops_score_and_invalidates_submission():
     assert audit.sprs.status == "Conditional"
     assert audit.sprs.valid_submission is False
     assert "IA.L2-3.5.3" in audit.sprs.unmet
-    # SC.L2-3.13.1 now machine-resolved (data_region criterion).
-    assert audit.proven.machine_count == 4
-    assert audit.proven.human_count == 18
+    # IA.L2-3.5.3 flips to a failed oracle here, so 19 machine-proven + 3 human.
+    assert audit.proven.machine_count == 19
+    assert audit.proven.human_count == 3
 
 
 def test_run_is_deterministic():
