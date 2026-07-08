@@ -120,12 +120,40 @@ def test_bom_references_every_artifact_and_hash_recomputes(tmp_path):
     assert set(bom.module_hashes.values()) <= refs
     assert set(bom.evidence_hashes) <= refs
     assert bom.hash_reference(reg) == f"registry://{bom.bom_hash}"
+
+
+def test_store_bom_signs_the_bom_and_records_it_in_the_registry(tmp_path):
+    from compliance_engine.signing.signer import Ed25519LocalSigner
+
+    state, ds = _factory_state(attest=["IA.L2-3.5.3"])
+    bom = bommod.build_bom(state, ds, contract_id="NV012")
+
+    reg = Registry(tmp_path)
+    bommod.store_bom(bom, reg, "NV012")
+
+    sig_hash = reg.bom_signature(bom.bom_hash)
+    assert sig_hash is not None
+    sig_bytes = reg.get(sig_hash)
+    assert Ed25519LocalSigner().verify(bom.canonical_bytes(), sig_bytes)
+
+
 def test_control_mapping_covers_every_required_control():
     state, ds = _factory_state()
     bom = bommod.build_bom(state, ds, "NV012")
     mapped = {r.control_id for r in bom.control_mapping}
     assert mapped == set(state.load_order.required_controls)
     assert len(bom.control_mapping) == 22
+
+
+def test_to_rdf_emits_evidence_backing_per_control_mapping_row():
+    state, ds = _factory_state(attest=["IA.L2-3.5.3"])
+    bom = bommod.build_bom(state, ds, "NV012")
+
+    g = bom.to_rdf()
+    for row in bom.control_mapping:
+        node = CE[f"BOM/{bom.bom_hash}/mapping/{row.control_id}"]
+        backing_values = list(g.objects(node, CE.evidenceBacking))
+        assert backing_values == [Literal(row.evidence_backing)]
 # ---------------------------------------------------------------------------
 # R12 — evidentiary status propagation
 # ---------------------------------------------------------------------------

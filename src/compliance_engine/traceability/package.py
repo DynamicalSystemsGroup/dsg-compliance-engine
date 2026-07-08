@@ -191,6 +191,16 @@ def build_audit_package(
         if src.exists():
             shutil.copy2(src, pkg / name)
 
+    # bom.json.sig (ce:step-SignAndStore's detached BOM signature, written by
+    # cli.py's _do_bom) is not sha256-tracked as a bundled artifact — it is
+    # itself a signature, not content to re-hash — but it is copied alongside
+    # bom.json so an assessor examining the package alone (without the raw
+    # output_dir) can still verify the BOM's own signature independently of
+    # the manifest's signature over the whole package.
+    bom_sig_src = output_dir / "bom.json.sig"
+    if bom_sig_src.exists():
+        shutil.copy2(bom_sig_src, pkg / "bom.json.sig")
+
     return AuditPackage(package_dir=pkg, manifest=manifest, sig_algo=signer.algo, key_id=key_id)
 
 
@@ -264,6 +274,23 @@ def verify_audit_package(package_dir: Path) -> PackageVerifyResult:
         elif _sha256_file(f) != art["sha256"]:
             artifacts_ok = False
             issues.append(f"artifact hash mismatch: {art['name']}")
+
+    # 2.5. bom.json.sig — the BOM's own detached signature (ce:step-SignAndStore),
+    #      independent of the manifest's signature over the whole package. Its
+    #      absence is non-fatal (older packages predate this signature); its
+    #      presence with an invalid signature is a hard failure.
+    bom_sig_path = package_dir / "bom.json.sig"
+    bom_path = package_dir / "bom.json"
+    if bom_sig_path.exists() and bom_path.exists():
+        try:
+            bom_sig = base64.b64decode(bom_sig_path.read_text().strip(), validate=True)
+            bom_signer = default_local_signer()
+            if not bom_signer.verify(bom_path.read_bytes(), bom_sig):
+                artifacts_ok = False
+                issues.append("bom.json.sig does not verify against bom.json (tampered)")
+        except ValueError as exc:
+            artifacts_ok = False
+            issues.append(f"bom.json.sig malformed: {exc}")
 
     # 3. control -> signed-policy chain: every attested control resolves to at least
     #    one policy reference, and MET controls carry an attestation outcome.

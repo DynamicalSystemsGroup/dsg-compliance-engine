@@ -111,11 +111,13 @@ ORDER BY ?controlId
 """
 
 # Document-compiler view: adds the outcome short-name, override justification,
-# backing-oracle outcome, and the cited evidence set (GROUP_CONCAT — split on
-# "|" and sort in Python for determinism).
+# backing-oracle outcome, the cited evidence set (GROUP_CONCAT — split on "|"
+# and sort in Python for determinism), and whether the attestation is backed by
+# a machine-recorded document (ce:documentEvidence — the "attested-evidenced"
+# Track B signal; see ssp.py's _backing_label()).
 ATTESTATION_DETAIL = """
 SELECT ?att ?controlId ?official ?adequacy ?sufficiency ?outcomeShort ?mode
-       ?timestamp ?override ?overrideEvidence ?oracleOutcome
+       ?timestamp ?override ?overrideEvidence ?oracleOutcome ?documentEvidence
        (GROUP_CONCAT(STR(?ev); separator="|") AS ?evidence) WHERE {
     ?att a ce:Attestation ;
          ce:attests ?control ;
@@ -126,6 +128,7 @@ SELECT ?att ?controlId ?official ?adequacy ?sufficiency ?outcomeShort ?mode
     OPTIONAL { ?att cmmc:overrideJustification ?override }
     OPTIONAL { ?att ce:overrideEvidence ?overrideEvidence }
     OPTIONAL { ?att ce:oracleOutcome ?oracleOutcome }
+    OPTIONAL { ?att ce:documentEvidence ?documentEvidence }
     OPTIONAL { ?att ce:hasEvidence ?ev }
     ?att gsn:inContextOf ?adequacyNode .
     ?adequacyNode a gsn:Assumption ; gsn:statement ?adequacy .
@@ -136,7 +139,7 @@ SELECT ?att ?controlId ?official ?adequacy ?sufficiency ?outcomeShort ?mode
     BIND(REPLACE(STR(?outcome), "^.*[#/]", "") AS ?outcomeShort)
 }
 GROUP BY ?att ?controlId ?official ?adequacy ?sufficiency ?outcomeShort ?mode
-         ?timestamp ?override ?overrideEvidence ?oracleOutcome
+         ?timestamp ?override ?overrideEvidence ?oracleOutcome ?documentEvidence
 ORDER BY ?controlId ?att
 """
 

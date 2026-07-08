@@ -69,6 +69,25 @@ def test_tampered_artifact_is_detected():
     assert not result.artifacts_ok
 
 
+def test_bom_json_sig_is_bundled_and_verifies():
+    _out, pkg = _run_and_package()
+    sig_path = pkg.package_dir / "bom.json.sig"
+    assert sig_path.exists()
+    result = verify_audit_package(pkg.package_dir)
+    assert result.ok, result.summary()
+
+
+def test_tampered_bom_signature_is_detected():
+    _out, pkg = _run_and_package()
+    sig_path = pkg.package_dir / "bom.json.sig"
+    assert sig_path.exists()
+    sig_path.write_text("dGFtcGVyZWQ=")  # base64("tampered") — well-formed, wrong
+    result = verify_audit_package(pkg.package_dir)
+    assert not result.ok
+    assert not result.artifacts_ok
+    assert any("bom.json.sig" in issue for issue in result.issues)
+
+
 def test_ce_package_on_incomplete_dir_errors_clearly(tmp_path):
     from typer.testing import CliRunner
 

@@ -1,0 +1,578 @@
+<http://dynamicalsystems.group/compliance-engine/collector/chrome-cloud-mgmt> <http://dynamicalsystems.group/compliance-engine/collectorVersion> "mock-0.1.0" .
+<http://dynamicalsystems.group/compliance-engine/collector/chrome-cloud-mgmt> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#SoftwareAgent> .
+<http://dynamicalsystems.group/compliance-engine/collector/chrome-cloud-mgmt> <http://www.w3.org/2000/01/rdf-schema#label> "chrome.cloud_mgmt collector mock-0.1.0" .
+<http://dynamicalsystems.group/compliance-engine/collector/crowdstrike-falcon> <http://dynamicalsystems.group/compliance-engine/collectorVersion> "mock-0.1.0" .
+<http://dynamicalsystems.group/compliance-engine/collector/crowdstrike-falcon> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#SoftwareAgent> .
+<http://dynamicalsystems.group/compliance-engine/collector/crowdstrike-falcon> <http://www.w3.org/2000/01/rdf-schema#label> "crowdstrike.falcon collector mock-0.1.0" .
+<http://dynamicalsystems.group/compliance-engine/collector/gcp-beyondcorp> <http://dynamicalsystems.group/compliance-engine/collectorVersion> "mock-0.1.0" .
+<http://dynamicalsystems.group/compliance-engine/collector/gcp-beyondcorp> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#SoftwareAgent> .
+<http://dynamicalsystems.group/compliance-engine/collector/gcp-beyondcorp> <http://www.w3.org/2000/01/rdf-schema#label> "gcp.beyondcorp collector mock-0.1.0" .
+<http://dynamicalsystems.group/compliance-engine/collector/gcp-binaryauth> <http://dynamicalsystems.group/compliance-engine/collectorVersion> "mock-0.1.0" .
+<http://dynamicalsystems.group/compliance-engine/collector/gcp-binaryauth> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#SoftwareAgent> .
+<http://dynamicalsystems.group/compliance-engine/collector/gcp-binaryauth> <http://www.w3.org/2000/01/rdf-schema#label> "gcp.binaryauth collector mock-0.1.0" .
+<http://dynamicalsystems.group/compliance-engine/collector/gcp-cloud-logging> <http://dynamicalsystems.group/compliance-engine/collectorVersion> "mock-0.1.0" .
+<http://dynamicalsystems.group/compliance-engine/collector/gcp-cloud-logging> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#SoftwareAgent> .
+<http://dynamicalsystems.group/compliance-engine/collector/gcp-cloud-logging> <http://www.w3.org/2000/01/rdf-schema#label> "gcp.cloud_logging collector mock-0.1.0" .
+<http://dynamicalsystems.group/compliance-engine/collector/gcp-cloudidentity> <http://dynamicalsystems.group/compliance-engine/collectorVersion> "mock-0.1.0" .
+<http://dynamicalsystems.group/compliance-engine/collector/gcp-cloudidentity> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#SoftwareAgent> .
+<http://dynamicalsystems.group/compliance-engine/collector/gcp-cloudidentity> <http://www.w3.org/2000/01/rdf-schema#label> "gcp.cloudidentity collector mock-0.1.0" .
+<http://dynamicalsystems.group/compliance-engine/collector/gcp-cloudlogging> <http://dynamicalsystems.group/compliance-engine/collectorVersion> "mock-0.1.0" .
+<http://dynamicalsystems.group/compliance-engine/collector/gcp-cloudlogging> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#SoftwareAgent> .
+<http://dynamicalsystems.group/compliance-engine/collector/gcp-cloudlogging> <http://www.w3.org/2000/01/rdf-schema#label> "gcp.cloudlogging collector mock-0.1.0" .
+<http://dynamicalsystems.group/compliance-engine/collector/gcp-compute> <http://dynamicalsystems.group/compliance-engine/collectorVersion> "mock-0.1.0" .
+<http://dynamicalsystems.group/compliance-engine/collector/gcp-compute> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#SoftwareAgent> .
+<http://dynamicalsystems.group/compliance-engine/collector/gcp-compute> <http://www.w3.org/2000/01/rdf-schema#label> "gcp.compute collector mock-0.1.0" .
+<http://dynamicalsystems.group/compliance-engine/collector/gcp-iam> <http://dynamicalsystems.group/compliance-engine/collectorVersion> "mock-0.1.0" .
+<http://dynamicalsystems.group/compliance-engine/collector/gcp-iam> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#SoftwareAgent> .
+<http://dynamicalsystems.group/compliance-engine/collector/gcp-iam> <http://www.w3.org/2000/01/rdf-schema#label> "gcp.iam collector mock-0.1.0" .
+<http://dynamicalsystems.group/compliance-engine/collector/gcp-kms> <http://dynamicalsystems.group/compliance-engine/collectorVersion> "mock-0.1.0" .
+<http://dynamicalsystems.group/compliance-engine/collector/gcp-kms> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#SoftwareAgent> .
+<http://dynamicalsystems.group/compliance-engine/collector/gcp-kms> <http://www.w3.org/2000/01/rdf-schema#label> "gcp.kms collector mock-0.1.0" .
+<http://dynamicalsystems.group/compliance-engine/collector/gcp-org-policy> <http://dynamicalsystems.group/compliance-engine/collectorVersion> "mock-0.1.0" .
+<http://dynamicalsystems.group/compliance-engine/collector/gcp-org-policy> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#SoftwareAgent> .
+<http://dynamicalsystems.group/compliance-engine/collector/gcp-org-policy> <http://www.w3.org/2000/01/rdf-schema#label> "gcp.org_policy collector mock-0.1.0" .
+<http://dynamicalsystems.group/compliance-engine/collector/gcp-security> <http://dynamicalsystems.group/compliance-engine/collectorVersion> "mock-0.1.0" .
+<http://dynamicalsystems.group/compliance-engine/collector/gcp-security> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#SoftwareAgent> .
+<http://dynamicalsystems.group/compliance-engine/collector/gcp-security> <http://www.w3.org/2000/01/rdf-schema#label> "gcp.security collector mock-0.1.0" .
+<http://dynamicalsystems.group/compliance-engine/collector/gcp-securitycommandcenter> <http://dynamicalsystems.group/compliance-engine/collectorVersion> "mock-0.1.0" .
+<http://dynamicalsystems.group/compliance-engine/collector/gcp-securitycommandcenter> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#SoftwareAgent> .
+<http://dynamicalsystems.group/compliance-engine/collector/gcp-securitycommandcenter> <http://www.w3.org/2000/01/rdf-schema#label> "gcp.securitycommandcenter collector mock-0.1.0" .
+<http://dynamicalsystems.group/compliance-engine/collector/gcp-storage> <http://dynamicalsystems.group/compliance-engine/collectorVersion> "mock-0.1.0" .
+<http://dynamicalsystems.group/compliance-engine/collector/gcp-storage> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#SoftwareAgent> .
+<http://dynamicalsystems.group/compliance-engine/collector/gcp-storage> <http://www.w3.org/2000/01/rdf-schema#label> "gcp.storage collector mock-0.1.0" .
+<http://dynamicalsystems.group/compliance-engine/collector/gcp-terraform-state> <http://dynamicalsystems.group/compliance-engine/collectorVersion> "mock-0.1.0" .
+<http://dynamicalsystems.group/compliance-engine/collector/gcp-terraform-state> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#SoftwareAgent> .
+<http://dynamicalsystems.group/compliance-engine/collector/gcp-terraform-state> <http://www.w3.org/2000/01/rdf-schema#label> "gcp.terraform_state collector mock-0.1.0" .
+<http://dynamicalsystems.group/compliance-engine/collector/gcp-vpcsc> <http://dynamicalsystems.group/compliance-engine/collectorVersion> "mock-0.1.0" .
+<http://dynamicalsystems.group/compliance-engine/collector/gcp-vpcsc> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#SoftwareAgent> .
+<http://dynamicalsystems.group/compliance-engine/collector/gcp-vpcsc> <http://www.w3.org/2000/01/rdf-schema#label> "gcp.vpcsc collector mock-0.1.0" .
+<http://dynamicalsystems.group/compliance-engine/collector/github-api> <http://dynamicalsystems.group/compliance-engine/collectorVersion> "mock-0.1.0" .
+<http://dynamicalsystems.group/compliance-engine/collector/github-api> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#SoftwareAgent> .
+<http://dynamicalsystems.group/compliance-engine/collector/github-api> <http://www.w3.org/2000/01/rdf-schema#label> "github.api collector mock-0.1.0" .
+<http://dynamicalsystems.group/compliance-engine/collector/workspace-2sv> <http://dynamicalsystems.group/compliance-engine/collectorVersion> "mock-0.1.0" .
+<http://dynamicalsystems.group/compliance-engine/collector/workspace-2sv> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#SoftwareAgent> .
+<http://dynamicalsystems.group/compliance-engine/collector/workspace-2sv> <http://www.w3.org/2000/01/rdf-schema#label> "workspace.2sv collector mock-0.1.0" .
+<http://dynamicalsystems.group/compliance-engine/collector/workspace-admin-sdk> <http://dynamicalsystems.group/compliance-engine/collectorVersion> "mock-0.1.0" .
+<http://dynamicalsystems.group/compliance-engine/collector/workspace-admin-sdk> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#SoftwareAgent> .
+<http://dynamicalsystems.group/compliance-engine/collector/workspace-admin-sdk> <http://www.w3.org/2000/01/rdf-schema#label> "workspace.admin_sdk collector mock-0.1.0" .
+<http://dynamicalsystems.group/compliance-engine/collector/workspace-security> <http://dynamicalsystems.group/compliance-engine/collectorVersion> "mock-0.1.0" .
+<http://dynamicalsystems.group/compliance-engine/collector/workspace-security> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#SoftwareAgent> .
+<http://dynamicalsystems.group/compliance-engine/collector/workspace-security> <http://www.w3.org/2000/01/rdf-schema#label> "workspace.security collector mock-0.1.0" .
+<http://dynamicalsystems.group/compliance-engine/evidence/2690e5e9a376ed92> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.1> .
+<http://dynamicalsystems.group/compliance-engine/evidence/2690e5e9a376ed92> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.2> .
+<http://dynamicalsystems.group/compliance-engine/evidence/2690e5e9a376ed92> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.5> .
+<http://dynamicalsystems.group/compliance-engine/evidence/2690e5e9a376ed92> <http://dynamicalsystems.group/compliance-engine/contentHash> "2690e5e9a376ed929cedfc9ae51b2bc7c2aa600c5347d63247036b2a104842a3" .
+<http://dynamicalsystems.group/compliance-engine/evidence/2690e5e9a376ed92> <http://dynamicalsystems.group/compliance-engine/documentRef> "registry://evidence/2690e5e9a376ed929cedfc9ae51b2bc7c2aa600c5347d63247036b2a104842a3" .
+<http://dynamicalsystems.group/compliance-engine/evidence/2690e5e9a376ed92> <http://dynamicalsystems.group/compliance-engine/evidentiaryStatus> "mock" .
+<http://dynamicalsystems.group/compliance-engine/evidence/2690e5e9a376ed92> <http://dynamicalsystems.group/compliance-engine/modelHash> "5cdfefb8bdfb1b6d9c0cbff4c668fb36cb4d9fa1beddb9312c470696cb71d620" .
+<http://dynamicalsystems.group/compliance-engine/evidence/2690e5e9a376ed92> <http://dynamicalsystems.group/compliance-engine/resultSummary> "config export from gcp.cloud_logging: audit_correlation_enabled=True; audit_log_export_enabled=True; audit_user_attribution_enabled=True" .
+<http://dynamicalsystems.group/compliance-engine/evidence/2690e5e9a376ed92> <http://dynamicalsystems.group/compliance-engine/sourceFile> "nv012/all-covered/gcp_cloud_audit.json" .
+<http://dynamicalsystems.group/compliance-engine/evidence/2690e5e9a376ed92> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/ConfigExport> .
+<http://dynamicalsystems.group/compliance-engine/evidence/2690e5e9a376ed92> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/Evidence> .
+<http://dynamicalsystems.group/compliance-engine/evidence/2690e5e9a376ed92> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Entity> .
+<http://dynamicalsystems.group/compliance-engine/evidence/2690e5e9a376ed92> <http://www.w3.org/ns/prov#generatedAtTime> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/evidence/2690e5e9a376ed92> <http://www.w3.org/ns/prov#wasGeneratedBy> <http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-2690e5e9a376ed92> .
+<http://dynamicalsystems.group/compliance-engine/evidence/2a64f51ac186a4af> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.15> .
+<http://dynamicalsystems.group/compliance-engine/evidence/2a64f51ac186a4af> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.3> .
+<http://dynamicalsystems.group/compliance-engine/evidence/2a64f51ac186a4af> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.4> .
+<http://dynamicalsystems.group/compliance-engine/evidence/2a64f51ac186a4af> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.5> .
+<http://dynamicalsystems.group/compliance-engine/evidence/2a64f51ac186a4af> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.6> .
+<http://dynamicalsystems.group/compliance-engine/evidence/2a64f51ac186a4af> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.7> .
+<http://dynamicalsystems.group/compliance-engine/evidence/2a64f51ac186a4af> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.8> .
+<http://dynamicalsystems.group/compliance-engine/evidence/2a64f51ac186a4af> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.9> .
+<http://dynamicalsystems.group/compliance-engine/evidence/2a64f51ac186a4af> <http://dynamicalsystems.group/compliance-engine/contentHash> "2a64f51ac186a4af034db0ab9b5c56f00c86587dc4a60f455a2f86688c806c3c" .
+<http://dynamicalsystems.group/compliance-engine/evidence/2a64f51ac186a4af> <http://dynamicalsystems.group/compliance-engine/documentRef> "registry://evidence/2a64f51ac186a4af034db0ab9b5c56f00c86587dc4a60f455a2f86688c806c3c" .
+<http://dynamicalsystems.group/compliance-engine/evidence/2a64f51ac186a4af> <http://dynamicalsystems.group/compliance-engine/evidentiaryStatus> "mock" .
+<http://dynamicalsystems.group/compliance-engine/evidence/2a64f51ac186a4af> <http://dynamicalsystems.group/compliance-engine/modelHash> "381752784763b6f1fa1a6a84a20097e36078196ed90dd22ae4da85ec743266b7" .
+<http://dynamicalsystems.group/compliance-engine/evidence/2a64f51ac186a4af> <http://dynamicalsystems.group/compliance-engine/resultSummary> "config export from gcp.compute: cui_subnet_private=True; default_deny_ingress=True; public_access_denied=True; session_authenticity_protected=True; session_termination_configured=True; shared_resource_isolation=True; split_tunnel_disabled=True; tls_minimum_version='1.2'" .
+<http://dynamicalsystems.group/compliance-engine/evidence/2a64f51ac186a4af> <http://dynamicalsystems.group/compliance-engine/sourceFile> "nv012/all-covered/gcp_vpc_segmentation.json" .
+<http://dynamicalsystems.group/compliance-engine/evidence/2a64f51ac186a4af> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/ConfigExport> .
+<http://dynamicalsystems.group/compliance-engine/evidence/2a64f51ac186a4af> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/Evidence> .
+<http://dynamicalsystems.group/compliance-engine/evidence/2a64f51ac186a4af> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Entity> .
+<http://dynamicalsystems.group/compliance-engine/evidence/2a64f51ac186a4af> <http://www.w3.org/ns/prov#generatedAtTime> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/evidence/2a64f51ac186a4af> <http://www.w3.org/ns/prov#wasGeneratedBy> <http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-2a64f51ac186a4af> .
+<http://dynamicalsystems.group/compliance-engine/evidence/2d9165ac19f597a8> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.10> .
+<http://dynamicalsystems.group/compliance-engine/evidence/2d9165ac19f597a8> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.11> .
+<http://dynamicalsystems.group/compliance-engine/evidence/2d9165ac19f597a8> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.1> .
+<http://dynamicalsystems.group/compliance-engine/evidence/2d9165ac19f597a8> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.5> .
+<http://dynamicalsystems.group/compliance-engine/evidence/2d9165ac19f597a8> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.6> .
+<http://dynamicalsystems.group/compliance-engine/evidence/2d9165ac19f597a8> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.7> .
+<http://dynamicalsystems.group/compliance-engine/evidence/2d9165ac19f597a8> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.8> .
+<http://dynamicalsystems.group/compliance-engine/evidence/2d9165ac19f597a8> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.9> .
+<http://dynamicalsystems.group/compliance-engine/evidence/2d9165ac19f597a8> <http://dynamicalsystems.group/compliance-engine/contentHash> "2d9165ac19f597a87ad36a01ebd58f042cdea08287d3b6a8325ad1297d03daba" .
+<http://dynamicalsystems.group/compliance-engine/evidence/2d9165ac19f597a8> <http://dynamicalsystems.group/compliance-engine/documentRef> "registry://evidence/2d9165ac19f597a87ad36a01ebd58f042cdea08287d3b6a8325ad1297d03daba" .
+<http://dynamicalsystems.group/compliance-engine/evidence/2d9165ac19f597a8> <http://dynamicalsystems.group/compliance-engine/evidentiaryStatus> "mock" .
+<http://dynamicalsystems.group/compliance-engine/evidence/2d9165ac19f597a8> <http://dynamicalsystems.group/compliance-engine/modelHash> "cfa83141c0ca3dda3d5a5b4ac32226c4206ab66a01b461a04ced28c52571bf8f" .
+<http://dynamicalsystems.group/compliance-engine/evidence/2d9165ac19f597a8> <http://dynamicalsystems.group/compliance-engine/resultSummary> "config export from workspace.admin_sdk: auth_feedback_obscured=True; identifier_reuse_days=180; inactive_disable_days=30; password_complexity_enforced=True; password_reuse_prohibited=True; passwords_stored_hashed=True; temp_password_expires_first_use=True; user_uniquely_identified=True" .
+<http://dynamicalsystems.group/compliance-engine/evidence/2d9165ac19f597a8> <http://dynamicalsystems.group/compliance-engine/sourceFile> "nv012/all-covered/workspace_admin_policy.json" .
+<http://dynamicalsystems.group/compliance-engine/evidence/2d9165ac19f597a8> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/ConfigExport> .
+<http://dynamicalsystems.group/compliance-engine/evidence/2d9165ac19f597a8> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/Evidence> .
+<http://dynamicalsystems.group/compliance-engine/evidence/2d9165ac19f597a8> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Entity> .
+<http://dynamicalsystems.group/compliance-engine/evidence/2d9165ac19f597a8> <http://www.w3.org/ns/prov#generatedAtTime> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/evidence/2d9165ac19f597a8> <http://www.w3.org/ns/prov#wasGeneratedBy> <http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-2d9165ac19f597a8> .
+<http://dynamicalsystems.group/compliance-engine/evidence/385f07ca2e587097> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.1> .
+<http://dynamicalsystems.group/compliance-engine/evidence/385f07ca2e587097> <http://dynamicalsystems.group/compliance-engine/contentHash> "385f07ca2e587097c8fdb83a7175af8d073717180b8e9db3670d7e5bc346897e" .
+<http://dynamicalsystems.group/compliance-engine/evidence/385f07ca2e587097> <http://dynamicalsystems.group/compliance-engine/documentRef> "registry://evidence/385f07ca2e587097c8fdb83a7175af8d073717180b8e9db3670d7e5bc346897e" .
+<http://dynamicalsystems.group/compliance-engine/evidence/385f07ca2e587097> <http://dynamicalsystems.group/compliance-engine/evidentiaryStatus> "mock" .
+<http://dynamicalsystems.group/compliance-engine/evidence/385f07ca2e587097> <http://dynamicalsystems.group/compliance-engine/modelHash> "e67500fb1b2bd28d9fb739770606aed86aafc341c1c21eb39159577675704450" .
+<http://dynamicalsystems.group/compliance-engine/evidence/385f07ca2e587097> <http://dynamicalsystems.group/compliance-engine/resultSummary> "opa check (PASS) for SC.L2-3.13.1: data_region='US'" .
+<http://dynamicalsystems.group/compliance-engine/evidence/385f07ca2e587097> <http://dynamicalsystems.group/compliance-engine/sourceFile> "nv012/all-covered/gcp_org_policy_region.json" .
+<http://dynamicalsystems.group/compliance-engine/evidence/385f07ca2e587097> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/Evidence> .
+<http://dynamicalsystems.group/compliance-engine/evidence/385f07ca2e587097> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/PolicyCheck> .
+<http://dynamicalsystems.group/compliance-engine/evidence/385f07ca2e587097> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Entity> .
+<http://dynamicalsystems.group/compliance-engine/evidence/385f07ca2e587097> <http://www.w3.org/ns/prov#generatedAtTime> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/evidence/385f07ca2e587097> <http://www.w3.org/ns/prov#wasGeneratedBy> <http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-385f07ca2e587097> .
+<http://dynamicalsystems.group/compliance-engine/evidence/3923ae07c2016872> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.10> .
+<http://dynamicalsystems.group/compliance-engine/evidence/3923ae07c2016872> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.3> .
+<http://dynamicalsystems.group/compliance-engine/evidence/3923ae07c2016872> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.6> .
+<http://dynamicalsystems.group/compliance-engine/evidence/3923ae07c2016872> <http://dynamicalsystems.group/compliance-engine/contentHash> "3923ae07c2016872f227b66e10a806b8754ae8e64e8126289dc50c4179830c49" .
+<http://dynamicalsystems.group/compliance-engine/evidence/3923ae07c2016872> <http://dynamicalsystems.group/compliance-engine/documentRef> "registry://evidence/3923ae07c2016872f227b66e10a806b8754ae8e64e8126289dc50c4179830c49" .
+<http://dynamicalsystems.group/compliance-engine/evidence/3923ae07c2016872> <http://dynamicalsystems.group/compliance-engine/evidentiaryStatus> "mock" .
+<http://dynamicalsystems.group/compliance-engine/evidence/3923ae07c2016872> <http://dynamicalsystems.group/compliance-engine/modelHash> "a5cdc71ae9445da3a544928b473125bd2f2cf04ccd410a085c45b625328aeaae" .
+<http://dynamicalsystems.group/compliance-engine/evidence/3923ae07c2016872> <http://dynamicalsystems.group/compliance-engine/resultSummary> "config export from gcp.security: key_management_established=True; network_attack_monitoring_active=True; security_alert_response_enabled=True" .
+<http://dynamicalsystems.group/compliance-engine/evidence/3923ae07c2016872> <http://dynamicalsystems.group/compliance-engine/sourceFile> "nv012/all-covered/gcp_sc_si_monitoring.json" .
+<http://dynamicalsystems.group/compliance-engine/evidence/3923ae07c2016872> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/ConfigExport> .
+<http://dynamicalsystems.group/compliance-engine/evidence/3923ae07c2016872> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/Evidence> .
+<http://dynamicalsystems.group/compliance-engine/evidence/3923ae07c2016872> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Entity> .
+<http://dynamicalsystems.group/compliance-engine/evidence/3923ae07c2016872> <http://www.w3.org/ns/prov#generatedAtTime> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/evidence/3923ae07c2016872> <http://www.w3.org/ns/prov#wasGeneratedBy> <http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-3923ae07c2016872> .
+<http://dynamicalsystems.group/compliance-engine/evidence/3c4af60bc1448007> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.11> .
+<http://dynamicalsystems.group/compliance-engine/evidence/3c4af60bc1448007> <http://dynamicalsystems.group/compliance-engine/contentHash> "3c4af60bc14480071afa3b9486fa7514484a9b6dcc77846d325e57f2955d47ac" .
+<http://dynamicalsystems.group/compliance-engine/evidence/3c4af60bc1448007> <http://dynamicalsystems.group/compliance-engine/documentRef> "registry://evidence/3c4af60bc14480071afa3b9486fa7514484a9b6dcc77846d325e57f2955d47ac" .
+<http://dynamicalsystems.group/compliance-engine/evidence/3c4af60bc1448007> <http://dynamicalsystems.group/compliance-engine/evidentiaryStatus> "mock" .
+<http://dynamicalsystems.group/compliance-engine/evidence/3c4af60bc1448007> <http://dynamicalsystems.group/compliance-engine/modelHash> "50731bcddc8ee6471cad750c74441e46fcff1e2688ac6a89b8207f2bc8e28832" .
+<http://dynamicalsystems.group/compliance-engine/evidence/3c4af60bc1448007> <http://dynamicalsystems.group/compliance-engine/resultSummary> "config export from gcp.kms: fips_module_present=True" .
+<http://dynamicalsystems.group/compliance-engine/evidence/3c4af60bc1448007> <http://dynamicalsystems.group/compliance-engine/sourceFile> "nv012/all-covered/gcp_kms_cmvp.json" .
+<http://dynamicalsystems.group/compliance-engine/evidence/3c4af60bc1448007> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/ConfigExport> .
+<http://dynamicalsystems.group/compliance-engine/evidence/3c4af60bc1448007> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/Evidence> .
+<http://dynamicalsystems.group/compliance-engine/evidence/3c4af60bc1448007> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Entity> .
+<http://dynamicalsystems.group/compliance-engine/evidence/3c4af60bc1448007> <http://www.w3.org/ns/prov#generatedAtTime> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/evidence/3c4af60bc1448007> <http://www.w3.org/ns/prov#wasGeneratedBy> <http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-3c4af60bc1448007> .
+<http://dynamicalsystems.group/compliance-engine/evidence/4472a35663cebbc9> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#RA.L2-3.11.2> .
+<http://dynamicalsystems.group/compliance-engine/evidence/4472a35663cebbc9> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.1> .
+<http://dynamicalsystems.group/compliance-engine/evidence/4472a35663cebbc9> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.5> .
+<http://dynamicalsystems.group/compliance-engine/evidence/4472a35663cebbc9> <http://dynamicalsystems.group/compliance-engine/contentHash> "4472a35663cebbc9ec59579789d76db8ebd76fca2a5942cf5c5bc891e5af8583" .
+<http://dynamicalsystems.group/compliance-engine/evidence/4472a35663cebbc9> <http://dynamicalsystems.group/compliance-engine/documentRef> "registry://evidence/4472a35663cebbc9ec59579789d76db8ebd76fca2a5942cf5c5bc891e5af8583" .
+<http://dynamicalsystems.group/compliance-engine/evidence/4472a35663cebbc9> <http://dynamicalsystems.group/compliance-engine/evidentiaryStatus> "mock" .
+<http://dynamicalsystems.group/compliance-engine/evidence/4472a35663cebbc9> <http://dynamicalsystems.group/compliance-engine/modelHash> "36f5f50a97de57a2fbe417db09cce8cc03fc6d1b033d010837fb4d898e7473bf" .
+<http://dynamicalsystems.group/compliance-engine/evidence/4472a35663cebbc9> <http://dynamicalsystems.group/compliance-engine/resultSummary> "config export from gcp.securitycommandcenter: high_severity_findings_open=0; scan_coverage_complete=True; vuln_scan_age_days=5" .
+<http://dynamicalsystems.group/compliance-engine/evidence/4472a35663cebbc9> <http://dynamicalsystems.group/compliance-engine/sourceFile> "nv012/all-covered/gcp_scc_findings.json" .
+<http://dynamicalsystems.group/compliance-engine/evidence/4472a35663cebbc9> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/ConfigExport> .
+<http://dynamicalsystems.group/compliance-engine/evidence/4472a35663cebbc9> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/Evidence> .
+<http://dynamicalsystems.group/compliance-engine/evidence/4472a35663cebbc9> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Entity> .
+<http://dynamicalsystems.group/compliance-engine/evidence/4472a35663cebbc9> <http://www.w3.org/ns/prov#generatedAtTime> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/evidence/4472a35663cebbc9> <http://www.w3.org/ns/prov#wasGeneratedBy> <http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-4472a35663cebbc9> .
+<http://dynamicalsystems.group/compliance-engine/evidence/4bba2d0adcbb48ec> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.1> .
+<http://dynamicalsystems.group/compliance-engine/evidence/4bba2d0adcbb48ec> <http://dynamicalsystems.group/compliance-engine/contentHash> "4bba2d0adcbb48ec02d9b82a9ec4c9655c13c20b39c35136630de23b08f32f12" .
+<http://dynamicalsystems.group/compliance-engine/evidence/4bba2d0adcbb48ec> <http://dynamicalsystems.group/compliance-engine/documentRef> "registry://evidence/4bba2d0adcbb48ec02d9b82a9ec4c9655c13c20b39c35136630de23b08f32f12" .
+<http://dynamicalsystems.group/compliance-engine/evidence/4bba2d0adcbb48ec> <http://dynamicalsystems.group/compliance-engine/evidentiaryStatus> "mock" .
+<http://dynamicalsystems.group/compliance-engine/evidence/4bba2d0adcbb48ec> <http://dynamicalsystems.group/compliance-engine/modelHash> "ab4b47c36980537acfbbcd2312110a13f4af0fdddcaac1513139c5640bdb283b" .
+<http://dynamicalsystems.group/compliance-engine/evidence/4bba2d0adcbb48ec> <http://dynamicalsystems.group/compliance-engine/resultSummary> "opa check (PASS) for AC.L2-3.1.1: unauthorized_principals=0" .
+<http://dynamicalsystems.group/compliance-engine/evidence/4bba2d0adcbb48ec> <http://dynamicalsystems.group/compliance-engine/sourceFile> "nv012/all-covered/gcp_iam_bindings.json" .
+<http://dynamicalsystems.group/compliance-engine/evidence/4bba2d0adcbb48ec> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/Evidence> .
+<http://dynamicalsystems.group/compliance-engine/evidence/4bba2d0adcbb48ec> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/PolicyCheck> .
+<http://dynamicalsystems.group/compliance-engine/evidence/4bba2d0adcbb48ec> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Entity> .
+<http://dynamicalsystems.group/compliance-engine/evidence/4bba2d0adcbb48ec> <http://www.w3.org/ns/prov#generatedAtTime> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/evidence/4bba2d0adcbb48ec> <http://www.w3.org/ns/prov#wasGeneratedBy> <http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-4bba2d0adcbb48ec> .
+<http://dynamicalsystems.group/compliance-engine/evidence/52eb61a61772b787> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.16> .
+<http://dynamicalsystems.group/compliance-engine/evidence/52eb61a61772b787> <http://dynamicalsystems.group/compliance-engine/contentHash> "52eb61a61772b7878d6db0b96ae3441d5f1bb66f0f1bf5cbc7565481acf23cde" .
+<http://dynamicalsystems.group/compliance-engine/evidence/52eb61a61772b787> <http://dynamicalsystems.group/compliance-engine/documentRef> "registry://evidence/52eb61a61772b7878d6db0b96ae3441d5f1bb66f0f1bf5cbc7565481acf23cde" .
+<http://dynamicalsystems.group/compliance-engine/evidence/52eb61a61772b787> <http://dynamicalsystems.group/compliance-engine/evidentiaryStatus> "mock" .
+<http://dynamicalsystems.group/compliance-engine/evidence/52eb61a61772b787> <http://dynamicalsystems.group/compliance-engine/modelHash> "d41bd56388430fd274a5477cb872fa562acaa595de8e42856f4e830550bfd342" .
+<http://dynamicalsystems.group/compliance-engine/evidence/52eb61a61772b787> <http://dynamicalsystems.group/compliance-engine/resultSummary> "config export from gcp.storage: cui_encrypted_at_rest=True" .
+<http://dynamicalsystems.group/compliance-engine/evidence/52eb61a61772b787> <http://dynamicalsystems.group/compliance-engine/sourceFile> "nv012/all-covered/gcp_cmek_at_rest.json" .
+<http://dynamicalsystems.group/compliance-engine/evidence/52eb61a61772b787> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/ConfigExport> .
+<http://dynamicalsystems.group/compliance-engine/evidence/52eb61a61772b787> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/Evidence> .
+<http://dynamicalsystems.group/compliance-engine/evidence/52eb61a61772b787> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Entity> .
+<http://dynamicalsystems.group/compliance-engine/evidence/52eb61a61772b787> <http://www.w3.org/ns/prov#generatedAtTime> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/evidence/52eb61a61772b787> <http://www.w3.org/ns/prov#wasGeneratedBy> <http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-52eb61a61772b787> .
+<http://dynamicalsystems.group/compliance-engine/evidence/594252df359f78bd> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.6> .
+<http://dynamicalsystems.group/compliance-engine/evidence/594252df359f78bd> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.7> .
+<http://dynamicalsystems.group/compliance-engine/evidence/594252df359f78bd> <http://dynamicalsystems.group/compliance-engine/contentHash> "594252df359f78bd131ed2d4944c62907b779167f547596cc320378c69406a69" .
+<http://dynamicalsystems.group/compliance-engine/evidence/594252df359f78bd> <http://dynamicalsystems.group/compliance-engine/documentRef> "registry://evidence/594252df359f78bd131ed2d4944c62907b779167f547596cc320378c69406a69" .
+<http://dynamicalsystems.group/compliance-engine/evidence/594252df359f78bd> <http://dynamicalsystems.group/compliance-engine/evidentiaryStatus> "mock" .
+<http://dynamicalsystems.group/compliance-engine/evidence/594252df359f78bd> <http://dynamicalsystems.group/compliance-engine/modelHash> "fc67a05f783e80b92c0b74e8e6fb21c35ecefbafec0fda8da3b754ac0748c896" .
+<http://dynamicalsystems.group/compliance-engine/evidence/594252df359f78bd> <http://dynamicalsystems.group/compliance-engine/resultSummary> "config export from gcp.iam: non_privileged_accounts_used_for_non_security=True; privileged_actions_logged=True" .
+<http://dynamicalsystems.group/compliance-engine/evidence/594252df359f78bd> <http://dynamicalsystems.group/compliance-engine/sourceFile> "nv012/all-covered/gcp_iam_privileged.json" .
+<http://dynamicalsystems.group/compliance-engine/evidence/594252df359f78bd> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/ConfigExport> .
+<http://dynamicalsystems.group/compliance-engine/evidence/594252df359f78bd> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/Evidence> .
+<http://dynamicalsystems.group/compliance-engine/evidence/594252df359f78bd> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Entity> .
+<http://dynamicalsystems.group/compliance-engine/evidence/594252df359f78bd> <http://www.w3.org/ns/prov#generatedAtTime> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/evidence/594252df359f78bd> <http://www.w3.org/ns/prov#wasGeneratedBy> <http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-594252df359f78bd> .
+<http://dynamicalsystems.group/compliance-engine/evidence/5f8e7ef2f8ffc747> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#ITAR-120.54> .
+<http://dynamicalsystems.group/compliance-engine/evidence/5f8e7ef2f8ffc747> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.1> .
+<http://dynamicalsystems.group/compliance-engine/evidence/5f8e7ef2f8ffc747> <http://dynamicalsystems.group/compliance-engine/contentHash> "5f8e7ef2f8ffc747ece0831bf33066eb499c1f12b2c5f5bb7e8768ce1fe921fa" .
+<http://dynamicalsystems.group/compliance-engine/evidence/5f8e7ef2f8ffc747> <http://dynamicalsystems.group/compliance-engine/documentRef> "registry://evidence/5f8e7ef2f8ffc747ece0831bf33066eb499c1f12b2c5f5bb7e8768ce1fe921fa" .
+<http://dynamicalsystems.group/compliance-engine/evidence/5f8e7ef2f8ffc747> <http://dynamicalsystems.group/compliance-engine/evidentiaryStatus> "mock" .
+<http://dynamicalsystems.group/compliance-engine/evidence/5f8e7ef2f8ffc747> <http://dynamicalsystems.group/compliance-engine/modelHash> "1735e085bb9f9d698b4ad84d4488afb4a3e5341a617795dfcf0ab981753dfa89" .
+<http://dynamicalsystems.group/compliance-engine/evidence/5f8e7ef2f8ffc747> <http://dynamicalsystems.group/compliance-engine/resultSummary> "config export from gcp.org_policy: data_region='US'" .
+<http://dynamicalsystems.group/compliance-engine/evidence/5f8e7ef2f8ffc747> <http://dynamicalsystems.group/compliance-engine/sourceFile> "nv012/all-covered/gcp_org_policy_region.json" .
+<http://dynamicalsystems.group/compliance-engine/evidence/5f8e7ef2f8ffc747> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/ConfigExport> .
+<http://dynamicalsystems.group/compliance-engine/evidence/5f8e7ef2f8ffc747> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/Evidence> .
+<http://dynamicalsystems.group/compliance-engine/evidence/5f8e7ef2f8ffc747> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Entity> .
+<http://dynamicalsystems.group/compliance-engine/evidence/5f8e7ef2f8ffc747> <http://www.w3.org/ns/prov#generatedAtTime> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/evidence/5f8e7ef2f8ffc747> <http://www.w3.org/ns/prov#wasGeneratedBy> <http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-5f8e7ef2f8ffc747> .
+<http://dynamicalsystems.group/compliance-engine/evidence/6549f40b7941e00a> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.3> .
+<http://dynamicalsystems.group/compliance-engine/evidence/6549f40b7941e00a> <http://dynamicalsystems.group/compliance-engine/contentHash> "6549f40b7941e00ae547750979c6a06ca36b640939dae098981394e4248dd3be" .
+<http://dynamicalsystems.group/compliance-engine/evidence/6549f40b7941e00a> <http://dynamicalsystems.group/compliance-engine/documentRef> "registry://evidence/6549f40b7941e00ae547750979c6a06ca36b640939dae098981394e4248dd3be" .
+<http://dynamicalsystems.group/compliance-engine/evidence/6549f40b7941e00a> <http://dynamicalsystems.group/compliance-engine/evidentiaryStatus> "mock" .
+<http://dynamicalsystems.group/compliance-engine/evidence/6549f40b7941e00a> <http://dynamicalsystems.group/compliance-engine/modelHash> "c997d03f4cfae14aefde4a1fa1d910ce7649267d152e15c632e238f9587944f7" .
+<http://dynamicalsystems.group/compliance-engine/evidence/6549f40b7941e00a> <http://dynamicalsystems.group/compliance-engine/resultSummary> "config export from workspace.2sv: mfa_enforced_privileged=True" .
+<http://dynamicalsystems.group/compliance-engine/evidence/6549f40b7941e00a> <http://dynamicalsystems.group/compliance-engine/sourceFile> "nv012/all-covered/workspace_2sv.json" .
+<http://dynamicalsystems.group/compliance-engine/evidence/6549f40b7941e00a> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/ConfigExport> .
+<http://dynamicalsystems.group/compliance-engine/evidence/6549f40b7941e00a> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/Evidence> .
+<http://dynamicalsystems.group/compliance-engine/evidence/6549f40b7941e00a> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Entity> .
+<http://dynamicalsystems.group/compliance-engine/evidence/6549f40b7941e00a> <http://www.w3.org/ns/prov#generatedAtTime> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/evidence/6549f40b7941e00a> <http://www.w3.org/ns/prov#wasGeneratedBy> <http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-6549f40b7941e00a> .
+<http://dynamicalsystems.group/compliance-engine/evidence/6c69bdddaea378c0> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.1> .
+<http://dynamicalsystems.group/compliance-engine/evidence/6c69bdddaea378c0> <http://dynamicalsystems.group/compliance-engine/contentHash> "6c69bdddaea378c058139148d6865c4cba32f0b00b86c9d24f2ba2aafb2b97c1" .
+<http://dynamicalsystems.group/compliance-engine/evidence/6c69bdddaea378c0> <http://dynamicalsystems.group/compliance-engine/documentRef> "registry://evidence/6c69bdddaea378c058139148d6865c4cba32f0b00b86c9d24f2ba2aafb2b97c1" .
+<http://dynamicalsystems.group/compliance-engine/evidence/6c69bdddaea378c0> <http://dynamicalsystems.group/compliance-engine/evidentiaryStatus> "mock" .
+<http://dynamicalsystems.group/compliance-engine/evidence/6c69bdddaea378c0> <http://dynamicalsystems.group/compliance-engine/modelHash> "59f30034fb29ef0fcf0fefab4216fdfdadd688bb988f14a3550ac1d841362bb1" .
+<http://dynamicalsystems.group/compliance-engine/evidence/6c69bdddaea378c0> <http://dynamicalsystems.group/compliance-engine/resultSummary> "config export from gcp.iam: unauthorized_principals=0" .
+<http://dynamicalsystems.group/compliance-engine/evidence/6c69bdddaea378c0> <http://dynamicalsystems.group/compliance-engine/sourceFile> "nv012/all-covered/gcp_iam_bindings.json" .
+<http://dynamicalsystems.group/compliance-engine/evidence/6c69bdddaea378c0> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/ConfigExport> .
+<http://dynamicalsystems.group/compliance-engine/evidence/6c69bdddaea378c0> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/Evidence> .
+<http://dynamicalsystems.group/compliance-engine/evidence/6c69bdddaea378c0> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Entity> .
+<http://dynamicalsystems.group/compliance-engine/evidence/6c69bdddaea378c0> <http://www.w3.org/ns/prov#generatedAtTime> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/evidence/6c69bdddaea378c0> <http://www.w3.org/ns/prov#wasGeneratedBy> <http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-6c69bdddaea378c0> .
+<http://dynamicalsystems.group/compliance-engine/evidence/753946a895a2cb99> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.12> .
+<http://dynamicalsystems.group/compliance-engine/evidence/753946a895a2cb99> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.13> .
+<http://dynamicalsystems.group/compliance-engine/evidence/753946a895a2cb99> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.14> .
+<http://dynamicalsystems.group/compliance-engine/evidence/753946a895a2cb99> <http://dynamicalsystems.group/compliance-engine/contentHash> "753946a895a2cb9963971ad499cfb0efe07ee3ad06f61d060d5035596421c853" .
+<http://dynamicalsystems.group/compliance-engine/evidence/753946a895a2cb99> <http://dynamicalsystems.group/compliance-engine/documentRef> "registry://evidence/753946a895a2cb9963971ad499cfb0efe07ee3ad06f61d060d5035596421c853" .
+<http://dynamicalsystems.group/compliance-engine/evidence/753946a895a2cb99> <http://dynamicalsystems.group/compliance-engine/evidentiaryStatus> "mock" .
+<http://dynamicalsystems.group/compliance-engine/evidence/753946a895a2cb99> <http://dynamicalsystems.group/compliance-engine/modelHash> "1f590f9784efa64ff9984f9eac8d369b732a18a51628993afec41b2979ad3c24" .
+<http://dynamicalsystems.group/compliance-engine/evidence/753946a895a2cb99> <http://dynamicalsystems.group/compliance-engine/resultSummary> "config export from gcp.beyondcorp: remote_routes_via_managed_proxy=True; remote_sessions_monitored=True; remote_tls_enforced=True" .
+<http://dynamicalsystems.group/compliance-engine/evidence/753946a895a2cb99> <http://dynamicalsystems.group/compliance-engine/sourceFile> "nv012/all-covered/beyondcorp_remote.json" .
+<http://dynamicalsystems.group/compliance-engine/evidence/753946a895a2cb99> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/ConfigExport> .
+<http://dynamicalsystems.group/compliance-engine/evidence/753946a895a2cb99> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/Evidence> .
+<http://dynamicalsystems.group/compliance-engine/evidence/753946a895a2cb99> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Entity> .
+<http://dynamicalsystems.group/compliance-engine/evidence/753946a895a2cb99> <http://www.w3.org/ns/prov#generatedAtTime> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/evidence/753946a895a2cb99> <http://www.w3.org/ns/prov#wasGeneratedBy> <http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-753946a895a2cb99> .
+<http://dynamicalsystems.group/compliance-engine/evidence/75ad3c7ecdfadfc7> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.1> .
+<http://dynamicalsystems.group/compliance-engine/evidence/75ad3c7ecdfadfc7> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.2> .
+<http://dynamicalsystems.group/compliance-engine/evidence/75ad3c7ecdfadfc7> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.6> .
+<http://dynamicalsystems.group/compliance-engine/evidence/75ad3c7ecdfadfc7> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.7> .
+<http://dynamicalsystems.group/compliance-engine/evidence/75ad3c7ecdfadfc7> <http://dynamicalsystems.group/compliance-engine/contentHash> "75ad3c7ecdfadfc75a9b15354b9cd3f31a2bd6127a30dc91f1a4c5cc8f831c47" .
+<http://dynamicalsystems.group/compliance-engine/evidence/75ad3c7ecdfadfc7> <http://dynamicalsystems.group/compliance-engine/documentRef> "registry://evidence/75ad3c7ecdfadfc75a9b15354b9cd3f31a2bd6127a30dc91f1a4c5cc8f831c47" .
+<http://dynamicalsystems.group/compliance-engine/evidence/75ad3c7ecdfadfc7> <http://dynamicalsystems.group/compliance-engine/evidentiaryStatus> "mock" .
+<http://dynamicalsystems.group/compliance-engine/evidence/75ad3c7ecdfadfc7> <http://dynamicalsystems.group/compliance-engine/modelHash> "3353fe03a9df6dc5f2e263d44ea0da303f832dfdc235b8aa35ccbc8ab9a62627" .
+<http://dynamicalsystems.group/compliance-engine/evidence/75ad3c7ecdfadfc7> <http://dynamicalsystems.group/compliance-engine/resultSummary> "config export from gcp.terraform_state: config_baseline_established=True; config_change_enforcement_active=True; least_functionality_enforced=True; nonessential_services_disabled=True" .
+<http://dynamicalsystems.group/compliance-engine/evidence/75ad3c7ecdfadfc7> <http://dynamicalsystems.group/compliance-engine/sourceFile> "nv012/all-covered/gcp_config_baseline.json" .
+<http://dynamicalsystems.group/compliance-engine/evidence/75ad3c7ecdfadfc7> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/ConfigExport> .
+<http://dynamicalsystems.group/compliance-engine/evidence/75ad3c7ecdfadfc7> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/Evidence> .
+<http://dynamicalsystems.group/compliance-engine/evidence/75ad3c7ecdfadfc7> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Entity> .
+<http://dynamicalsystems.group/compliance-engine/evidence/75ad3c7ecdfadfc7> <http://www.w3.org/ns/prov#generatedAtTime> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/evidence/75ad3c7ecdfadfc7> <http://www.w3.org/ns/prov#wasGeneratedBy> <http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-75ad3c7ecdfadfc7> .
+<http://dynamicalsystems.group/compliance-engine/evidence/78748c9966987bfe> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.2> .
+<http://dynamicalsystems.group/compliance-engine/evidence/78748c9966987bfe> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.4> .
+<http://dynamicalsystems.group/compliance-engine/evidence/78748c9966987bfe> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.7> .
+<http://dynamicalsystems.group/compliance-engine/evidence/78748c9966987bfe> <http://dynamicalsystems.group/compliance-engine/contentHash> "78748c9966987bfedd68a2453a0eca06763c63d93df1a5ee3db598c507c498f4" .
+<http://dynamicalsystems.group/compliance-engine/evidence/78748c9966987bfe> <http://dynamicalsystems.group/compliance-engine/documentRef> "registry://evidence/78748c9966987bfedd68a2453a0eca06763c63d93df1a5ee3db598c507c498f4" .
+<http://dynamicalsystems.group/compliance-engine/evidence/78748c9966987bfe> <http://dynamicalsystems.group/compliance-engine/evidentiaryStatus> "mock" .
+<http://dynamicalsystems.group/compliance-engine/evidence/78748c9966987bfe> <http://dynamicalsystems.group/compliance-engine/modelHash> "1837c6b075c80cb18ce4652b2f2090b021b23bcb9f66ecc54f1233f951e25d8f" .
+<http://dynamicalsystems.group/compliance-engine/evidence/78748c9966987bfe> <http://dynamicalsystems.group/compliance-engine/resultSummary> "config export from crowdstrike.falcon: anomaly_detection_active=True; av_definition_age_hours=6; malware_protection_active=True" .
+<http://dynamicalsystems.group/compliance-engine/evidence/78748c9966987bfe> <http://dynamicalsystems.group/compliance-engine/sourceFile> "nv012/all-covered/crowdstrike_edr.json" .
+<http://dynamicalsystems.group/compliance-engine/evidence/78748c9966987bfe> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/ConfigExport> .
+<http://dynamicalsystems.group/compliance-engine/evidence/78748c9966987bfe> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/Evidence> .
+<http://dynamicalsystems.group/compliance-engine/evidence/78748c9966987bfe> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Entity> .
+<http://dynamicalsystems.group/compliance-engine/evidence/78748c9966987bfe> <http://www.w3.org/ns/prov#generatedAtTime> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/evidence/78748c9966987bfe> <http://www.w3.org/ns/prov#wasGeneratedBy> <http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-78748c9966987bfe> .
+<http://dynamicalsystems.group/compliance-engine/evidence/8959f24468b8f262> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.10> .
+<http://dynamicalsystems.group/compliance-engine/evidence/8959f24468b8f262> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.11> .
+<http://dynamicalsystems.group/compliance-engine/evidence/8959f24468b8f262> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.8> .
+<http://dynamicalsystems.group/compliance-engine/evidence/8959f24468b8f262> <http://dynamicalsystems.group/compliance-engine/contentHash> "8959f24468b8f262147051cfa413d1beebea65bd15144dcb01afd7b32689d86e" .
+<http://dynamicalsystems.group/compliance-engine/evidence/8959f24468b8f262> <http://dynamicalsystems.group/compliance-engine/documentRef> "registry://evidence/8959f24468b8f262147051cfa413d1beebea65bd15144dcb01afd7b32689d86e" .
+<http://dynamicalsystems.group/compliance-engine/evidence/8959f24468b8f262> <http://dynamicalsystems.group/compliance-engine/evidentiaryStatus> "mock" .
+<http://dynamicalsystems.group/compliance-engine/evidence/8959f24468b8f262> <http://dynamicalsystems.group/compliance-engine/modelHash> "e980ece89671a42b784a4fd6ce27ab084082abf0ffc249ed15f70d218d82bbf0" .
+<http://dynamicalsystems.group/compliance-engine/evidence/8959f24468b8f262> <http://dynamicalsystems.group/compliance-engine/resultSummary> "config export from gcp.cloudidentity: failed_login_lockout_enabled=True; idle_session_timeout_minutes=10; session_termination_conditions=True" .
+<http://dynamicalsystems.group/compliance-engine/evidence/8959f24468b8f262> <http://dynamicalsystems.group/compliance-engine/sourceFile> "nv012/all-covered/gcp_session_control.json" .
+<http://dynamicalsystems.group/compliance-engine/evidence/8959f24468b8f262> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/ConfigExport> .
+<http://dynamicalsystems.group/compliance-engine/evidence/8959f24468b8f262> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/Evidence> .
+<http://dynamicalsystems.group/compliance-engine/evidence/8959f24468b8f262> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Entity> .
+<http://dynamicalsystems.group/compliance-engine/evidence/8959f24468b8f262> <http://www.w3.org/ns/prov#generatedAtTime> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/evidence/8959f24468b8f262> <http://www.w3.org/ns/prov#wasGeneratedBy> <http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-8959f24468b8f262> .
+<http://dynamicalsystems.group/compliance-engine/evidence/9c2e2dd99b274292> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.2> .
+<http://dynamicalsystems.group/compliance-engine/evidence/9c2e2dd99b274292> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.3> .
+<http://dynamicalsystems.group/compliance-engine/evidence/9c2e2dd99b274292> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.5> .
+<http://dynamicalsystems.group/compliance-engine/evidence/9c2e2dd99b274292> <http://dynamicalsystems.group/compliance-engine/contentHash> "9c2e2dd99b27429246d159b75a6a7bbc9b0b72aea0aceec114825f5729d3fdb7" .
+<http://dynamicalsystems.group/compliance-engine/evidence/9c2e2dd99b274292> <http://dynamicalsystems.group/compliance-engine/documentRef> "registry://evidence/9c2e2dd99b27429246d159b75a6a7bbc9b0b72aea0aceec114825f5729d3fdb7" .
+<http://dynamicalsystems.group/compliance-engine/evidence/9c2e2dd99b274292> <http://dynamicalsystems.group/compliance-engine/evidentiaryStatus> "mock" .
+<http://dynamicalsystems.group/compliance-engine/evidence/9c2e2dd99b274292> <http://dynamicalsystems.group/compliance-engine/modelHash> "08fd281ff5283d657b3543a4d4d8b9eba24372e6cc22b0ab5c8e80ffbb94bbee" .
+<http://dynamicalsystems.group/compliance-engine/evidence/9c2e2dd99b274292> <http://dynamicalsystems.group/compliance-engine/resultSummary> "config export from gcp.iam: cui_flow_control_enforced=True; overprivileged_bindings=0; transaction_type_restrictions_enforced=True" .
+<http://dynamicalsystems.group/compliance-engine/evidence/9c2e2dd99b274292> <http://dynamicalsystems.group/compliance-engine/sourceFile> "nv012/all-covered/gcp_iam_access_enforcement.json" .
+<http://dynamicalsystems.group/compliance-engine/evidence/9c2e2dd99b274292> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/ConfigExport> .
+<http://dynamicalsystems.group/compliance-engine/evidence/9c2e2dd99b274292> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/Evidence> .
+<http://dynamicalsystems.group/compliance-engine/evidence/9c2e2dd99b274292> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Entity> .
+<http://dynamicalsystems.group/compliance-engine/evidence/9c2e2dd99b274292> <http://www.w3.org/ns/prov#generatedAtTime> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/evidence/9c2e2dd99b274292> <http://www.w3.org/ns/prov#wasGeneratedBy> <http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-9c2e2dd99b274292> .
+<http://dynamicalsystems.group/compliance-engine/evidence/a911dd6a6276701f> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.3> .
+<http://dynamicalsystems.group/compliance-engine/evidence/a911dd6a6276701f> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.5> .
+<http://dynamicalsystems.group/compliance-engine/evidence/a911dd6a6276701f> <http://dynamicalsystems.group/compliance-engine/contentHash> "a911dd6a6276701fffb7957d3a0dcbf8618bd137b391f2c8636734eebdcb3d55" .
+<http://dynamicalsystems.group/compliance-engine/evidence/a911dd6a6276701f> <http://dynamicalsystems.group/compliance-engine/documentRef> "registry://evidence/a911dd6a6276701fffb7957d3a0dcbf8618bd137b391f2c8636734eebdcb3d55" .
+<http://dynamicalsystems.group/compliance-engine/evidence/a911dd6a6276701f> <http://dynamicalsystems.group/compliance-engine/evidentiaryStatus> "mock" .
+<http://dynamicalsystems.group/compliance-engine/evidence/a911dd6a6276701f> <http://dynamicalsystems.group/compliance-engine/modelHash> "72853c80c339ada81ec9f76dab7c67607bff7f0826870abc1413b47c20bf67be" .
+<http://dynamicalsystems.group/compliance-engine/evidence/a911dd6a6276701f> <http://dynamicalsystems.group/compliance-engine/resultSummary> "config export from github.api: change_log_present=True; required_reviews_enforced=True" .
+<http://dynamicalsystems.group/compliance-engine/evidence/a911dd6a6276701f> <http://dynamicalsystems.group/compliance-engine/sourceFile> "nv012/all-covered/github_branch_protection.json" .
+<http://dynamicalsystems.group/compliance-engine/evidence/a911dd6a6276701f> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/ConfigExport> .
+<http://dynamicalsystems.group/compliance-engine/evidence/a911dd6a6276701f> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/Evidence> .
+<http://dynamicalsystems.group/compliance-engine/evidence/a911dd6a6276701f> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Entity> .
+<http://dynamicalsystems.group/compliance-engine/evidence/a911dd6a6276701f> <http://www.w3.org/ns/prov#generatedAtTime> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/evidence/a911dd6a6276701f> <http://www.w3.org/ns/prov#wasGeneratedBy> <http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-a911dd6a6276701f> .
+<http://dynamicalsystems.group/compliance-engine/evidence/b6c67e930e8a45ac> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.20> .
+<http://dynamicalsystems.group/compliance-engine/evidence/b6c67e930e8a45ac> <http://dynamicalsystems.group/compliance-engine/contentHash> "b6c67e930e8a45acefac192bf87956bcf8a39faf35630792a4568daa2cc354bc" .
+<http://dynamicalsystems.group/compliance-engine/evidence/b6c67e930e8a45ac> <http://dynamicalsystems.group/compliance-engine/documentRef> "registry://evidence/b6c67e930e8a45acefac192bf87956bcf8a39faf35630792a4568daa2cc354bc" .
+<http://dynamicalsystems.group/compliance-engine/evidence/b6c67e930e8a45ac> <http://dynamicalsystems.group/compliance-engine/evidentiaryStatus> "mock" .
+<http://dynamicalsystems.group/compliance-engine/evidence/b6c67e930e8a45ac> <http://dynamicalsystems.group/compliance-engine/modelHash> "4f05f6603377879b138e174d0216eb4817b6fd40c41ff4c38447ff5cc75e9c76" .
+<http://dynamicalsystems.group/compliance-engine/evidence/b6c67e930e8a45ac> <http://dynamicalsystems.group/compliance-engine/resultSummary> "config export from gcp.vpcsc: external_system_perimeter_defined=True" .
+<http://dynamicalsystems.group/compliance-engine/evidence/b6c67e930e8a45ac> <http://dynamicalsystems.group/compliance-engine/sourceFile> "nv012/all-covered/gcp_vpc_service_controls.json" .
+<http://dynamicalsystems.group/compliance-engine/evidence/b6c67e930e8a45ac> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/ConfigExport> .
+<http://dynamicalsystems.group/compliance-engine/evidence/b6c67e930e8a45ac> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/Evidence> .
+<http://dynamicalsystems.group/compliance-engine/evidence/b6c67e930e8a45ac> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Entity> .
+<http://dynamicalsystems.group/compliance-engine/evidence/b6c67e930e8a45ac> <http://www.w3.org/ns/prov#generatedAtTime> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/evidence/b6c67e930e8a45ac> <http://www.w3.org/ns/prov#wasGeneratedBy> <http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-b6c67e930e8a45ac> .
+<http://dynamicalsystems.group/compliance-engine/evidence/d0cea0ecf9b3ce6d> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.2> .
+<http://dynamicalsystems.group/compliance-engine/evidence/d0cea0ecf9b3ce6d> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.4> .
+<http://dynamicalsystems.group/compliance-engine/evidence/d0cea0ecf9b3ce6d> <http://dynamicalsystems.group/compliance-engine/contentHash> "d0cea0ecf9b3ce6dc1ef4d2466dd8575067e9a45c0deae9b3d0f704ee46444a4" .
+<http://dynamicalsystems.group/compliance-engine/evidence/d0cea0ecf9b3ce6d> <http://dynamicalsystems.group/compliance-engine/documentRef> "registry://evidence/d0cea0ecf9b3ce6dc1ef4d2466dd8575067e9a45c0deae9b3d0f704ee46444a4" .
+<http://dynamicalsystems.group/compliance-engine/evidence/d0cea0ecf9b3ce6d> <http://dynamicalsystems.group/compliance-engine/evidentiaryStatus> "mock" .
+<http://dynamicalsystems.group/compliance-engine/evidence/d0cea0ecf9b3ce6d> <http://dynamicalsystems.group/compliance-engine/modelHash> "f4d4bd521bda98b95c8d313cffd8ea1da621675dbbfc1d19bca21eca8827d4d6" .
+<http://dynamicalsystems.group/compliance-engine/evidence/d0cea0ecf9b3ce6d> <http://dynamicalsystems.group/compliance-engine/resultSummary> "config export from workspace.security: device_authentication_required=True; replay_resistant_auth_enabled=True" .
+<http://dynamicalsystems.group/compliance-engine/evidence/d0cea0ecf9b3ce6d> <http://dynamicalsystems.group/compliance-engine/sourceFile> "nv012/all-covered/workspace_auth_hardening.json" .
+<http://dynamicalsystems.group/compliance-engine/evidence/d0cea0ecf9b3ce6d> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/ConfigExport> .
+<http://dynamicalsystems.group/compliance-engine/evidence/d0cea0ecf9b3ce6d> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/Evidence> .
+<http://dynamicalsystems.group/compliance-engine/evidence/d0cea0ecf9b3ce6d> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Entity> .
+<http://dynamicalsystems.group/compliance-engine/evidence/d0cea0ecf9b3ce6d> <http://www.w3.org/ns/prov#generatedAtTime> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/evidence/d0cea0ecf9b3ce6d> <http://www.w3.org/ns/prov#wasGeneratedBy> <http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-d0cea0ecf9b3ce6d> .
+<http://dynamicalsystems.group/compliance-engine/evidence/d51b18159d04d6ed> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.5> .
+<http://dynamicalsystems.group/compliance-engine/evidence/d51b18159d04d6ed> <http://dynamicalsystems.group/compliance-engine/contentHash> "d51b18159d04d6edf398258392cbd60434bf1609a8b89b6ee5eb5b08a47ffa52" .
+<http://dynamicalsystems.group/compliance-engine/evidence/d51b18159d04d6ed> <http://dynamicalsystems.group/compliance-engine/documentRef> "registry://evidence/d51b18159d04d6edf398258392cbd60434bf1609a8b89b6ee5eb5b08a47ffa52" .
+<http://dynamicalsystems.group/compliance-engine/evidence/d51b18159d04d6ed> <http://dynamicalsystems.group/compliance-engine/evidentiaryStatus> "mock" .
+<http://dynamicalsystems.group/compliance-engine/evidence/d51b18159d04d6ed> <http://dynamicalsystems.group/compliance-engine/modelHash> "9dc121ee28f44ac6d261d5d55337884ae9eee44091bf10fc009878f19d9df557" .
+<http://dynamicalsystems.group/compliance-engine/evidence/d51b18159d04d6ed> <http://dynamicalsystems.group/compliance-engine/resultSummary> "config export from workspace.admin_sdk: ops_mfa_enforced=True" .
+<http://dynamicalsystems.group/compliance-engine/evidence/d51b18159d04d6ed> <http://dynamicalsystems.group/compliance-engine/sourceFile> "nv012/all-covered/workspace_ops_mfa.json" .
+<http://dynamicalsystems.group/compliance-engine/evidence/d51b18159d04d6ed> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/ConfigExport> .
+<http://dynamicalsystems.group/compliance-engine/evidence/d51b18159d04d6ed> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/Evidence> .
+<http://dynamicalsystems.group/compliance-engine/evidence/d51b18159d04d6ed> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Entity> .
+<http://dynamicalsystems.group/compliance-engine/evidence/d51b18159d04d6ed> <http://www.w3.org/ns/prov#generatedAtTime> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/evidence/d51b18159d04d6ed> <http://www.w3.org/ns/prov#wasGeneratedBy> <http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-d51b18159d04d6ed> .
+<http://dynamicalsystems.group/compliance-engine/evidence/dbbec27575687acd> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.4> .
+<http://dynamicalsystems.group/compliance-engine/evidence/dbbec27575687acd> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.7> .
+<http://dynamicalsystems.group/compliance-engine/evidence/dbbec27575687acd> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.8> .
+<http://dynamicalsystems.group/compliance-engine/evidence/dbbec27575687acd> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.9> .
+<http://dynamicalsystems.group/compliance-engine/evidence/dbbec27575687acd> <http://dynamicalsystems.group/compliance-engine/contentHash> "dbbec27575687acd6dd7f477539165531ff5ed1a7bff42d1f53983e165dd4584" .
+<http://dynamicalsystems.group/compliance-engine/evidence/dbbec27575687acd> <http://dynamicalsystems.group/compliance-engine/documentRef> "registry://evidence/dbbec27575687acd6dd7f477539165531ff5ed1a7bff42d1f53983e165dd4584" .
+<http://dynamicalsystems.group/compliance-engine/evidence/dbbec27575687acd> <http://dynamicalsystems.group/compliance-engine/evidentiaryStatus> "mock" .
+<http://dynamicalsystems.group/compliance-engine/evidence/dbbec27575687acd> <http://dynamicalsystems.group/compliance-engine/modelHash> "9b8aa121c432fcc2c4a33347d9e985d1312205c79cd43d19f613f4f9ac009c28" .
+<http://dynamicalsystems.group/compliance-engine/evidence/dbbec27575687acd> <http://dynamicalsystems.group/compliance-engine/resultSummary> "config export from gcp.cloudlogging: audit_mgmt_privileged=True; log_bucket_access_restricted=True; log_failure_alerting=True; ntp_configured=True" .
+<http://dynamicalsystems.group/compliance-engine/evidence/dbbec27575687acd> <http://dynamicalsystems.group/compliance-engine/sourceFile> "nv012/all-covered/gcp_cloud_logging.json" .
+<http://dynamicalsystems.group/compliance-engine/evidence/dbbec27575687acd> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/ConfigExport> .
+<http://dynamicalsystems.group/compliance-engine/evidence/dbbec27575687acd> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/Evidence> .
+<http://dynamicalsystems.group/compliance-engine/evidence/dbbec27575687acd> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Entity> .
+<http://dynamicalsystems.group/compliance-engine/evidence/dbbec27575687acd> <http://www.w3.org/ns/prov#generatedAtTime> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/evidence/dbbec27575687acd> <http://www.w3.org/ns/prov#wasGeneratedBy> <http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-dbbec27575687acd> .
+<http://dynamicalsystems.group/compliance-engine/evidence/df6706e07d448f63> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.16> .
+<http://dynamicalsystems.group/compliance-engine/evidence/df6706e07d448f63> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.17> .
+<http://dynamicalsystems.group/compliance-engine/evidence/df6706e07d448f63> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.18> .
+<http://dynamicalsystems.group/compliance-engine/evidence/df6706e07d448f63> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.19> .
+<http://dynamicalsystems.group/compliance-engine/evidence/df6706e07d448f63> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.7> .
+<http://dynamicalsystems.group/compliance-engine/evidence/df6706e07d448f63> <http://dynamicalsystems.group/compliance-engine/contentHash> "df6706e07d448f632c0f7304eb2d1ce5d78b55f7908fe70eb1535809d42df746" .
+<http://dynamicalsystems.group/compliance-engine/evidence/df6706e07d448f63> <http://dynamicalsystems.group/compliance-engine/documentRef> "registry://evidence/df6706e07d448f632c0f7304eb2d1ce5d78b55f7908fe70eb1535809d42df746" .
+<http://dynamicalsystems.group/compliance-engine/evidence/df6706e07d448f63> <http://dynamicalsystems.group/compliance-engine/evidentiaryStatus> "mock" .
+<http://dynamicalsystems.group/compliance-engine/evidence/df6706e07d448f63> <http://dynamicalsystems.group/compliance-engine/modelHash> "af34e08baa3888c6b2edcf8c307a03e99d4da72d1c96d4e73ae0557a805700a0" .
+<http://dynamicalsystems.group/compliance-engine/evidence/df6706e07d448f63> <http://dynamicalsystems.group/compliance-engine/resultSummary> "config export from chrome.cloud_mgmt: mdm_enrolled=True; mobile_encryption_at_rest=True; removable_media_blocked=True; wireless_authorized=True; wireless_crypto_enforced=True" .
+<http://dynamicalsystems.group/compliance-engine/evidence/df6706e07d448f63> <http://dynamicalsystems.group/compliance-engine/sourceFile> "nv012/all-covered/chrome_mdm.json" .
+<http://dynamicalsystems.group/compliance-engine/evidence/df6706e07d448f63> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/ConfigExport> .
+<http://dynamicalsystems.group/compliance-engine/evidence/df6706e07d448f63> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/Evidence> .
+<http://dynamicalsystems.group/compliance-engine/evidence/df6706e07d448f63> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Entity> .
+<http://dynamicalsystems.group/compliance-engine/evidence/df6706e07d448f63> <http://www.w3.org/ns/prov#generatedAtTime> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/evidence/df6706e07d448f63> <http://www.w3.org/ns/prov#wasGeneratedBy> <http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-df6706e07d448f63> .
+<http://dynamicalsystems.group/compliance-engine/evidence/e1bec3138a1ea59f> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.8> .
+<http://dynamicalsystems.group/compliance-engine/evidence/e1bec3138a1ea59f> <http://dynamicalsystems.group/compliance-engine/addresses> <http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.9> .
+<http://dynamicalsystems.group/compliance-engine/evidence/e1bec3138a1ea59f> <http://dynamicalsystems.group/compliance-engine/contentHash> "e1bec3138a1ea59f82170a1bb8b5be92f8efcf66e6345736c2651501c258763a" .
+<http://dynamicalsystems.group/compliance-engine/evidence/e1bec3138a1ea59f> <http://dynamicalsystems.group/compliance-engine/documentRef> "registry://evidence/e1bec3138a1ea59f82170a1bb8b5be92f8efcf66e6345736c2651501c258763a" .
+<http://dynamicalsystems.group/compliance-engine/evidence/e1bec3138a1ea59f> <http://dynamicalsystems.group/compliance-engine/evidentiaryStatus> "mock" .
+<http://dynamicalsystems.group/compliance-engine/evidence/e1bec3138a1ea59f> <http://dynamicalsystems.group/compliance-engine/modelHash> "7f5bac0cf9270997b3603d6dbc38437b3663c47b02b81e2f89871f77f80b6331" .
+<http://dynamicalsystems.group/compliance-engine/evidence/e1bec3138a1ea59f> <http://dynamicalsystems.group/compliance-engine/resultSummary> "config export from gcp.binaryauth: deny_by_default_binauth=True; user_software_approval_required=True" .
+<http://dynamicalsystems.group/compliance-engine/evidence/e1bec3138a1ea59f> <http://dynamicalsystems.group/compliance-engine/sourceFile> "nv012/all-covered/gcp_binauth_allowlist.json" .
+<http://dynamicalsystems.group/compliance-engine/evidence/e1bec3138a1ea59f> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/ConfigExport> .
+<http://dynamicalsystems.group/compliance-engine/evidence/e1bec3138a1ea59f> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/Evidence> .
+<http://dynamicalsystems.group/compliance-engine/evidence/e1bec3138a1ea59f> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Entity> .
+<http://dynamicalsystems.group/compliance-engine/evidence/e1bec3138a1ea59f> <http://www.w3.org/ns/prov#generatedAtTime> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/evidence/e1bec3138a1ea59f> <http://www.w3.org/ns/prov#wasGeneratedBy> <http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-e1bec3138a1ea59f> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-2690e5e9a376ed92> <http://dynamicalsystems.group/compliance-engine/collectedAt> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-2690e5e9a376ed92> <http://dynamicalsystems.group/compliance-engine/exportCommand> "gcloud logging sinks describe cui-audit-sink --format=json" .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-2690e5e9a376ed92> <http://dynamicalsystems.group/compliance-engine/sourceSystem> "gcp.cloud_logging" .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-2690e5e9a376ed92> <http://purl.org/net/p-plan#correspondsToStep> <http://dynamicalsystems.group/compliance-engine/step-CollectEvidence> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-2690e5e9a376ed92> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Activity> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-2690e5e9a376ed92> <http://www.w3.org/ns/prov#startedAtTime> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-2690e5e9a376ed92> <http://www.w3.org/ns/prov#wasAssociatedWith> <http://dynamicalsystems.group/compliance-engine/collector/gcp-cloud-logging> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-2a64f51ac186a4af> <http://dynamicalsystems.group/compliance-engine/collectedAt> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-2a64f51ac186a4af> <http://dynamicalsystems.group/compliance-engine/exportCommand> "gcloud compute networks describe cui-enclave --format json && gcloud compute firewall-rules list --filter='network=cui-enclave' --format json" .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-2a64f51ac186a4af> <http://dynamicalsystems.group/compliance-engine/sourceSystem> "gcp.compute" .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-2a64f51ac186a4af> <http://purl.org/net/p-plan#correspondsToStep> <http://dynamicalsystems.group/compliance-engine/step-CollectEvidence> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-2a64f51ac186a4af> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Activity> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-2a64f51ac186a4af> <http://www.w3.org/ns/prov#startedAtTime> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-2a64f51ac186a4af> <http://www.w3.org/ns/prov#wasAssociatedWith> <http://dynamicalsystems.group/compliance-engine/collector/gcp-compute> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-2d9165ac19f597a8> <http://dynamicalsystems.group/compliance-engine/collectedAt> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-2d9165ac19f597a8> <http://dynamicalsystems.group/compliance-engine/exportCommand> "mock-export" .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-2d9165ac19f597a8> <http://dynamicalsystems.group/compliance-engine/sourceSystem> "workspace.admin_sdk" .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-2d9165ac19f597a8> <http://purl.org/net/p-plan#correspondsToStep> <http://dynamicalsystems.group/compliance-engine/step-CollectEvidence> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-2d9165ac19f597a8> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Activity> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-2d9165ac19f597a8> <http://www.w3.org/ns/prov#startedAtTime> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-2d9165ac19f597a8> <http://www.w3.org/ns/prov#wasAssociatedWith> <http://dynamicalsystems.group/compliance-engine/collector/workspace-admin-sdk> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-385f07ca2e587097> <http://dynamicalsystems.group/compliance-engine/collectedAt> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-385f07ca2e587097> <http://dynamicalsystems.group/compliance-engine/exportCommand> "gcloud resource-manager org-policies describe gcp.resourceLocations --project nv012-cui --format json" .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-385f07ca2e587097> <http://dynamicalsystems.group/compliance-engine/sourceSystem> "gcp.org_policy" .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-385f07ca2e587097> <http://purl.org/net/p-plan#correspondsToStep> <http://dynamicalsystems.group/compliance-engine/step-CollectEvidence> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-385f07ca2e587097> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Activity> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-385f07ca2e587097> <http://www.w3.org/ns/prov#startedAtTime> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-385f07ca2e587097> <http://www.w3.org/ns/prov#wasAssociatedWith> <http://dynamicalsystems.group/compliance-engine/collector/gcp-org-policy> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-3923ae07c2016872> <http://dynamicalsystems.group/compliance-engine/collectedAt> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-3923ae07c2016872> <http://dynamicalsystems.group/compliance-engine/exportCommand> "gcloud kms keyrings list && gcloud scc notifications list --format=json" .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-3923ae07c2016872> <http://dynamicalsystems.group/compliance-engine/sourceSystem> "gcp.security" .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-3923ae07c2016872> <http://purl.org/net/p-plan#correspondsToStep> <http://dynamicalsystems.group/compliance-engine/step-CollectEvidence> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-3923ae07c2016872> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Activity> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-3923ae07c2016872> <http://www.w3.org/ns/prov#startedAtTime> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-3923ae07c2016872> <http://www.w3.org/ns/prov#wasAssociatedWith> <http://dynamicalsystems.group/compliance-engine/collector/gcp-security> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-3c4af60bc1448007> <http://dynamicalsystems.group/compliance-engine/collectedAt> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-3c4af60bc1448007> <http://dynamicalsystems.group/compliance-engine/exportCommand> "gcloud kms keys describe cui-cmek --keyring cui --location us --format json" .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-3c4af60bc1448007> <http://dynamicalsystems.group/compliance-engine/sourceSystem> "gcp.kms" .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-3c4af60bc1448007> <http://purl.org/net/p-plan#correspondsToStep> <http://dynamicalsystems.group/compliance-engine/step-CollectEvidence> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-3c4af60bc1448007> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Activity> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-3c4af60bc1448007> <http://www.w3.org/ns/prov#startedAtTime> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-3c4af60bc1448007> <http://www.w3.org/ns/prov#wasAssociatedWith> <http://dynamicalsystems.group/compliance-engine/collector/gcp-kms> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-4472a35663cebbc9> <http://dynamicalsystems.group/compliance-engine/collectedAt> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-4472a35663cebbc9> <http://dynamicalsystems.group/compliance-engine/exportCommand> "mock-export" .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-4472a35663cebbc9> <http://dynamicalsystems.group/compliance-engine/sourceSystem> "gcp.securitycommandcenter" .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-4472a35663cebbc9> <http://purl.org/net/p-plan#correspondsToStep> <http://dynamicalsystems.group/compliance-engine/step-CollectEvidence> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-4472a35663cebbc9> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Activity> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-4472a35663cebbc9> <http://www.w3.org/ns/prov#startedAtTime> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-4472a35663cebbc9> <http://www.w3.org/ns/prov#wasAssociatedWith> <http://dynamicalsystems.group/compliance-engine/collector/gcp-securitycommandcenter> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-4bba2d0adcbb48ec> <http://dynamicalsystems.group/compliance-engine/collectedAt> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-4bba2d0adcbb48ec> <http://dynamicalsystems.group/compliance-engine/exportCommand> "gcloud projects get-iam-policy nv012-cui --format json" .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-4bba2d0adcbb48ec> <http://dynamicalsystems.group/compliance-engine/sourceSystem> "gcp.iam" .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-4bba2d0adcbb48ec> <http://purl.org/net/p-plan#correspondsToStep> <http://dynamicalsystems.group/compliance-engine/step-CollectEvidence> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-4bba2d0adcbb48ec> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Activity> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-4bba2d0adcbb48ec> <http://www.w3.org/ns/prov#startedAtTime> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-4bba2d0adcbb48ec> <http://www.w3.org/ns/prov#wasAssociatedWith> <http://dynamicalsystems.group/compliance-engine/collector/gcp-iam> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-52eb61a61772b787> <http://dynamicalsystems.group/compliance-engine/collectedAt> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-52eb61a61772b787> <http://dynamicalsystems.group/compliance-engine/exportCommand> "gcloud storage buckets describe gs://nv012-cui-data --format json" .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-52eb61a61772b787> <http://dynamicalsystems.group/compliance-engine/sourceSystem> "gcp.storage" .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-52eb61a61772b787> <http://purl.org/net/p-plan#correspondsToStep> <http://dynamicalsystems.group/compliance-engine/step-CollectEvidence> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-52eb61a61772b787> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Activity> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-52eb61a61772b787> <http://www.w3.org/ns/prov#startedAtTime> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-52eb61a61772b787> <http://www.w3.org/ns/prov#wasAssociatedWith> <http://dynamicalsystems.group/compliance-engine/collector/gcp-storage> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-594252df359f78bd> <http://dynamicalsystems.group/compliance-engine/collectedAt> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-594252df359f78bd> <http://dynamicalsystems.group/compliance-engine/exportCommand> "mock-export" .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-594252df359f78bd> <http://dynamicalsystems.group/compliance-engine/sourceSystem> "gcp.iam" .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-594252df359f78bd> <http://purl.org/net/p-plan#correspondsToStep> <http://dynamicalsystems.group/compliance-engine/step-CollectEvidence> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-594252df359f78bd> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Activity> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-594252df359f78bd> <http://www.w3.org/ns/prov#startedAtTime> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-594252df359f78bd> <http://www.w3.org/ns/prov#wasAssociatedWith> <http://dynamicalsystems.group/compliance-engine/collector/gcp-iam> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-5f8e7ef2f8ffc747> <http://dynamicalsystems.group/compliance-engine/collectedAt> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-5f8e7ef2f8ffc747> <http://dynamicalsystems.group/compliance-engine/exportCommand> "gcloud resource-manager org-policies describe gcp.resourceLocations --project nv012-cui --format json" .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-5f8e7ef2f8ffc747> <http://dynamicalsystems.group/compliance-engine/sourceSystem> "gcp.org_policy" .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-5f8e7ef2f8ffc747> <http://purl.org/net/p-plan#correspondsToStep> <http://dynamicalsystems.group/compliance-engine/step-CollectEvidence> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-5f8e7ef2f8ffc747> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Activity> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-5f8e7ef2f8ffc747> <http://www.w3.org/ns/prov#startedAtTime> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-5f8e7ef2f8ffc747> <http://www.w3.org/ns/prov#wasAssociatedWith> <http://dynamicalsystems.group/compliance-engine/collector/gcp-org-policy> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-6549f40b7941e00a> <http://dynamicalsystems.group/compliance-engine/collectedAt> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-6549f40b7941e00a> <http://dynamicalsystems.group/compliance-engine/exportCommand> "gam print users query 'orgUnitPath=/Privileged' fields primaryEmail,isEnrolledIn2Sv,isEnforcedIn2Sv" .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-6549f40b7941e00a> <http://dynamicalsystems.group/compliance-engine/sourceSystem> "workspace.2sv" .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-6549f40b7941e00a> <http://purl.org/net/p-plan#correspondsToStep> <http://dynamicalsystems.group/compliance-engine/step-CollectEvidence> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-6549f40b7941e00a> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Activity> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-6549f40b7941e00a> <http://www.w3.org/ns/prov#startedAtTime> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-6549f40b7941e00a> <http://www.w3.org/ns/prov#wasAssociatedWith> <http://dynamicalsystems.group/compliance-engine/collector/workspace-2sv> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-6c69bdddaea378c0> <http://dynamicalsystems.group/compliance-engine/collectedAt> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-6c69bdddaea378c0> <http://dynamicalsystems.group/compliance-engine/exportCommand> "gcloud projects get-iam-policy nv012-cui --format json" .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-6c69bdddaea378c0> <http://dynamicalsystems.group/compliance-engine/sourceSystem> "gcp.iam" .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-6c69bdddaea378c0> <http://purl.org/net/p-plan#correspondsToStep> <http://dynamicalsystems.group/compliance-engine/step-CollectEvidence> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-6c69bdddaea378c0> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Activity> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-6c69bdddaea378c0> <http://www.w3.org/ns/prov#startedAtTime> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-6c69bdddaea378c0> <http://www.w3.org/ns/prov#wasAssociatedWith> <http://dynamicalsystems.group/compliance-engine/collector/gcp-iam> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-753946a895a2cb99> <http://dynamicalsystems.group/compliance-engine/collectedAt> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-753946a895a2cb99> <http://dynamicalsystems.group/compliance-engine/exportCommand> "mock-export" .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-753946a895a2cb99> <http://dynamicalsystems.group/compliance-engine/sourceSystem> "gcp.beyondcorp" .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-753946a895a2cb99> <http://purl.org/net/p-plan#correspondsToStep> <http://dynamicalsystems.group/compliance-engine/step-CollectEvidence> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-753946a895a2cb99> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Activity> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-753946a895a2cb99> <http://www.w3.org/ns/prov#startedAtTime> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-753946a895a2cb99> <http://www.w3.org/ns/prov#wasAssociatedWith> <http://dynamicalsystems.group/compliance-engine/collector/gcp-beyondcorp> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-75ad3c7ecdfadfc7> <http://dynamicalsystems.group/compliance-engine/collectedAt> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-75ad3c7ecdfadfc7> <http://dynamicalsystems.group/compliance-engine/exportCommand> "terraform show -json | opa eval -d cm_baseline.rego" .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-75ad3c7ecdfadfc7> <http://dynamicalsystems.group/compliance-engine/sourceSystem> "gcp.terraform_state" .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-75ad3c7ecdfadfc7> <http://purl.org/net/p-plan#correspondsToStep> <http://dynamicalsystems.group/compliance-engine/step-CollectEvidence> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-75ad3c7ecdfadfc7> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Activity> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-75ad3c7ecdfadfc7> <http://www.w3.org/ns/prov#startedAtTime> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-75ad3c7ecdfadfc7> <http://www.w3.org/ns/prov#wasAssociatedWith> <http://dynamicalsystems.group/compliance-engine/collector/gcp-terraform-state> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-78748c9966987bfe> <http://dynamicalsystems.group/compliance-engine/collectedAt> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-78748c9966987bfe> <http://dynamicalsystems.group/compliance-engine/exportCommand> "mock-export" .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-78748c9966987bfe> <http://dynamicalsystems.group/compliance-engine/sourceSystem> "crowdstrike.falcon" .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-78748c9966987bfe> <http://purl.org/net/p-plan#correspondsToStep> <http://dynamicalsystems.group/compliance-engine/step-CollectEvidence> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-78748c9966987bfe> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Activity> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-78748c9966987bfe> <http://www.w3.org/ns/prov#startedAtTime> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-78748c9966987bfe> <http://www.w3.org/ns/prov#wasAssociatedWith> <http://dynamicalsystems.group/compliance-engine/collector/crowdstrike-falcon> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-8959f24468b8f262> <http://dynamicalsystems.group/compliance-engine/collectedAt> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-8959f24468b8f262> <http://dynamicalsystems.group/compliance-engine/exportCommand> "mock-export" .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-8959f24468b8f262> <http://dynamicalsystems.group/compliance-engine/sourceSystem> "gcp.cloudidentity" .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-8959f24468b8f262> <http://purl.org/net/p-plan#correspondsToStep> <http://dynamicalsystems.group/compliance-engine/step-CollectEvidence> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-8959f24468b8f262> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Activity> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-8959f24468b8f262> <http://www.w3.org/ns/prov#startedAtTime> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-8959f24468b8f262> <http://www.w3.org/ns/prov#wasAssociatedWith> <http://dynamicalsystems.group/compliance-engine/collector/gcp-cloudidentity> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-9c2e2dd99b274292> <http://dynamicalsystems.group/compliance-engine/collectedAt> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-9c2e2dd99b274292> <http://dynamicalsystems.group/compliance-engine/exportCommand> "gcloud projects get-iam-policy nv012-cui --format=json | opa eval -d access_policy.rego" .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-9c2e2dd99b274292> <http://dynamicalsystems.group/compliance-engine/sourceSystem> "gcp.iam" .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-9c2e2dd99b274292> <http://purl.org/net/p-plan#correspondsToStep> <http://dynamicalsystems.group/compliance-engine/step-CollectEvidence> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-9c2e2dd99b274292> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Activity> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-9c2e2dd99b274292> <http://www.w3.org/ns/prov#startedAtTime> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-9c2e2dd99b274292> <http://www.w3.org/ns/prov#wasAssociatedWith> <http://dynamicalsystems.group/compliance-engine/collector/gcp-iam> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-a911dd6a6276701f> <http://dynamicalsystems.group/compliance-engine/collectedAt> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-a911dd6a6276701f> <http://dynamicalsystems.group/compliance-engine/exportCommand> "mock-export" .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-a911dd6a6276701f> <http://dynamicalsystems.group/compliance-engine/sourceSystem> "github.api" .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-a911dd6a6276701f> <http://purl.org/net/p-plan#correspondsToStep> <http://dynamicalsystems.group/compliance-engine/step-CollectEvidence> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-a911dd6a6276701f> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Activity> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-a911dd6a6276701f> <http://www.w3.org/ns/prov#startedAtTime> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-a911dd6a6276701f> <http://www.w3.org/ns/prov#wasAssociatedWith> <http://dynamicalsystems.group/compliance-engine/collector/github-api> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-b6c67e930e8a45ac> <http://dynamicalsystems.group/compliance-engine/collectedAt> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-b6c67e930e8a45ac> <http://dynamicalsystems.group/compliance-engine/exportCommand> "mock-export" .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-b6c67e930e8a45ac> <http://dynamicalsystems.group/compliance-engine/sourceSystem> "gcp.vpcsc" .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-b6c67e930e8a45ac> <http://purl.org/net/p-plan#correspondsToStep> <http://dynamicalsystems.group/compliance-engine/step-CollectEvidence> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-b6c67e930e8a45ac> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Activity> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-b6c67e930e8a45ac> <http://www.w3.org/ns/prov#startedAtTime> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-b6c67e930e8a45ac> <http://www.w3.org/ns/prov#wasAssociatedWith> <http://dynamicalsystems.group/compliance-engine/collector/gcp-vpcsc> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-d0cea0ecf9b3ce6d> <http://dynamicalsystems.group/compliance-engine/collectedAt> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-d0cea0ecf9b3ce6d> <http://dynamicalsystems.group/compliance-engine/exportCommand> "gam print settings | opa eval -d ia_auth.rego" .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-d0cea0ecf9b3ce6d> <http://dynamicalsystems.group/compliance-engine/sourceSystem> "workspace.security" .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-d0cea0ecf9b3ce6d> <http://purl.org/net/p-plan#correspondsToStep> <http://dynamicalsystems.group/compliance-engine/step-CollectEvidence> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-d0cea0ecf9b3ce6d> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Activity> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-d0cea0ecf9b3ce6d> <http://www.w3.org/ns/prov#startedAtTime> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-d0cea0ecf9b3ce6d> <http://www.w3.org/ns/prov#wasAssociatedWith> <http://dynamicalsystems.group/compliance-engine/collector/workspace-security> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-d51b18159d04d6ed> <http://dynamicalsystems.group/compliance-engine/collectedAt> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-d51b18159d04d6ed> <http://dynamicalsystems.group/compliance-engine/exportCommand> "mock-export" .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-d51b18159d04d6ed> <http://dynamicalsystems.group/compliance-engine/sourceSystem> "workspace.admin_sdk" .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-d51b18159d04d6ed> <http://purl.org/net/p-plan#correspondsToStep> <http://dynamicalsystems.group/compliance-engine/step-CollectEvidence> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-d51b18159d04d6ed> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Activity> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-d51b18159d04d6ed> <http://www.w3.org/ns/prov#startedAtTime> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-d51b18159d04d6ed> <http://www.w3.org/ns/prov#wasAssociatedWith> <http://dynamicalsystems.group/compliance-engine/collector/workspace-admin-sdk> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-dbbec27575687acd> <http://dynamicalsystems.group/compliance-engine/collectedAt> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-dbbec27575687acd> <http://dynamicalsystems.group/compliance-engine/exportCommand> "mock-export" .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-dbbec27575687acd> <http://dynamicalsystems.group/compliance-engine/sourceSystem> "gcp.cloudlogging" .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-dbbec27575687acd> <http://purl.org/net/p-plan#correspondsToStep> <http://dynamicalsystems.group/compliance-engine/step-CollectEvidence> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-dbbec27575687acd> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Activity> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-dbbec27575687acd> <http://www.w3.org/ns/prov#startedAtTime> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-dbbec27575687acd> <http://www.w3.org/ns/prov#wasAssociatedWith> <http://dynamicalsystems.group/compliance-engine/collector/gcp-cloudlogging> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-df6706e07d448f63> <http://dynamicalsystems.group/compliance-engine/collectedAt> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-df6706e07d448f63> <http://dynamicalsystems.group/compliance-engine/exportCommand> "mock-export" .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-df6706e07d448f63> <http://dynamicalsystems.group/compliance-engine/sourceSystem> "chrome.cloud_mgmt" .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-df6706e07d448f63> <http://purl.org/net/p-plan#correspondsToStep> <http://dynamicalsystems.group/compliance-engine/step-CollectEvidence> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-df6706e07d448f63> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Activity> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-df6706e07d448f63> <http://www.w3.org/ns/prov#startedAtTime> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-df6706e07d448f63> <http://www.w3.org/ns/prov#wasAssociatedWith> <http://dynamicalsystems.group/compliance-engine/collector/chrome-cloud-mgmt> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-e1bec3138a1ea59f> <http://dynamicalsystems.group/compliance-engine/collectedAt> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-e1bec3138a1ea59f> <http://dynamicalsystems.group/compliance-engine/exportCommand> "mock-export" .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-e1bec3138a1ea59f> <http://dynamicalsystems.group/compliance-engine/sourceSystem> "gcp.binaryauth" .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-e1bec3138a1ea59f> <http://purl.org/net/p-plan#correspondsToStep> <http://dynamicalsystems.group/compliance-engine/step-CollectEvidence> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-e1bec3138a1ea59f> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Activity> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-e1bec3138a1ea59f> <http://www.w3.org/ns/prov#startedAtTime> "2026-07-02T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/exec/CollectEvidence-e1bec3138a1ea59f> <http://www.w3.org/ns/prov#wasAssociatedWith> <http://dynamicalsystems.group/compliance-engine/collector/gcp-binaryauth> .

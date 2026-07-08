@@ -219,6 +219,42 @@ class FakeFlexoStore:
         )
         return manifest["graphs"].get(iri)
 
+    # -- raw object store (Registry write-through/read-through tier) --------
+    #
+    # Separate from the graph-commit `objects/<ref>/objects/<hash>.nt` path
+    # above: this is a plain content-addressed blob store (BOM bytes, artifact
+    # bytes), not a named-graph snapshot. Kept in its own `_registry_objects`
+    # ref so registry blobs never mix into named-graph commit history.
+
+    _REGISTRY_REF = "_registry_objects"
+
+    def _registry_object_path(self, hash_: str) -> Path:
+        return self._ref_dir(self._REGISTRY_REF) / "objects" / hash_
+
+    def put_object(self, content: bytes) -> str:
+        """Write-once content-addressed blob storage. Returns the SHA-256 hex key."""
+        h = content_hash(content)
+        path = self._registry_object_path(h)
+        if path.exists():
+            if path.read_bytes() != content:
+                raise ValueError(
+                    f"object {h} exists in Flexo registry tier with different "
+                    f"bytes (write-once violation or tampering)"
+                )
+        else:
+            path.parent.mkdir(parents=True, exist_ok=True)
+            tmp = path.with_name(path.name + ".tmp")
+            tmp.write_bytes(content)
+            tmp.replace(path)
+        return h
+
+    def get_object(self, hash_: str) -> bytes:
+        """Return the stored bytes for ``hash_``. Raises KeyError if absent."""
+        path = self._registry_object_path(hash_)
+        if not path.exists():
+            raise KeyError(hash_)
+        return path.read_bytes()
+
 
 class FlexoBackend:
     """Persist the runtime Dataset to a Flexo MMS versioned quadstore.
@@ -368,6 +404,30 @@ class FlexoBackend:
         )
 
     # -- convenience (not part of the StoreBackend protocol) ----------------
+    #
+    # put_object/get_object: a narrow, separate object-store surface used by
+    # Registry (pipeline/registry.py) for write-through/read-through of
+    # single content-addressed blobs (BOM bytes, artifacts) — distinct from
+    # persist()'s whole-Dataset named-graph snapshots above. Feature-detected
+    # by Registry via hasattr; LocalBackend does not implement this surface.
+
+    def put_object(self, content: bytes) -> str:
+        """Write-once content-addressed blob storage. Returns the SHA-256 hex key."""
+        if self.store is None:
+            raise BackendUnavailable(
+                "flexo real-endpoint object store is deferred; configure a "
+                "FakeFlexoStore for offline persistence"
+            )
+        return self.store.put_object(content)
+
+    def get_object(self, hash_: str) -> bytes:
+        """Return the stored bytes for ``hash_``. Raises KeyError if absent."""
+        if self.store is None:
+            raise BackendUnavailable(
+                "flexo real-endpoint object store is deferred; configure a "
+                "FakeFlexoStore for offline persistence"
+            )
+        return self.store.get_object(hash_)
 
     def load(self, version: str | None = None) -> Dataset:
         """Rebuild a Dataset from a committed version (latest if None).

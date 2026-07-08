@@ -93,6 +93,8 @@ class AttestationRecord:
     sig: str | None = None
     sig_algo: str = SIG_ALGO_NONE
     notes: str = ""
+    override_justification: str | None = None
+    override_evidence: str | None = None
 
     def __post_init__(self) -> None:
         if not self.id:
@@ -146,6 +148,14 @@ class AttestationRecord:
         if self.sig_algo != SIG_ALGO_NONE and not self.sig:
             raise AttestationStoreError(
                 f"sig_algo={self.sig_algo} requires a sig value (record {self.id!r})"
+            )
+        # An override (MET attested over a failed/absent machine check) must carry
+        # concrete evidence — a written justification alone does not substantiate
+        # it. Mirrors the identical check in traceability.attestation.request_attestation().
+        if self.override_justification and not self.override_evidence:
+            raise AttestationStoreError(
+                f"override_justification requires override_evidence "
+                f"(record {self.id!r})"
             )
 
     def signing_payload(self) -> bytes:
@@ -277,6 +287,8 @@ def _record_from_obj(obj: dict, path, lineno: int) -> AttestationRecord:
         sig=obj.get("sig"),
         sig_algo=obj.get("sig_algo", SIG_ALGO_NONE),
         notes=obj.get("notes", ""),
+        override_justification=obj.get("override_justification"),
+        override_evidence=obj.get("override_evidence"),
     )
 
 
@@ -294,4 +306,6 @@ def _record_to_obj(rec: AttestationRecord) -> dict:
         "sig": rec.sig,
         "sig_algo": rec.sig_algo,
         "notes": rec.notes,
+        "override_justification": rec.override_justification,
+        "override_evidence": rec.override_evidence,
     }

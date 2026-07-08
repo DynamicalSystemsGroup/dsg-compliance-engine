@@ -148,3 +148,58 @@ class TestFailFast:
         blocker.write_text("i am a file\n")
         with pytest.raises(BackendUnavailable):
             Registry(blocker / "store")
+
+
+class _FakeRemote:
+    """Minimal put_object/get_object stub — the duck-typed surface Registry
+    feature-detects, independent of any real FlexoBackend."""
+
+    def __init__(self, *, fail_put: bool = False):
+        self.fail_put = fail_put
+        self._store: dict[str, bytes] = {}
+
+    def put_object(self, content: bytes) -> str:
+        if self.fail_put:
+            raise RuntimeError("remote unavailable")
+        h = content_hash(content)
+        self._store[h] = content
+        return h
+
+    def get_object(self, hash_: str) -> bytes:
+        return self._store[hash_]
+
+
+class TestRemoteComposition:
+    def test_put_writes_through_to_remote(self, tmp_path):
+        remote = _FakeRemote()
+        reg = Registry(tmp_path / "store", remote=remote)
+        h = reg.put(b"content-a")
+
+        assert reg.degraded is False
+        assert remote.get_object(h) == b"content-a"
+        assert reg.get(h) == b"content-a"  # still readable locally
+
+    def test_get_falls_back_to_remote_on_local_miss_and_backfills(self, tmp_path):
+        remote = _FakeRemote()
+        h = remote.put_object(b"remote-only")
+
+        reg = Registry(tmp_path / "store", remote=remote)
+        assert reg.has(h) is False  # not local yet
+
+        assert reg.get(h) == b"remote-only"
+        assert reg.has(h) is True  # backfilled into local cache
+
+    def test_remote_put_failure_degrades_but_local_write_still_succeeds(self, tmp_path):
+        remote = _FakeRemote(fail_put=True)
+        reg = Registry(tmp_path / "store", remote=remote)
+
+        h = reg.put(b"content-b")  # must not raise
+
+        assert reg.degraded is True
+        assert reg.get(h) == b"content-b"  # local write unaffected
+
+    def test_no_remote_configured_behaves_exactly_as_before(self, tmp_path):
+        reg = Registry(tmp_path / "store")
+        h = reg.put(b"content-c")
+        assert reg.degraded is False
+        assert reg.get(h) == b"content-c"

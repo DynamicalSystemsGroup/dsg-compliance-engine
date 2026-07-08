@@ -1,748 +1,96 @@
 {
   "timestamp": "2026-07-02T00:00:00+00:00",
-  "passed": false,
+  "passed": true,
   "forward": {
     "passed": true,
-    "checked_count": 110,
+    "checked_count": 22,
     "failures": []
   },
   "backward": {
-    "passed": false,
-    "checked_count": 108,
-    "failures": [
-      {
-        "subject": "http://dynamicalsystems.group/compliance-engine/ATT-AC.L2-3.1.15",
-        "reason": "attestation cites evidence DE-REF_POL_AC_RemoteAuth_v1 that does not ce:addresses AC.L2-3.1.15",
-        "details": {
-          "attestation": "http://dynamicalsystems.group/compliance-engine/ATT-AC.L2-3.1.15",
-          "evidence": "http://dynamicalsystems.group/compliance-engine/DE-REF_POL_AC_RemoteAuth_v1",
-          "control": "http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.15"
-        }
-      },
-      {
-        "subject": "http://dynamicalsystems.group/compliance-engine/ATT-AC.L2-3.1.21",
-        "reason": "attestation cites evidence DE-REF_POL_AC_RemoteAuth_v1 that does not ce:addresses AC.L2-3.1.21",
-        "details": {
-          "attestation": "http://dynamicalsystems.group/compliance-engine/ATT-AC.L2-3.1.21",
-          "evidence": "http://dynamicalsystems.group/compliance-engine/DE-REF_POL_AC_RemoteAuth_v1",
-          "control": "http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.21"
-        }
-      },
-      {
-        "subject": "http://dynamicalsystems.group/compliance-engine/ATT-AC.L2-3.1.22",
-        "reason": "attestation cites evidence DE-REF_POL_AC_RemoteAuth_v1 that does not ce:addresses AC.L2-3.1.22",
-        "details": {
-          "attestation": "http://dynamicalsystems.group/compliance-engine/ATT-AC.L2-3.1.22",
-          "evidence": "http://dynamicalsystems.group/compliance-engine/DE-REF_POL_AC_RemoteAuth_v1",
-          "control": "http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.22"
-        }
-      },
-      {
-        "subject": "http://dynamicalsystems.group/compliance-engine/ATT-AC.L2-3.1.4",
-        "reason": "attestation cites evidence DE-REF_POL_AC_SoD_v1 that does not ce:addresses AC.L2-3.1.4",
-        "details": {
-          "attestation": "http://dynamicalsystems.group/compliance-engine/ATT-AC.L2-3.1.4",
-          "evidence": "http://dynamicalsystems.group/compliance-engine/DE-REF_POL_AC_SoD_v1",
-          "control": "http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.4"
-        }
-      },
-      {
-        "subject": "http://dynamicalsystems.group/compliance-engine/ATT-AC.L2-3.1.9",
-        "reason": "attestation cites evidence DE-REF_POL_AC_LoginBanner_v1 that does not ce:addresses AC.L2-3.1.9",
-        "details": {
-          "attestation": "http://dynamicalsystems.group/compliance-engine/ATT-AC.L2-3.1.9",
-          "evidence": "http://dynamicalsystems.group/compliance-engine/DE-REF_POL_AC_LoginBanner_v1",
-          "control": "http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.9"
-        }
-      },
-      {
-        "subject": "http://dynamicalsystems.group/compliance-engine/ATT-AT.L2-3.2.1",
-        "reason": "attestation cites evidence DE-REF_POL_AT_Training_v1 that does not ce:addresses AT.L2-3.2.1",
-        "details": {
-          "attestation": "http://dynamicalsystems.group/compliance-engine/ATT-AT.L2-3.2.1",
-          "evidence": "http://dynamicalsystems.group/compliance-engine/DE-REF_POL_AT_Training_v1",
-          "control": "http://dynamicalsystems.group/ontology/cmmc#AT.L2-3.2.1"
-        }
-      },
-      {
-        "subject": "http://dynamicalsystems.group/compliance-engine/ATT-AT.L2-3.2.2",
-        "reason": "attestation cites evidence DE-REF_POL_AT_Training_v1 that does not ce:addresses AT.L2-3.2.2",
-        "details": {
-          "attestation": "http://dynamicalsystems.group/compliance-engine/ATT-AT.L2-3.2.2",
-          "evidence": "http://dynamicalsystems.group/compliance-engine/DE-REF_POL_AT_Training_v1",
-          "control": "http://dynamicalsystems.group/ontology/cmmc#AT.L2-3.2.2"
-        }
-      },
-      {
-        "subject": "http://dynamicalsystems.group/compliance-engine/ATT-AT.L2-3.2.3",
-        "reason": "attestation cites evidence DE-REF_POL_AT_Training_v1 that does not ce:addresses AT.L2-3.2.3",
-        "details": {
-          "attestation": "http://dynamicalsystems.group/compliance-engine/ATT-AT.L2-3.2.3",
-          "evidence": "http://dynamicalsystems.group/compliance-engine/DE-REF_POL_AT_Training_v1",
-          "control": "http://dynamicalsystems.group/ontology/cmmc#AT.L2-3.2.3"
-        }
-      },
-      {
-        "subject": "http://dynamicalsystems.group/compliance-engine/ATT-AU.L2-3.3.3",
-        "reason": "attestation cites evidence DE-REF_POL_AU_Procedure_v1 that does not ce:addresses AU.L2-3.3.3",
-        "details": {
-          "attestation": "http://dynamicalsystems.group/compliance-engine/ATT-AU.L2-3.3.3",
-          "evidence": "http://dynamicalsystems.group/compliance-engine/DE-REF_POL_AU_Procedure_v1",
-          "control": "http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.3"
-        }
-      },
-      {
-        "subject": "http://dynamicalsystems.group/compliance-engine/ATT-AU.L2-3.3.6",
-        "reason": "attestation cites evidence DE-REF_POL_AU_Procedure_v1 that does not ce:addresses AU.L2-3.3.6",
-        "details": {
-          "attestation": "http://dynamicalsystems.group/compliance-engine/ATT-AU.L2-3.3.6",
-          "evidence": "http://dynamicalsystems.group/compliance-engine/DE-REF_POL_AU_Procedure_v1",
-          "control": "http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.6"
-        }
-      },
-      {
-        "subject": "http://dynamicalsystems.group/compliance-engine/ATT-CA.L2-3.12.1",
-        "reason": "attestation cites evidence DE-REF_POL_CA_Monitoring_v1 that does not ce:addresses CA.L2-3.12.1",
-        "details": {
-          "attestation": "http://dynamicalsystems.group/compliance-engine/ATT-CA.L2-3.12.1",
-          "evidence": "http://dynamicalsystems.group/compliance-engine/DE-REF_POL_CA_Monitoring_v1",
-          "control": "http://dynamicalsystems.group/ontology/cmmc#CA.L2-3.12.1"
-        }
-      },
-      {
-        "subject": "http://dynamicalsystems.group/compliance-engine/ATT-CA.L2-3.12.2",
-        "reason": "attestation cites evidence DE-REF_POL_CA_Monitoring_v1 that does not ce:addresses CA.L2-3.12.2",
-        "details": {
-          "attestation": "http://dynamicalsystems.group/compliance-engine/ATT-CA.L2-3.12.2",
-          "evidence": "http://dynamicalsystems.group/compliance-engine/DE-REF_POL_CA_Monitoring_v1",
-          "control": "http://dynamicalsystems.group/ontology/cmmc#CA.L2-3.12.2"
-        }
-      },
-      {
-        "subject": "http://dynamicalsystems.group/compliance-engine/ATT-CA.L2-3.12.3",
-        "reason": "attestation cites evidence DE-REF_POL_CA_Monitoring_v1 that does not ce:addresses CA.L2-3.12.3",
-        "details": {
-          "attestation": "http://dynamicalsystems.group/compliance-engine/ATT-CA.L2-3.12.3",
-          "evidence": "http://dynamicalsystems.group/compliance-engine/DE-REF_POL_CA_Monitoring_v1",
-          "control": "http://dynamicalsystems.group/ontology/cmmc#CA.L2-3.12.3"
-        }
-      },
-      {
-        "subject": "http://dynamicalsystems.group/compliance-engine/ATT-CA.L2-3.12.4",
-        "reason": "attestation cites evidence DE-REF_POL_SSP_v1 that does not ce:addresses CA.L2-3.12.4",
-        "details": {
-          "attestation": "http://dynamicalsystems.group/compliance-engine/ATT-CA.L2-3.12.4",
-          "evidence": "http://dynamicalsystems.group/compliance-engine/DE-REF_POL_SSP_v1",
-          "control": "http://dynamicalsystems.group/ontology/cmmc#CA.L2-3.12.4"
-        }
-      },
-      {
-        "subject": "http://dynamicalsystems.group/compliance-engine/ATT-CM.L2-3.4.4",
-        "reason": "attestation cites evidence DE-REF_POL_CM_Config_v1 that does not ce:addresses CM.L2-3.4.4",
-        "details": {
-          "attestation": "http://dynamicalsystems.group/compliance-engine/ATT-CM.L2-3.4.4",
-          "evidence": "http://dynamicalsystems.group/compliance-engine/DE-REF_POL_CM_Config_v1",
-          "control": "http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.4"
-        }
-      },
-      {
-        "subject": "http://dynamicalsystems.group/compliance-engine/ATT-IR.L2-3.6.1",
-        "reason": "attestation cites evidence DE-REF_POL_IR_Plan_v1 that does not ce:addresses IR.L2-3.6.1",
-        "details": {
-          "attestation": "http://dynamicalsystems.group/compliance-engine/ATT-IR.L2-3.6.1",
-          "evidence": "http://dynamicalsystems.group/compliance-engine/DE-REF_POL_IR_Plan_v1",
-          "control": "http://dynamicalsystems.group/ontology/cmmc#IR.L2-3.6.1"
-        }
-      },
-      {
-        "subject": "http://dynamicalsystems.group/compliance-engine/ATT-IR.L2-3.6.2",
-        "reason": "attestation cites evidence DE-REF_POL_IR_Plan_v1 that does not ce:addresses IR.L2-3.6.2",
-        "details": {
-          "attestation": "http://dynamicalsystems.group/compliance-engine/ATT-IR.L2-3.6.2",
-          "evidence": "http://dynamicalsystems.group/compliance-engine/DE-REF_POL_IR_Plan_v1",
-          "control": "http://dynamicalsystems.group/ontology/cmmc#IR.L2-3.6.2"
-        }
-      },
-      {
-        "subject": "http://dynamicalsystems.group/compliance-engine/ATT-IR.L2-3.6.3",
-        "reason": "attestation cites evidence DE-REF_POL_IR_Plan_v1 that does not ce:addresses IR.L2-3.6.3",
-        "details": {
-          "attestation": "http://dynamicalsystems.group/compliance-engine/ATT-IR.L2-3.6.3",
-          "evidence": "http://dynamicalsystems.group/compliance-engine/DE-REF_POL_IR_Plan_v1",
-          "control": "http://dynamicalsystems.group/ontology/cmmc#IR.L2-3.6.3"
-        }
-      },
-      {
-        "subject": "http://dynamicalsystems.group/compliance-engine/ATT-MA.L2-3.7.1",
-        "reason": "attestation cites evidence DE-REF_POL_MA_Maintenance_v1 that does not ce:addresses MA.L2-3.7.1",
-        "details": {
-          "attestation": "http://dynamicalsystems.group/compliance-engine/ATT-MA.L2-3.7.1",
-          "evidence": "http://dynamicalsystems.group/compliance-engine/DE-REF_POL_MA_Maintenance_v1",
-          "control": "http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.1"
-        }
-      },
-      {
-        "subject": "http://dynamicalsystems.group/compliance-engine/ATT-MA.L2-3.7.2",
-        "reason": "attestation cites evidence DE-REF_POL_MA_Maintenance_v1 that does not ce:addresses MA.L2-3.7.2",
-        "details": {
-          "attestation": "http://dynamicalsystems.group/compliance-engine/ATT-MA.L2-3.7.2",
-          "evidence": "http://dynamicalsystems.group/compliance-engine/DE-REF_POL_MA_Maintenance_v1",
-          "control": "http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.2"
-        }
-      },
-      {
-        "subject": "http://dynamicalsystems.group/compliance-engine/ATT-MA.L2-3.7.3",
-        "reason": "attestation cites evidence DE-REF_POL_MA_Maintenance_v1 that does not ce:addresses MA.L2-3.7.3",
-        "details": {
-          "attestation": "http://dynamicalsystems.group/compliance-engine/ATT-MA.L2-3.7.3",
-          "evidence": "http://dynamicalsystems.group/compliance-engine/DE-REF_POL_MA_Maintenance_v1",
-          "control": "http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.3"
-        }
-      },
-      {
-        "subject": "http://dynamicalsystems.group/compliance-engine/ATT-MA.L2-3.7.4",
-        "reason": "attestation cites evidence DE-REF_POL_MA_Maintenance_v1 that does not ce:addresses MA.L2-3.7.4",
-        "details": {
-          "attestation": "http://dynamicalsystems.group/compliance-engine/ATT-MA.L2-3.7.4",
-          "evidence": "http://dynamicalsystems.group/compliance-engine/DE-REF_POL_MA_Maintenance_v1",
-          "control": "http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.4"
-        }
-      },
-      {
-        "subject": "http://dynamicalsystems.group/compliance-engine/ATT-MA.L2-3.7.6",
-        "reason": "attestation cites evidence DE-REF_POL_MA_Maintenance_v1 that does not ce:addresses MA.L2-3.7.6",
-        "details": {
-          "attestation": "http://dynamicalsystems.group/compliance-engine/ATT-MA.L2-3.7.6",
-          "evidence": "http://dynamicalsystems.group/compliance-engine/DE-REF_POL_MA_Maintenance_v1",
-          "control": "http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.6"
-        }
-      },
-      {
-        "subject": "http://dynamicalsystems.group/compliance-engine/ATT-MP.L2-3.8.1",
-        "reason": "attestation cites evidence DE-REF_POL_MP_Media_v1 that does not ce:addresses MP.L2-3.8.1",
-        "details": {
-          "attestation": "http://dynamicalsystems.group/compliance-engine/ATT-MP.L2-3.8.1",
-          "evidence": "http://dynamicalsystems.group/compliance-engine/DE-REF_POL_MP_Media_v1",
-          "control": "http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.1"
-        }
-      },
-      {
-        "subject": "http://dynamicalsystems.group/compliance-engine/ATT-MP.L2-3.8.2",
-        "reason": "attestation cites evidence DE-REF_POL_MP_Media_v1 that does not ce:addresses MP.L2-3.8.2",
-        "details": {
-          "attestation": "http://dynamicalsystems.group/compliance-engine/ATT-MP.L2-3.8.2",
-          "evidence": "http://dynamicalsystems.group/compliance-engine/DE-REF_POL_MP_Media_v1",
-          "control": "http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.2"
-        }
-      },
-      {
-        "subject": "http://dynamicalsystems.group/compliance-engine/ATT-MP.L2-3.8.3",
-        "reason": "attestation cites evidence DE-REF_POL_MP_Media_v1 that does not ce:addresses MP.L2-3.8.3",
-        "details": {
-          "attestation": "http://dynamicalsystems.group/compliance-engine/ATT-MP.L2-3.8.3",
-          "evidence": "http://dynamicalsystems.group/compliance-engine/DE-REF_POL_MP_Media_v1",
-          "control": "http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.3"
-        }
-      },
-      {
-        "subject": "http://dynamicalsystems.group/compliance-engine/ATT-MP.L2-3.8.4",
-        "reason": "attestation cites evidence DE-REF_POL_MP_Media_v1 that does not ce:addresses MP.L2-3.8.4",
-        "details": {
-          "attestation": "http://dynamicalsystems.group/compliance-engine/ATT-MP.L2-3.8.4",
-          "evidence": "http://dynamicalsystems.group/compliance-engine/DE-REF_POL_MP_Media_v1",
-          "control": "http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.4"
-        }
-      },
-      {
-        "subject": "http://dynamicalsystems.group/compliance-engine/ATT-MP.L2-3.8.5",
-        "reason": "attestation cites evidence DE-REF_POL_MP_Media_v1 that does not ce:addresses MP.L2-3.8.5",
-        "details": {
-          "attestation": "http://dynamicalsystems.group/compliance-engine/ATT-MP.L2-3.8.5",
-          "evidence": "http://dynamicalsystems.group/compliance-engine/DE-REF_POL_MP_Media_v1",
-          "control": "http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.5"
-        }
-      },
-      {
-        "subject": "http://dynamicalsystems.group/compliance-engine/ATT-MP.L2-3.8.6",
-        "reason": "attestation cites evidence DE-REF_POL_MP_Media_v1 that does not ce:addresses MP.L2-3.8.6",
-        "details": {
-          "attestation": "http://dynamicalsystems.group/compliance-engine/ATT-MP.L2-3.8.6",
-          "evidence": "http://dynamicalsystems.group/compliance-engine/DE-REF_POL_MP_Media_v1",
-          "control": "http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.6"
-        }
-      },
-      {
-        "subject": "http://dynamicalsystems.group/compliance-engine/ATT-MP.L2-3.8.8",
-        "reason": "attestation cites evidence DE-REF_POL_MP_Media_v1 that does not ce:addresses MP.L2-3.8.8",
-        "details": {
-          "attestation": "http://dynamicalsystems.group/compliance-engine/ATT-MP.L2-3.8.8",
-          "evidence": "http://dynamicalsystems.group/compliance-engine/DE-REF_POL_MP_Media_v1",
-          "control": "http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.8"
-        }
-      },
-      {
-        "subject": "http://dynamicalsystems.group/compliance-engine/ATT-MP.L2-3.8.9",
-        "reason": "attestation cites evidence DE-REF_POL_MP_Media_v1 that does not ce:addresses MP.L2-3.8.9",
-        "details": {
-          "attestation": "http://dynamicalsystems.group/compliance-engine/ATT-MP.L2-3.8.9",
-          "evidence": "http://dynamicalsystems.group/compliance-engine/DE-REF_POL_MP_Media_v1",
-          "control": "http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.9"
-        }
-      },
-      {
-        "subject": "http://dynamicalsystems.group/compliance-engine/ATT-PE.L2-3.10.3",
-        "reason": "attestation cites evidence DE-REF_POL_PE_Physical_v1 that does not ce:addresses PE.L2-3.10.3",
-        "details": {
-          "attestation": "http://dynamicalsystems.group/compliance-engine/ATT-PE.L2-3.10.3",
-          "evidence": "http://dynamicalsystems.group/compliance-engine/DE-REF_POL_PE_Physical_v1",
-          "control": "http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.3"
-        }
-      },
-      {
-        "subject": "http://dynamicalsystems.group/compliance-engine/ATT-PE.L2-3.10.4",
-        "reason": "attestation cites evidence DE-REF_POL_PE_Physical_v1 that does not ce:addresses PE.L2-3.10.4",
-        "details": {
-          "attestation": "http://dynamicalsystems.group/compliance-engine/ATT-PE.L2-3.10.4",
-          "evidence": "http://dynamicalsystems.group/compliance-engine/DE-REF_POL_PE_Physical_v1",
-          "control": "http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.4"
-        }
-      },
-      {
-        "subject": "http://dynamicalsystems.group/compliance-engine/ATT-PE.L2-3.10.5",
-        "reason": "attestation cites evidence DE-REF_POL_PE_Physical_v1 that does not ce:addresses PE.L2-3.10.5",
-        "details": {
-          "attestation": "http://dynamicalsystems.group/compliance-engine/ATT-PE.L2-3.10.5",
-          "evidence": "http://dynamicalsystems.group/compliance-engine/DE-REF_POL_PE_Physical_v1",
-          "control": "http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.5"
-        }
-      },
-      {
-        "subject": "http://dynamicalsystems.group/compliance-engine/ATT-PE.L2-3.10.6",
-        "reason": "attestation cites evidence DE-REF_POL_PE_Physical_v1 that does not ce:addresses PE.L2-3.10.6",
-        "details": {
-          "attestation": "http://dynamicalsystems.group/compliance-engine/ATT-PE.L2-3.10.6",
-          "evidence": "http://dynamicalsystems.group/compliance-engine/DE-REF_POL_PE_Physical_v1",
-          "control": "http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.6"
-        }
-      },
-      {
-        "subject": "http://dynamicalsystems.group/compliance-engine/ATT-PS.L2-3.9.1",
-        "reason": "attestation cites evidence DE-REF_POL_PS_Personnel_v1 that does not ce:addresses PS.L2-3.9.1",
-        "details": {
-          "attestation": "http://dynamicalsystems.group/compliance-engine/ATT-PS.L2-3.9.1",
-          "evidence": "http://dynamicalsystems.group/compliance-engine/DE-REF_POL_PS_Personnel_v1",
-          "control": "http://dynamicalsystems.group/ontology/cmmc#PS.L2-3.9.1"
-        }
-      },
-      {
-        "subject": "http://dynamicalsystems.group/compliance-engine/ATT-PS.L2-3.9.2",
-        "reason": "attestation cites evidence DE-REF_POL_PS_Personnel_v1 that does not ce:addresses PS.L2-3.9.2",
-        "details": {
-          "attestation": "http://dynamicalsystems.group/compliance-engine/ATT-PS.L2-3.9.2",
-          "evidence": "http://dynamicalsystems.group/compliance-engine/DE-REF_POL_PS_Personnel_v1",
-          "control": "http://dynamicalsystems.group/ontology/cmmc#PS.L2-3.9.2"
-        }
-      },
-      {
-        "subject": "http://dynamicalsystems.group/compliance-engine/ATT-RA.L2-3.11.1",
-        "reason": "attestation cites evidence DE-REF_POL_RA_Assessment_v1 that does not ce:addresses RA.L2-3.11.1",
-        "details": {
-          "attestation": "http://dynamicalsystems.group/compliance-engine/ATT-RA.L2-3.11.1",
-          "evidence": "http://dynamicalsystems.group/compliance-engine/DE-REF_POL_RA_Assessment_v1",
-          "control": "http://dynamicalsystems.group/ontology/cmmc#RA.L2-3.11.1"
-        }
-      },
-      {
-        "subject": "http://dynamicalsystems.group/compliance-engine/ATT-RA.L2-3.11.3",
-        "reason": "attestation cites evidence DE-REF_POL_RA_Assessment_v1 that does not ce:addresses RA.L2-3.11.3",
-        "details": {
-          "attestation": "http://dynamicalsystems.group/compliance-engine/ATT-RA.L2-3.11.3",
-          "evidence": "http://dynamicalsystems.group/compliance-engine/DE-REF_POL_RA_Assessment_v1",
-          "control": "http://dynamicalsystems.group/ontology/cmmc#RA.L2-3.11.3"
-        }
-      },
-      {
-        "subject": "http://dynamicalsystems.group/compliance-engine/ATT-SC.L2-3.13.12",
-        "reason": "attestation cites evidence DE-REF_POL_SC_Collab_v1 that does not ce:addresses SC.L2-3.13.12",
-        "details": {
-          "attestation": "http://dynamicalsystems.group/compliance-engine/ATT-SC.L2-3.13.12",
-          "evidence": "http://dynamicalsystems.group/compliance-engine/DE-REF_POL_SC_Collab_v1",
-          "control": "http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.12"
-        }
-      },
-      {
-        "subject": "http://dynamicalsystems.group/compliance-engine/ATT-SC.L2-3.13.13",
-        "reason": "attestation cites evidence DE-REF_POL_SC_Collab_v1 that does not ce:addresses SC.L2-3.13.13",
-        "details": {
-          "attestation": "http://dynamicalsystems.group/compliance-engine/ATT-SC.L2-3.13.13",
-          "evidence": "http://dynamicalsystems.group/compliance-engine/DE-REF_POL_SC_Collab_v1",
-          "control": "http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.13"
-        }
-      },
-      {
-        "subject": "http://dynamicalsystems.group/compliance-engine/ATT-SC.L2-3.13.14",
-        "reason": "attestation cites evidence DE-REF_POL_SC_Collab_v1 that does not ce:addresses SC.L2-3.13.14",
-        "details": {
-          "attestation": "http://dynamicalsystems.group/compliance-engine/ATT-SC.L2-3.13.14",
-          "evidence": "http://dynamicalsystems.group/compliance-engine/DE-REF_POL_SC_Collab_v1",
-          "control": "http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.14"
-        }
-      },
-      {
-        "subject": "http://dynamicalsystems.group/compliance-engine/ATT-SC.L2-3.13.2",
-        "reason": "attestation cites evidence DE-REF_POL_SC_SecEng_v1 that does not ce:addresses SC.L2-3.13.2",
-        "details": {
-          "attestation": "http://dynamicalsystems.group/compliance-engine/ATT-SC.L2-3.13.2",
-          "evidence": "http://dynamicalsystems.group/compliance-engine/DE-REF_POL_SC_SecEng_v1",
-          "control": "http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.2"
-        }
-      }
-    ]
+    "passed": true,
+    "checked_count": 20,
+    "failures": []
   },
   "bidirectional": {
-    "passed": false
+    "passed": true
   },
   "contradictions": [],
   "proven_vs_attested": {
     "met_by_machine": [
       "AC.L2-3.1.1",
-      "AC.L2-3.1.10",
-      "AC.L2-3.1.11",
-      "AC.L2-3.1.12",
-      "AC.L2-3.1.13",
-      "AC.L2-3.1.14",
-      "AC.L2-3.1.15",
-      "AC.L2-3.1.16",
-      "AC.L2-3.1.17",
-      "AC.L2-3.1.18",
-      "AC.L2-3.1.19",
       "AC.L2-3.1.2",
-      "AC.L2-3.1.20",
-      "AC.L2-3.1.21",
-      "AC.L2-3.1.22",
       "AC.L2-3.1.3",
-      "AC.L2-3.1.4",
       "AC.L2-3.1.5",
-      "AC.L2-3.1.6",
-      "AC.L2-3.1.7",
-      "AC.L2-3.1.8",
-      "AC.L2-3.1.9",
-      "AT.L2-3.2.1",
-      "AT.L2-3.2.2",
-      "AT.L2-3.2.3",
       "AU.L2-3.3.1",
       "AU.L2-3.3.2",
-      "AU.L2-3.3.3",
-      "AU.L2-3.3.4",
       "AU.L2-3.3.5",
-      "AU.L2-3.3.6",
-      "AU.L2-3.3.7",
-      "AU.L2-3.3.8",
-      "AU.L2-3.3.9",
-      "CA.L2-3.12.1",
-      "CA.L2-3.12.2",
-      "CA.L2-3.12.3",
-      "CA.L2-3.12.4",
       "CM.L2-3.4.1",
       "CM.L2-3.4.2",
-      "CM.L2-3.4.3",
-      "CM.L2-3.4.4",
-      "CM.L2-3.4.5",
       "CM.L2-3.4.6",
       "CM.L2-3.4.7",
-      "CM.L2-3.4.8",
-      "CM.L2-3.4.9",
-      "IA.L2-3.5.1",
-      "IA.L2-3.5.10",
-      "IA.L2-3.5.11",
       "IA.L2-3.5.2",
       "IA.L2-3.5.3",
       "IA.L2-3.5.4",
-      "IA.L2-3.5.5",
-      "IA.L2-3.5.6",
-      "IA.L2-3.5.7",
-      "IA.L2-3.5.8",
-      "IA.L2-3.5.9",
-      "IR.L2-3.6.1",
-      "IR.L2-3.6.2",
-      "IR.L2-3.6.3",
-      "MA.L2-3.7.1",
-      "MA.L2-3.7.2",
-      "MA.L2-3.7.3",
-      "MA.L2-3.7.4",
-      "MA.L2-3.7.5",
-      "MA.L2-3.7.6",
-      "MP.L2-3.8.1",
-      "MP.L2-3.8.2",
-      "MP.L2-3.8.3",
-      "MP.L2-3.8.4",
-      "MP.L2-3.8.5",
-      "MP.L2-3.8.6",
-      "MP.L2-3.8.7",
-      "MP.L2-3.8.8",
-      "MP.L2-3.8.9",
-      "PE.L2-3.10.3",
-      "PE.L2-3.10.4",
-      "PE.L2-3.10.5",
-      "PE.L2-3.10.6",
-      "PS.L2-3.9.1",
-      "PS.L2-3.9.2",
-      "RA.L2-3.11.1",
-      "RA.L2-3.11.2",
-      "RA.L2-3.11.3",
       "SC.L2-3.13.1",
       "SC.L2-3.13.10",
       "SC.L2-3.13.11",
-      "SC.L2-3.13.12",
-      "SC.L2-3.13.13",
-      "SC.L2-3.13.14",
-      "SC.L2-3.13.15",
       "SC.L2-3.13.16",
-      "SC.L2-3.13.2",
-      "SC.L2-3.13.3",
-      "SC.L2-3.13.4",
-      "SC.L2-3.13.5",
-      "SC.L2-3.13.6",
-      "SC.L2-3.13.7",
-      "SC.L2-3.13.8",
-      "SC.L2-3.13.9",
-      "SI.L2-3.14.1",
-      "SI.L2-3.14.2",
       "SI.L2-3.14.3",
-      "SI.L2-3.14.4",
-      "SI.L2-3.14.5",
-      "SI.L2-3.14.6",
-      "SI.L2-3.14.7"
+      "SI.L2-3.14.6"
     ],
     "met_by_human_only": [
       "PE.L2-3.10.1",
       "PE.L2-3.10.2"
     ],
-    "summary": "108 MET-by-machine / 2 MET-by-human-only"
+    "summary": "20 MET-by-machine / 2 MET-by-human-only"
   },
   "required_controls": [
     "AC.L2-3.1.1",
-    "AC.L2-3.1.10",
-    "AC.L2-3.1.11",
-    "AC.L2-3.1.12",
-    "AC.L2-3.1.13",
-    "AC.L2-3.1.14",
-    "AC.L2-3.1.15",
-    "AC.L2-3.1.16",
-    "AC.L2-3.1.17",
-    "AC.L2-3.1.18",
-    "AC.L2-3.1.19",
     "AC.L2-3.1.2",
-    "AC.L2-3.1.20",
-    "AC.L2-3.1.21",
-    "AC.L2-3.1.22",
     "AC.L2-3.1.3",
-    "AC.L2-3.1.4",
     "AC.L2-3.1.5",
-    "AC.L2-3.1.6",
-    "AC.L2-3.1.7",
-    "AC.L2-3.1.8",
-    "AC.L2-3.1.9",
-    "AT.L2-3.2.1",
-    "AT.L2-3.2.2",
-    "AT.L2-3.2.3",
     "AU.L2-3.3.1",
     "AU.L2-3.3.2",
-    "AU.L2-3.3.3",
-    "AU.L2-3.3.4",
     "AU.L2-3.3.5",
-    "AU.L2-3.3.6",
-    "AU.L2-3.3.7",
-    "AU.L2-3.3.8",
-    "AU.L2-3.3.9",
-    "CA.L2-3.12.1",
-    "CA.L2-3.12.2",
-    "CA.L2-3.12.3",
-    "CA.L2-3.12.4",
     "CM.L2-3.4.1",
     "CM.L2-3.4.2",
-    "CM.L2-3.4.3",
-    "CM.L2-3.4.4",
-    "CM.L2-3.4.5",
     "CM.L2-3.4.6",
     "CM.L2-3.4.7",
-    "CM.L2-3.4.8",
-    "CM.L2-3.4.9",
-    "IA.L2-3.5.1",
-    "IA.L2-3.5.10",
-    "IA.L2-3.5.11",
     "IA.L2-3.5.2",
     "IA.L2-3.5.3",
     "IA.L2-3.5.4",
-    "IA.L2-3.5.5",
-    "IA.L2-3.5.6",
-    "IA.L2-3.5.7",
-    "IA.L2-3.5.8",
-    "IA.L2-3.5.9",
-    "IR.L2-3.6.1",
-    "IR.L2-3.6.2",
-    "IR.L2-3.6.3",
-    "MA.L2-3.7.1",
-    "MA.L2-3.7.2",
-    "MA.L2-3.7.3",
-    "MA.L2-3.7.4",
-    "MA.L2-3.7.5",
-    "MA.L2-3.7.6",
-    "MP.L2-3.8.1",
-    "MP.L2-3.8.2",
-    "MP.L2-3.8.3",
-    "MP.L2-3.8.4",
-    "MP.L2-3.8.5",
-    "MP.L2-3.8.6",
-    "MP.L2-3.8.7",
-    "MP.L2-3.8.8",
-    "MP.L2-3.8.9",
     "PE.L2-3.10.1",
     "PE.L2-3.10.2",
-    "PE.L2-3.10.3",
-    "PE.L2-3.10.4",
-    "PE.L2-3.10.5",
-    "PE.L2-3.10.6",
-    "PS.L2-3.9.1",
-    "PS.L2-3.9.2",
-    "RA.L2-3.11.1",
-    "RA.L2-3.11.2",
-    "RA.L2-3.11.3",
     "SC.L2-3.13.1",
     "SC.L2-3.13.10",
     "SC.L2-3.13.11",
-    "SC.L2-3.13.12",
-    "SC.L2-3.13.13",
-    "SC.L2-3.13.14",
-    "SC.L2-3.13.15",
     "SC.L2-3.13.16",
-    "SC.L2-3.13.2",
-    "SC.L2-3.13.3",
-    "SC.L2-3.13.4",
-    "SC.L2-3.13.5",
-    "SC.L2-3.13.6",
-    "SC.L2-3.13.7",
-    "SC.L2-3.13.8",
-    "SC.L2-3.13.9",
-    "SI.L2-3.14.1",
-    "SI.L2-3.14.2",
     "SI.L2-3.14.3",
-    "SI.L2-3.14.4",
-    "SI.L2-3.14.5",
-    "SI.L2-3.14.6",
-    "SI.L2-3.14.7"
+    "SI.L2-3.14.6"
   ],
   "met_control_ids": [
     "AC.L2-3.1.1",
-    "AC.L2-3.1.10",
-    "AC.L2-3.1.11",
-    "AC.L2-3.1.12",
-    "AC.L2-3.1.13",
-    "AC.L2-3.1.14",
-    "AC.L2-3.1.15",
-    "AC.L2-3.1.16",
-    "AC.L2-3.1.17",
-    "AC.L2-3.1.18",
-    "AC.L2-3.1.19",
     "AC.L2-3.1.2",
-    "AC.L2-3.1.20",
-    "AC.L2-3.1.21",
-    "AC.L2-3.1.22",
     "AC.L2-3.1.3",
-    "AC.L2-3.1.4",
     "AC.L2-3.1.5",
-    "AC.L2-3.1.6",
-    "AC.L2-3.1.7",
-    "AC.L2-3.1.8",
-    "AC.L2-3.1.9",
-    "AT.L2-3.2.1",
-    "AT.L2-3.2.2",
-    "AT.L2-3.2.3",
     "AU.L2-3.3.1",
     "AU.L2-3.3.2",
-    "AU.L2-3.3.3",
-    "AU.L2-3.3.4",
     "AU.L2-3.3.5",
-    "AU.L2-3.3.6",
-    "AU.L2-3.3.7",
-    "AU.L2-3.3.8",
-    "AU.L2-3.3.9",
-    "CA.L2-3.12.1",
-    "CA.L2-3.12.2",
-    "CA.L2-3.12.3",
-    "CA.L2-3.12.4",
     "CM.L2-3.4.1",
     "CM.L2-3.4.2",
-    "CM.L2-3.4.3",
-    "CM.L2-3.4.4",
-    "CM.L2-3.4.5",
     "CM.L2-3.4.6",
     "CM.L2-3.4.7",
-    "CM.L2-3.4.8",
-    "CM.L2-3.4.9",
-    "IA.L2-3.5.1",
-    "IA.L2-3.5.10",
-    "IA.L2-3.5.11",
     "IA.L2-3.5.2",
     "IA.L2-3.5.3",
     "IA.L2-3.5.4",
-    "IA.L2-3.5.5",
-    "IA.L2-3.5.6",
-    "IA.L2-3.5.7",
-    "IA.L2-3.5.8",
-    "IA.L2-3.5.9",
-    "IR.L2-3.6.1",
-    "IR.L2-3.6.2",
-    "IR.L2-3.6.3",
-    "MA.L2-3.7.1",
-    "MA.L2-3.7.2",
-    "MA.L2-3.7.3",
-    "MA.L2-3.7.4",
-    "MA.L2-3.7.5",
-    "MA.L2-3.7.6",
-    "MP.L2-3.8.1",
-    "MP.L2-3.8.2",
-    "MP.L2-3.8.3",
-    "MP.L2-3.8.4",
-    "MP.L2-3.8.5",
-    "MP.L2-3.8.6",
-    "MP.L2-3.8.7",
-    "MP.L2-3.8.8",
-    "MP.L2-3.8.9",
     "PE.L2-3.10.1",
     "PE.L2-3.10.2",
-    "PE.L2-3.10.3",
-    "PE.L2-3.10.4",
-    "PE.L2-3.10.5",
-    "PE.L2-3.10.6",
-    "PS.L2-3.9.1",
-    "PS.L2-3.9.2",
-    "RA.L2-3.11.1",
-    "RA.L2-3.11.2",
-    "RA.L2-3.11.3",
     "SC.L2-3.13.1",
     "SC.L2-3.13.10",
     "SC.L2-3.13.11",
-    "SC.L2-3.13.12",
-    "SC.L2-3.13.13",
-    "SC.L2-3.13.14",
-    "SC.L2-3.13.15",
     "SC.L2-3.13.16",
-    "SC.L2-3.13.2",
-    "SC.L2-3.13.3",
-    "SC.L2-3.13.4",
-    "SC.L2-3.13.5",
-    "SC.L2-3.13.6",
-    "SC.L2-3.13.7",
-    "SC.L2-3.13.8",
-    "SC.L2-3.13.9",
-    "SI.L2-3.14.1",
-    "SI.L2-3.14.2",
     "SI.L2-3.14.3",
-    "SI.L2-3.14.4",
-    "SI.L2-3.14.5",
-    "SI.L2-3.14.6",
-    "SI.L2-3.14.7"
+    "SI.L2-3.14.6"
   ],
   "coverage": [
     {
@@ -758,47 +106,47 @@
     {
       "control": "AC.L2-3.1.10",
       "evidence": "8959f24468b8f262",
-      "status": "covered+passed"
+      "status": "covered+unattested"
     },
     {
       "control": "AC.L2-3.1.11",
       "evidence": "8959f24468b8f262",
-      "status": "covered+passed"
+      "status": "covered+unattested"
     },
     {
       "control": "AC.L2-3.1.12",
       "evidence": "753946a895a2cb99",
-      "status": "covered+passed"
+      "status": "covered+unattested"
     },
     {
       "control": "AC.L2-3.1.13",
       "evidence": "753946a895a2cb99",
-      "status": "covered+passed"
+      "status": "covered+unattested"
     },
     {
       "control": "AC.L2-3.1.14",
       "evidence": "753946a895a2cb99",
-      "status": "covered+passed"
+      "status": "covered+unattested"
     },
     {
       "control": "AC.L2-3.1.16",
       "evidence": "df6706e07d448f63",
-      "status": "covered+passed"
+      "status": "covered+unattested"
     },
     {
       "control": "AC.L2-3.1.17",
       "evidence": "df6706e07d448f63",
-      "status": "covered+passed"
+      "status": "covered+unattested"
     },
     {
       "control": "AC.L2-3.1.18",
       "evidence": "df6706e07d448f63",
-      "status": "covered+passed"
+      "status": "covered+unattested"
     },
     {
       "control": "AC.L2-3.1.19",
       "evidence": "df6706e07d448f63",
-      "status": "covered+passed"
+      "status": "covered+unattested"
     },
     {
       "control": "AC.L2-3.1.2",
@@ -808,7 +156,7 @@
     {
       "control": "AC.L2-3.1.20",
       "evidence": "b6c67e930e8a45ac",
-      "status": "covered+passed"
+      "status": "covered+unattested"
     },
     {
       "control": "AC.L2-3.1.3",
@@ -823,17 +171,17 @@
     {
       "control": "AC.L2-3.1.6",
       "evidence": "594252df359f78bd",
-      "status": "covered+passed"
+      "status": "covered+unattested"
     },
     {
       "control": "AC.L2-3.1.7",
       "evidence": "594252df359f78bd",
-      "status": "covered+passed"
+      "status": "covered+unattested"
     },
     {
       "control": "AC.L2-3.1.8",
       "evidence": "8959f24468b8f262",
-      "status": "covered+passed"
+      "status": "covered+unattested"
     },
     {
       "control": "AU.L2-3.3.1",
@@ -848,7 +196,7 @@
     {
       "control": "AU.L2-3.3.4",
       "evidence": "dbbec27575687acd",
-      "status": "covered+passed"
+      "status": "covered+unattested"
     },
     {
       "control": "AU.L2-3.3.5",
@@ -858,17 +206,17 @@
     {
       "control": "AU.L2-3.3.7",
       "evidence": "dbbec27575687acd",
-      "status": "covered+passed"
+      "status": "covered+unattested"
     },
     {
       "control": "AU.L2-3.3.8",
       "evidence": "dbbec27575687acd",
-      "status": "covered+passed"
+      "status": "covered+unattested"
     },
     {
       "control": "AU.L2-3.3.9",
       "evidence": "dbbec27575687acd",
-      "status": "covered+passed"
+      "status": "covered+unattested"
     },
     {
       "control": "CM.L2-3.4.1",
@@ -883,12 +231,12 @@
     {
       "control": "CM.L2-3.4.3",
       "evidence": "a911dd6a6276701f",
-      "status": "covered+passed"
+      "status": "covered+unattested"
     },
     {
       "control": "CM.L2-3.4.5",
       "evidence": "a911dd6a6276701f",
-      "status": "covered+passed"
+      "status": "covered+unattested"
     },
     {
       "control": "CM.L2-3.4.6",
@@ -903,27 +251,27 @@
     {
       "control": "CM.L2-3.4.8",
       "evidence": "e1bec3138a1ea59f",
-      "status": "covered+passed"
+      "status": "covered+unattested"
     },
     {
       "control": "CM.L2-3.4.9",
       "evidence": "e1bec3138a1ea59f",
-      "status": "covered+passed"
+      "status": "covered+unattested"
     },
     {
       "control": "IA.L2-3.5.1",
       "evidence": "2d9165ac19f597a8",
-      "status": "covered+passed"
+      "status": "covered+unattested"
     },
     {
       "control": "IA.L2-3.5.10",
       "evidence": "2d9165ac19f597a8",
-      "status": "covered+passed"
+      "status": "covered+unattested"
     },
     {
       "control": "IA.L2-3.5.11",
       "evidence": "2d9165ac19f597a8",
-      "status": "covered+passed"
+      "status": "covered+unattested"
     },
     {
       "control": "IA.L2-3.5.2",
@@ -943,27 +291,27 @@
     {
       "control": "IA.L2-3.5.5",
       "evidence": "2d9165ac19f597a8",
-      "status": "covered+passed"
+      "status": "covered+unattested"
     },
     {
       "control": "IA.L2-3.5.6",
       "evidence": "2d9165ac19f597a8",
-      "status": "covered+passed"
+      "status": "covered+unattested"
     },
     {
       "control": "IA.L2-3.5.7",
       "evidence": "2d9165ac19f597a8",
-      "status": "covered+passed"
+      "status": "covered+unattested"
     },
     {
       "control": "IA.L2-3.5.8",
       "evidence": "2d9165ac19f597a8",
-      "status": "covered+passed"
+      "status": "covered+unattested"
     },
     {
       "control": "IA.L2-3.5.9",
       "evidence": "2d9165ac19f597a8",
-      "status": "covered+passed"
+      "status": "covered+unattested"
     },
     {
       "control": "ITAR-120.54",
@@ -973,17 +321,17 @@
     {
       "control": "MA.L2-3.7.5",
       "evidence": "d51b18159d04d6ed",
-      "status": "covered+passed"
+      "status": "covered+unattested"
     },
     {
       "control": "MP.L2-3.8.7",
       "evidence": "df6706e07d448f63",
-      "status": "covered+passed"
+      "status": "covered+unattested"
     },
     {
       "control": "RA.L2-3.11.2",
       "evidence": "4472a35663cebbc9",
-      "status": "covered+passed"
+      "status": "covered+unattested"
     },
     {
       "control": "SC.L2-3.13.1",
@@ -1008,7 +356,7 @@
     {
       "control": "SC.L2-3.13.15",
       "evidence": "2a64f51ac186a4af",
-      "status": "covered+passed"
+      "status": "covered+unattested"
     },
     {
       "control": "SC.L2-3.13.16",
@@ -1018,47 +366,47 @@
     {
       "control": "SC.L2-3.13.3",
       "evidence": "2a64f51ac186a4af",
-      "status": "covered+passed"
+      "status": "covered+unattested"
     },
     {
       "control": "SC.L2-3.13.4",
       "evidence": "2a64f51ac186a4af",
-      "status": "covered+passed"
+      "status": "covered+unattested"
     },
     {
       "control": "SC.L2-3.13.5",
       "evidence": "2a64f51ac186a4af",
-      "status": "covered+passed"
+      "status": "covered+unattested"
     },
     {
       "control": "SC.L2-3.13.6",
       "evidence": "2a64f51ac186a4af",
-      "status": "covered+passed"
+      "status": "covered+unattested"
     },
     {
       "control": "SC.L2-3.13.7",
       "evidence": "2a64f51ac186a4af",
-      "status": "covered+passed"
+      "status": "covered+unattested"
     },
     {
       "control": "SC.L2-3.13.8",
       "evidence": "2a64f51ac186a4af",
-      "status": "covered+passed"
+      "status": "covered+unattested"
     },
     {
       "control": "SC.L2-3.13.9",
       "evidence": "2a64f51ac186a4af",
-      "status": "covered+passed"
+      "status": "covered+unattested"
     },
     {
       "control": "SI.L2-3.14.1",
       "evidence": "4472a35663cebbc9",
-      "status": "covered+passed"
+      "status": "covered+unattested"
     },
     {
       "control": "SI.L2-3.14.2",
       "evidence": "78748c9966987bfe",
-      "status": "covered+passed"
+      "status": "covered+unattested"
     },
     {
       "control": "SI.L2-3.14.3",
@@ -1068,12 +416,12 @@
     {
       "control": "SI.L2-3.14.4",
       "evidence": "78748c9966987bfe",
-      "status": "covered+passed"
+      "status": "covered+unattested"
     },
     {
       "control": "SI.L2-3.14.5",
       "evidence": "4472a35663cebbc9",
-      "status": "covered+passed"
+      "status": "covered+unattested"
     },
     {
       "control": "SI.L2-3.14.6",
@@ -1083,7 +431,7 @@
     {
       "control": "SI.L2-3.14.7",
       "evidence": "78748c9966987bfe",
-      "status": "covered+passed"
+      "status": "covered+unattested"
     }
   ],
   "orphans": {

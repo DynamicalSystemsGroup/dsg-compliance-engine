@@ -179,6 +179,16 @@ ce:overrideEvidence a owl:DatatypeProperty ;
     rdfs:range xsd:string ;
     rdfs:comment "Resolvable evidence (artifact hash or URI) appended to an override justification. Required whenever cmmc:overrideJustification is present." .
 
+# BOM control-mapping node → how the row's sign-off is backed. One of "machine"
+# (a passing config-check oracle over resolvable evidence), "attested-evidenced"
+# (a human attestation backed by a resolved, hashed, git/Flexo-anchored
+# document), "override" (MET attested over a FAILED check), or "human-only"
+# (no machine anchor at all). Mirrors ControlMappingRow.evidence_backing.
+ce:evidenceBacking a owl:DatatypeProperty ;
+    rdfs:label "evidence backing" ;
+    rdfs:range xsd:string ;
+    rdfs:comment "How a BOM control-mapping row's sign-off is backed: machine, attested-evidenced, override, or human-only." .
+
 #################################################################
 # Oracle-kind IRIs — three canonical kinds referenced by
 # cmmc:verificationMethod. Track A machine modules use oracle-config-check;

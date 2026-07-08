@@ -91,3 +91,63 @@ def test_evidence_backing_property(oracle, attest, evidence, expected):
         status="MET",
     )
     assert row.evidence_backing == expected
+
+
+# ---------------------------------------------------------------------------
+# KI-7: same override-requires-evidence rule, enforced at the store-record
+# level (traceability.attestation_store.AttestationRecord), not just at the
+# request_attestation() write path above.
+# ---------------------------------------------------------------------------
+
+from compliance_engine.traceability.attestation_store import (  # noqa: E402
+    AttestationRecord,
+    AttestationStoreError,
+    _record_from_obj,
+)
+
+_REC_BASE = dict(
+    id="att-override-test",
+    signer="Jane Official",
+    signer_role="Role_AffirmingOfficial",
+    signed_at="2026-07-01T12:00:00+00:00",
+    covers=("ref-x",),
+    controls_attested=("IA.L2-3.5.3",),
+    outcome="passed",
+    adequacy="Compensating control asserted.",
+    sufficiency="Deemed MET.",
+)
+
+
+def test_attestation_record_rejects_override_without_evidence():
+    with pytest.raises(AttestationStoreError, match="override_evidence"):
+        AttestationRecord(
+            **_REC_BASE,
+            override_justification="risk accepted; documented",
+            override_evidence=None,
+        )
+
+
+def test_attestation_record_accepts_override_with_evidence():
+    rec = AttestationRecord(
+        **_REC_BASE,
+        override_justification="risk accepted; documented",
+        override_evidence="artifact-sha256:compensating-policy-export",
+    )
+    assert rec.override_justification == "risk accepted; documented"
+    assert rec.override_evidence == "artifact-sha256:compensating-policy-export"
+
+
+def test_attestation_record_omitting_both_override_fields_still_works():
+    # The common case (all real tier1.jsonl records today): no override at all.
+    rec = AttestationRecord(**_REC_BASE)
+    assert rec.override_justification is None
+    assert rec.override_evidence is None
+
+
+def test_attestation_record_parses_override_fields_from_jsonl():
+    obj = dict(_REC_BASE)
+    obj["override_justification"] = "risk accepted; documented"
+    obj["override_evidence"] = "artifact-sha256:compensating-policy-export"
+    rec = _record_from_obj(obj, path="test.jsonl", lineno=1)
+    assert rec.override_justification == "risk accepted; documented"
+    assert rec.override_evidence == "artifact-sha256:compensating-policy-export"

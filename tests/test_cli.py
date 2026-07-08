@@ -107,3 +107,34 @@ def test_ssp_present_does_not_crash(tmp_path):
 def test_demo_rejects_unknown_evidence_set(tmp_path):
     res = _run(["demo", "--evidence-set", "nope"], tmp_path)
     assert res.exit_code == 2
+# ---------------------------------------------------------------------------
+# store-backend flexo — Registry/FlexoBackend composition (KI-2)
+# ---------------------------------------------------------------------------
+
+def test_demo_store_backend_flexo_exits_clean_and_reports_not_degraded(tmp_path):
+    res = _run(
+        ["demo", "--evidence-set", "all-covered", "--auto", "--store-backend", "flexo"],
+        tmp_path,
+    )
+    assert res.exit_code == 0, res.output
+
+    run_state = json.loads((tmp_path / "run_state.json").read_text())
+    assert run_state["degraded"] is False
+
+    # The BOM object landed in the Flexo registry-objects tier, not only local.
+    # bom.json is written verbatim as the canonical bytes registry.put() hashes,
+    # so re-hashing it recovers the exact key store_bom() used.
+    from compliance_engine.pipeline.backends.flexo import FlexoBackend
+    from compliance_engine.pipeline.registry import content_hash
+
+    bom_bytes = (tmp_path / "bom.json").read_bytes()
+    bom_hash = content_hash(bom_bytes)
+    flexo = FlexoBackend(store_root=tmp_path / "flexo", ref="NV012")
+    assert flexo.get_object(bom_hash) == bom_bytes
+
+
+def test_demo_store_backend_local_reports_not_degraded(tmp_path):
+    res = _run(["demo", "--evidence-set", "all-covered", "--auto"], tmp_path)
+    assert res.exit_code == 0, res.output
+    run_state = json.loads((tmp_path / "run_state.json").read_text())
+    assert run_state["degraded"] is False

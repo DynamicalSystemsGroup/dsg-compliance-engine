@@ -240,6 +240,7 @@ class BOM:
             g.add((bom, CE.hasControlMapping, node))
             g.add((node, CE.control, CMMC[row.control_id]))
             g.add((node, CE.bomStatus, Literal(row.status)))
+            g.add((node, CE.evidenceBacking, Literal(row.evidence_backing)))
             for rid in row.resource_ids:
                 g.add((node, CE.resource, CE[rid]))
             for eh in row.evidence_hashes:
@@ -410,8 +411,13 @@ def store_bom(
 
     Puts the BOM's canonical bytes (write-once), optionally puts any provided
     artifact bytes (whose SHA-256 must equal the referenced hash), records
-    `set_bom_artifacts` (level 2) and `set_latest_bom` (level 1).
+    `set_bom_artifacts` (level 2) and `set_latest_bom` (level 1). Also signs
+    the BOM's canonical bytes (the `ce:step-SignAndStore` step this
+    implements) and records the signature's registry object hash via
+    `set_bom_signature`, so it can be looked up alongside the BOM.
     """
+    from compliance_engine.signing.signer import default_local_signer
+
     stored = registry.put(bom.canonical_bytes(), kind="bom")
     if stored != bom.bom_hash:
         raise ValueError(
@@ -426,6 +432,12 @@ def store_bom(
                 )
     registry.set_bom_artifacts(bom.bom_hash, bom.artifact_hashes())
     registry.set_latest_bom(contract_id, bom.bom_hash)
+
+    signer = default_local_signer()
+    sig = signer.sign(bom.canonical_bytes())
+    sig_hash = registry.put(sig, kind="bom-signature")
+    registry.set_bom_signature(bom.bom_hash, sig_hash)
+
     return bom.bom_hash
 
 

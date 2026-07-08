@@ -405,7 +405,17 @@ def _run_attested_reference_pass(
         evidence_iri: str | None = None
         if view is not None:
             ev = doc_evidence.capture(ac.reference_id, ac.uri, uploaded_by)
-            view = replace(view, resolved_ok=ev.exists)
+            sig_verified: bool | None = None
+            if ev.exists and view.signature is not None:
+                import base64
+
+                from compliance_engine.signing.signer import Ed25519LocalSigner
+
+                doc_path = doc_evidence.resolve_uri(ac.uri)
+                sig_verified = doc_path is not None and Ed25519LocalSigner().verify(
+                    doc_path.read_bytes(), base64.b64decode(view.signature)
+                )
+            view = replace(view, resolved_ok=ev.exists, signature_verified=sig_verified)
             node = doc_evidence.bind_doc_evidence(ev_graph, ev)
             evidence_iri = str(node)
 

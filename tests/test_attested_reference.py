@@ -17,6 +17,7 @@ from pathlib import Path
 
 import pytest
 from rdflib import Graph, Namespace, URIRef
+from rdflib.namespace import RDF
 
 from compliance_engine.oracles.attested_reference import (
     AO_ROLE,
@@ -92,12 +93,17 @@ class TestFreshness:
         assert all(isinstance(v, int) and v >= 0 for v in POLICY_DAYS.values())
 
 # ---------------------------------------------------------------------------
-# attested-reference oracle — the six-branch decision tree
+# attested-reference oracle — the branch decision tree
 # ---------------------------------------------------------------------------
 
 def _ref(**kw):
+    # Defaults a valid signature + verified=True so tests exercising branches
+    # downstream of the KI-5 signature checks (awaiting-attestation,
+    # signer-role-mismatch, etc.) aren't tripped up by signature-missing.
+    # Tests targeting the signature branches themselves override these.
     base = dict(id="ref-x", uri="https://ex/doc", freshness_days=365,
-                last_verified=NOW - timedelta(days=30))
+                last_verified=NOW - timedelta(days=30),
+                signature="deadbeef", signature_verified=True)
     base.update(kw)
     return ReferenceView(**base)
 
@@ -132,6 +138,29 @@ class TestAttestedReferenceOracle:
             "Role_SecurityOfficer", [_att()], now=NOW,
         )
         assert r.outcome == "failed" and r.reason.startswith("stale:")
+
+    def test_signature_missing_yields_needsAction(self):
+        r = evaluate_attested_reference(
+            "IR.L2-3.6.1", _ref(signature=None, signature_verified=None),
+            "Role_SecurityOfficer", [_att()], now=NOW,
+        )
+        assert r.outcome == "needsAction" and r.reason == "signature-missing"
+
+    def test_signature_invalid_yields_failed(self):
+        r = evaluate_attested_reference(
+            "IR.L2-3.6.1", _ref(signature="deadbeef", signature_verified=False),
+            "Role_SecurityOfficer", [_att()], now=NOW,
+        )
+        assert r.outcome == "failed" and r.reason == "signature-invalid"
+
+    def test_signature_valid_continues_to_attestation_check(self):
+        # A valid signature does not short-circuit the happy path — with no
+        # attestation present, the next branch (awaiting-attestation) fires.
+        r = evaluate_attested_reference(
+            "IR.L2-3.6.1", _ref(signature="deadbeef", signature_verified=True),
+            "Role_SecurityOfficer", [], now=NOW,
+        )
+        assert r.outcome == "needsAction" and r.reason == "awaiting-attestation"
 
     def test_no_attestation_yields_needsAction(self):
         r = evaluate_attested_reference("IR.L2-3.6.1", _ref(), "Role_SecurityOfficer", [], now=NOW)
@@ -329,11 +358,27 @@ class TestTrackBEndToEnd:
         assert len(modules) == 16, f"expected 16 Track B modules, got {len(modules)}"
 
         def read_ref(rid: str) -> ReferenceView:
+            import base64
+
+            from compliance_engine.pipeline.evidence.doc_evidence import resolve_uri
+            from compliance_engine.signing.signer import Ed25519LocalSigner
+
             ref = URIRef(str(CE) + rid)
             uri = str(next(g.objects(ref, CE.uri)))
             fd = int(str(next(g.objects(ref, CE.freshnessDays))))
             lv = datetime.fromisoformat(str(next(g.objects(ref, CE.lastVerified))))
-            return ReferenceView(id=rid, uri=uri, freshness_days=fd, last_verified=lv)
+            version = str(next(g.objects(ref, CE.version), None) or "") or None
+            signature = str(next(g.objects(ref, CE.signature), None) or "") or None
+            sig_verified = None
+            if signature is not None:
+                doc_path = resolve_uri(uri)
+                sig_verified = doc_path is not None and Ed25519LocalSigner().verify(
+                    doc_path.read_bytes(), base64.b64decode(signature)
+                )
+            return ReferenceView(
+                id=rid, uri=uri, freshness_days=fd, last_verified=lv,
+                version=version, signature=signature, signature_verified=sig_verified,
+            )
 
         atts = load_all(Path(__file__).resolve().parent.parent / "data" / "attestations")
         assert len(atts) == 16
@@ -349,3 +394,52 @@ class TestTrackBEndToEnd:
         assert not non_pass, f"non-passing Track B controls: {non_pass}"
         # 43 Track B controls, all PASS.
         assert len(results) == 43
+
+
+# ---------------------------------------------------------------------------
+# KI-3: ce:version / ce:signature round-trip against the real resolved
+# documents in references.ttl — regression guard against doc drift.
+# ---------------------------------------------------------------------------
+
+class TestReferenceVersionAndSignature:
+    def test_every_reference_carries_a_version_and_signature(self):
+        g = Graph()
+        g.parse(
+            Path(__file__).resolve().parent.parent / "data" / "structural" / "references.ttl",
+            format="turtle",
+        )
+        CE = Namespace("http://dynamicalsystems.group/compliance-engine/")
+        refs = set(g.subjects(RDF.type, CE.Reference))
+        assert len(refs) == 16
+        for ref in refs:
+            assert next(g.objects(ref, CE.version), None) is not None, ref
+            assert next(g.objects(ref, CE.signature), None) is not None, ref
+
+    def test_version_and_signature_match_the_actually_resolved_document(self):
+        import base64
+
+        from compliance_engine.pipeline.evidence.doc_evidence import resolve_uri
+        from compliance_engine.pipeline.registry import content_hash
+        from compliance_engine.signing.signer import Ed25519LocalSigner
+
+        g = Graph()
+        g.parse(
+            Path(__file__).resolve().parent.parent / "data" / "structural" / "references.ttl",
+            format="turtle",
+        )
+        CE = Namespace("http://dynamicalsystems.group/compliance-engine/")
+        signer = Ed25519LocalSigner()
+
+        for ref in g.subjects(RDF.type, CE.Reference):
+            uri = str(next(g.objects(ref, CE.uri)))
+            version = str(next(g.objects(ref, CE.version)))
+            signature = str(next(g.objects(ref, CE.signature)))
+
+            path = resolve_uri(uri)
+            assert path is not None, f"{ref} does not resolve: {uri}"
+            content = path.read_bytes()
+
+            assert content_hash(content) == version, f"{ref}: version stale"
+            assert signer.verify(content, base64.b64decode(signature)), (
+                f"{ref}: signature does not verify against the resolved document"
+            )

@@ -65,11 +65,26 @@ class Registry:
     `BackendUnavailable` at construction.
     """
 
-    def __init__(self, root: str | Path, backend: LocalBackend | None = None) -> None:
+    def __init__(
+        self,
+        root: str | Path,
+        backend: LocalBackend | None = None,
+        remote: object | None = None,
+    ) -> None:
         self.root = Path(root)
         self.backend = backend or LocalBackend()
         # Fail-fast: the backend probe creates + write-tests the root.
         self.backend.probe(self.root)
+
+        # `remote` is an optional write-through/read-through tier (e.g. a
+        # FlexoBackend), duck-typed to put_object(bytes) -> str /
+        # get_object(str) -> bytes. Feature-detected via hasattr rather than a
+        # formal Protocol, since LocalBackend does not (and need not)
+        # implement this narrower object-store surface. `local` remains the
+        # cache/fallback tier regardless: a remote failure never fails a
+        # write, it only sets `degraded`.
+        self.remote = remote
+        self.degraded = False
 
         self.objects_dir = self.root / _OBJECTS_DIR
         self.index_path = self.root / _INDEX_FILE
@@ -88,6 +103,11 @@ class Registry:
         Write-once: if an object already exists at the key, its bytes are
         verified to match `content`; a mismatch raises `ContentMismatch` and the
         object is never overwritten.
+
+        If a `remote` tier is configured (e.g. a FlexoBackend), the content is
+        also write-through'd there first. A remote failure never fails the
+        local write — it sets `self.degraded = True` and the local object is
+        still stored, so local remains the durable cache/fallback tier.
         """
         h = content_hash(content)
         path = self._object_path(h)
@@ -103,6 +123,13 @@ class Registry:
             tmp.write_bytes(content)
             tmp.replace(path)  # atomic publish
 
+        put_object = getattr(self.remote, "put_object", None)
+        if put_object is not None:
+            try:
+                put_object(content)
+            except Exception:
+                self.degraded = True
+
         # Record the artifact kind for observability (does not affect the key).
         if self._index["objects"].get(h) != kind:
             self._index["objects"][h] = kind
@@ -110,15 +137,34 @@ class Registry:
         return h
 
     def has(self, hash_: str) -> bool:
-        """True if an object with this hash is stored."""
+        """True if an object with this hash is stored locally."""
         return self._object_path(hash_).exists()
 
     def get(self, hash_: str) -> bytes:
-        """Return the stored bytes for `hash_`. Raises KeyError if absent."""
+        """Return the stored bytes for `hash_`.
+
+        Reads locally first; on local miss, falls back to the `remote` tier
+        (if configured) and backfills the local cache on success. Raises
+        `KeyError` if the object is absent from both.
+        """
         path = self._object_path(hash_)
-        if not path.exists():
-            raise KeyError(hash_)
-        return path.read_bytes()
+        if path.exists():
+            return path.read_bytes()
+
+        get_object = getattr(self.remote, "get_object", None)
+        if get_object is not None:
+            try:
+                content = get_object(hash_)
+            except Exception:
+                pass
+            else:
+                path.parent.mkdir(parents=True, exist_ok=True)
+                tmp = path.with_name(path.name + ".tmp")
+                tmp.write_bytes(content)
+                tmp.replace(path)
+                return content
+
+        raise KeyError(hash_)
 
     def verify(self, hash_: str) -> bool:
         """Re-hash the stored bytes and confirm they match the key (tamper check).
@@ -159,11 +205,22 @@ class Registry:
         """Resolve a BOM hash to its artifact hashes ([] if unknown)."""
         return list(self._index["bom_artifacts"].get(bom_hash, []))
 
+    def set_bom_signature(self, bom_hash: str, sig_hash: str) -> None:
+        """Point a BOM hash at the registry object hash of its detached signature."""
+        self._index["bom_signatures"][bom_hash] = sig_hash
+        self._persist_index()
+
+    def bom_signature(self, bom_hash: str) -> str | None:
+        """Resolve a BOM hash to its signature's registry object hash, or None."""
+        return self._index["bom_signatures"].get(bom_hash)
+
     # -- index persistence --------------------------------------------------
 
     @staticmethod
     def _empty_index() -> dict:
-        return {"latest_bom": {}, "bom_artifacts": {}, "objects": {}}
+        return {
+            "latest_bom": {}, "bom_artifacts": {}, "bom_signatures": {}, "objects": {},
+        }
 
     def _load_index(self) -> dict:
         if self.index_path.exists():

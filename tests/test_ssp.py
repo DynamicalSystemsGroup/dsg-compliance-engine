@@ -39,7 +39,7 @@ _TIER1 = _REPO / "data" / "structural" / "tier1.ttl"
 runner = CliRunner()
 
 _VCRM_HEADER = ("| Control | Implementation | Responsible party | Evidence location "
-                "| Evidence hash | Status | Gap notes | POA&M ref |")
+                "| Evidence hash | Status | Backing | Gap notes | POA&M ref |")
 
 
 def _add_evidence(g, ev_id, control_id, content_hash, *, status=None,
@@ -324,3 +324,73 @@ class TestAuditBomWiring:
         assert doc1 == doc2                          # byte-identical across runs
         assert "NON-EVIDENTIARY" in doc1             # R12 banner still fires
         assert "score 88 (Conditional)" in doc1
+
+
+# --------------------------------------------------------------------------- #
+# KI-6: evidence-backing column (mirrors ControlMappingRow.evidence_backing,
+# computed live from ce:hasEvidence / ce:oracleOutcome / ce:documentEvidence
+# already present in the run dataset, not from a live BOM object).
+# --------------------------------------------------------------------------- #
+
+def _row_for(doc: str, control_id: str) -> str:
+    return next(l for l in doc.splitlines() if l.startswith(f"| {control_id} |"))
+
+
+class TestBackingColumn:
+    def test_machine_backed_control(self):
+        ds = _base_dataset()
+        att_g = graph_for(ds, "attestations")
+        ev_g = graph_for(ds, "evidence")
+        ev = _add_evidence(ev_g, "mach", "SC.L2-3.13.1", "c" * 64)
+        att = _add_attestation(att_g, "mach", "SC.L2-3.13.1", EARL.passed,
+                                "Jane Official", "adequate", "sufficient")
+        att_g.add((att, CE.hasEvidence, ev))
+        att_g.add((att, CE.oracleOutcome, EARL.passed))
+
+        doc = compile_ssp(ds)
+        row = _row_for(doc, "SC.L2-3.13.1")
+        assert "| machine |" in row
+
+    def test_attested_evidenced_control(self):
+        ds = _base_dataset()
+        att_g = graph_for(ds, "attestations")
+        ev_g = graph_for(ds, "evidence")
+        ev = _add_evidence(ev_g, "doc", "SC.L2-3.13.1", "d" * 64)
+        att = _add_attestation(att_g, "doc", "SC.L2-3.13.1", EARL.passed,
+                                "Jane Official", "adequate", "sufficient")
+        att_g.add((att, CE.hasEvidence, ev))
+        att_g.add((att, CE.documentEvidence, CE["DE-REF_POL_TEST"]))
+        # No ce:oracleOutcome — this is a Track B (human-attested) control,
+        # backed by the machine-recorded document, not a config oracle.
+
+        doc = compile_ssp(ds)
+        row = _row_for(doc, "SC.L2-3.13.1")
+        assert "| attested-evidenced |" in row
+
+    def test_override_control(self):
+        ds = _base_dataset()
+        att_g = graph_for(ds, "attestations")
+        att = _add_attestation(att_g, "ovr", "SC.L2-3.13.1", EARL.passed,
+                                "Jane Official", "adequate", "sufficient",
+                                override="risk accepted; documented")
+        att_g.add((att, CE.oracleOutcome, EARL.failed))
+
+        doc = compile_ssp(ds)
+        row = _row_for(doc, "SC.L2-3.13.1")
+        assert "| override |" in row
+
+    def test_human_only_control(self):
+        # AC.L2-3.1.1 in _base_dataset() is attested passed with no
+        # ce:hasEvidence/ce:oracleOutcome/ce:documentEvidence link at all.
+        doc = compile_ssp(_base_dataset())
+        row = _row_for(doc, "AC.L2-3.1.1")
+        assert "| human-only |" in row
+
+    def test_unattested_control_shows_dash(self):
+        doc = compile_ssp(_base_dataset())
+        row = _row_for(doc, "AT.L2-3.2.1")  # no attestation in the fixture
+        cells = [c.strip() for c in row.strip("|").split("|")]
+        # Control, Implementation, Responsible party, Evidence location,
+        # Evidence hash, Status, Backing, Gap notes, POA&M ref
+        assert cells[5] == "PLANNED"
+        assert cells[6] == "-"

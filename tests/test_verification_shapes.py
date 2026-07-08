@@ -104,6 +104,33 @@ def test_override_clears_contradiction():
 
 
 # ---------------------------------------------------------------------------
+# KI-8: OverrideEvidenceShape, extracted as a standalone shape referenced
+# from ContradictionShape via sh:node (not merged — see resolution note).
+# ---------------------------------------------------------------------------
+
+def test_override_justification_without_evidence_violates_standalone_shape():
+    # No oracle failure at all — not a contradiction — but a justification with
+    # no appended evidence. Proves OverrideEvidenceShape is genuinely reusable
+    # and fires independent of the R13 contradiction condition.
+    g = Graph()
+    att = _passed_attestation(g, oracle_failed=False, override=False)
+    g.add((att, CMMC.overrideJustification, Literal("risk accepted, no evidence yet")))
+    report = verify(g, skip_reverification=True)
+    assert not report.conforms
+    assert "OverrideEvidenceShape" in report.shape_results_text
+    assert "Contradiction (R13)" not in report.shape_results_text
+
+
+def test_override_justification_with_evidence_conforms_standalone():
+    g = Graph()
+    att = _passed_attestation(g, oracle_failed=False, override=False)
+    g.add((att, CMMC.overrideJustification, Literal("risk accepted; documented")))
+    g.add((att, CE.overrideEvidence, Literal("override-evidence-artifact-hash")))
+    report = verify(g, skip_reverification=True)
+    assert report.conforms, report.summary_lines()
+
+
+# ---------------------------------------------------------------------------
 # Re-verification (evidence re-hashing)
 # ---------------------------------------------------------------------------
 

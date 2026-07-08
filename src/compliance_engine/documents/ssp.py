@@ -195,6 +195,34 @@ def _gap_note(status: str, att_rows: list[dict]) -> str:
     return "; ".join(notes) if notes else "-"
 
 
+def _backing_for_row(a: dict) -> str:
+    """Evidence-backing for one attestation row — mirrors (does not call)
+    ControlMappingRow.evidence_backing's four-way rule in traceability/bom.py,
+    computed from the fields ATTESTATION_DETAIL already carries: outcomeShort
+    (attestation outcome, already a short name via SPARQL BIND/REPLACE),
+    oracleOutcome (a full EARL outcome IRI — normalised here via _local()),
+    evidence (ce:hasEvidence links), and documentEvidence (the
+    ce:documentEvidence Track B signal)."""
+    met = a.get("outcomeShort") == "passed"
+    oracle = _local(a.get("oracleOutcome"))
+    has_evidence = bool(a.get("evidence"))
+    if met and oracle == "failed":
+        return "override"
+    if a.get("documentEvidence") and met and has_evidence:
+        return "attested-evidenced"
+    if oracle == "passed" and has_evidence:
+        return "machine"
+    return "human-only"
+
+
+def _backing_label(att_rows: list[dict]) -> str:
+    """Backing cell for a control: one label, or several joined if a control
+    has multiple attestation rows with differing backing."""
+    if not att_rows:
+        return "-"
+    return "; ".join(sorted({_backing_for_row(a) for a in att_rows}))
+
+
 # ---------------------------------------------------------------------------
 # Compiler
 # ---------------------------------------------------------------------------
@@ -297,12 +325,13 @@ def compile_ssp(
             _join((e["sourceFile"] or e["documentRef"]) for e in evs),
             _join(_short_hash(e["contentHash"]) for e in evs),
             status,
+            _backing_label(atts),
             _cell(_gap_note(status, atts)),
             _join(_local(p["poamItem"]) for p in poams),
         ])
     lines.extend(_md_table(
         ["Control", "Implementation", "Responsible party", "Evidence location",
-         "Evidence hash", "Status", "Gap notes", "POA&M ref"],
+         "Evidence hash", "Status", "Backing", "Gap notes", "POA&M ref"],
         vcrm_rows,
     ))
 

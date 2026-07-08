@@ -8,16 +8,23 @@ this oracle answers one question per control it claims:
     ce:Reference that resolves into its authoritative source, and is that
     reference within its freshness window?
 
-Five explicit branches, in order of check. Each failure yields a specific
+Eight explicit branches, in order of check. Each failure yields a specific
 `needsAction` or `failed` reason so the SSP / BOM / UI can present a concrete
 work item instead of a shrug:
 
-    1. reference-missing        → needsAction
-    2. reference-unresolvable   → failed (bad URI / dead link)
-    3. reference-stale          → failed  ("stale:172d>90d")
-    4. awaiting-attestation     → needsAction
-    5. signer-role-mismatch     → failed  ("ITAdmin!=SecurityOfficer")
-    6. attestation-predates-ref → failed  (attestation older than lastVerified)
+    1. reference-missing         → needsAction
+    2. reference-unresolvable    → failed (bad URI / dead link)
+    3. reference-never-verified  → needsAction
+    4. reference-stale           → failed  ("stale:172d>90d")
+    5. signature-missing         → needsAction (no ce:signature registered)
+    6. signature-invalid         → failed  (signature does not verify — set
+                                   by the caller after live verification,
+                                   e.g. pipeline/runner.py; this function
+                                   stays dependency-free and never verifies
+                                   a signature itself)
+    7. awaiting-attestation      → needsAction
+    8. signer-role-mismatch      → failed  ("ITAdmin!=SecurityOfficer")
+    9. attestation-predates-ref  → failed  (attestation older than lastVerified)
     → PASS
 
 The oracle does NOT verify the substance of what the reference points at;
@@ -60,6 +67,12 @@ class ReferenceView:
     custodian: str = ""           # ce:custodian (optional)
     resolved_ok: bool | None = None  # did the URI resolve to real content on disk?
                                   # None ⇒ resolution not attempted (URI-presence only)
+    version: str | None = None    # ce:version (SHA-256 hex of the resolved document;
+                                  # None ⇒ unpinned, fixture mode)
+    signature: str | None = None  # ce:signature (base64 Ed25519 detached signature
+                                  # over the resolved document's raw bytes)
+    signature_verified: bool | None = None  # set by the runner after live verification
+                                  # against the resolved document; None ⇒ not attempted
 
     def is_resolvable(self) -> bool:
         """A reference is resolvable if it has a URI AND, when resolution was
@@ -132,6 +145,29 @@ def evaluate_attested_reference(
             control_id, verdict.age_days, OUTCOME_FAILED,
             f"reference {reference.id!r} is stale: {verdict.reason}",
             reason=verdict.reason,
+        )
+
+    # Branch — reference resolves and is fresh, but carries no ce:signature at
+    # all. A stale/dead reference is caught above; a missing signature is
+    # surfaced here even before an attestation exists, since it is actionable
+    # on its own.
+    if reference.signature is None:
+        return OracleResult(
+            control_id, None, OUTCOME_NEEDS_ACTION,
+            f"reference {reference.id!r} resolves and is fresh but carries no ce:signature",
+            reason="signature-missing",
+        )
+
+    # Branch — a signature is present but failed live verification against the
+    # resolved document (set by the caller, e.g. pipeline/runner.py, which has
+    # already resolved the document bytes via doc_evidence.capture()). This
+    # oracle stays dependency-free (no Signer import, no file I/O) — it only
+    # branches on the boolean the caller already computed.
+    if reference.signature_verified is False:
+        return OracleResult(
+            control_id, None, OUTCOME_FAILED,
+            f"reference {reference.id!r}: signature does not verify against resolved document",
+            reason="signature-invalid",
         )
 
     # Filter attestations to those covering this reference AND this control.

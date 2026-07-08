@@ -1,0 +1,1057 @@
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.10> <http://dynamicalsystems.group/ontology/cmmc#controlId> "AC.L2-3.1.10" .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.10> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#AC> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.10> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.10> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.10> <http://dynamicalsystems.group/ontology/cmmc#text> "Use session lock with pattern-hiding displays to prevent access and viewing of data after a period of inactivity." .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.10> <http://dynamicalsystems.group/ontology/cmmc#weight> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.10> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.10> <https://www.omg.org/spec/SysML/2.0/declaredName> "AC.L2-3.1.10" .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.10> <https://www.omg.org/spec/SysML/2.0/text> "Use session lock with pattern-hiding displays to prevent access and viewing of data after a period of inactivity." .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.11> <http://dynamicalsystems.group/ontology/cmmc#controlId> "AC.L2-3.1.11" .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.11> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#AC> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.11> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.11> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.11> <http://dynamicalsystems.group/ontology/cmmc#text> "Terminate (automatically) a user session after a defined condition." .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.11> <http://dynamicalsystems.group/ontology/cmmc#weight> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.11> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.11> <https://www.omg.org/spec/SysML/2.0/declaredName> "AC.L2-3.1.11" .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.11> <https://www.omg.org/spec/SysML/2.0/text> "Terminate (automatically) a user session after a defined condition." .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.12> <http://dynamicalsystems.group/ontology/cmmc#controlId> "AC.L2-3.1.12" .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.12> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#AC> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.12> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.12> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.12> <http://dynamicalsystems.group/ontology/cmmc#text> "Monitor and control remote access sessions." .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.12> <http://dynamicalsystems.group/ontology/cmmc#weight> "5"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.12> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.12> <https://www.omg.org/spec/SysML/2.0/declaredName> "AC.L2-3.1.12" .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.12> <https://www.omg.org/spec/SysML/2.0/text> "Monitor and control remote access sessions." .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.13> <http://dynamicalsystems.group/ontology/cmmc#controlId> "AC.L2-3.1.13" .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.13> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#AC> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.13> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.13> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.13> <http://dynamicalsystems.group/ontology/cmmc#text> "Employ cryptographic mechanisms to protect the confidentiality of remote access sessions." .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.13> <http://dynamicalsystems.group/ontology/cmmc#weight> "5"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.13> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.13> <https://www.omg.org/spec/SysML/2.0/declaredName> "AC.L2-3.1.13" .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.13> <https://www.omg.org/spec/SysML/2.0/text> "Employ cryptographic mechanisms to protect the confidentiality of remote access sessions." .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.14> <http://dynamicalsystems.group/ontology/cmmc#controlId> "AC.L2-3.1.14" .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.14> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#AC> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.14> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.14> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.14> <http://dynamicalsystems.group/ontology/cmmc#text> "Route remote access via managed access control points." .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.14> <http://dynamicalsystems.group/ontology/cmmc#weight> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.14> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.14> <https://www.omg.org/spec/SysML/2.0/declaredName> "AC.L2-3.1.14" .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.14> <https://www.omg.org/spec/SysML/2.0/text> "Route remote access via managed access control points." .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.15> <http://dynamicalsystems.group/ontology/cmmc#controlId> "AC.L2-3.1.15" .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.15> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#AC> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.15> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.15> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.15> <http://dynamicalsystems.group/ontology/cmmc#text> "Authorize remote execution of privileged commands and remote access to security-relevant information." .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.15> <http://dynamicalsystems.group/ontology/cmmc#weight> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.15> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.15> <https://www.omg.org/spec/SysML/2.0/declaredName> "AC.L2-3.1.15" .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.15> <https://www.omg.org/spec/SysML/2.0/text> "Authorize remote execution of privileged commands and remote access to security-relevant information." .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.16> <http://dynamicalsystems.group/ontology/cmmc#controlId> "AC.L2-3.1.16" .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.16> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#AC> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.16> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.16> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.16> <http://dynamicalsystems.group/ontology/cmmc#text> "Authorize wireless access prior to allowing such connections." .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.16> <http://dynamicalsystems.group/ontology/cmmc#weight> "5"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.16> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.16> <https://www.omg.org/spec/SysML/2.0/declaredName> "AC.L2-3.1.16" .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.16> <https://www.omg.org/spec/SysML/2.0/text> "Authorize wireless access prior to allowing such connections." .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.17> <http://dynamicalsystems.group/ontology/cmmc#controlId> "AC.L2-3.1.17" .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.17> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#AC> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.17> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.17> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.17> <http://dynamicalsystems.group/ontology/cmmc#text> "Protect wireless access using authentication and encryption." .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.17> <http://dynamicalsystems.group/ontology/cmmc#weight> "5"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.17> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.17> <https://www.omg.org/spec/SysML/2.0/declaredName> "AC.L2-3.1.17" .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.17> <https://www.omg.org/spec/SysML/2.0/text> "Protect wireless access using authentication and encryption." .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.18> <http://dynamicalsystems.group/ontology/cmmc#controlId> "AC.L2-3.1.18" .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.18> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#AC> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.18> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.18> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.18> <http://dynamicalsystems.group/ontology/cmmc#text> "Control connection of mobile devices." .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.18> <http://dynamicalsystems.group/ontology/cmmc#weight> "5"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.18> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.18> <https://www.omg.org/spec/SysML/2.0/declaredName> "AC.L2-3.1.18" .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.18> <https://www.omg.org/spec/SysML/2.0/text> "Control connection of mobile devices." .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.19> <http://dynamicalsystems.group/ontology/cmmc#controlId> "AC.L2-3.1.19" .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.19> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#AC> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.19> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.19> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.19> <http://dynamicalsystems.group/ontology/cmmc#text> "Encrypt CUI on mobile devices and mobile computing platforms." .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.19> <http://dynamicalsystems.group/ontology/cmmc#weight> "3"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.19> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.19> <https://www.omg.org/spec/SysML/2.0/declaredName> "AC.L2-3.1.19" .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.19> <https://www.omg.org/spec/SysML/2.0/text> "Encrypt CUI on mobile devices and mobile computing platforms." .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.1> <http://dynamicalsystems.group/ontology/cmmc#controlId> "AC.L2-3.1.1" .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.1> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#AC> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.1> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.1> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.1> <http://dynamicalsystems.group/ontology/cmmc#text> "Limit system access to authorized users, processes acting on behalf of authorized users, and devices (including other systems)." .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.1> <http://dynamicalsystems.group/ontology/cmmc#weight> "5"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.1> <https://www.omg.org/spec/SysML/2.0/declaredName> "AC.L2-3.1.1" .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.1> <https://www.omg.org/spec/SysML/2.0/text> "Limit system access to authorized users, processes acting on behalf of authorized users, and devices (including other systems)." .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.20> <http://dynamicalsystems.group/ontology/cmmc#controlId> "AC.L2-3.1.20" .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.20> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#AC> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.20> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.20> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.20> <http://dynamicalsystems.group/ontology/cmmc#text> "Verify and control/limit connections to and use of external systems." .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.20> <http://dynamicalsystems.group/ontology/cmmc#weight> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.20> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.20> <https://www.omg.org/spec/SysML/2.0/declaredName> "AC.L2-3.1.20" .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.20> <https://www.omg.org/spec/SysML/2.0/text> "Verify and control/limit connections to and use of external systems." .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.21> <http://dynamicalsystems.group/ontology/cmmc#controlId> "AC.L2-3.1.21" .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.21> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#AC> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.21> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.21> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.21> <http://dynamicalsystems.group/ontology/cmmc#text> "Limit use of portable storage devices on external systems." .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.21> <http://dynamicalsystems.group/ontology/cmmc#weight> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.21> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.21> <https://www.omg.org/spec/SysML/2.0/declaredName> "AC.L2-3.1.21" .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.21> <https://www.omg.org/spec/SysML/2.0/text> "Limit use of portable storage devices on external systems." .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.22> <http://dynamicalsystems.group/ontology/cmmc#controlId> "AC.L2-3.1.22" .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.22> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#AC> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.22> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.22> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.22> <http://dynamicalsystems.group/ontology/cmmc#text> "Control CUI posted or processed on publicly accessible systems." .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.22> <http://dynamicalsystems.group/ontology/cmmc#weight> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.22> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.22> <https://www.omg.org/spec/SysML/2.0/declaredName> "AC.L2-3.1.22" .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.22> <https://www.omg.org/spec/SysML/2.0/text> "Control CUI posted or processed on publicly accessible systems." .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.2> <http://dynamicalsystems.group/ontology/cmmc#controlId> "AC.L2-3.1.2" .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.2> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#AC> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.2> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.2> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.2> <http://dynamicalsystems.group/ontology/cmmc#text> "Limit system access to the types of transactions and functions that authorized users are permitted to execute." .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.2> <http://dynamicalsystems.group/ontology/cmmc#weight> "5"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.2> <https://www.omg.org/spec/SysML/2.0/declaredName> "AC.L2-3.1.2" .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.2> <https://www.omg.org/spec/SysML/2.0/text> "Limit system access to the types of transactions and functions that authorized users are permitted to execute." .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.3> <http://dynamicalsystems.group/ontology/cmmc#controlId> "AC.L2-3.1.3" .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.3> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#AC> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.3> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.3> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.3> <http://dynamicalsystems.group/ontology/cmmc#text> "Control the flow of CUI in accordance with approved authorizations." .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.3> <http://dynamicalsystems.group/ontology/cmmc#weight> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.3> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.3> <https://www.omg.org/spec/SysML/2.0/declaredName> "AC.L2-3.1.3" .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.3> <https://www.omg.org/spec/SysML/2.0/text> "Control the flow of CUI in accordance with approved authorizations." .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.4> <http://dynamicalsystems.group/ontology/cmmc#controlId> "AC.L2-3.1.4" .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.4> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#AC> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.4> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.4> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.4> <http://dynamicalsystems.group/ontology/cmmc#text> "Separate the duties of individuals to reduce the risk of malevolent activity without collusion." .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.4> <http://dynamicalsystems.group/ontology/cmmc#weight> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.4> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.4> <https://www.omg.org/spec/SysML/2.0/declaredName> "AC.L2-3.1.4" .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.4> <https://www.omg.org/spec/SysML/2.0/text> "Separate the duties of individuals to reduce the risk of malevolent activity without collusion." .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.5> <http://dynamicalsystems.group/ontology/cmmc#controlId> "AC.L2-3.1.5" .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.5> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#AC> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.5> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.5> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.5> <http://dynamicalsystems.group/ontology/cmmc#text> "Employ the principle of least privilege, including for specific security functions and privileged accounts." .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.5> <http://dynamicalsystems.group/ontology/cmmc#weight> "3"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.5> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.5> <https://www.omg.org/spec/SysML/2.0/declaredName> "AC.L2-3.1.5" .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.5> <https://www.omg.org/spec/SysML/2.0/text> "Employ the principle of least privilege, including for specific security functions and privileged accounts." .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.6> <http://dynamicalsystems.group/ontology/cmmc#controlId> "AC.L2-3.1.6" .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.6> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#AC> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.6> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.6> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.6> <http://dynamicalsystems.group/ontology/cmmc#text> "Use non-privileged accounts or roles when accessing nonsecurity functions." .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.6> <http://dynamicalsystems.group/ontology/cmmc#weight> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.6> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.6> <https://www.omg.org/spec/SysML/2.0/declaredName> "AC.L2-3.1.6" .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.6> <https://www.omg.org/spec/SysML/2.0/text> "Use non-privileged accounts or roles when accessing nonsecurity functions." .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.7> <http://dynamicalsystems.group/ontology/cmmc#controlId> "AC.L2-3.1.7" .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.7> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#AC> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.7> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.7> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.7> <http://dynamicalsystems.group/ontology/cmmc#text> "Prevent non-privileged users from executing privileged functions and capture the execution of such functions in audit logs." .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.7> <http://dynamicalsystems.group/ontology/cmmc#weight> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.7> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.7> <https://www.omg.org/spec/SysML/2.0/declaredName> "AC.L2-3.1.7" .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.7> <https://www.omg.org/spec/SysML/2.0/text> "Prevent non-privileged users from executing privileged functions and capture the execution of such functions in audit logs." .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.8> <http://dynamicalsystems.group/ontology/cmmc#controlId> "AC.L2-3.1.8" .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.8> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#AC> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.8> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.8> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.8> <http://dynamicalsystems.group/ontology/cmmc#text> "Limit unsuccessful logon attempts." .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.8> <http://dynamicalsystems.group/ontology/cmmc#weight> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.8> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.8> <https://www.omg.org/spec/SysML/2.0/declaredName> "AC.L2-3.1.8" .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.8> <https://www.omg.org/spec/SysML/2.0/text> "Limit unsuccessful logon attempts." .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.9> <http://dynamicalsystems.group/ontology/cmmc#controlId> "AC.L2-3.1.9" .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.9> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#AC> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.9> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.9> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.9> <http://dynamicalsystems.group/ontology/cmmc#text> "Provide privacy and security notices consistent with applicable CUI rules." .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.9> <http://dynamicalsystems.group/ontology/cmmc#weight> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.9> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.9> <https://www.omg.org/spec/SysML/2.0/declaredName> "AC.L2-3.1.9" .
+<http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.9> <https://www.omg.org/spec/SysML/2.0/text> "Provide privacy and security notices consistent with applicable CUI rules." .
+<http://dynamicalsystems.group/ontology/cmmc#AC> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Family> .
+<http://dynamicalsystems.group/ontology/cmmc#AC> <http://www.w3.org/2000/01/rdf-schema#label> "Access Control" .
+<http://dynamicalsystems.group/ontology/cmmc#AT.L2-3.2.1> <http://dynamicalsystems.group/ontology/cmmc#controlId> "AT.L2-3.2.1" .
+<http://dynamicalsystems.group/ontology/cmmc#AT.L2-3.2.1> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#AT> .
+<http://dynamicalsystems.group/ontology/cmmc#AT.L2-3.2.1> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AT.L2-3.2.1> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AT.L2-3.2.1> <http://dynamicalsystems.group/ontology/cmmc#text> "Ensure that managers, systems administrators, and users of organizational systems are made aware of the security risks associated with their activities and of the applicable policies, standards, and procedures related to the security of those systems." .
+<http://dynamicalsystems.group/ontology/cmmc#AT.L2-3.2.1> <http://dynamicalsystems.group/ontology/cmmc#weight> "5"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#AT.L2-3.2.1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#AT.L2-3.2.1> <https://www.omg.org/spec/SysML/2.0/declaredName> "AT.L2-3.2.1" .
+<http://dynamicalsystems.group/ontology/cmmc#AT.L2-3.2.1> <https://www.omg.org/spec/SysML/2.0/text> "Ensure that managers, systems administrators, and users of organizational systems are made aware of the security risks associated with their activities and of the applicable policies, standards, and procedures related to the security of those systems." .
+<http://dynamicalsystems.group/ontology/cmmc#AT.L2-3.2.2> <http://dynamicalsystems.group/ontology/cmmc#controlId> "AT.L2-3.2.2" .
+<http://dynamicalsystems.group/ontology/cmmc#AT.L2-3.2.2> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#AT> .
+<http://dynamicalsystems.group/ontology/cmmc#AT.L2-3.2.2> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AT.L2-3.2.2> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AT.L2-3.2.2> <http://dynamicalsystems.group/ontology/cmmc#text> "Ensure that personnel are trained to carry out their assigned information security-related duties and responsibilities." .
+<http://dynamicalsystems.group/ontology/cmmc#AT.L2-3.2.2> <http://dynamicalsystems.group/ontology/cmmc#weight> "5"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#AT.L2-3.2.2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#AT.L2-3.2.2> <https://www.omg.org/spec/SysML/2.0/declaredName> "AT.L2-3.2.2" .
+<http://dynamicalsystems.group/ontology/cmmc#AT.L2-3.2.2> <https://www.omg.org/spec/SysML/2.0/text> "Ensure that personnel are trained to carry out their assigned information security-related duties and responsibilities." .
+<http://dynamicalsystems.group/ontology/cmmc#AT.L2-3.2.3> <http://dynamicalsystems.group/ontology/cmmc#controlId> "AT.L2-3.2.3" .
+<http://dynamicalsystems.group/ontology/cmmc#AT.L2-3.2.3> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#AT> .
+<http://dynamicalsystems.group/ontology/cmmc#AT.L2-3.2.3> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AT.L2-3.2.3> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AT.L2-3.2.3> <http://dynamicalsystems.group/ontology/cmmc#text> "Provide security awareness training on recognizing and reporting potential indicators of insider threat." .
+<http://dynamicalsystems.group/ontology/cmmc#AT.L2-3.2.3> <http://dynamicalsystems.group/ontology/cmmc#weight> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#AT.L2-3.2.3> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#AT.L2-3.2.3> <https://www.omg.org/spec/SysML/2.0/declaredName> "AT.L2-3.2.3" .
+<http://dynamicalsystems.group/ontology/cmmc#AT.L2-3.2.3> <https://www.omg.org/spec/SysML/2.0/text> "Provide security awareness training on recognizing and reporting potential indicators of insider threat." .
+<http://dynamicalsystems.group/ontology/cmmc#AT> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Family> .
+<http://dynamicalsystems.group/ontology/cmmc#AT> <http://www.w3.org/2000/01/rdf-schema#label> "Awareness and Training" .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.1> <http://dynamicalsystems.group/ontology/cmmc#controlId> "AU.L2-3.3.1" .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.1> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#AU> .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.1> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.1> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.1> <http://dynamicalsystems.group/ontology/cmmc#text> "Create and retain system audit logs and records to the extent needed to enable the monitoring, analysis, investigation, and reporting of unlawful or unauthorized system activity." .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.1> <http://dynamicalsystems.group/ontology/cmmc#weight> "5"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.1> <https://www.omg.org/spec/SysML/2.0/declaredName> "AU.L2-3.3.1" .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.1> <https://www.omg.org/spec/SysML/2.0/text> "Create and retain system audit logs and records to the extent needed to enable the monitoring, analysis, investigation, and reporting of unlawful or unauthorized system activity." .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.2> <http://dynamicalsystems.group/ontology/cmmc#controlId> "AU.L2-3.3.2" .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.2> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#AU> .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.2> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.2> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.2> <http://dynamicalsystems.group/ontology/cmmc#text> "Ensure that the actions of individual system users can be uniquely traced to those users, so they can be held accountable for their actions." .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.2> <http://dynamicalsystems.group/ontology/cmmc#weight> "3"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.2> <https://www.omg.org/spec/SysML/2.0/declaredName> "AU.L2-3.3.2" .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.2> <https://www.omg.org/spec/SysML/2.0/text> "Ensure that the actions of individual system users can be uniquely traced to those users, so they can be held accountable for their actions." .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.3> <http://dynamicalsystems.group/ontology/cmmc#controlId> "AU.L2-3.3.3" .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.3> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#AU> .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.3> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.3> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.3> <http://dynamicalsystems.group/ontology/cmmc#text> "Review and update logged events." .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.3> <http://dynamicalsystems.group/ontology/cmmc#weight> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.3> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.3> <https://www.omg.org/spec/SysML/2.0/declaredName> "AU.L2-3.3.3" .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.3> <https://www.omg.org/spec/SysML/2.0/text> "Review and update logged events." .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.4> <http://dynamicalsystems.group/ontology/cmmc#controlId> "AU.L2-3.3.4" .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.4> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#AU> .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.4> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.4> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.4> <http://dynamicalsystems.group/ontology/cmmc#text> "Alert in the event of an audit logging process failure." .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.4> <http://dynamicalsystems.group/ontology/cmmc#weight> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.4> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.4> <https://www.omg.org/spec/SysML/2.0/declaredName> "AU.L2-3.3.4" .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.4> <https://www.omg.org/spec/SysML/2.0/text> "Alert in the event of an audit logging process failure." .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.5> <http://dynamicalsystems.group/ontology/cmmc#controlId> "AU.L2-3.3.5" .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.5> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#AU> .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.5> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.5> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.5> <http://dynamicalsystems.group/ontology/cmmc#text> "Correlate audit record review, analysis, and reporting processes for investigation and response to indications of unlawful, unauthorized, suspicious, or unusual activity." .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.5> <http://dynamicalsystems.group/ontology/cmmc#weight> "5"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.5> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.5> <https://www.omg.org/spec/SysML/2.0/declaredName> "AU.L2-3.3.5" .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.5> <https://www.omg.org/spec/SysML/2.0/text> "Correlate audit record review, analysis, and reporting processes for investigation and response to indications of unlawful, unauthorized, suspicious, or unusual activity." .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.6> <http://dynamicalsystems.group/ontology/cmmc#controlId> "AU.L2-3.3.6" .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.6> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#AU> .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.6> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.6> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.6> <http://dynamicalsystems.group/ontology/cmmc#text> "Provide audit record reduction and report generation to support on-demand analysis and reporting." .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.6> <http://dynamicalsystems.group/ontology/cmmc#weight> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.6> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.6> <https://www.omg.org/spec/SysML/2.0/declaredName> "AU.L2-3.3.6" .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.6> <https://www.omg.org/spec/SysML/2.0/text> "Provide audit record reduction and report generation to support on-demand analysis and reporting." .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.7> <http://dynamicalsystems.group/ontology/cmmc#controlId> "AU.L2-3.3.7" .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.7> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#AU> .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.7> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.7> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.7> <http://dynamicalsystems.group/ontology/cmmc#text> "Provide a system capability that compares and synchronizes internal system clocks with an authoritative source to generate time stamps for audit records." .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.7> <http://dynamicalsystems.group/ontology/cmmc#weight> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.7> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.7> <https://www.omg.org/spec/SysML/2.0/declaredName> "AU.L2-3.3.7" .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.7> <https://www.omg.org/spec/SysML/2.0/text> "Provide a system capability that compares and synchronizes internal system clocks with an authoritative source to generate time stamps for audit records." .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.8> <http://dynamicalsystems.group/ontology/cmmc#controlId> "AU.L2-3.3.8" .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.8> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#AU> .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.8> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.8> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.8> <http://dynamicalsystems.group/ontology/cmmc#text> "Protect audit information and audit logging tools from unauthorized access, modification, and deletion." .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.8> <http://dynamicalsystems.group/ontology/cmmc#weight> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.8> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.8> <https://www.omg.org/spec/SysML/2.0/declaredName> "AU.L2-3.3.8" .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.8> <https://www.omg.org/spec/SysML/2.0/text> "Protect audit information and audit logging tools from unauthorized access, modification, and deletion." .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.9> <http://dynamicalsystems.group/ontology/cmmc#controlId> "AU.L2-3.3.9" .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.9> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#AU> .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.9> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.9> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.9> <http://dynamicalsystems.group/ontology/cmmc#text> "Limit management of audit logging functionality to a subset of privileged users." .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.9> <http://dynamicalsystems.group/ontology/cmmc#weight> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.9> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.9> <https://www.omg.org/spec/SysML/2.0/declaredName> "AU.L2-3.3.9" .
+<http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.9> <https://www.omg.org/spec/SysML/2.0/text> "Limit management of audit logging functionality to a subset of privileged users." .
+<http://dynamicalsystems.group/ontology/cmmc#AU> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Family> .
+<http://dynamicalsystems.group/ontology/cmmc#AU> <http://www.w3.org/2000/01/rdf-schema#label> "Audit and Accountability" .
+<http://dynamicalsystems.group/ontology/cmmc#AssessmentMethod> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://dynamicalsystems.group/ontology/cmmc#AssessmentMethod> <http://www.w3.org/2000/01/rdf-schema#label> "NIST SP 800-171A assessment method (Examine/Interview/Test)" .
+<http://dynamicalsystems.group/ontology/cmmc#CA.L2-3.12.1> <http://dynamicalsystems.group/ontology/cmmc#controlId> "CA.L2-3.12.1" .
+<http://dynamicalsystems.group/ontology/cmmc#CA.L2-3.12.1> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#CA> .
+<http://dynamicalsystems.group/ontology/cmmc#CA.L2-3.12.1> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#CA.L2-3.12.1> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#CA.L2-3.12.1> <http://dynamicalsystems.group/ontology/cmmc#text> "Periodically assess the security controls in organizational systems to determine if the controls are effective in their application." .
+<http://dynamicalsystems.group/ontology/cmmc#CA.L2-3.12.1> <http://dynamicalsystems.group/ontology/cmmc#weight> "5"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#CA.L2-3.12.1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#CA.L2-3.12.1> <https://www.omg.org/spec/SysML/2.0/declaredName> "CA.L2-3.12.1" .
+<http://dynamicalsystems.group/ontology/cmmc#CA.L2-3.12.1> <https://www.omg.org/spec/SysML/2.0/text> "Periodically assess the security controls in organizational systems to determine if the controls are effective in their application." .
+<http://dynamicalsystems.group/ontology/cmmc#CA.L2-3.12.2> <http://dynamicalsystems.group/ontology/cmmc#controlId> "CA.L2-3.12.2" .
+<http://dynamicalsystems.group/ontology/cmmc#CA.L2-3.12.2> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#CA> .
+<http://dynamicalsystems.group/ontology/cmmc#CA.L2-3.12.2> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#CA.L2-3.12.2> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#CA.L2-3.12.2> <http://dynamicalsystems.group/ontology/cmmc#text> "Develop and implement plans of action designed to correct deficiencies and reduce or eliminate vulnerabilities in organizational systems." .
+<http://dynamicalsystems.group/ontology/cmmc#CA.L2-3.12.2> <http://dynamicalsystems.group/ontology/cmmc#weight> "3"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#CA.L2-3.12.2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#CA.L2-3.12.2> <https://www.omg.org/spec/SysML/2.0/declaredName> "CA.L2-3.12.2" .
+<http://dynamicalsystems.group/ontology/cmmc#CA.L2-3.12.2> <https://www.omg.org/spec/SysML/2.0/text> "Develop and implement plans of action designed to correct deficiencies and reduce or eliminate vulnerabilities in organizational systems." .
+<http://dynamicalsystems.group/ontology/cmmc#CA.L2-3.12.3> <http://dynamicalsystems.group/ontology/cmmc#controlId> "CA.L2-3.12.3" .
+<http://dynamicalsystems.group/ontology/cmmc#CA.L2-3.12.3> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#CA> .
+<http://dynamicalsystems.group/ontology/cmmc#CA.L2-3.12.3> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#CA.L2-3.12.3> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#CA.L2-3.12.3> <http://dynamicalsystems.group/ontology/cmmc#text> "Monitor security controls on an ongoing basis to ensure the continued effectiveness of the controls." .
+<http://dynamicalsystems.group/ontology/cmmc#CA.L2-3.12.3> <http://dynamicalsystems.group/ontology/cmmc#weight> "5"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#CA.L2-3.12.3> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#CA.L2-3.12.3> <https://www.omg.org/spec/SysML/2.0/declaredName> "CA.L2-3.12.3" .
+<http://dynamicalsystems.group/ontology/cmmc#CA.L2-3.12.3> <https://www.omg.org/spec/SysML/2.0/text> "Monitor security controls on an ongoing basis to ensure the continued effectiveness of the controls." .
+<http://dynamicalsystems.group/ontology/cmmc#CA.L2-3.12.4> <http://dynamicalsystems.group/ontology/cmmc#controlId> "CA.L2-3.12.4" .
+<http://dynamicalsystems.group/ontology/cmmc#CA.L2-3.12.4> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#CA> .
+<http://dynamicalsystems.group/ontology/cmmc#CA.L2-3.12.4> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#CA.L2-3.12.4> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#CA.L2-3.12.4> <http://dynamicalsystems.group/ontology/cmmc#text> "Develop, document, and periodically update system security plans that describe system boundaries, system environments of operation, how security requirements are implemented, and the relationships with or connections to other systems." .
+<http://dynamicalsystems.group/ontology/cmmc#CA.L2-3.12.4> <http://dynamicalsystems.group/ontology/cmmc#weight> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#CA.L2-3.12.4> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#CA.L2-3.12.4> <https://www.omg.org/spec/SysML/2.0/declaredName> "CA.L2-3.12.4" .
+<http://dynamicalsystems.group/ontology/cmmc#CA.L2-3.12.4> <https://www.omg.org/spec/SysML/2.0/text> "Develop, document, and periodically update system security plans that describe system boundaries, system environments of operation, how security requirements are implemented, and the relationships with or connections to other systems." .
+<http://dynamicalsystems.group/ontology/cmmc#CA> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Family> .
+<http://dynamicalsystems.group/ontology/cmmc#CA> <http://www.w3.org/2000/01/rdf-schema#label> "Security Assessment" .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.1> <http://dynamicalsystems.group/ontology/cmmc#controlId> "CM.L2-3.4.1" .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.1> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#CM> .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.1> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.1> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.1> <http://dynamicalsystems.group/ontology/cmmc#text> "Establish and maintain baseline configurations and inventories of organizational systems (including hardware, software, firmware, and documentation) throughout the respective system development life cycles." .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.1> <http://dynamicalsystems.group/ontology/cmmc#weight> "5"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.1> <https://www.omg.org/spec/SysML/2.0/declaredName> "CM.L2-3.4.1" .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.1> <https://www.omg.org/spec/SysML/2.0/text> "Establish and maintain baseline configurations and inventories of organizational systems (including hardware, software, firmware, and documentation) throughout the respective system development life cycles." .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.2> <http://dynamicalsystems.group/ontology/cmmc#controlId> "CM.L2-3.4.2" .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.2> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#CM> .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.2> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.2> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.2> <http://dynamicalsystems.group/ontology/cmmc#text> "Establish and enforce security configuration settings for information technology products employed in organizational systems." .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.2> <http://dynamicalsystems.group/ontology/cmmc#weight> "5"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.2> <https://www.omg.org/spec/SysML/2.0/declaredName> "CM.L2-3.4.2" .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.2> <https://www.omg.org/spec/SysML/2.0/text> "Establish and enforce security configuration settings for information technology products employed in organizational systems." .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.3> <http://dynamicalsystems.group/ontology/cmmc#controlId> "CM.L2-3.4.3" .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.3> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#CM> .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.3> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.3> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.3> <http://dynamicalsystems.group/ontology/cmmc#text> "Track, review, approve or disapprove, and log changes to organizational systems." .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.3> <http://dynamicalsystems.group/ontology/cmmc#weight> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.3> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.3> <https://www.omg.org/spec/SysML/2.0/declaredName> "CM.L2-3.4.3" .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.3> <https://www.omg.org/spec/SysML/2.0/text> "Track, review, approve or disapprove, and log changes to organizational systems." .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.4> <http://dynamicalsystems.group/ontology/cmmc#controlId> "CM.L2-3.4.4" .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.4> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#CM> .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.4> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.4> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.4> <http://dynamicalsystems.group/ontology/cmmc#text> "Analyze the security impact of changes prior to implementation." .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.4> <http://dynamicalsystems.group/ontology/cmmc#weight> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.4> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.4> <https://www.omg.org/spec/SysML/2.0/declaredName> "CM.L2-3.4.4" .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.4> <https://www.omg.org/spec/SysML/2.0/text> "Analyze the security impact of changes prior to implementation." .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.5> <http://dynamicalsystems.group/ontology/cmmc#controlId> "CM.L2-3.4.5" .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.5> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#CM> .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.5> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.5> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.5> <http://dynamicalsystems.group/ontology/cmmc#text> "Define, document, approve, and enforce physical and logical access restrictions associated with changes to organizational systems." .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.5> <http://dynamicalsystems.group/ontology/cmmc#weight> "5"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.5> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.5> <https://www.omg.org/spec/SysML/2.0/declaredName> "CM.L2-3.4.5" .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.5> <https://www.omg.org/spec/SysML/2.0/text> "Define, document, approve, and enforce physical and logical access restrictions associated with changes to organizational systems." .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.6> <http://dynamicalsystems.group/ontology/cmmc#controlId> "CM.L2-3.4.6" .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.6> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#CM> .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.6> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.6> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.6> <http://dynamicalsystems.group/ontology/cmmc#text> "Employ the principle of least functionality by configuring organizational systems to provide only essential capabilities." .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.6> <http://dynamicalsystems.group/ontology/cmmc#weight> "5"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.6> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.6> <https://www.omg.org/spec/SysML/2.0/declaredName> "CM.L2-3.4.6" .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.6> <https://www.omg.org/spec/SysML/2.0/text> "Employ the principle of least functionality by configuring organizational systems to provide only essential capabilities." .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.7> <http://dynamicalsystems.group/ontology/cmmc#controlId> "CM.L2-3.4.7" .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.7> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#CM> .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.7> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.7> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.7> <http://dynamicalsystems.group/ontology/cmmc#text> "Restrict, disable, or prevent the use of nonessential programs, functions, ports, protocols, and services." .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.7> <http://dynamicalsystems.group/ontology/cmmc#weight> "5"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.7> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.7> <https://www.omg.org/spec/SysML/2.0/declaredName> "CM.L2-3.4.7" .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.7> <https://www.omg.org/spec/SysML/2.0/text> "Restrict, disable, or prevent the use of nonessential programs, functions, ports, protocols, and services." .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.8> <http://dynamicalsystems.group/ontology/cmmc#controlId> "CM.L2-3.4.8" .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.8> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#CM> .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.8> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.8> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.8> <http://dynamicalsystems.group/ontology/cmmc#text> "Apply deny-by-exception (blacklisting) policy to prevent the use of unauthorized software or deny-all, permit-by-exception (whitelisting) policy to allow the execution of authorized software." .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.8> <http://dynamicalsystems.group/ontology/cmmc#weight> "5"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.8> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.8> <https://www.omg.org/spec/SysML/2.0/declaredName> "CM.L2-3.4.8" .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.8> <https://www.omg.org/spec/SysML/2.0/text> "Apply deny-by-exception (blacklisting) policy to prevent the use of unauthorized software or deny-all, permit-by-exception (whitelisting) policy to allow the execution of authorized software." .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.9> <http://dynamicalsystems.group/ontology/cmmc#controlId> "CM.L2-3.4.9" .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.9> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#CM> .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.9> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.9> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.9> <http://dynamicalsystems.group/ontology/cmmc#text> "Control and monitor user-installed software." .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.9> <http://dynamicalsystems.group/ontology/cmmc#weight> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.9> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.9> <https://www.omg.org/spec/SysML/2.0/declaredName> "CM.L2-3.4.9" .
+<http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.9> <https://www.omg.org/spec/SysML/2.0/text> "Control and monitor user-installed software." .
+<http://dynamicalsystems.group/ontology/cmmc#CM> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Family> .
+<http://dynamicalsystems.group/ontology/cmmc#CM> <http://www.w3.org/2000/01/rdf-schema#label> "Configuration Management" .
+<http://dynamicalsystems.group/ontology/cmmc#Control> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://dynamicalsystems.group/ontology/cmmc#Control> <http://www.w3.org/2000/01/rdf-schema#label> "CMMC control (a requirement to be attested MET)" .
+<http://dynamicalsystems.group/ontology/cmmc#Control> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <https://www.omg.org/spec/SysML/2.0/RequirementDefinition> .
+<http://dynamicalsystems.group/ontology/cmmc#Examine> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#AssessmentMethod> .
+<http://dynamicalsystems.group/ontology/cmmc#Family> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://dynamicalsystems.group/ontology/cmmc#Family> <http://www.w3.org/2000/01/rdf-schema#label> "NIST 800-171 control family (AC, AU, IA, SC, ...)" .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.10> <http://dynamicalsystems.group/ontology/cmmc#controlId> "IA.L2-3.5.10" .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.10> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#IA> .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.10> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.10> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.10> <http://dynamicalsystems.group/ontology/cmmc#text> "Store and transmit only cryptographically-protected passwords." .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.10> <http://dynamicalsystems.group/ontology/cmmc#weight> "5"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.10> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.10> <https://www.omg.org/spec/SysML/2.0/declaredName> "IA.L2-3.5.10" .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.10> <https://www.omg.org/spec/SysML/2.0/text> "Store and transmit only cryptographically-protected passwords." .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.11> <http://dynamicalsystems.group/ontology/cmmc#controlId> "IA.L2-3.5.11" .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.11> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#IA> .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.11> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.11> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.11> <http://dynamicalsystems.group/ontology/cmmc#text> "Obscure feedback of authentication information." .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.11> <http://dynamicalsystems.group/ontology/cmmc#weight> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.11> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.11> <https://www.omg.org/spec/SysML/2.0/declaredName> "IA.L2-3.5.11" .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.11> <https://www.omg.org/spec/SysML/2.0/text> "Obscure feedback of authentication information." .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.1> <http://dynamicalsystems.group/ontology/cmmc#controlId> "IA.L2-3.5.1" .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.1> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#IA> .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.1> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.1> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.1> <http://dynamicalsystems.group/ontology/cmmc#text> "Identify system users, processes acting on behalf of users, and devices." .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.1> <http://dynamicalsystems.group/ontology/cmmc#weight> "5"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.1> <https://www.omg.org/spec/SysML/2.0/declaredName> "IA.L2-3.5.1" .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.1> <https://www.omg.org/spec/SysML/2.0/text> "Identify system users, processes acting on behalf of users, and devices." .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.2> <http://dynamicalsystems.group/ontology/cmmc#controlId> "IA.L2-3.5.2" .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.2> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#IA> .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.2> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.2> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.2> <http://dynamicalsystems.group/ontology/cmmc#text> "Authenticate (or verify) the identities of users, processes, or devices, as a prerequisite to allowing access to organizational systems." .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.2> <http://dynamicalsystems.group/ontology/cmmc#weight> "5"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.2> <https://www.omg.org/spec/SysML/2.0/declaredName> "IA.L2-3.5.2" .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.2> <https://www.omg.org/spec/SysML/2.0/text> "Authenticate (or verify) the identities of users, processes, or devices, as a prerequisite to allowing access to organizational systems." .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.3> <http://dynamicalsystems.group/ontology/cmmc#controlId> "IA.L2-3.5.3" .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.3> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#IA> .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.3> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.3> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.3> <http://dynamicalsystems.group/ontology/cmmc#text> "Use multifactor authentication for local and network access to privileged accounts and for network access to non-privileged accounts." .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.3> <http://dynamicalsystems.group/ontology/cmmc#variableWeight> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.3> <http://dynamicalsystems.group/ontology/cmmc#weight> "5"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.3> <http://dynamicalsystems.group/ontology/cmmc#weightIfPartial> "3"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.3> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.3> <https://www.omg.org/spec/SysML/2.0/declaredName> "IA.L2-3.5.3" .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.3> <https://www.omg.org/spec/SysML/2.0/text> "Use multifactor authentication for local and network access to privileged accounts and for network access to non-privileged accounts." .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.4> <http://dynamicalsystems.group/ontology/cmmc#controlId> "IA.L2-3.5.4" .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.4> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#IA> .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.4> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.4> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.4> <http://dynamicalsystems.group/ontology/cmmc#text> "Employ replay-resistant authentication mechanisms for network access to privileged and non-privileged accounts." .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.4> <http://dynamicalsystems.group/ontology/cmmc#weight> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.4> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.4> <https://www.omg.org/spec/SysML/2.0/declaredName> "IA.L2-3.5.4" .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.4> <https://www.omg.org/spec/SysML/2.0/text> "Employ replay-resistant authentication mechanisms for network access to privileged and non-privileged accounts." .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.5> <http://dynamicalsystems.group/ontology/cmmc#controlId> "IA.L2-3.5.5" .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.5> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#IA> .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.5> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.5> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.5> <http://dynamicalsystems.group/ontology/cmmc#text> "Prevent reuse of identifiers for a defined period." .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.5> <http://dynamicalsystems.group/ontology/cmmc#weight> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.5> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.5> <https://www.omg.org/spec/SysML/2.0/declaredName> "IA.L2-3.5.5" .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.5> <https://www.omg.org/spec/SysML/2.0/text> "Prevent reuse of identifiers for a defined period." .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.6> <http://dynamicalsystems.group/ontology/cmmc#controlId> "IA.L2-3.5.6" .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.6> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#IA> .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.6> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.6> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.6> <http://dynamicalsystems.group/ontology/cmmc#text> "Disable identifiers after a defined period of inactivity." .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.6> <http://dynamicalsystems.group/ontology/cmmc#weight> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.6> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.6> <https://www.omg.org/spec/SysML/2.0/declaredName> "IA.L2-3.5.6" .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.6> <https://www.omg.org/spec/SysML/2.0/text> "Disable identifiers after a defined period of inactivity." .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.7> <http://dynamicalsystems.group/ontology/cmmc#controlId> "IA.L2-3.5.7" .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.7> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#IA> .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.7> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.7> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.7> <http://dynamicalsystems.group/ontology/cmmc#text> "Enforce a minimum password complexity and change of characters when new passwords are created." .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.7> <http://dynamicalsystems.group/ontology/cmmc#weight> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.7> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.7> <https://www.omg.org/spec/SysML/2.0/declaredName> "IA.L2-3.5.7" .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.7> <https://www.omg.org/spec/SysML/2.0/text> "Enforce a minimum password complexity and change of characters when new passwords are created." .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.8> <http://dynamicalsystems.group/ontology/cmmc#controlId> "IA.L2-3.5.8" .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.8> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#IA> .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.8> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.8> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.8> <http://dynamicalsystems.group/ontology/cmmc#text> "Prohibit password reuse for a specified number of generations." .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.8> <http://dynamicalsystems.group/ontology/cmmc#weight> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.8> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.8> <https://www.omg.org/spec/SysML/2.0/declaredName> "IA.L2-3.5.8" .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.8> <https://www.omg.org/spec/SysML/2.0/text> "Prohibit password reuse for a specified number of generations." .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.9> <http://dynamicalsystems.group/ontology/cmmc#controlId> "IA.L2-3.5.9" .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.9> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#IA> .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.9> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.9> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.9> <http://dynamicalsystems.group/ontology/cmmc#text> "Allow temporary password use for system logons with an immediate change to a permanent password." .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.9> <http://dynamicalsystems.group/ontology/cmmc#weight> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.9> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.9> <https://www.omg.org/spec/SysML/2.0/declaredName> "IA.L2-3.5.9" .
+<http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.9> <https://www.omg.org/spec/SysML/2.0/text> "Allow temporary password use for system logons with an immediate change to a permanent password." .
+<http://dynamicalsystems.group/ontology/cmmc#IA> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Family> .
+<http://dynamicalsystems.group/ontology/cmmc#IA> <http://www.w3.org/2000/01/rdf-schema#label> "Identification and Authentication" .
+<http://dynamicalsystems.group/ontology/cmmc#IR.L2-3.6.1> <http://dynamicalsystems.group/ontology/cmmc#controlId> "IR.L2-3.6.1" .
+<http://dynamicalsystems.group/ontology/cmmc#IR.L2-3.6.1> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#IR> .
+<http://dynamicalsystems.group/ontology/cmmc#IR.L2-3.6.1> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#IR.L2-3.6.1> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#IR.L2-3.6.1> <http://dynamicalsystems.group/ontology/cmmc#text> "Establish an operational incident-handling capability for organizational systems that includes preparation, detection, analysis, containment, recovery, and user response activities." .
+<http://dynamicalsystems.group/ontology/cmmc#IR.L2-3.6.1> <http://dynamicalsystems.group/ontology/cmmc#weight> "5"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#IR.L2-3.6.1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#IR.L2-3.6.1> <https://www.omg.org/spec/SysML/2.0/declaredName> "IR.L2-3.6.1" .
+<http://dynamicalsystems.group/ontology/cmmc#IR.L2-3.6.1> <https://www.omg.org/spec/SysML/2.0/text> "Establish an operational incident-handling capability for organizational systems that includes preparation, detection, analysis, containment, recovery, and user response activities." .
+<http://dynamicalsystems.group/ontology/cmmc#IR.L2-3.6.2> <http://dynamicalsystems.group/ontology/cmmc#controlId> "IR.L2-3.6.2" .
+<http://dynamicalsystems.group/ontology/cmmc#IR.L2-3.6.2> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#IR> .
+<http://dynamicalsystems.group/ontology/cmmc#IR.L2-3.6.2> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#IR.L2-3.6.2> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#IR.L2-3.6.2> <http://dynamicalsystems.group/ontology/cmmc#text> "Track, document, and report incidents to designated officials and/or authorities both internal and external to the organization." .
+<http://dynamicalsystems.group/ontology/cmmc#IR.L2-3.6.2> <http://dynamicalsystems.group/ontology/cmmc#weight> "5"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#IR.L2-3.6.2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#IR.L2-3.6.2> <https://www.omg.org/spec/SysML/2.0/declaredName> "IR.L2-3.6.2" .
+<http://dynamicalsystems.group/ontology/cmmc#IR.L2-3.6.2> <https://www.omg.org/spec/SysML/2.0/text> "Track, document, and report incidents to designated officials and/or authorities both internal and external to the organization." .
+<http://dynamicalsystems.group/ontology/cmmc#IR.L2-3.6.3> <http://dynamicalsystems.group/ontology/cmmc#controlId> "IR.L2-3.6.3" .
+<http://dynamicalsystems.group/ontology/cmmc#IR.L2-3.6.3> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#IR> .
+<http://dynamicalsystems.group/ontology/cmmc#IR.L2-3.6.3> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#IR.L2-3.6.3> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#IR.L2-3.6.3> <http://dynamicalsystems.group/ontology/cmmc#text> "Test the organizational incident response capability." .
+<http://dynamicalsystems.group/ontology/cmmc#IR.L2-3.6.3> <http://dynamicalsystems.group/ontology/cmmc#weight> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#IR.L2-3.6.3> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#IR.L2-3.6.3> <https://www.omg.org/spec/SysML/2.0/declaredName> "IR.L2-3.6.3" .
+<http://dynamicalsystems.group/ontology/cmmc#IR.L2-3.6.3> <https://www.omg.org/spec/SysML/2.0/text> "Test the organizational incident response capability." .
+<http://dynamicalsystems.group/ontology/cmmc#IR> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Family> .
+<http://dynamicalsystems.group/ontology/cmmc#IR> <http://www.w3.org/2000/01/rdf-schema#label> "Incident Response" .
+<http://dynamicalsystems.group/ontology/cmmc#Interview> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#AssessmentMethod> .
+<http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.1> <http://dynamicalsystems.group/ontology/cmmc#controlId> "MA.L2-3.7.1" .
+<http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.1> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#MA> .
+<http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.1> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.1> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.1> <http://dynamicalsystems.group/ontology/cmmc#text> "Perform maintenance on organizational systems." .
+<http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.1> <http://dynamicalsystems.group/ontology/cmmc#weight> "3"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.1> <https://www.omg.org/spec/SysML/2.0/declaredName> "MA.L2-3.7.1" .
+<http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.1> <https://www.omg.org/spec/SysML/2.0/text> "Perform maintenance on organizational systems." .
+<http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.2> <http://dynamicalsystems.group/ontology/cmmc#controlId> "MA.L2-3.7.2" .
+<http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.2> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#MA> .
+<http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.2> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.2> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.2> <http://dynamicalsystems.group/ontology/cmmc#text> "Provide controls on the tools, techniques, mechanisms, and personnel used to conduct system maintenance." .
+<http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.2> <http://dynamicalsystems.group/ontology/cmmc#weight> "5"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.2> <https://www.omg.org/spec/SysML/2.0/declaredName> "MA.L2-3.7.2" .
+<http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.2> <https://www.omg.org/spec/SysML/2.0/text> "Provide controls on the tools, techniques, mechanisms, and personnel used to conduct system maintenance." .
+<http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.3> <http://dynamicalsystems.group/ontology/cmmc#controlId> "MA.L2-3.7.3" .
+<http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.3> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#MA> .
+<http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.3> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.3> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.3> <http://dynamicalsystems.group/ontology/cmmc#text> "Ensure equipment removed for off-site maintenance is sanitized of any CUI." .
+<http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.3> <http://dynamicalsystems.group/ontology/cmmc#weight> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.3> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.3> <https://www.omg.org/spec/SysML/2.0/declaredName> "MA.L2-3.7.3" .
+<http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.3> <https://www.omg.org/spec/SysML/2.0/text> "Ensure equipment removed for off-site maintenance is sanitized of any CUI." .
+<http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.4> <http://dynamicalsystems.group/ontology/cmmc#controlId> "MA.L2-3.7.4" .
+<http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.4> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#MA> .
+<http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.4> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.4> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.4> <http://dynamicalsystems.group/ontology/cmmc#text> "Check media containing diagnostic and test programs for malicious code before the media are used in organizational systems." .
+<http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.4> <http://dynamicalsystems.group/ontology/cmmc#weight> "3"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.4> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.4> <https://www.omg.org/spec/SysML/2.0/declaredName> "MA.L2-3.7.4" .
+<http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.4> <https://www.omg.org/spec/SysML/2.0/text> "Check media containing diagnostic and test programs for malicious code before the media are used in organizational systems." .
+<http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.5> <http://dynamicalsystems.group/ontology/cmmc#controlId> "MA.L2-3.7.5" .
+<http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.5> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#MA> .
+<http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.5> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.5> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.5> <http://dynamicalsystems.group/ontology/cmmc#text> "Require multifactor authentication to establish nonlocal maintenance sessions via external network connections and terminate such connections when nonlocal maintenance is complete." .
+<http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.5> <http://dynamicalsystems.group/ontology/cmmc#weight> "5"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.5> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.5> <https://www.omg.org/spec/SysML/2.0/declaredName> "MA.L2-3.7.5" .
+<http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.5> <https://www.omg.org/spec/SysML/2.0/text> "Require multifactor authentication to establish nonlocal maintenance sessions via external network connections and terminate such connections when nonlocal maintenance is complete." .
+<http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.6> <http://dynamicalsystems.group/ontology/cmmc#controlId> "MA.L2-3.7.6" .
+<http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.6> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#MA> .
+<http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.6> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.6> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.6> <http://dynamicalsystems.group/ontology/cmmc#text> "Supervise the maintenance activities of maintenance personnel without required access authorization." .
+<http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.6> <http://dynamicalsystems.group/ontology/cmmc#weight> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.6> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.6> <https://www.omg.org/spec/SysML/2.0/declaredName> "MA.L2-3.7.6" .
+<http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.6> <https://www.omg.org/spec/SysML/2.0/text> "Supervise the maintenance activities of maintenance personnel without required access authorization." .
+<http://dynamicalsystems.group/ontology/cmmc#MA> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Family> .
+<http://dynamicalsystems.group/ontology/cmmc#MA> <http://www.w3.org/2000/01/rdf-schema#label> "Maintenance" .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.1> <http://dynamicalsystems.group/ontology/cmmc#controlId> "MP.L2-3.8.1" .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.1> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#MP> .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.1> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.1> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.1> <http://dynamicalsystems.group/ontology/cmmc#text> "Protect (i.e., physically control and securely store) system media containing CUI, both paper and digital." .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.1> <http://dynamicalsystems.group/ontology/cmmc#weight> "3"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.1> <https://www.omg.org/spec/SysML/2.0/declaredName> "MP.L2-3.8.1" .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.1> <https://www.omg.org/spec/SysML/2.0/text> "Protect (i.e., physically control and securely store) system media containing CUI, both paper and digital." .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.2> <http://dynamicalsystems.group/ontology/cmmc#controlId> "MP.L2-3.8.2" .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.2> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#MP> .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.2> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.2> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.2> <http://dynamicalsystems.group/ontology/cmmc#text> "Limit access to CUI on system media to authorized users." .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.2> <http://dynamicalsystems.group/ontology/cmmc#weight> "3"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.2> <https://www.omg.org/spec/SysML/2.0/declaredName> "MP.L2-3.8.2" .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.2> <https://www.omg.org/spec/SysML/2.0/text> "Limit access to CUI on system media to authorized users." .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.3> <http://dynamicalsystems.group/ontology/cmmc#controlId> "MP.L2-3.8.3" .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.3> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#MP> .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.3> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.3> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.3> <http://dynamicalsystems.group/ontology/cmmc#text> "Sanitize or destroy system media containing CUI before disposal or release for reuse." .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.3> <http://dynamicalsystems.group/ontology/cmmc#weight> "5"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.3> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.3> <https://www.omg.org/spec/SysML/2.0/declaredName> "MP.L2-3.8.3" .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.3> <https://www.omg.org/spec/SysML/2.0/text> "Sanitize or destroy system media containing CUI before disposal or release for reuse." .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.4> <http://dynamicalsystems.group/ontology/cmmc#controlId> "MP.L2-3.8.4" .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.4> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#MP> .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.4> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.4> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.4> <http://dynamicalsystems.group/ontology/cmmc#text> "Mark media with necessary CUI markings and distribution limitations." .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.4> <http://dynamicalsystems.group/ontology/cmmc#weight> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.4> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.4> <https://www.omg.org/spec/SysML/2.0/declaredName> "MP.L2-3.8.4" .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.4> <https://www.omg.org/spec/SysML/2.0/text> "Mark media with necessary CUI markings and distribution limitations." .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.5> <http://dynamicalsystems.group/ontology/cmmc#controlId> "MP.L2-3.8.5" .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.5> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#MP> .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.5> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.5> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.5> <http://dynamicalsystems.group/ontology/cmmc#text> "Control access to media containing CUI and maintain accountability for media during transport outside of controlled areas." .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.5> <http://dynamicalsystems.group/ontology/cmmc#weight> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.5> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.5> <https://www.omg.org/spec/SysML/2.0/declaredName> "MP.L2-3.8.5" .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.5> <https://www.omg.org/spec/SysML/2.0/text> "Control access to media containing CUI and maintain accountability for media during transport outside of controlled areas." .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.6> <http://dynamicalsystems.group/ontology/cmmc#controlId> "MP.L2-3.8.6" .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.6> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#MP> .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.6> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.6> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.6> <http://dynamicalsystems.group/ontology/cmmc#text> "Implement cryptographic mechanisms to protect the confidentiality of CUI stored on digital media during transport unless otherwise protected by alternative physical safeguards." .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.6> <http://dynamicalsystems.group/ontology/cmmc#weight> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.6> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.6> <https://www.omg.org/spec/SysML/2.0/declaredName> "MP.L2-3.8.6" .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.6> <https://www.omg.org/spec/SysML/2.0/text> "Implement cryptographic mechanisms to protect the confidentiality of CUI stored on digital media during transport unless otherwise protected by alternative physical safeguards." .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.7> <http://dynamicalsystems.group/ontology/cmmc#controlId> "MP.L2-3.8.7" .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.7> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#MP> .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.7> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.7> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.7> <http://dynamicalsystems.group/ontology/cmmc#text> "Control the use of removable media on system components." .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.7> <http://dynamicalsystems.group/ontology/cmmc#weight> "5"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.7> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.7> <https://www.omg.org/spec/SysML/2.0/declaredName> "MP.L2-3.8.7" .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.7> <https://www.omg.org/spec/SysML/2.0/text> "Control the use of removable media on system components." .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.8> <http://dynamicalsystems.group/ontology/cmmc#controlId> "MP.L2-3.8.8" .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.8> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#MP> .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.8> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.8> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.8> <http://dynamicalsystems.group/ontology/cmmc#text> "Prohibit the use of portable storage devices when such devices have no identifiable owner." .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.8> <http://dynamicalsystems.group/ontology/cmmc#weight> "3"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.8> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.8> <https://www.omg.org/spec/SysML/2.0/declaredName> "MP.L2-3.8.8" .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.8> <https://www.omg.org/spec/SysML/2.0/text> "Prohibit the use of portable storage devices when such devices have no identifiable owner." .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.9> <http://dynamicalsystems.group/ontology/cmmc#controlId> "MP.L2-3.8.9" .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.9> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#MP> .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.9> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.9> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.9> <http://dynamicalsystems.group/ontology/cmmc#text> "Protect the confidentiality of backup CUI at storage locations." .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.9> <http://dynamicalsystems.group/ontology/cmmc#weight> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.9> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.9> <https://www.omg.org/spec/SysML/2.0/declaredName> "MP.L2-3.8.9" .
+<http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.9> <https://www.omg.org/spec/SysML/2.0/text> "Protect the confidentiality of backup CUI at storage locations." .
+<http://dynamicalsystems.group/ontology/cmmc#MP> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Family> .
+<http://dynamicalsystems.group/ontology/cmmc#MP> <http://www.w3.org/2000/01/rdf-schema#label> "Media Protection" .
+<http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.1> <http://dynamicalsystems.group/ontology/cmmc#controlId> "PE.L2-3.10.1" .
+<http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.1> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#PE> .
+<http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.1> <http://dynamicalsystems.group/ontology/cmmc#inherited> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.1> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.1> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.1> <http://dynamicalsystems.group/ontology/cmmc#text> "Limit physical access to organizational systems, equipment, and the respective operating environments to authorized individuals." .
+<http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.1> <http://dynamicalsystems.group/ontology/cmmc#weight> "5"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.1> <https://www.omg.org/spec/SysML/2.0/declaredName> "PE.L2-3.10.1" .
+<http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.1> <https://www.omg.org/spec/SysML/2.0/text> "Limit physical access to organizational systems, equipment, and the respective operating environments to authorized individuals." .
+<http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.2> <http://dynamicalsystems.group/ontology/cmmc#controlId> "PE.L2-3.10.2" .
+<http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.2> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#PE> .
+<http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.2> <http://dynamicalsystems.group/ontology/cmmc#inherited> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.2> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.2> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.2> <http://dynamicalsystems.group/ontology/cmmc#text> "Protect and monitor the physical facility and support infrastructure for organizational systems." .
+<http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.2> <http://dynamicalsystems.group/ontology/cmmc#weight> "5"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.2> <https://www.omg.org/spec/SysML/2.0/declaredName> "PE.L2-3.10.2" .
+<http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.2> <https://www.omg.org/spec/SysML/2.0/text> "Protect and monitor the physical facility and support infrastructure for organizational systems." .
+<http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.3> <http://dynamicalsystems.group/ontology/cmmc#controlId> "PE.L2-3.10.3" .
+<http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.3> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#PE> .
+<http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.3> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.3> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.3> <http://dynamicalsystems.group/ontology/cmmc#text> "Escort visitors and monitor visitor activity." .
+<http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.3> <http://dynamicalsystems.group/ontology/cmmc#weight> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.3> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.3> <https://www.omg.org/spec/SysML/2.0/declaredName> "PE.L2-3.10.3" .
+<http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.3> <https://www.omg.org/spec/SysML/2.0/text> "Escort visitors and monitor visitor activity." .
+<http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.4> <http://dynamicalsystems.group/ontology/cmmc#controlId> "PE.L2-3.10.4" .
+<http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.4> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#PE> .
+<http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.4> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.4> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.4> <http://dynamicalsystems.group/ontology/cmmc#text> "Maintain audit logs of physical access." .
+<http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.4> <http://dynamicalsystems.group/ontology/cmmc#weight> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.4> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.4> <https://www.omg.org/spec/SysML/2.0/declaredName> "PE.L2-3.10.4" .
+<http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.4> <https://www.omg.org/spec/SysML/2.0/text> "Maintain audit logs of physical access." .
+<http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.5> <http://dynamicalsystems.group/ontology/cmmc#controlId> "PE.L2-3.10.5" .
+<http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.5> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#PE> .
+<http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.5> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.5> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.5> <http://dynamicalsystems.group/ontology/cmmc#text> "Control and manage physical access devices." .
+<http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.5> <http://dynamicalsystems.group/ontology/cmmc#weight> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.5> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.5> <https://www.omg.org/spec/SysML/2.0/declaredName> "PE.L2-3.10.5" .
+<http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.5> <https://www.omg.org/spec/SysML/2.0/text> "Control and manage physical access devices." .
+<http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.6> <http://dynamicalsystems.group/ontology/cmmc#controlId> "PE.L2-3.10.6" .
+<http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.6> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#PE> .
+<http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.6> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.6> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.6> <http://dynamicalsystems.group/ontology/cmmc#text> "Enforce safeguarding measures for CUI at alternate work sites." .
+<http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.6> <http://dynamicalsystems.group/ontology/cmmc#weight> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.6> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.6> <https://www.omg.org/spec/SysML/2.0/declaredName> "PE.L2-3.10.6" .
+<http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.6> <https://www.omg.org/spec/SysML/2.0/text> "Enforce safeguarding measures for CUI at alternate work sites." .
+<http://dynamicalsystems.group/ontology/cmmc#PE> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Family> .
+<http://dynamicalsystems.group/ontology/cmmc#PE> <http://www.w3.org/2000/01/rdf-schema#label> "Physical Protection" .
+<http://dynamicalsystems.group/ontology/cmmc#PS.L2-3.9.1> <http://dynamicalsystems.group/ontology/cmmc#controlId> "PS.L2-3.9.1" .
+<http://dynamicalsystems.group/ontology/cmmc#PS.L2-3.9.1> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#PS> .
+<http://dynamicalsystems.group/ontology/cmmc#PS.L2-3.9.1> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#PS.L2-3.9.1> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#PS.L2-3.9.1> <http://dynamicalsystems.group/ontology/cmmc#text> "Screen individuals prior to authorizing access to organizational systems containing CUI." .
+<http://dynamicalsystems.group/ontology/cmmc#PS.L2-3.9.1> <http://dynamicalsystems.group/ontology/cmmc#weight> "3"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#PS.L2-3.9.1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#PS.L2-3.9.1> <https://www.omg.org/spec/SysML/2.0/declaredName> "PS.L2-3.9.1" .
+<http://dynamicalsystems.group/ontology/cmmc#PS.L2-3.9.1> <https://www.omg.org/spec/SysML/2.0/text> "Screen individuals prior to authorizing access to organizational systems containing CUI." .
+<http://dynamicalsystems.group/ontology/cmmc#PS.L2-3.9.2> <http://dynamicalsystems.group/ontology/cmmc#controlId> "PS.L2-3.9.2" .
+<http://dynamicalsystems.group/ontology/cmmc#PS.L2-3.9.2> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#PS> .
+<http://dynamicalsystems.group/ontology/cmmc#PS.L2-3.9.2> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#PS.L2-3.9.2> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#PS.L2-3.9.2> <http://dynamicalsystems.group/ontology/cmmc#text> "Ensure that organizational systems containing CUI are protected during and after personnel actions such as terminations and transfers." .
+<http://dynamicalsystems.group/ontology/cmmc#PS.L2-3.9.2> <http://dynamicalsystems.group/ontology/cmmc#weight> "5"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#PS.L2-3.9.2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#PS.L2-3.9.2> <https://www.omg.org/spec/SysML/2.0/declaredName> "PS.L2-3.9.2" .
+<http://dynamicalsystems.group/ontology/cmmc#PS.L2-3.9.2> <https://www.omg.org/spec/SysML/2.0/text> "Ensure that organizational systems containing CUI are protected during and after personnel actions such as terminations and transfers." .
+<http://dynamicalsystems.group/ontology/cmmc#PS> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Family> .
+<http://dynamicalsystems.group/ontology/cmmc#PS> <http://www.w3.org/2000/01/rdf-schema#label> "Personnel Security" .
+<http://dynamicalsystems.group/ontology/cmmc#RA.L2-3.11.1> <http://dynamicalsystems.group/ontology/cmmc#controlId> "RA.L2-3.11.1" .
+<http://dynamicalsystems.group/ontology/cmmc#RA.L2-3.11.1> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#RA> .
+<http://dynamicalsystems.group/ontology/cmmc#RA.L2-3.11.1> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#RA.L2-3.11.1> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#RA.L2-3.11.1> <http://dynamicalsystems.group/ontology/cmmc#text> "Periodically assess the risk to organizational operations (including mission, functions, image, or reputation), organizational assets, and individuals, resulting from the operation of organizational systems and the associated processing, storage, or transmission of CUI." .
+<http://dynamicalsystems.group/ontology/cmmc#RA.L2-3.11.1> <http://dynamicalsystems.group/ontology/cmmc#weight> "3"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#RA.L2-3.11.1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#RA.L2-3.11.1> <https://www.omg.org/spec/SysML/2.0/declaredName> "RA.L2-3.11.1" .
+<http://dynamicalsystems.group/ontology/cmmc#RA.L2-3.11.1> <https://www.omg.org/spec/SysML/2.0/text> "Periodically assess the risk to organizational operations (including mission, functions, image, or reputation), organizational assets, and individuals, resulting from the operation of organizational systems and the associated processing, storage, or transmission of CUI." .
+<http://dynamicalsystems.group/ontology/cmmc#RA.L2-3.11.2> <http://dynamicalsystems.group/ontology/cmmc#controlId> "RA.L2-3.11.2" .
+<http://dynamicalsystems.group/ontology/cmmc#RA.L2-3.11.2> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#RA> .
+<http://dynamicalsystems.group/ontology/cmmc#RA.L2-3.11.2> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#RA.L2-3.11.2> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#RA.L2-3.11.2> <http://dynamicalsystems.group/ontology/cmmc#text> "Scan for vulnerabilities in organizational systems and applications periodically and when new vulnerabilities affecting those systems and applications are identified." .
+<http://dynamicalsystems.group/ontology/cmmc#RA.L2-3.11.2> <http://dynamicalsystems.group/ontology/cmmc#weight> "5"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#RA.L2-3.11.2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#RA.L2-3.11.2> <https://www.omg.org/spec/SysML/2.0/declaredName> "RA.L2-3.11.2" .
+<http://dynamicalsystems.group/ontology/cmmc#RA.L2-3.11.2> <https://www.omg.org/spec/SysML/2.0/text> "Scan for vulnerabilities in organizational systems and applications periodically and when new vulnerabilities affecting those systems and applications are identified." .
+<http://dynamicalsystems.group/ontology/cmmc#RA.L2-3.11.3> <http://dynamicalsystems.group/ontology/cmmc#controlId> "RA.L2-3.11.3" .
+<http://dynamicalsystems.group/ontology/cmmc#RA.L2-3.11.3> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#RA> .
+<http://dynamicalsystems.group/ontology/cmmc#RA.L2-3.11.3> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#RA.L2-3.11.3> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#RA.L2-3.11.3> <http://dynamicalsystems.group/ontology/cmmc#text> "Remediate vulnerabilities in accordance with risk assessments." .
+<http://dynamicalsystems.group/ontology/cmmc#RA.L2-3.11.3> <http://dynamicalsystems.group/ontology/cmmc#weight> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#RA.L2-3.11.3> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#RA.L2-3.11.3> <https://www.omg.org/spec/SysML/2.0/declaredName> "RA.L2-3.11.3" .
+<http://dynamicalsystems.group/ontology/cmmc#RA.L2-3.11.3> <https://www.omg.org/spec/SysML/2.0/text> "Remediate vulnerabilities in accordance with risk assessments." .
+<http://dynamicalsystems.group/ontology/cmmc#RA> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Family> .
+<http://dynamicalsystems.group/ontology/cmmc#RA> <http://www.w3.org/2000/01/rdf-schema#label> "Risk Assessment" .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.10> <http://dynamicalsystems.group/ontology/cmmc#controlId> "SC.L2-3.13.10" .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.10> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#SC> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.10> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.10> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.10> <http://dynamicalsystems.group/ontology/cmmc#text> "Establish and manage cryptographic keys for cryptography employed in organizational systems." .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.10> <http://dynamicalsystems.group/ontology/cmmc#weight> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.10> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.10> <https://www.omg.org/spec/SysML/2.0/declaredName> "SC.L2-3.13.10" .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.10> <https://www.omg.org/spec/SysML/2.0/text> "Establish and manage cryptographic keys for cryptography employed in organizational systems." .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.11> <http://dynamicalsystems.group/ontology/cmmc#controlId> "SC.L2-3.13.11" .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.11> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#SC> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.11> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.11> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.11> <http://dynamicalsystems.group/ontology/cmmc#text> "Employ FIPS-validated cryptography when used to protect the confidentiality of CUI." .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.11> <http://dynamicalsystems.group/ontology/cmmc#variableWeight> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.11> <http://dynamicalsystems.group/ontology/cmmc#weight> "5"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.11> <http://dynamicalsystems.group/ontology/cmmc#weightIfPartial> "3"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.11> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.11> <https://www.omg.org/spec/SysML/2.0/declaredName> "SC.L2-3.13.11" .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.11> <https://www.omg.org/spec/SysML/2.0/text> "Employ FIPS-validated cryptography when used to protect the confidentiality of CUI." .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.12> <http://dynamicalsystems.group/ontology/cmmc#controlId> "SC.L2-3.13.12" .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.12> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#SC> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.12> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.12> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.12> <http://dynamicalsystems.group/ontology/cmmc#text> "Prohibit remote activation of collaborative computing devices and provide indication of devices in use to users present at the device." .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.12> <http://dynamicalsystems.group/ontology/cmmc#weight> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.12> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.12> <https://www.omg.org/spec/SysML/2.0/declaredName> "SC.L2-3.13.12" .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.12> <https://www.omg.org/spec/SysML/2.0/text> "Prohibit remote activation of collaborative computing devices and provide indication of devices in use to users present at the device." .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.13> <http://dynamicalsystems.group/ontology/cmmc#controlId> "SC.L2-3.13.13" .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.13> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#SC> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.13> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.13> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.13> <http://dynamicalsystems.group/ontology/cmmc#text> "Control and monitor the use of mobile code." .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.13> <http://dynamicalsystems.group/ontology/cmmc#weight> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.13> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.13> <https://www.omg.org/spec/SysML/2.0/declaredName> "SC.L2-3.13.13" .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.13> <https://www.omg.org/spec/SysML/2.0/text> "Control and monitor the use of mobile code." .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.14> <http://dynamicalsystems.group/ontology/cmmc#controlId> "SC.L2-3.13.14" .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.14> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#SC> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.14> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.14> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.14> <http://dynamicalsystems.group/ontology/cmmc#text> "Control and monitor the use of Voice over Internet Protocol (VoIP) technologies." .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.14> <http://dynamicalsystems.group/ontology/cmmc#weight> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.14> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.14> <https://www.omg.org/spec/SysML/2.0/declaredName> "SC.L2-3.13.14" .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.14> <https://www.omg.org/spec/SysML/2.0/text> "Control and monitor the use of Voice over Internet Protocol (VoIP) technologies." .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.15> <http://dynamicalsystems.group/ontology/cmmc#controlId> "SC.L2-3.13.15" .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.15> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#SC> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.15> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.15> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.15> <http://dynamicalsystems.group/ontology/cmmc#text> "Protect the authenticity of communications sessions." .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.15> <http://dynamicalsystems.group/ontology/cmmc#weight> "5"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.15> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.15> <https://www.omg.org/spec/SysML/2.0/declaredName> "SC.L2-3.13.15" .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.15> <https://www.omg.org/spec/SysML/2.0/text> "Protect the authenticity of communications sessions." .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.16> <http://dynamicalsystems.group/ontology/cmmc#controlId> "SC.L2-3.13.16" .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.16> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#SC> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.16> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.16> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.16> <http://dynamicalsystems.group/ontology/cmmc#text> "Protect the confidentiality of CUI at rest." .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.16> <http://dynamicalsystems.group/ontology/cmmc#weight> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.16> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.16> <https://www.omg.org/spec/SysML/2.0/declaredName> "SC.L2-3.13.16" .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.16> <https://www.omg.org/spec/SysML/2.0/text> "Protect the confidentiality of CUI at rest." .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.1> <http://dynamicalsystems.group/ontology/cmmc#controlId> "SC.L2-3.13.1" .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.1> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#SC> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.1> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.1> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.1> <http://dynamicalsystems.group/ontology/cmmc#text> "Monitor, control, and protect communications (i.e., information transmitted or received by organizational systems) at the external boundaries and key internal boundaries of organizational systems." .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.1> <http://dynamicalsystems.group/ontology/cmmc#weight> "5"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.1> <https://www.omg.org/spec/SysML/2.0/declaredName> "SC.L2-3.13.1" .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.1> <https://www.omg.org/spec/SysML/2.0/text> "Monitor, control, and protect communications (i.e., information transmitted or received by organizational systems) at the external boundaries and key internal boundaries of organizational systems." .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.2> <http://dynamicalsystems.group/ontology/cmmc#controlId> "SC.L2-3.13.2" .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.2> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#SC> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.2> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.2> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.2> <http://dynamicalsystems.group/ontology/cmmc#text> "Employ architectural designs, software development techniques, and systems engineering principles that promote effective information security within organizational systems." .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.2> <http://dynamicalsystems.group/ontology/cmmc#weight> "5"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.2> <https://www.omg.org/spec/SysML/2.0/declaredName> "SC.L2-3.13.2" .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.2> <https://www.omg.org/spec/SysML/2.0/text> "Employ architectural designs, software development techniques, and systems engineering principles that promote effective information security within organizational systems." .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.3> <http://dynamicalsystems.group/ontology/cmmc#controlId> "SC.L2-3.13.3" .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.3> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#SC> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.3> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.3> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.3> <http://dynamicalsystems.group/ontology/cmmc#text> "Separate user functionality from system management functionality." .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.3> <http://dynamicalsystems.group/ontology/cmmc#weight> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.3> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.3> <https://www.omg.org/spec/SysML/2.0/declaredName> "SC.L2-3.13.3" .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.3> <https://www.omg.org/spec/SysML/2.0/text> "Separate user functionality from system management functionality." .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.4> <http://dynamicalsystems.group/ontology/cmmc#controlId> "SC.L2-3.13.4" .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.4> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#SC> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.4> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.4> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.4> <http://dynamicalsystems.group/ontology/cmmc#text> "Prevent unauthorized and unintended information transfer via shared system resources." .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.4> <http://dynamicalsystems.group/ontology/cmmc#weight> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.4> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.4> <https://www.omg.org/spec/SysML/2.0/declaredName> "SC.L2-3.13.4" .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.4> <https://www.omg.org/spec/SysML/2.0/text> "Prevent unauthorized and unintended information transfer via shared system resources." .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.5> <http://dynamicalsystems.group/ontology/cmmc#controlId> "SC.L2-3.13.5" .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.5> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#SC> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.5> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.5> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.5> <http://dynamicalsystems.group/ontology/cmmc#text> "Implement subnetworks for publicly accessible system components that are physically or logically separated from internal networks." .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.5> <http://dynamicalsystems.group/ontology/cmmc#weight> "5"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.5> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.5> <https://www.omg.org/spec/SysML/2.0/declaredName> "SC.L2-3.13.5" .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.5> <https://www.omg.org/spec/SysML/2.0/text> "Implement subnetworks for publicly accessible system components that are physically or logically separated from internal networks." .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.6> <http://dynamicalsystems.group/ontology/cmmc#controlId> "SC.L2-3.13.6" .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.6> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#SC> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.6> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.6> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.6> <http://dynamicalsystems.group/ontology/cmmc#text> "Deny network communications traffic by default and allow network communications traffic by exception (i.e., deny all, permit by exception)." .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.6> <http://dynamicalsystems.group/ontology/cmmc#weight> "5"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.6> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.6> <https://www.omg.org/spec/SysML/2.0/declaredName> "SC.L2-3.13.6" .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.6> <https://www.omg.org/spec/SysML/2.0/text> "Deny network communications traffic by default and allow network communications traffic by exception (i.e., deny all, permit by exception)." .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.7> <http://dynamicalsystems.group/ontology/cmmc#controlId> "SC.L2-3.13.7" .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.7> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#SC> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.7> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.7> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.7> <http://dynamicalsystems.group/ontology/cmmc#text> "Prevent remote devices from simultaneously establishing non-remote connections with organizational systems and communicating via some other connection to resources in external networks (i.e., split tunneling)." .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.7> <http://dynamicalsystems.group/ontology/cmmc#weight> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.7> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.7> <https://www.omg.org/spec/SysML/2.0/declaredName> "SC.L2-3.13.7" .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.7> <https://www.omg.org/spec/SysML/2.0/text> "Prevent remote devices from simultaneously establishing non-remote connections with organizational systems and communicating via some other connection to resources in external networks (i.e., split tunneling)." .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.8> <http://dynamicalsystems.group/ontology/cmmc#controlId> "SC.L2-3.13.8" .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.8> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#SC> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.8> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.8> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.8> <http://dynamicalsystems.group/ontology/cmmc#text> "Implement cryptographic mechanisms to prevent unauthorized disclosure of CUI during transmission unless otherwise protected by alternative physical safeguards." .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.8> <http://dynamicalsystems.group/ontology/cmmc#weight> "3"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.8> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.8> <https://www.omg.org/spec/SysML/2.0/declaredName> "SC.L2-3.13.8" .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.8> <https://www.omg.org/spec/SysML/2.0/text> "Implement cryptographic mechanisms to prevent unauthorized disclosure of CUI during transmission unless otherwise protected by alternative physical safeguards." .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.9> <http://dynamicalsystems.group/ontology/cmmc#controlId> "SC.L2-3.13.9" .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.9> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#SC> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.9> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.9> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.9> <http://dynamicalsystems.group/ontology/cmmc#text> "Terminate network connections associated with communications sessions at the end of the sessions or after a defined period of inactivity." .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.9> <http://dynamicalsystems.group/ontology/cmmc#weight> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.9> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.9> <https://www.omg.org/spec/SysML/2.0/declaredName> "SC.L2-3.13.9" .
+<http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.9> <https://www.omg.org/spec/SysML/2.0/text> "Terminate network connections associated with communications sessions at the end of the sessions or after a defined period of inactivity." .
+<http://dynamicalsystems.group/ontology/cmmc#SC> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Family> .
+<http://dynamicalsystems.group/ontology/cmmc#SC> <http://www.w3.org/2000/01/rdf-schema#label> "System and Communications Protection" .
+<http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.1> <http://dynamicalsystems.group/ontology/cmmc#controlId> "SI.L2-3.14.1" .
+<http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.1> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#SI> .
+<http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.1> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.1> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.1> <http://dynamicalsystems.group/ontology/cmmc#text> "Identify, report, and correct system flaws in a timely manner." .
+<http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.1> <http://dynamicalsystems.group/ontology/cmmc#weight> "5"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.1> <https://www.omg.org/spec/SysML/2.0/declaredName> "SI.L2-3.14.1" .
+<http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.1> <https://www.omg.org/spec/SysML/2.0/text> "Identify, report, and correct system flaws in a timely manner." .
+<http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.2> <http://dynamicalsystems.group/ontology/cmmc#controlId> "SI.L2-3.14.2" .
+<http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.2> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#SI> .
+<http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.2> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.2> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.2> <http://dynamicalsystems.group/ontology/cmmc#text> "Provide protection from malicious code at designated locations within organizational systems." .
+<http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.2> <http://dynamicalsystems.group/ontology/cmmc#weight> "5"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.2> <https://www.omg.org/spec/SysML/2.0/declaredName> "SI.L2-3.14.2" .
+<http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.2> <https://www.omg.org/spec/SysML/2.0/text> "Provide protection from malicious code at designated locations within organizational systems." .
+<http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.3> <http://dynamicalsystems.group/ontology/cmmc#controlId> "SI.L2-3.14.3" .
+<http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.3> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#SI> .
+<http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.3> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.3> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.3> <http://dynamicalsystems.group/ontology/cmmc#text> "Monitor system security alerts and advisories and take action in response." .
+<http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.3> <http://dynamicalsystems.group/ontology/cmmc#weight> "5"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.3> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.3> <https://www.omg.org/spec/SysML/2.0/declaredName> "SI.L2-3.14.3" .
+<http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.3> <https://www.omg.org/spec/SysML/2.0/text> "Monitor system security alerts and advisories and take action in response." .
+<http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.4> <http://dynamicalsystems.group/ontology/cmmc#controlId> "SI.L2-3.14.4" .
+<http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.4> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#SI> .
+<http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.4> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.4> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.4> <http://dynamicalsystems.group/ontology/cmmc#text> "Update malicious code protection mechanisms when new releases are available." .
+<http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.4> <http://dynamicalsystems.group/ontology/cmmc#weight> "5"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.4> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.4> <https://www.omg.org/spec/SysML/2.0/declaredName> "SI.L2-3.14.4" .
+<http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.4> <https://www.omg.org/spec/SysML/2.0/text> "Update malicious code protection mechanisms when new releases are available." .
+<http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.5> <http://dynamicalsystems.group/ontology/cmmc#controlId> "SI.L2-3.14.5" .
+<http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.5> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#SI> .
+<http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.5> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.5> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.5> <http://dynamicalsystems.group/ontology/cmmc#text> "Perform periodic scans of organizational systems and real-time scans of files from external sources as files are downloaded, opened, or executed." .
+<http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.5> <http://dynamicalsystems.group/ontology/cmmc#weight> "3"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.5> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.5> <https://www.omg.org/spec/SysML/2.0/declaredName> "SI.L2-3.14.5" .
+<http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.5> <https://www.omg.org/spec/SysML/2.0/text> "Perform periodic scans of organizational systems and real-time scans of files from external sources as files are downloaded, opened, or executed." .
+<http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.6> <http://dynamicalsystems.group/ontology/cmmc#controlId> "SI.L2-3.14.6" .
+<http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.6> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#SI> .
+<http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.6> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.6> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.6> <http://dynamicalsystems.group/ontology/cmmc#text> "Monitor organizational systems, including inbound and outbound communications traffic, to detect attacks and indicators of potential attacks." .
+<http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.6> <http://dynamicalsystems.group/ontology/cmmc#weight> "5"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.6> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.6> <https://www.omg.org/spec/SysML/2.0/declaredName> "SI.L2-3.14.6" .
+<http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.6> <https://www.omg.org/spec/SysML/2.0/text> "Monitor organizational systems, including inbound and outbound communications traffic, to detect attacks and indicators of potential attacks." .
+<http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.7> <http://dynamicalsystems.group/ontology/cmmc#controlId> "SI.L2-3.14.7" .
+<http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.7> <http://dynamicalsystems.group/ontology/cmmc#family> <http://dynamicalsystems.group/ontology/cmmc#SI> .
+<http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.7> <http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.7> <http://dynamicalsystems.group/ontology/cmmc#poamEligible> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.7> <http://dynamicalsystems.group/ontology/cmmc#text> "Identify unauthorized use of organizational systems." .
+<http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.7> <http://dynamicalsystems.group/ontology/cmmc#weight> "3"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.7> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Control> .
+<http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.7> <https://www.omg.org/spec/SysML/2.0/declaredName> "SI.L2-3.14.7" .
+<http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.7> <https://www.omg.org/spec/SysML/2.0/text> "Identify unauthorized use of organizational systems." .
+<http://dynamicalsystems.group/ontology/cmmc#SI> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#Family> .
+<http://dynamicalsystems.group/ontology/cmmc#SI> <http://www.w3.org/2000/01/rdf-schema#label> "System and Information Integrity" .
+<http://dynamicalsystems.group/ontology/cmmc#Test> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/ontology/cmmc#AssessmentMethod> .
+<http://dynamicalsystems.group/ontology/cmmc#assessmentMethod> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://dynamicalsystems.group/ontology/cmmc#assessmentMethod> <http://www.w3.org/2000/01/rdf-schema#range> <http://dynamicalsystems.group/ontology/cmmc#AssessmentMethod> .
+<http://dynamicalsystems.group/ontology/cmmc#controlId> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://dynamicalsystems.group/ontology/cmmc#controlId> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<http://dynamicalsystems.group/ontology/cmmc#family> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://dynamicalsystems.group/ontology/cmmc#family> <http://www.w3.org/2000/01/rdf-schema#range> <http://dynamicalsystems.group/ontology/cmmc#Family> .
+<http://dynamicalsystems.group/ontology/cmmc#inherited> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://dynamicalsystems.group/ontology/cmmc#inherited> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://dynamicalsystems.group/ontology/cmmc#nonDeferrable> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#overrideJustification> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://dynamicalsystems.group/ontology/cmmc#overrideJustification> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<http://dynamicalsystems.group/ontology/cmmc#poamEligible> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://dynamicalsystems.group/ontology/cmmc#poamEligible> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#poamItem> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://dynamicalsystems.group/ontology/cmmc#text> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://dynamicalsystems.group/ontology/cmmc#text> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<http://dynamicalsystems.group/ontology/cmmc#variableWeight> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://dynamicalsystems.group/ontology/cmmc#variableWeight> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/ontology/cmmc#weight> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://dynamicalsystems.group/ontology/cmmc#weight> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/ontology/cmmc#weightIfPartial> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://dynamicalsystems.group/ontology/cmmc#weightIfPartial> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#integer> .

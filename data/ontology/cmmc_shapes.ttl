@@ -86,6 +86,7 @@ cmmc:PoamLegalityShape a sh:NodeShape ;
 
 cmmc:ContradictionShape a sh:NodeShape ;
     sh:targetClass ce:Attestation ;
+    sh:node ce:OverrideEvidenceShape ;
     sh:sparql [
         sh:message "Contradiction (R13): attestation marked MET (earl:passed) but its backing oracle FAILED, without BOTH a cmmc:overrideJustification and appended ce:overrideEvidence." ;
         sh:prefixes cmmc: ;
@@ -106,6 +107,34 @@ cmmc:ContradictionShape a sh:NodeShape ;
                     $this cmmc:overrideJustification ?j .
                     $this ce:overrideEvidence ?e .
                 }
+            }
+        """
+    ] .
+
+# -- OverrideEvidenceShape -----------------------------------------------------
+# An attestation carrying a cmmc:overrideJustification must also carry
+# ce:overrideEvidence — a justification alone does not substantiate an override.
+# Standalone and general-purpose: it applies to ANY ce:Attestation with a
+# justification, not only ones tangled up in a MET-over-FAILED contradiction.
+# Referenced from ContradictionShape via sh:node (above) so an override that
+# clears R13 must also satisfy this shape — but note sh:node and sh:sparql are
+# independent constraint components, not merged: a genuine MET-over-FAILED
+# attestation with a justification but no evidence will report a violation
+# under BOTH ContradictionShape and OverrideEvidenceShape. This is intentional
+# and more informative, not a regression (see KI-8 resolution).
+# -------------------------------------------------------------------------------
+
+ce:OverrideEvidenceShape a sh:NodeShape ;
+    sh:targetClass ce:Attestation ;
+    sh:sparql [
+        sh:message "OverrideEvidenceShape: cmmc:overrideJustification present without ce:overrideEvidence." ;
+        sh:prefixes cmmc: ;
+        sh:select """
+            PREFIX cmmc: <http://dynamicalsystems.group/ontology/cmmc#>
+            PREFIX ce:   <http://dynamicalsystems.group/compliance-engine/>
+            SELECT $this WHERE {
+                $this cmmc:overrideJustification ?j .
+                FILTER NOT EXISTS { $this ce:overrideEvidence ?e . }
             }
         """
     ] .

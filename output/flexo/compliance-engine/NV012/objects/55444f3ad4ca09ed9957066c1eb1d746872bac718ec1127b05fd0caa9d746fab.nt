@@ -1,0 +1,679 @@
+<http://dynamicalsystems.group/compliance-engine/AUTHSRC_ChromeCloudMgmt> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/AuthoritativeSource> .
+<http://dynamicalsystems.group/compliance-engine/AUTHSRC_ChromeCloudMgmt> <http://www.w3.org/2000/01/rdf-schema#comment> "Managed device policy: 802.1X, encryption, USB, MDM." .
+<http://dynamicalsystems.group/compliance-engine/AUTHSRC_ChromeCloudMgmt> <http://www.w3.org/2000/01/rdf-schema#label> "Chrome Browser Cloud Management + Endpoint Verification" .
+<http://dynamicalsystems.group/compliance-engine/AUTHSRC_CrowdStrike> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/AuthoritativeSource> .
+<http://dynamicalsystems.group/compliance-engine/AUTHSRC_CrowdStrike> <http://www.w3.org/2000/01/rdf-schema#comment> "Endpoint sensor status + AV definition freshness + anomaly detection." .
+<http://dynamicalsystems.group/compliance-engine/AUTHSRC_CrowdStrike> <http://www.w3.org/2000/01/rdf-schema#label> "CrowdStrike Falcon API" .
+<http://dynamicalsystems.group/compliance-engine/AUTHSRC_DocRepo> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/AuthoritativeSource> .
+<http://dynamicalsystems.group/compliance-engine/AUTHSRC_DocRepo> <http://www.w3.org/2000/01/rdf-schema#comment> "File:// URIs into the git-tracked policy directory. Freshness is enforced by the reference's ce:lastVerified; substantive change is caught by git history." .
+<http://dynamicalsystems.group/compliance-engine/AUTHSRC_DocRepo> <http://www.w3.org/2000/01/rdf-schema#label> "In-repo policy document store (documents/policies/)" .
+<http://dynamicalsystems.group/compliance-engine/AUTHSRC_EngineHistory> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/AuthoritativeSource> .
+<http://dynamicalsystems.group/compliance-engine/AUTHSRC_EngineHistory> <http://www.w3.org/2000/01/rdf-schema#comment> "The audit / evidence graphs produced by prior engine runs. Used for continuous-monitoring evidence (CA family)." .
+<http://dynamicalsystems.group/compliance-engine/AUTHSRC_EngineHistory> <http://www.w3.org/2000/01/rdf-schema#label> "This compliance engine's own run history" .
+<http://dynamicalsystems.group/compliance-engine/AUTHSRC_GCP_BeyondCorp> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/AuthoritativeSource> .
+<http://dynamicalsystems.group/compliance-engine/AUTHSRC_GCP_BeyondCorp> <http://www.w3.org/2000/01/rdf-schema#comment> "Zero-trust remote access policy + session config." .
+<http://dynamicalsystems.group/compliance-engine/AUTHSRC_GCP_BeyondCorp> <http://www.w3.org/2000/01/rdf-schema#label> "GCP BeyondCorp Enterprise API" .
+<http://dynamicalsystems.group/compliance-engine/AUTHSRC_GCP_BinaryAuth> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/AuthoritativeSource> .
+<http://dynamicalsystems.group/compliance-engine/AUTHSRC_GCP_BinaryAuth> <http://www.w3.org/2000/01/rdf-schema#comment> "Container image allowlist / attestation policy." .
+<http://dynamicalsystems.group/compliance-engine/AUTHSRC_GCP_BinaryAuth> <http://www.w3.org/2000/01/rdf-schema#label> "GCP Binary Authorization API" .
+<http://dynamicalsystems.group/compliance-engine/AUTHSRC_GCP_CloudIdentity> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/AuthoritativeSource> .
+<http://dynamicalsystems.group/compliance-engine/AUTHSRC_GCP_CloudIdentity> <http://www.w3.org/2000/01/rdf-schema#comment> "Session duration, idle timeout, failed-login lockout." .
+<http://dynamicalsystems.group/compliance-engine/AUTHSRC_GCP_CloudIdentity> <http://www.w3.org/2000/01/rdf-schema#label> "GCP Cloud Identity policy" .
+<http://dynamicalsystems.group/compliance-engine/AUTHSRC_GCP_CloudLogging> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/AuthoritativeSource> .
+<http://dynamicalsystems.group/compliance-engine/AUTHSRC_GCP_CloudLogging> <http://www.w3.org/2000/01/rdf-schema#comment> "Log sinks, retention policy, IAM on log buckets." .
+<http://dynamicalsystems.group/compliance-engine/AUTHSRC_GCP_CloudLogging> <http://www.w3.org/2000/01/rdf-schema#label> "GCP Cloud Logging API" .
+<http://dynamicalsystems.group/compliance-engine/AUTHSRC_GCP_ComputeAPI> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/AuthoritativeSource> .
+<http://dynamicalsystems.group/compliance-engine/AUTHSRC_GCP_ComputeAPI> <http://www.w3.org/2000/01/rdf-schema#comment> "VPC networks, subnetworks, firewall rules, Cloud Armor policies." .
+<http://dynamicalsystems.group/compliance-engine/AUTHSRC_GCP_ComputeAPI> <http://www.w3.org/2000/01/rdf-schema#label> "GCP Compute API" .
+<http://dynamicalsystems.group/compliance-engine/AUTHSRC_GCP_IAM> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/AuthoritativeSource> .
+<http://dynamicalsystems.group/compliance-engine/AUTHSRC_GCP_IAM> <http://www.w3.org/2000/01/rdf-schema#comment> "Role bindings + privileged-action audit trail." .
+<http://dynamicalsystems.group/compliance-engine/AUTHSRC_GCP_IAM> <http://www.w3.org/2000/01/rdf-schema#label> "GCP IAM API + audit logs" .
+<http://dynamicalsystems.group/compliance-engine/AUTHSRC_GCP_SCC> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/AuthoritativeSource> .
+<http://dynamicalsystems.group/compliance-engine/AUTHSRC_GCP_SCC> <http://www.w3.org/2000/01/rdf-schema#comment> "Vulnerability scan runs + findings." .
+<http://dynamicalsystems.group/compliance-engine/AUTHSRC_GCP_SCC> <http://www.w3.org/2000/01/rdf-schema#label> "GCP Security Command Center API" .
+<http://dynamicalsystems.group/compliance-engine/AUTHSRC_GCP_VPCServiceControls> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/AuthoritativeSource> .
+<http://dynamicalsystems.group/compliance-engine/AUTHSRC_GCP_VPCServiceControls> <http://www.w3.org/2000/01/rdf-schema#comment> "Service perimeter config + external-system authorization." .
+<http://dynamicalsystems.group/compliance-engine/AUTHSRC_GCP_VPCServiceControls> <http://www.w3.org/2000/01/rdf-schema#label> "GCP VPC Service Controls" .
+<http://dynamicalsystems.group/compliance-engine/AUTHSRC_GitHub_API> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/AuthoritativeSource> .
+<http://dynamicalsystems.group/compliance-engine/AUTHSRC_GitHub_API> <http://www.w3.org/2000/01/rdf-schema#comment> "Branch protection, required reviews, change log commits." .
+<http://dynamicalsystems.group/compliance-engine/AUTHSRC_GitHub_API> <http://www.w3.org/2000/01/rdf-schema#label> "GitHub REST API" .
+<http://dynamicalsystems.group/compliance-engine/AUTHSRC_HRIS> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/AuthoritativeSource> .
+<http://dynamicalsystems.group/compliance-engine/AUTHSRC_HRIS> <http://www.w3.org/2000/01/rdf-schema#comment> "Personnel lifecycle records: background checks, hire/termination events, offboarding checklists." .
+<http://dynamicalsystems.group/compliance-engine/AUTHSRC_HRIS> <http://www.w3.org/2000/01/rdf-schema#label> "Human Resources Info System (Rippling / Gusto)" .
+<http://dynamicalsystems.group/compliance-engine/AUTHSRC_LMS> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/AuthoritativeSource> .
+<http://dynamicalsystems.group/compliance-engine/AUTHSRC_LMS> <http://www.w3.org/2000/01/rdf-schema#comment> "Training completion records. Reference URIs point at the report export for the current training cycle." .
+<http://dynamicalsystems.group/compliance-engine/AUTHSRC_LMS> <http://www.w3.org/2000/01/rdf-schema#label> "Learning Management System (KnowBe4 / Vector)" .
+<http://dynamicalsystems.group/compliance-engine/AUTHSRC_TicketingSystem> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/AuthoritativeSource> .
+<http://dynamicalsystems.group/compliance-engine/AUTHSRC_TicketingSystem> <http://www.w3.org/2000/01/rdf-schema#comment> "Operational event log: tabletop drill runs, maintenance events, sanitization records, offboarding tickets." .
+<http://dynamicalsystems.group/compliance-engine/AUTHSRC_TicketingSystem> <http://www.w3.org/2000/01/rdf-schema#label> "Ticketing system (Linear / Jira)" .
+<http://dynamicalsystems.group/compliance-engine/AUTHSRC_Workspace_AdminSDK> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/AuthoritativeSource> .
+<http://dynamicalsystems.group/compliance-engine/AUTHSRC_Workspace_AdminSDK> <http://www.w3.org/2000/01/rdf-schema#comment> "User/group/policy configuration for Workspace CUI users." .
+<http://dynamicalsystems.group/compliance-engine/AUTHSRC_Workspace_AdminSDK> <http://www.w3.org/2000/01/rdf-schema#label> "Google Workspace Admin SDK" .
+<http://dynamicalsystems.group/compliance-engine/AccessTransparency_ExternalSystems> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.20> .
+<http://dynamicalsystems.group/compliance-engine/AccessTransparency_ExternalSystems> <http://dynamicalsystems.group/ontology/cmmc#verificationMethod> <http://dynamicalsystems.group/compliance-engine/oracle-vpc-sc-perimeter> .
+<http://dynamicalsystems.group/compliance-engine/AccessTransparency_ExternalSystems> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/PartUsage> .
+<http://dynamicalsystems.group/compliance-engine/AccessTransparency_ExternalSystems> <http://www.w3.org/2000/01/rdf-schema#label> "VPC Service Controls perimeter — external system authorization" .
+<http://dynamicalsystems.group/compliance-engine/AccessTransparency_ExternalSystems> <https://www.omg.org/spec/SysML/2.0/ownedRelationship> _:nfd5cd8c6a58f4931b485ea29f1ad1a4bb22 .
+<http://dynamicalsystems.group/compliance-engine/AuditLog_Export> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.1> .
+<http://dynamicalsystems.group/compliance-engine/AuditLog_Export> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.2> .
+<http://dynamicalsystems.group/compliance-engine/AuditLog_Export> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.5> .
+<http://dynamicalsystems.group/compliance-engine/AuditLog_Export> <http://dynamicalsystems.group/ontology/cmmc#verificationMethod> <http://dynamicalsystems.group/compliance-engine/oracle-auditlog-export> .
+<http://dynamicalsystems.group/compliance-engine/AuditLog_Export> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/PartUsage> .
+<http://dynamicalsystems.group/compliance-engine/AuditLog_Export> <http://www.w3.org/2000/01/rdf-schema#label> "Workspace + GCP audit log export to retained Cloud Storage bucket" .
+<http://dynamicalsystems.group/compliance-engine/AuditLog_Export> <https://www.omg.org/spec/SysML/2.0/ownedRelationship> _:nfd5cd8c6a58f4931b485ea29f1ad1a4bb6 .
+<http://dynamicalsystems.group/compliance-engine/CMEK_KeyRing> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.10> .
+<http://dynamicalsystems.group/compliance-engine/CMEK_KeyRing> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.11> .
+<http://dynamicalsystems.group/compliance-engine/CMEK_KeyRing> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.16> .
+<http://dynamicalsystems.group/compliance-engine/CMEK_KeyRing> <http://dynamicalsystems.group/ontology/cmmc#verificationMethod> <http://dynamicalsystems.group/compliance-engine/oracle-cmek-fips-keyring> .
+<http://dynamicalsystems.group/compliance-engine/CMEK_KeyRing> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/PartUsage> .
+<http://dynamicalsystems.group/compliance-engine/CMEK_KeyRing> <http://www.w3.org/2000/01/rdf-schema#label> "Cloud KMS CMEK + Workspace CSE key management (FIPS-validated crypto)" .
+<http://dynamicalsystems.group/compliance-engine/CMEK_KeyRing> <https://www.omg.org/spec/SysML/2.0/ownedRelationship> _:nfd5cd8c6a58f4931b485ea29f1ad1a4bb2 .
+<http://dynamicalsystems.group/compliance-engine/CSP_Physical_Inheritance> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.1> .
+<http://dynamicalsystems.group/compliance-engine/CSP_Physical_Inheritance> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.2> .
+<http://dynamicalsystems.group/compliance-engine/CSP_Physical_Inheritance> <http://dynamicalsystems.group/ontology/cmmc#satisfiedByInheritance> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<http://dynamicalsystems.group/compliance-engine/CSP_Physical_Inheritance> <http://dynamicalsystems.group/ontology/cmmc#verificationMethod> "inherited:google-workspace-crm" .
+<http://dynamicalsystems.group/compliance-engine/CSP_Physical_Inheritance> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/PartUsage> .
+<http://dynamicalsystems.group/compliance-engine/CSP_Physical_Inheritance> <http://www.w3.org/2000/01/rdf-schema#label> "CSP-inherited physical protection (Google IL4 data-center controls)" .
+<http://dynamicalsystems.group/compliance-engine/CSP_Physical_Inheritance> <https://www.omg.org/spec/SysML/2.0/ownedRelationship> _:nfd5cd8c6a58f4931b485ea29f1ad1a4bb10 .
+<http://dynamicalsystems.group/compliance-engine/CUI_Users_Group> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.1> .
+<http://dynamicalsystems.group/compliance-engine/CUI_Users_Group> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.2> .
+<http://dynamicalsystems.group/compliance-engine/CUI_Users_Group> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.5> .
+<http://dynamicalsystems.group/compliance-engine/CUI_Users_Group> <http://dynamicalsystems.group/ontology/cmmc#verificationMethod> <http://dynamicalsystems.group/compliance-engine/oracle-iam-least-privilege> .
+<http://dynamicalsystems.group/compliance-engine/CUI_Users_Group> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/PartUsage> .
+<http://dynamicalsystems.group/compliance-engine/CUI_Users_Group> <http://www.w3.org/2000/01/rdf-schema#label> "IAM groups + least-privilege role bindings for CUI access" .
+<http://dynamicalsystems.group/compliance-engine/CUI_Users_Group> <https://www.omg.org/spec/SysML/2.0/ownedRelationship> _:nfd5cd8c6a58f4931b485ea29f1ad1a4bb3 .
+<http://dynamicalsystems.group/compliance-engine/ChangeManagement_GitHub> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.3> .
+<http://dynamicalsystems.group/compliance-engine/ChangeManagement_GitHub> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.5> .
+<http://dynamicalsystems.group/compliance-engine/ChangeManagement_GitHub> <http://dynamicalsystems.group/ontology/cmmc#verificationMethod> <http://dynamicalsystems.group/compliance-engine/oracle-github-change-mgmt> .
+<http://dynamicalsystems.group/compliance-engine/ChangeManagement_GitHub> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/PartUsage> .
+<http://dynamicalsystems.group/compliance-engine/ChangeManagement_GitHub> <http://www.w3.org/2000/01/rdf-schema#label> "GitHub branch protection + required reviews" .
+<http://dynamicalsystems.group/compliance-engine/ChangeManagement_GitHub> <https://www.omg.org/spec/SysML/2.0/ownedRelationship> _:nfd5cd8c6a58f4931b485ea29f1ad1a4bb17 .
+<http://dynamicalsystems.group/compliance-engine/CloudIdentity_RemoteMaintenance> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.5> .
+<http://dynamicalsystems.group/compliance-engine/CloudIdentity_RemoteMaintenance> <http://dynamicalsystems.group/ontology/cmmc#verificationMethod> <http://dynamicalsystems.group/compliance-engine/oracle-remote-maintenance-mfa> .
+<http://dynamicalsystems.group/compliance-engine/CloudIdentity_RemoteMaintenance> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/PartUsage> .
+<http://dynamicalsystems.group/compliance-engine/CloudIdentity_RemoteMaintenance> <http://www.w3.org/2000/01/rdf-schema#label> "Cloud Identity MFA for ops / break-glass roles" .
+<http://dynamicalsystems.group/compliance-engine/CloudIdentity_RemoteMaintenance> <https://www.omg.org/spec/SysML/2.0/ownedRelationship> _:nfd5cd8c6a58f4931b485ea29f1ad1a4bb18 .
+<http://dynamicalsystems.group/compliance-engine/CloudLogging_Config> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.4> .
+<http://dynamicalsystems.group/compliance-engine/CloudLogging_Config> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.7> .
+<http://dynamicalsystems.group/compliance-engine/CloudLogging_Config> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.8> .
+<http://dynamicalsystems.group/compliance-engine/CloudLogging_Config> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.9> .
+<http://dynamicalsystems.group/compliance-engine/CloudLogging_Config> <http://dynamicalsystems.group/ontology/cmmc#verificationMethod> <http://dynamicalsystems.group/compliance-engine/oracle-cloud-logging-config> .
+<http://dynamicalsystems.group/compliance-engine/CloudLogging_Config> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/PartUsage> .
+<http://dynamicalsystems.group/compliance-engine/CloudLogging_Config> <http://www.w3.org/2000/01/rdf-schema#label> "Cloud Logging sinks + NTP + IAM on log buckets" .
+<http://dynamicalsystems.group/compliance-engine/CloudLogging_Config> <https://www.omg.org/spec/SysML/2.0/ownedRelationship> _:nfd5cd8c6a58f4931b485ea29f1ad1a4bb19 .
+<http://dynamicalsystems.group/compliance-engine/Disable_NonFedRAMP_Services> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.6> .
+<http://dynamicalsystems.group/compliance-engine/Disable_NonFedRAMP_Services> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.7> .
+<http://dynamicalsystems.group/compliance-engine/Disable_NonFedRAMP_Services> <http://dynamicalsystems.group/ontology/cmmc#verificationMethod> <http://dynamicalsystems.group/compliance-engine/oracle-restrict-service-usage> .
+<http://dynamicalsystems.group/compliance-engine/Disable_NonFedRAMP_Services> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/PartUsage> .
+<http://dynamicalsystems.group/compliance-engine/Disable_NonFedRAMP_Services> <http://www.w3.org/2000/01/rdf-schema#label> "Disable non-FedRAMP-authorized services for the CUI OU (least functionality)" .
+<http://dynamicalsystems.group/compliance-engine/Disable_NonFedRAMP_Services> <https://www.omg.org/spec/SysML/2.0/ownedRelationship> _:nfd5cd8c6a58f4931b485ea29f1ad1a4bb7 .
+<http://dynamicalsystems.group/compliance-engine/Drive_DLP_Rules> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.3> .
+<http://dynamicalsystems.group/compliance-engine/Drive_DLP_Rules> <http://dynamicalsystems.group/ontology/cmmc#verificationMethod> <http://dynamicalsystems.group/compliance-engine/oracle-drive-dlp-rules> .
+<http://dynamicalsystems.group/compliance-engine/Drive_DLP_Rules> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/PartUsage> .
+<http://dynamicalsystems.group/compliance-engine/Drive_DLP_Rules> <http://www.w3.org/2000/01/rdf-schema#label> "Drive + Gmail DLP rules (control the flow of CUI)" .
+<http://dynamicalsystems.group/compliance-engine/Drive_DLP_Rules> <https://www.omg.org/spec/SysML/2.0/ownedRelationship> _:nfd5cd8c6a58f4931b485ea29f1ad1a4bb4 .
+<http://dynamicalsystems.group/compliance-engine/EndpointVerification_CrowdStrike> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.2> .
+<http://dynamicalsystems.group/compliance-engine/EndpointVerification_CrowdStrike> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.4> .
+<http://dynamicalsystems.group/compliance-engine/EndpointVerification_CrowdStrike> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.7> .
+<http://dynamicalsystems.group/compliance-engine/EndpointVerification_CrowdStrike> <http://dynamicalsystems.group/ontology/cmmc#verificationMethod> <http://dynamicalsystems.group/compliance-engine/oracle-endpoint-edr> .
+<http://dynamicalsystems.group/compliance-engine/EndpointVerification_CrowdStrike> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/PartUsage> .
+<http://dynamicalsystems.group/compliance-engine/EndpointVerification_CrowdStrike> <http://www.w3.org/2000/01/rdf-schema#label> "CrowdStrike Falcon EDR — malware + endpoint integrity" .
+<http://dynamicalsystems.group/compliance-engine/EndpointVerification_CrowdStrike> <https://www.omg.org/spec/SysML/2.0/ownedRelationship> _:nfd5cd8c6a58f4931b485ea29f1ad1a4bb12 .
+<http://dynamicalsystems.group/compliance-engine/IAMRoles_Privilege> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.6> .
+<http://dynamicalsystems.group/compliance-engine/IAMRoles_Privilege> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.7> .
+<http://dynamicalsystems.group/compliance-engine/IAMRoles_Privilege> <http://dynamicalsystems.group/ontology/cmmc#verificationMethod> <http://dynamicalsystems.group/compliance-engine/oracle-iam-privileged-use> .
+<http://dynamicalsystems.group/compliance-engine/IAMRoles_Privilege> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/PartUsage> .
+<http://dynamicalsystems.group/compliance-engine/IAMRoles_Privilege> <http://www.w3.org/2000/01/rdf-schema#label> "GCP IAM policy + audit-log signals for privileged use" .
+<http://dynamicalsystems.group/compliance-engine/IAMRoles_Privilege> <https://www.omg.org/spec/SysML/2.0/ownedRelationship> _:nfd5cd8c6a58f4931b485ea29f1ad1a4bb23 .
+<http://dynamicalsystems.group/compliance-engine/MDM_ChromeOS> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.16> .
+<http://dynamicalsystems.group/compliance-engine/MDM_ChromeOS> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.17> .
+<http://dynamicalsystems.group/compliance-engine/MDM_ChromeOS> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.18> .
+<http://dynamicalsystems.group/compliance-engine/MDM_ChromeOS> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.19> .
+<http://dynamicalsystems.group/compliance-engine/MDM_ChromeOS> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.7> .
+<http://dynamicalsystems.group/compliance-engine/MDM_ChromeOS> <http://dynamicalsystems.group/ontology/cmmc#verificationMethod> <http://dynamicalsystems.group/compliance-engine/oracle-mdm-policy> .
+<http://dynamicalsystems.group/compliance-engine/MDM_ChromeOS> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/PartUsage> .
+<http://dynamicalsystems.group/compliance-engine/MDM_ChromeOS> <http://www.w3.org/2000/01/rdf-schema#label> "Chrome Cloud Management + Endpoint Verification (MDM)" .
+<http://dynamicalsystems.group/compliance-engine/MDM_ChromeOS> <https://www.omg.org/spec/SysML/2.0/ownedRelationship> _:nfd5cd8c6a58f4931b485ea29f1ad1a4bb13 .
+<http://dynamicalsystems.group/compliance-engine/Monitoring_Alerting> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.3> .
+<http://dynamicalsystems.group/compliance-engine/Monitoring_Alerting> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.6> .
+<http://dynamicalsystems.group/compliance-engine/Monitoring_Alerting> <http://dynamicalsystems.group/ontology/cmmc#verificationMethod> <http://dynamicalsystems.group/compliance-engine/oracle-monitoring-alerts> .
+<http://dynamicalsystems.group/compliance-engine/Monitoring_Alerting> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/PartUsage> .
+<http://dynamicalsystems.group/compliance-engine/Monitoring_Alerting> <http://www.w3.org/2000/01/rdf-schema#label> "Cloud Monitoring + Workspace Alert Center (security alert monitoring/response)" .
+<http://dynamicalsystems.group/compliance-engine/Monitoring_Alerting> <https://www.omg.org/spec/SysML/2.0/ownedRelationship> _:nfd5cd8c6a58f4931b485ea29f1ad1a4bb9 .
+<http://dynamicalsystems.group/compliance-engine/OrgPolicy_Allowlist> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.8> .
+<http://dynamicalsystems.group/compliance-engine/OrgPolicy_Allowlist> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.9> .
+<http://dynamicalsystems.group/compliance-engine/OrgPolicy_Allowlist> <http://dynamicalsystems.group/ontology/cmmc#verificationMethod> <http://dynamicalsystems.group/compliance-engine/oracle-binauth-allowlist> .
+<http://dynamicalsystems.group/compliance-engine/OrgPolicy_Allowlist> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/PartUsage> .
+<http://dynamicalsystems.group/compliance-engine/OrgPolicy_Allowlist> <http://www.w3.org/2000/01/rdf-schema#label> "Binary Authorization — image allowlist / user-installed software" .
+<http://dynamicalsystems.group/compliance-engine/OrgPolicy_Allowlist> <https://www.omg.org/spec/SysML/2.0/ownedRelationship> _:nfd5cd8c6a58f4931b485ea29f1ad1a4bb20 .
+<http://dynamicalsystems.group/compliance-engine/OrgPolicy_SessionControl> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.10> .
+<http://dynamicalsystems.group/compliance-engine/OrgPolicy_SessionControl> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.11> .
+<http://dynamicalsystems.group/compliance-engine/OrgPolicy_SessionControl> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.8> .
+<http://dynamicalsystems.group/compliance-engine/OrgPolicy_SessionControl> <http://dynamicalsystems.group/ontology/cmmc#verificationMethod> <http://dynamicalsystems.group/compliance-engine/oracle-session-control> .
+<http://dynamicalsystems.group/compliance-engine/OrgPolicy_SessionControl> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/PartUsage> .
+<http://dynamicalsystems.group/compliance-engine/OrgPolicy_SessionControl> <http://www.w3.org/2000/01/rdf-schema#label> "Cloud Identity session control + failed-login lockout" .
+<http://dynamicalsystems.group/compliance-engine/OrgPolicy_SessionControl> <https://www.omg.org/spec/SysML/2.0/ownedRelationship> _:nfd5cd8c6a58f4931b485ea29f1ad1a4bb21 .
+<http://dynamicalsystems.group/compliance-engine/OrgPolicy_USRegion> <http://dynamicalsystems.group/compliance-engine/residencyBasis> "ITAR-120.54" .
+<http://dynamicalsystems.group/compliance-engine/OrgPolicy_USRegion> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.1> .
+<http://dynamicalsystems.group/compliance-engine/OrgPolicy_USRegion> <http://dynamicalsystems.group/ontology/cmmc#verificationMethod> <http://dynamicalsystems.group/compliance-engine/oracle-orgpolicy-us-residency> .
+<http://dynamicalsystems.group/compliance-engine/OrgPolicy_USRegion> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/PartUsage> .
+<http://dynamicalsystems.group/compliance-engine/OrgPolicy_USRegion> <http://www.w3.org/2000/01/rdf-schema#label> "GCP Org Policy: US-only resource locations + restricted service usage" .
+<http://dynamicalsystems.group/compliance-engine/OrgPolicy_USRegion> <https://www.omg.org/spec/SysML/2.0/ownedRelationship> _:nfd5cd8c6a58f4931b485ea29f1ad1a4bb5 .
+<http://dynamicalsystems.group/compliance-engine/POL_AC_LoginBanner> <http://dynamicalsystems.group/compliance-engine/attestationRole> <http://dynamicalsystems.group/compliance-engine/Role_SecurityOfficer> .
+<http://dynamicalsystems.group/compliance-engine/POL_AC_LoginBanner> <http://dynamicalsystems.group/compliance-engine/authoritativeSource> <http://dynamicalsystems.group/compliance-engine/AUTHSRC_DocRepo> .
+<http://dynamicalsystems.group/compliance-engine/POL_AC_LoginBanner> <http://dynamicalsystems.group/compliance-engine/reference> <http://dynamicalsystems.group/compliance-engine/REF_POL_AC_LoginBanner_v1> .
+<http://dynamicalsystems.group/compliance-engine/POL_AC_LoginBanner> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.9> .
+<http://dynamicalsystems.group/compliance-engine/POL_AC_LoginBanner> <http://dynamicalsystems.group/ontology/cmmc#verificationMethod> <http://dynamicalsystems.group/compliance-engine/oracle-attested-reference> .
+<http://dynamicalsystems.group/compliance-engine/POL_AC_LoginBanner> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/PartUsage> .
+<http://dynamicalsystems.group/compliance-engine/POL_AC_LoginBanner> <http://www.w3.org/2000/01/rdf-schema#label> "Login banner policy (system-use notification)" .
+<http://dynamicalsystems.group/compliance-engine/POL_AC_LoginBanner> <https://www.omg.org/spec/SysML/2.0/ownedRelationship> _:nfd5cd8c6a58f4931b485ea29f1ad1a4bb39 .
+<http://dynamicalsystems.group/compliance-engine/POL_AC_RemoteAuth> <http://dynamicalsystems.group/compliance-engine/attestationRole> <http://dynamicalsystems.group/compliance-engine/Role_SecurityOfficer> .
+<http://dynamicalsystems.group/compliance-engine/POL_AC_RemoteAuth> <http://dynamicalsystems.group/compliance-engine/authoritativeSource> <http://dynamicalsystems.group/compliance-engine/AUTHSRC_DocRepo> .
+<http://dynamicalsystems.group/compliance-engine/POL_AC_RemoteAuth> <http://dynamicalsystems.group/compliance-engine/reference> <http://dynamicalsystems.group/compliance-engine/REF_POL_AC_RemoteAuth_v1> .
+<http://dynamicalsystems.group/compliance-engine/POL_AC_RemoteAuth> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.15> .
+<http://dynamicalsystems.group/compliance-engine/POL_AC_RemoteAuth> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.21> .
+<http://dynamicalsystems.group/compliance-engine/POL_AC_RemoteAuth> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.22> .
+<http://dynamicalsystems.group/compliance-engine/POL_AC_RemoteAuth> <http://dynamicalsystems.group/ontology/cmmc#verificationMethod> <http://dynamicalsystems.group/compliance-engine/oracle-attested-reference> .
+<http://dynamicalsystems.group/compliance-engine/POL_AC_RemoteAuth> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/PartUsage> .
+<http://dynamicalsystems.group/compliance-engine/POL_AC_RemoteAuth> <http://www.w3.org/2000/01/rdf-schema#label> "Remote access authorization (SSP appendix)" .
+<http://dynamicalsystems.group/compliance-engine/POL_AC_RemoteAuth> <https://www.omg.org/spec/SysML/2.0/ownedRelationship> _:nfd5cd8c6a58f4931b485ea29f1ad1a4bb34 .
+<http://dynamicalsystems.group/compliance-engine/POL_AC_SoD> <http://dynamicalsystems.group/compliance-engine/attestationRole> <http://dynamicalsystems.group/compliance-engine/Role_SecurityOfficer> .
+<http://dynamicalsystems.group/compliance-engine/POL_AC_SoD> <http://dynamicalsystems.group/compliance-engine/authoritativeSource> <http://dynamicalsystems.group/compliance-engine/AUTHSRC_DocRepo> .
+<http://dynamicalsystems.group/compliance-engine/POL_AC_SoD> <http://dynamicalsystems.group/compliance-engine/reference> <http://dynamicalsystems.group/compliance-engine/REF_POL_AC_SoD_v1> .
+<http://dynamicalsystems.group/compliance-engine/POL_AC_SoD> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.4> .
+<http://dynamicalsystems.group/compliance-engine/POL_AC_SoD> <http://dynamicalsystems.group/ontology/cmmc#verificationMethod> <http://dynamicalsystems.group/compliance-engine/oracle-attested-reference> .
+<http://dynamicalsystems.group/compliance-engine/POL_AC_SoD> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/PartUsage> .
+<http://dynamicalsystems.group/compliance-engine/POL_AC_SoD> <http://www.w3.org/2000/01/rdf-schema#label> "Separation of duties (RACI matrix)" .
+<http://dynamicalsystems.group/compliance-engine/POL_AC_SoD> <https://www.omg.org/spec/SysML/2.0/ownedRelationship> _:nfd5cd8c6a58f4931b485ea29f1ad1a4bb37 .
+<http://dynamicalsystems.group/compliance-engine/POL_AT_Training> <http://dynamicalsystems.group/compliance-engine/attestationRole> <http://dynamicalsystems.group/compliance-engine/Role_SecurityOfficer> .
+<http://dynamicalsystems.group/compliance-engine/POL_AT_Training> <http://dynamicalsystems.group/compliance-engine/authoritativeSource> <http://dynamicalsystems.group/compliance-engine/AUTHSRC_LMS> .
+<http://dynamicalsystems.group/compliance-engine/POL_AT_Training> <http://dynamicalsystems.group/compliance-engine/reference> <http://dynamicalsystems.group/compliance-engine/REF_POL_AT_Training_v1> .
+<http://dynamicalsystems.group/compliance-engine/POL_AT_Training> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#AT.L2-3.2.1> .
+<http://dynamicalsystems.group/compliance-engine/POL_AT_Training> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#AT.L2-3.2.2> .
+<http://dynamicalsystems.group/compliance-engine/POL_AT_Training> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#AT.L2-3.2.3> .
+<http://dynamicalsystems.group/compliance-engine/POL_AT_Training> <http://dynamicalsystems.group/ontology/cmmc#verificationMethod> <http://dynamicalsystems.group/compliance-engine/oracle-attested-reference> .
+<http://dynamicalsystems.group/compliance-engine/POL_AT_Training> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/PartUsage> .
+<http://dynamicalsystems.group/compliance-engine/POL_AT_Training> <http://www.w3.org/2000/01/rdf-schema#label> "Annual security awareness + role-based training program" .
+<http://dynamicalsystems.group/compliance-engine/POL_AT_Training> <https://www.omg.org/spec/SysML/2.0/ownedRelationship> _:nfd5cd8c6a58f4931b485ea29f1ad1a4bb25 .
+<http://dynamicalsystems.group/compliance-engine/POL_AU_Procedure> <http://dynamicalsystems.group/compliance-engine/attestationRole> <http://dynamicalsystems.group/compliance-engine/Role_SecurityOfficer> .
+<http://dynamicalsystems.group/compliance-engine/POL_AU_Procedure> <http://dynamicalsystems.group/compliance-engine/authoritativeSource> <http://dynamicalsystems.group/compliance-engine/AUTHSRC_DocRepo> .
+<http://dynamicalsystems.group/compliance-engine/POL_AU_Procedure> <http://dynamicalsystems.group/compliance-engine/reference> <http://dynamicalsystems.group/compliance-engine/REF_POL_AU_Procedure_v1> .
+<http://dynamicalsystems.group/compliance-engine/POL_AU_Procedure> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.3> .
+<http://dynamicalsystems.group/compliance-engine/POL_AU_Procedure> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.6> .
+<http://dynamicalsystems.group/compliance-engine/POL_AU_Procedure> <http://dynamicalsystems.group/ontology/cmmc#verificationMethod> <http://dynamicalsystems.group/compliance-engine/oracle-attested-reference> .
+<http://dynamicalsystems.group/compliance-engine/POL_AU_Procedure> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/PartUsage> .
+<http://dynamicalsystems.group/compliance-engine/POL_AU_Procedure> <http://www.w3.org/2000/01/rdf-schema#label> "Audit management procedure (log review cadence + reports)" .
+<http://dynamicalsystems.group/compliance-engine/POL_AU_Procedure> <https://www.omg.org/spec/SysML/2.0/ownedRelationship> _:nfd5cd8c6a58f4931b485ea29f1ad1a4bb32 .
+<http://dynamicalsystems.group/compliance-engine/POL_CA_Monitoring> <http://dynamicalsystems.group/compliance-engine/attestationRole> <http://dynamicalsystems.group/compliance-engine/Role_SecurityOfficer> .
+<http://dynamicalsystems.group/compliance-engine/POL_CA_Monitoring> <http://dynamicalsystems.group/compliance-engine/authoritativeSource> <http://dynamicalsystems.group/compliance-engine/AUTHSRC_EngineHistory> .
+<http://dynamicalsystems.group/compliance-engine/POL_CA_Monitoring> <http://dynamicalsystems.group/compliance-engine/reference> <http://dynamicalsystems.group/compliance-engine/REF_POL_CA_Monitoring_v1> .
+<http://dynamicalsystems.group/compliance-engine/POL_CA_Monitoring> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#CA.L2-3.12.1> .
+<http://dynamicalsystems.group/compliance-engine/POL_CA_Monitoring> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#CA.L2-3.12.2> .
+<http://dynamicalsystems.group/compliance-engine/POL_CA_Monitoring> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#CA.L2-3.12.3> .
+<http://dynamicalsystems.group/compliance-engine/POL_CA_Monitoring> <http://dynamicalsystems.group/ontology/cmmc#verificationMethod> <http://dynamicalsystems.group/compliance-engine/oracle-attested-reference> .
+<http://dynamicalsystems.group/compliance-engine/POL_CA_Monitoring> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/PartUsage> .
+<http://dynamicalsystems.group/compliance-engine/POL_CA_Monitoring> <http://www.w3.org/2000/01/rdf-schema#label> "Continuous monitoring: engine run history + POA&M tracker" .
+<http://dynamicalsystems.group/compliance-engine/POL_CA_Monitoring> <https://www.omg.org/spec/SysML/2.0/ownedRelationship> _:nfd5cd8c6a58f4931b485ea29f1ad1a4bb38 .
+<http://dynamicalsystems.group/compliance-engine/POL_CM_Config> <http://dynamicalsystems.group/compliance-engine/attestationRole> <http://dynamicalsystems.group/compliance-engine/Role_ITAdmin> .
+<http://dynamicalsystems.group/compliance-engine/POL_CM_Config> <http://dynamicalsystems.group/compliance-engine/authoritativeSource> <http://dynamicalsystems.group/compliance-engine/AUTHSRC_DocRepo> .
+<http://dynamicalsystems.group/compliance-engine/POL_CM_Config> <http://dynamicalsystems.group/compliance-engine/reference> <http://dynamicalsystems.group/compliance-engine/REF_POL_CM_Config_v1> .
+<http://dynamicalsystems.group/compliance-engine/POL_CM_Config> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.4> .
+<http://dynamicalsystems.group/compliance-engine/POL_CM_Config> <http://dynamicalsystems.group/ontology/cmmc#verificationMethod> <http://dynamicalsystems.group/compliance-engine/oracle-attested-reference> .
+<http://dynamicalsystems.group/compliance-engine/POL_CM_Config> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/PartUsage> .
+<http://dynamicalsystems.group/compliance-engine/POL_CM_Config> <http://www.w3.org/2000/01/rdf-schema#label> "Configuration management: security impact analysis procedure" .
+<http://dynamicalsystems.group/compliance-engine/POL_CM_Config> <https://www.omg.org/spec/SysML/2.0/ownedRelationship> _:nfd5cd8c6a58f4931b485ea29f1ad1a4bb29 .
+<http://dynamicalsystems.group/compliance-engine/POL_IR_Plan> <http://dynamicalsystems.group/compliance-engine/attestationRole> <http://dynamicalsystems.group/compliance-engine/Role_SecurityOfficer> .
+<http://dynamicalsystems.group/compliance-engine/POL_IR_Plan> <http://dynamicalsystems.group/compliance-engine/authoritativeSource> <http://dynamicalsystems.group/compliance-engine/AUTHSRC_DocRepo> .
+<http://dynamicalsystems.group/compliance-engine/POL_IR_Plan> <http://dynamicalsystems.group/compliance-engine/reference> <http://dynamicalsystems.group/compliance-engine/REF_POL_IR_Plan_v1> .
+<http://dynamicalsystems.group/compliance-engine/POL_IR_Plan> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#IR.L2-3.6.1> .
+<http://dynamicalsystems.group/compliance-engine/POL_IR_Plan> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#IR.L2-3.6.2> .
+<http://dynamicalsystems.group/compliance-engine/POL_IR_Plan> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#IR.L2-3.6.3> .
+<http://dynamicalsystems.group/compliance-engine/POL_IR_Plan> <http://dynamicalsystems.group/ontology/cmmc#verificationMethod> <http://dynamicalsystems.group/compliance-engine/oracle-attested-reference> .
+<http://dynamicalsystems.group/compliance-engine/POL_IR_Plan> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/PartUsage> .
+<http://dynamicalsystems.group/compliance-engine/POL_IR_Plan> <http://www.w3.org/2000/01/rdf-schema#label> "Incident Response Plan + annual tabletop exercise" .
+<http://dynamicalsystems.group/compliance-engine/POL_IR_Plan> <https://www.omg.org/spec/SysML/2.0/ownedRelationship> _:nfd5cd8c6a58f4931b485ea29f1ad1a4bb26 .
+<http://dynamicalsystems.group/compliance-engine/POL_MA_Maintenance> <http://dynamicalsystems.group/compliance-engine/attestationRole> <http://dynamicalsystems.group/compliance-engine/Role_OPs> .
+<http://dynamicalsystems.group/compliance-engine/POL_MA_Maintenance> <http://dynamicalsystems.group/compliance-engine/authoritativeSource> <http://dynamicalsystems.group/compliance-engine/AUTHSRC_DocRepo> .
+<http://dynamicalsystems.group/compliance-engine/POL_MA_Maintenance> <http://dynamicalsystems.group/compliance-engine/reference> <http://dynamicalsystems.group/compliance-engine/REF_POL_MA_Maintenance_v1> .
+<http://dynamicalsystems.group/compliance-engine/POL_MA_Maintenance> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.1> .
+<http://dynamicalsystems.group/compliance-engine/POL_MA_Maintenance> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.2> .
+<http://dynamicalsystems.group/compliance-engine/POL_MA_Maintenance> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.3> .
+<http://dynamicalsystems.group/compliance-engine/POL_MA_Maintenance> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.4> .
+<http://dynamicalsystems.group/compliance-engine/POL_MA_Maintenance> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.6> .
+<http://dynamicalsystems.group/compliance-engine/POL_MA_Maintenance> <http://dynamicalsystems.group/ontology/cmmc#verificationMethod> <http://dynamicalsystems.group/compliance-engine/oracle-attested-reference> .
+<http://dynamicalsystems.group/compliance-engine/POL_MA_Maintenance> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/PartUsage> .
+<http://dynamicalsystems.group/compliance-engine/POL_MA_Maintenance> <http://www.w3.org/2000/01/rdf-schema#label> "Maintenance policy: approved vendor list + maintenance log" .
+<http://dynamicalsystems.group/compliance-engine/POL_MA_Maintenance> <https://www.omg.org/spec/SysML/2.0/ownedRelationship> _:nfd5cd8c6a58f4931b485ea29f1ad1a4bb30 .
+<http://dynamicalsystems.group/compliance-engine/POL_MP_Media> <http://dynamicalsystems.group/compliance-engine/attestationRole> <http://dynamicalsystems.group/compliance-engine/Role_OPs> .
+<http://dynamicalsystems.group/compliance-engine/POL_MP_Media> <http://dynamicalsystems.group/compliance-engine/authoritativeSource> <http://dynamicalsystems.group/compliance-engine/AUTHSRC_DocRepo> .
+<http://dynamicalsystems.group/compliance-engine/POL_MP_Media> <http://dynamicalsystems.group/compliance-engine/reference> <http://dynamicalsystems.group/compliance-engine/REF_POL_MP_Media_v1> .
+<http://dynamicalsystems.group/compliance-engine/POL_MP_Media> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.1> .
+<http://dynamicalsystems.group/compliance-engine/POL_MP_Media> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.2> .
+<http://dynamicalsystems.group/compliance-engine/POL_MP_Media> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.3> .
+<http://dynamicalsystems.group/compliance-engine/POL_MP_Media> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.4> .
+<http://dynamicalsystems.group/compliance-engine/POL_MP_Media> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.5> .
+<http://dynamicalsystems.group/compliance-engine/POL_MP_Media> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.6> .
+<http://dynamicalsystems.group/compliance-engine/POL_MP_Media> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.8> .
+<http://dynamicalsystems.group/compliance-engine/POL_MP_Media> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.9> .
+<http://dynamicalsystems.group/compliance-engine/POL_MP_Media> <http://dynamicalsystems.group/ontology/cmmc#verificationMethod> <http://dynamicalsystems.group/compliance-engine/oracle-attested-reference> .
+<http://dynamicalsystems.group/compliance-engine/POL_MP_Media> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/PartUsage> .
+<http://dynamicalsystems.group/compliance-engine/POL_MP_Media> <http://www.w3.org/2000/01/rdf-schema#label> "Media protection: labeling, storage, sanitization (NIST SP 800-88)" .
+<http://dynamicalsystems.group/compliance-engine/POL_MP_Media> <https://www.omg.org/spec/SysML/2.0/ownedRelationship> _:nfd5cd8c6a58f4931b485ea29f1ad1a4bb31 .
+<http://dynamicalsystems.group/compliance-engine/POL_PE_Physical> <http://dynamicalsystems.group/compliance-engine/attestationRole> <http://dynamicalsystems.group/compliance-engine/Role_OPs> .
+<http://dynamicalsystems.group/compliance-engine/POL_PE_Physical> <http://dynamicalsystems.group/compliance-engine/authoritativeSource> <http://dynamicalsystems.group/compliance-engine/AUTHSRC_DocRepo> .
+<http://dynamicalsystems.group/compliance-engine/POL_PE_Physical> <http://dynamicalsystems.group/compliance-engine/reference> <http://dynamicalsystems.group/compliance-engine/REF_POL_PE_Physical_v1> .
+<http://dynamicalsystems.group/compliance-engine/POL_PE_Physical> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.3> .
+<http://dynamicalsystems.group/compliance-engine/POL_PE_Physical> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.4> .
+<http://dynamicalsystems.group/compliance-engine/POL_PE_Physical> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.5> .
+<http://dynamicalsystems.group/compliance-engine/POL_PE_Physical> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.6> .
+<http://dynamicalsystems.group/compliance-engine/POL_PE_Physical> <http://dynamicalsystems.group/ontology/cmmc#verificationMethod> <http://dynamicalsystems.group/compliance-engine/oracle-attested-reference> .
+<http://dynamicalsystems.group/compliance-engine/POL_PE_Physical> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/PartUsage> .
+<http://dynamicalsystems.group/compliance-engine/POL_PE_Physical> <http://www.w3.org/2000/01/rdf-schema#label> "Physical access (visitor log + badge + WFH agreements)" .
+<http://dynamicalsystems.group/compliance-engine/POL_PE_Physical> <https://www.omg.org/spec/SysML/2.0/ownedRelationship> _:nfd5cd8c6a58f4931b485ea29f1ad1a4bb35 .
+<http://dynamicalsystems.group/compliance-engine/POL_PS_Personnel> <http://dynamicalsystems.group/compliance-engine/attestationRole> <http://dynamicalsystems.group/compliance-engine/Role_OPs> .
+<http://dynamicalsystems.group/compliance-engine/POL_PS_Personnel> <http://dynamicalsystems.group/compliance-engine/authoritativeSource> <http://dynamicalsystems.group/compliance-engine/AUTHSRC_HRIS> .
+<http://dynamicalsystems.group/compliance-engine/POL_PS_Personnel> <http://dynamicalsystems.group/compliance-engine/reference> <http://dynamicalsystems.group/compliance-engine/REF_POL_PS_Personnel_v1> .
+<http://dynamicalsystems.group/compliance-engine/POL_PS_Personnel> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#PS.L2-3.9.1> .
+<http://dynamicalsystems.group/compliance-engine/POL_PS_Personnel> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#PS.L2-3.9.2> .
+<http://dynamicalsystems.group/compliance-engine/POL_PS_Personnel> <http://dynamicalsystems.group/ontology/cmmc#verificationMethod> <http://dynamicalsystems.group/compliance-engine/oracle-attested-reference> .
+<http://dynamicalsystems.group/compliance-engine/POL_PS_Personnel> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/PartUsage> .
+<http://dynamicalsystems.group/compliance-engine/POL_PS_Personnel> <http://www.w3.org/2000/01/rdf-schema#label> "Personnel security: background screening + offboarding" .
+<http://dynamicalsystems.group/compliance-engine/POL_PS_Personnel> <https://www.omg.org/spec/SysML/2.0/ownedRelationship> _:nfd5cd8c6a58f4931b485ea29f1ad1a4bb28 .
+<http://dynamicalsystems.group/compliance-engine/POL_RA_Assessment> <http://dynamicalsystems.group/compliance-engine/attestationRole> <http://dynamicalsystems.group/compliance-engine/Role_SecurityOfficer> .
+<http://dynamicalsystems.group/compliance-engine/POL_RA_Assessment> <http://dynamicalsystems.group/compliance-engine/authoritativeSource> <http://dynamicalsystems.group/compliance-engine/AUTHSRC_DocRepo> .
+<http://dynamicalsystems.group/compliance-engine/POL_RA_Assessment> <http://dynamicalsystems.group/compliance-engine/reference> <http://dynamicalsystems.group/compliance-engine/REF_POL_RA_Assessment_v1> .
+<http://dynamicalsystems.group/compliance-engine/POL_RA_Assessment> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#RA.L2-3.11.1> .
+<http://dynamicalsystems.group/compliance-engine/POL_RA_Assessment> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#RA.L2-3.11.3> .
+<http://dynamicalsystems.group/compliance-engine/POL_RA_Assessment> <http://dynamicalsystems.group/ontology/cmmc#verificationMethod> <http://dynamicalsystems.group/compliance-engine/oracle-attested-reference> .
+<http://dynamicalsystems.group/compliance-engine/POL_RA_Assessment> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/PartUsage> .
+<http://dynamicalsystems.group/compliance-engine/POL_RA_Assessment> <http://www.w3.org/2000/01/rdf-schema#label> "Formal risk assessment + finding tracker" .
+<http://dynamicalsystems.group/compliance-engine/POL_RA_Assessment> <https://www.omg.org/spec/SysML/2.0/ownedRelationship> _:nfd5cd8c6a58f4931b485ea29f1ad1a4bb27 .
+<http://dynamicalsystems.group/compliance-engine/POL_SC_Collab> <http://dynamicalsystems.group/compliance-engine/attestationRole> <http://dynamicalsystems.group/compliance-engine/Role_ITAdmin> .
+<http://dynamicalsystems.group/compliance-engine/POL_SC_Collab> <http://dynamicalsystems.group/compliance-engine/authoritativeSource> <http://dynamicalsystems.group/compliance-engine/AUTHSRC_DocRepo> .
+<http://dynamicalsystems.group/compliance-engine/POL_SC_Collab> <http://dynamicalsystems.group/compliance-engine/reference> <http://dynamicalsystems.group/compliance-engine/REF_POL_SC_Collab_v1> .
+<http://dynamicalsystems.group/compliance-engine/POL_SC_Collab> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.12> .
+<http://dynamicalsystems.group/compliance-engine/POL_SC_Collab> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.13> .
+<http://dynamicalsystems.group/compliance-engine/POL_SC_Collab> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.14> .
+<http://dynamicalsystems.group/compliance-engine/POL_SC_Collab> <http://dynamicalsystems.group/ontology/cmmc#verificationMethod> <http://dynamicalsystems.group/compliance-engine/oracle-attested-reference> .
+<http://dynamicalsystems.group/compliance-engine/POL_SC_Collab> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/PartUsage> .
+<http://dynamicalsystems.group/compliance-engine/POL_SC_Collab> <http://www.w3.org/2000/01/rdf-schema#label> "Collaborative computing / mobile code / VoIP policies" .
+<http://dynamicalsystems.group/compliance-engine/POL_SC_Collab> <https://www.omg.org/spec/SysML/2.0/ownedRelationship> _:nfd5cd8c6a58f4931b485ea29f1ad1a4bb36 .
+<http://dynamicalsystems.group/compliance-engine/POL_SC_SecEng> <http://dynamicalsystems.group/compliance-engine/attestationRole> <http://dynamicalsystems.group/compliance-engine/Role_SecurityOfficer> .
+<http://dynamicalsystems.group/compliance-engine/POL_SC_SecEng> <http://dynamicalsystems.group/compliance-engine/authoritativeSource> <http://dynamicalsystems.group/compliance-engine/AUTHSRC_DocRepo> .
+<http://dynamicalsystems.group/compliance-engine/POL_SC_SecEng> <http://dynamicalsystems.group/compliance-engine/reference> <http://dynamicalsystems.group/compliance-engine/REF_POL_SC_SecEng_v1> .
+<http://dynamicalsystems.group/compliance-engine/POL_SC_SecEng> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.2> .
+<http://dynamicalsystems.group/compliance-engine/POL_SC_SecEng> <http://dynamicalsystems.group/ontology/cmmc#verificationMethod> <http://dynamicalsystems.group/compliance-engine/oracle-attested-reference> .
+<http://dynamicalsystems.group/compliance-engine/POL_SC_SecEng> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/PartUsage> .
+<http://dynamicalsystems.group/compliance-engine/POL_SC_SecEng> <http://www.w3.org/2000/01/rdf-schema#label> "Security engineering principles (NIST SP 800-160 Vol.1)" .
+<http://dynamicalsystems.group/compliance-engine/POL_SC_SecEng> <https://www.omg.org/spec/SysML/2.0/ownedRelationship> _:nfd5cd8c6a58f4931b485ea29f1ad1a4bb33 .
+<http://dynamicalsystems.group/compliance-engine/POL_SSP_SystemDescription> <http://dynamicalsystems.group/compliance-engine/attestationRole> <http://dynamicalsystems.group/compliance-engine/Role_AffirmingOfficial> .
+<http://dynamicalsystems.group/compliance-engine/POL_SSP_SystemDescription> <http://dynamicalsystems.group/compliance-engine/authoritativeSource> <http://dynamicalsystems.group/compliance-engine/AUTHSRC_DocRepo> .
+<http://dynamicalsystems.group/compliance-engine/POL_SSP_SystemDescription> <http://dynamicalsystems.group/compliance-engine/reference> <http://dynamicalsystems.group/compliance-engine/REF_POL_SSP_v1> .
+<http://dynamicalsystems.group/compliance-engine/POL_SSP_SystemDescription> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#CA.L2-3.12.4> .
+<http://dynamicalsystems.group/compliance-engine/POL_SSP_SystemDescription> <http://dynamicalsystems.group/ontology/cmmc#verificationMethod> <http://dynamicalsystems.group/compliance-engine/oracle-attested-reference> .
+<http://dynamicalsystems.group/compliance-engine/POL_SSP_SystemDescription> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/PartUsage> .
+<http://dynamicalsystems.group/compliance-engine/POL_SSP_SystemDescription> <http://www.w3.org/2000/01/rdf-schema#label> "System Security Plan supplement (system description)" .
+<http://dynamicalsystems.group/compliance-engine/POL_SSP_SystemDescription> <https://www.omg.org/spec/SysML/2.0/ownedRelationship> _:nfd5cd8c6a58f4931b485ea29f1ad1a4bb24 .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_AC_LoginBanner_v1> <http://dynamicalsystems.group/compliance-engine/custodian> "Security Officer" .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_AC_LoginBanner_v1> <http://dynamicalsystems.group/compliance-engine/freshnessDays> "365"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_AC_LoginBanner_v1> <http://dynamicalsystems.group/compliance-engine/lastVerified> "2026-06-15T12:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_AC_LoginBanner_v1> <http://dynamicalsystems.group/compliance-engine/sourceSystem> <http://dynamicalsystems.group/compliance-engine/AUTHSRC_DocRepo> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_AC_LoginBanner_v1> <http://dynamicalsystems.group/compliance-engine/uri> <file://documents/policies/POL_AC_LoginBanner.md> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_AC_LoginBanner_v1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/Reference> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_AC_LoginBanner_v1> <http://www.w3.org/2000/01/rdf-schema#label> "Login banner policy text (Workspace + CUI systems)" .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_AC_RemoteAuth_v1> <http://dynamicalsystems.group/compliance-engine/custodian> "Security Officer" .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_AC_RemoteAuth_v1> <http://dynamicalsystems.group/compliance-engine/freshnessDays> "365"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_AC_RemoteAuth_v1> <http://dynamicalsystems.group/compliance-engine/lastVerified> "2026-06-15T12:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_AC_RemoteAuth_v1> <http://dynamicalsystems.group/compliance-engine/sourceSystem> <http://dynamicalsystems.group/compliance-engine/AUTHSRC_DocRepo> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_AC_RemoteAuth_v1> <http://dynamicalsystems.group/compliance-engine/uri> <file://documents/policies/POL_AC_RemoteAuth.md> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_AC_RemoteAuth_v1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/Reference> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_AC_RemoteAuth_v1> <http://www.w3.org/2000/01/rdf-schema#label> "Remote access authorization (SSP appendix)" .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_AC_SoD_v1> <http://dynamicalsystems.group/compliance-engine/custodian> "Security Officer" .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_AC_SoD_v1> <http://dynamicalsystems.group/compliance-engine/freshnessDays> "365"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_AC_SoD_v1> <http://dynamicalsystems.group/compliance-engine/lastVerified> "2026-06-15T12:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_AC_SoD_v1> <http://dynamicalsystems.group/compliance-engine/sourceSystem> <http://dynamicalsystems.group/compliance-engine/AUTHSRC_DocRepo> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_AC_SoD_v1> <http://dynamicalsystems.group/compliance-engine/uri> <file://documents/policies/POL_AC_SoD.md> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_AC_SoD_v1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/Reference> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_AC_SoD_v1> <http://www.w3.org/2000/01/rdf-schema#label> "Separation of duties (RACI matrix)" .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_AT_Training_v1> <http://dynamicalsystems.group/compliance-engine/custodian> "Operations lead (LMS admin)" .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_AT_Training_v1> <http://dynamicalsystems.group/compliance-engine/freshnessDays> "365"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_AT_Training_v1> <http://dynamicalsystems.group/compliance-engine/lastVerified> "2026-06-15T12:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_AT_Training_v1> <http://dynamicalsystems.group/compliance-engine/sourceSystem> <http://dynamicalsystems.group/compliance-engine/AUTHSRC_LMS> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_AT_Training_v1> <http://dynamicalsystems.group/compliance-engine/uri> <file://documents/policies/POL_AT_Training.md> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_AT_Training_v1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/Reference> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_AT_Training_v1> <http://www.w3.org/2000/01/rdf-schema#label> "Annual security awareness training completion (2026 cycle)" .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_AU_Procedure_v1> <http://dynamicalsystems.group/compliance-engine/custodian> "Security Officer" .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_AU_Procedure_v1> <http://dynamicalsystems.group/compliance-engine/freshnessDays> "90"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_AU_Procedure_v1> <http://dynamicalsystems.group/compliance-engine/lastVerified> "2026-06-15T12:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_AU_Procedure_v1> <http://dynamicalsystems.group/compliance-engine/sourceSystem> <http://dynamicalsystems.group/compliance-engine/AUTHSRC_DocRepo> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_AU_Procedure_v1> <http://dynamicalsystems.group/compliance-engine/uri> <file://documents/policies/POL_AU_Procedure.md> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_AU_Procedure_v1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/Reference> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_AU_Procedure_v1> <http://www.w3.org/2000/01/rdf-schema#label> "Audit management procedure + sample log review report" .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_CA_Monitoring_v1> <http://dynamicalsystems.group/compliance-engine/custodian> "Security Officer" .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_CA_Monitoring_v1> <http://dynamicalsystems.group/compliance-engine/freshnessDays> "90"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_CA_Monitoring_v1> <http://dynamicalsystems.group/compliance-engine/lastVerified> "2026-06-15T12:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_CA_Monitoring_v1> <http://dynamicalsystems.group/compliance-engine/sourceSystem> <http://dynamicalsystems.group/compliance-engine/AUTHSRC_EngineHistory> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_CA_Monitoring_v1> <http://dynamicalsystems.group/compliance-engine/uri> <file://documents/policies/POL_CA_Monitoring.md> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_CA_Monitoring_v1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/Reference> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_CA_Monitoring_v1> <http://www.w3.org/2000/01/rdf-schema#label> "Continuous monitoring: engine run history + POA&M tracker" .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_CM_Config_v1> <http://dynamicalsystems.group/compliance-engine/custodian> "IT Admin" .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_CM_Config_v1> <http://dynamicalsystems.group/compliance-engine/freshnessDays> "180"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_CM_Config_v1> <http://dynamicalsystems.group/compliance-engine/lastVerified> "2026-06-15T12:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_CM_Config_v1> <http://dynamicalsystems.group/compliance-engine/sourceSystem> <http://dynamicalsystems.group/compliance-engine/AUTHSRC_DocRepo> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_CM_Config_v1> <http://dynamicalsystems.group/compliance-engine/uri> <file://documents/policies/POL_CM_Config.md> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_CM_Config_v1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/Reference> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_CM_Config_v1> <http://www.w3.org/2000/01/rdf-schema#label> "Configuration management: SIA procedure + change log" .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_IR_Plan_v1> <http://dynamicalsystems.group/compliance-engine/custodian> "Security Officer" .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_IR_Plan_v1> <http://dynamicalsystems.group/compliance-engine/freshnessDays> "365"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_IR_Plan_v1> <http://dynamicalsystems.group/compliance-engine/lastVerified> "2026-06-15T12:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_IR_Plan_v1> <http://dynamicalsystems.group/compliance-engine/sourceSystem> <http://dynamicalsystems.group/compliance-engine/AUTHSRC_DocRepo> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_IR_Plan_v1> <http://dynamicalsystems.group/compliance-engine/uri> <file://documents/policies/POL_IR_Plan.md> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_IR_Plan_v1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/Reference> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_IR_Plan_v1> <http://www.w3.org/2000/01/rdf-schema#label> "Incident Response Plan + 2026 tabletop report" .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_MA_Maintenance_v1> <http://dynamicalsystems.group/compliance-engine/custodian> "Operations lead" .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_MA_Maintenance_v1> <http://dynamicalsystems.group/compliance-engine/freshnessDays> "365"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_MA_Maintenance_v1> <http://dynamicalsystems.group/compliance-engine/lastVerified> "2026-06-15T12:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_MA_Maintenance_v1> <http://dynamicalsystems.group/compliance-engine/sourceSystem> <http://dynamicalsystems.group/compliance-engine/AUTHSRC_DocRepo> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_MA_Maintenance_v1> <http://dynamicalsystems.group/compliance-engine/uri> <file://documents/policies/POL_MA_Maintenance.md> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_MA_Maintenance_v1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/Reference> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_MA_Maintenance_v1> <http://www.w3.org/2000/01/rdf-schema#label> "Maintenance policy: approved vendor list + maintenance log" .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_MP_Media_v1> <http://dynamicalsystems.group/compliance-engine/custodian> "Operations lead" .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_MP_Media_v1> <http://dynamicalsystems.group/compliance-engine/freshnessDays> "0"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_MP_Media_v1> <http://dynamicalsystems.group/compliance-engine/lastVerified> "2026-06-15T12:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_MP_Media_v1> <http://dynamicalsystems.group/compliance-engine/sourceSystem> <http://dynamicalsystems.group/compliance-engine/AUTHSRC_DocRepo> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_MP_Media_v1> <http://dynamicalsystems.group/compliance-engine/uri> <file://documents/policies/POL_MP_Media.md> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_MP_Media_v1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/Reference> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_MP_Media_v1> <http://www.w3.org/2000/01/rdf-schema#label> "Media protection: inventory + sanitization records (NIST SP 800-88)" .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_PE_Physical_v1> <http://dynamicalsystems.group/compliance-engine/custodian> "Operations lead" .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_PE_Physical_v1> <http://dynamicalsystems.group/compliance-engine/freshnessDays> "365"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_PE_Physical_v1> <http://dynamicalsystems.group/compliance-engine/lastVerified> "2026-06-15T12:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_PE_Physical_v1> <http://dynamicalsystems.group/compliance-engine/sourceSystem> <http://dynamicalsystems.group/compliance-engine/AUTHSRC_DocRepo> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_PE_Physical_v1> <http://dynamicalsystems.group/compliance-engine/uri> <file://documents/policies/POL_PE_Physical.md> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_PE_Physical_v1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/Reference> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_PE_Physical_v1> <http://www.w3.org/2000/01/rdf-schema#label> "Physical access + WFH agreements + visitor/badge logs" .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_PS_Personnel_v1> <http://dynamicalsystems.group/compliance-engine/custodian> "Operations lead" .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_PS_Personnel_v1> <http://dynamicalsystems.group/compliance-engine/freshnessDays> "0"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_PS_Personnel_v1> <http://dynamicalsystems.group/compliance-engine/lastVerified> "2026-06-15T12:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_PS_Personnel_v1> <http://dynamicalsystems.group/compliance-engine/sourceSystem> <http://dynamicalsystems.group/compliance-engine/AUTHSRC_HRIS> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_PS_Personnel_v1> <http://dynamicalsystems.group/compliance-engine/uri> <file://documents/policies/POL_PS_Personnel.md> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_PS_Personnel_v1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/Reference> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_PS_Personnel_v1> <http://www.w3.org/2000/01/rdf-schema#label> "Personnel security records (screening + offboarding)" .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_RA_Assessment_v1> <http://dynamicalsystems.group/compliance-engine/custodian> "Security Officer" .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_RA_Assessment_v1> <http://dynamicalsystems.group/compliance-engine/freshnessDays> "365"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_RA_Assessment_v1> <http://dynamicalsystems.group/compliance-engine/lastVerified> "2026-06-15T12:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_RA_Assessment_v1> <http://dynamicalsystems.group/compliance-engine/sourceSystem> <http://dynamicalsystems.group/compliance-engine/AUTHSRC_DocRepo> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_RA_Assessment_v1> <http://dynamicalsystems.group/compliance-engine/uri> <file://documents/policies/POL_RA_Assessment.md> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_RA_Assessment_v1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/Reference> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_RA_Assessment_v1> <http://www.w3.org/2000/01/rdf-schema#label> "Formal risk assessment + finding tracker (2026)" .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_SC_Collab_v1> <http://dynamicalsystems.group/compliance-engine/custodian> "IT Admin" .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_SC_Collab_v1> <http://dynamicalsystems.group/compliance-engine/freshnessDays> "365"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_SC_Collab_v1> <http://dynamicalsystems.group/compliance-engine/lastVerified> "2026-06-15T12:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_SC_Collab_v1> <http://dynamicalsystems.group/compliance-engine/sourceSystem> <http://dynamicalsystems.group/compliance-engine/AUTHSRC_DocRepo> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_SC_Collab_v1> <http://dynamicalsystems.group/compliance-engine/uri> <file://documents/policies/POL_SC_Collab.md> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_SC_Collab_v1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/Reference> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_SC_Collab_v1> <http://www.w3.org/2000/01/rdf-schema#label> "Collaborative computing / mobile code / VoIP policies" .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_SC_SecEng_v1> <http://dynamicalsystems.group/compliance-engine/custodian> "Security Officer" .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_SC_SecEng_v1> <http://dynamicalsystems.group/compliance-engine/freshnessDays> "365"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_SC_SecEng_v1> <http://dynamicalsystems.group/compliance-engine/lastVerified> "2026-06-15T12:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_SC_SecEng_v1> <http://dynamicalsystems.group/compliance-engine/sourceSystem> <http://dynamicalsystems.group/compliance-engine/AUTHSRC_DocRepo> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_SC_SecEng_v1> <http://dynamicalsystems.group/compliance-engine/uri> <file://documents/policies/POL_SC_SecEng.md> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_SC_SecEng_v1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/Reference> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_SC_SecEng_v1> <http://www.w3.org/2000/01/rdf-schema#label> "Security engineering principles (NIST SP 800-160 Vol.1)" .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_SSP_v1> <http://dynamicalsystems.group/compliance-engine/custodian> "Sayer Tindall (Affirming Official)" .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_SSP_v1> <http://dynamicalsystems.group/compliance-engine/freshnessDays> "365"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_SSP_v1> <http://dynamicalsystems.group/compliance-engine/lastVerified> "2026-06-15T12:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_SSP_v1> <http://dynamicalsystems.group/compliance-engine/sourceSystem> <http://dynamicalsystems.group/compliance-engine/AUTHSRC_DocRepo> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_SSP_v1> <http://dynamicalsystems.group/compliance-engine/uri> <file://documents/policies/POL_SSP_SystemDescription.md> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_SSP_v1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dynamicalsystems.group/compliance-engine/Reference> .
+<http://dynamicalsystems.group/compliance-engine/REF_POL_SSP_v1> <http://www.w3.org/2000/01/rdf-schema#label> "SSP supplement (system description) v1" .
+<http://dynamicalsystems.group/compliance-engine/SecurityCommandCenter> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#RA.L2-3.11.2> .
+<http://dynamicalsystems.group/compliance-engine/SecurityCommandCenter> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.1> .
+<http://dynamicalsystems.group/compliance-engine/SecurityCommandCenter> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.5> .
+<http://dynamicalsystems.group/compliance-engine/SecurityCommandCenter> <http://dynamicalsystems.group/ontology/cmmc#verificationMethod> <http://dynamicalsystems.group/compliance-engine/oracle-scc-vuln-mgmt> .
+<http://dynamicalsystems.group/compliance-engine/SecurityCommandCenter> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/PartUsage> .
+<http://dynamicalsystems.group/compliance-engine/SecurityCommandCenter> <http://www.w3.org/2000/01/rdf-schema#label> "GCP Security Command Center — vulnerability management" .
+<http://dynamicalsystems.group/compliance-engine/SecurityCommandCenter> <https://www.omg.org/spec/SysML/2.0/ownedRelationship> _:nfd5cd8c6a58f4931b485ea29f1ad1a4bb14 .
+<http://dynamicalsystems.group/compliance-engine/Terraform_Baseline> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.1> .
+<http://dynamicalsystems.group/compliance-engine/Terraform_Baseline> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.2> .
+<http://dynamicalsystems.group/compliance-engine/Terraform_Baseline> <http://dynamicalsystems.group/ontology/cmmc#verificationMethod> <http://dynamicalsystems.group/compliance-engine/oracle-terraform-baseline> .
+<http://dynamicalsystems.group/compliance-engine/Terraform_Baseline> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/PartUsage> .
+<http://dynamicalsystems.group/compliance-engine/Terraform_Baseline> <http://www.w3.org/2000/01/rdf-schema#label> "Terraform baseline configuration + resource inventory (IaC)" .
+<http://dynamicalsystems.group/compliance-engine/Terraform_Baseline> <https://www.omg.org/spec/SysML/2.0/ownedRelationship> _:nfd5cd8c6a58f4931b485ea29f1ad1a4bb8 .
+<http://dynamicalsystems.group/compliance-engine/Tier1Enclave> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/PartDefinition> .
+<http://dynamicalsystems.group/compliance-engine/Tier1Enclave> <http://www.w3.org/2000/01/rdf-schema#label> "Tier 1 IL4 CUI enclave (Workspace Enterprise Plus + GCP Assured Workloads IL4)" .
+<http://dynamicalsystems.group/compliance-engine/Tier1Enclave> <https://www.omg.org/spec/SysML/2.0/ownedPart> <http://dynamicalsystems.group/compliance-engine/AuditLog_Export> .
+<http://dynamicalsystems.group/compliance-engine/Tier1Enclave> <https://www.omg.org/spec/SysML/2.0/ownedPart> <http://dynamicalsystems.group/compliance-engine/CMEK_KeyRing> .
+<http://dynamicalsystems.group/compliance-engine/Tier1Enclave> <https://www.omg.org/spec/SysML/2.0/ownedPart> <http://dynamicalsystems.group/compliance-engine/CSP_Physical_Inheritance> .
+<http://dynamicalsystems.group/compliance-engine/Tier1Enclave> <https://www.omg.org/spec/SysML/2.0/ownedPart> <http://dynamicalsystems.group/compliance-engine/CUI_Users_Group> .
+<http://dynamicalsystems.group/compliance-engine/Tier1Enclave> <https://www.omg.org/spec/SysML/2.0/ownedPart> <http://dynamicalsystems.group/compliance-engine/Disable_NonFedRAMP_Services> .
+<http://dynamicalsystems.group/compliance-engine/Tier1Enclave> <https://www.omg.org/spec/SysML/2.0/ownedPart> <http://dynamicalsystems.group/compliance-engine/Drive_DLP_Rules> .
+<http://dynamicalsystems.group/compliance-engine/Tier1Enclave> <https://www.omg.org/spec/SysML/2.0/ownedPart> <http://dynamicalsystems.group/compliance-engine/Monitoring_Alerting> .
+<http://dynamicalsystems.group/compliance-engine/Tier1Enclave> <https://www.omg.org/spec/SysML/2.0/ownedPart> <http://dynamicalsystems.group/compliance-engine/OrgPolicy_USRegion> .
+<http://dynamicalsystems.group/compliance-engine/Tier1Enclave> <https://www.omg.org/spec/SysML/2.0/ownedPart> <http://dynamicalsystems.group/compliance-engine/Terraform_Baseline> .
+<http://dynamicalsystems.group/compliance-engine/Tier1Enclave> <https://www.omg.org/spec/SysML/2.0/ownedPart> <http://dynamicalsystems.group/compliance-engine/Workspace2SV_CUI_OU> .
+<http://dynamicalsystems.group/compliance-engine/VPC_Segmentation> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.15> .
+<http://dynamicalsystems.group/compliance-engine/VPC_Segmentation> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.3> .
+<http://dynamicalsystems.group/compliance-engine/VPC_Segmentation> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.4> .
+<http://dynamicalsystems.group/compliance-engine/VPC_Segmentation> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.5> .
+<http://dynamicalsystems.group/compliance-engine/VPC_Segmentation> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.6> .
+<http://dynamicalsystems.group/compliance-engine/VPC_Segmentation> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.7> .
+<http://dynamicalsystems.group/compliance-engine/VPC_Segmentation> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.8> .
+<http://dynamicalsystems.group/compliance-engine/VPC_Segmentation> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.9> .
+<http://dynamicalsystems.group/compliance-engine/VPC_Segmentation> <http://dynamicalsystems.group/ontology/cmmc#verificationMethod> <http://dynamicalsystems.group/compliance-engine/oracle-vpc-segmentation> .
+<http://dynamicalsystems.group/compliance-engine/VPC_Segmentation> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/PartUsage> .
+<http://dynamicalsystems.group/compliance-engine/VPC_Segmentation> <http://www.w3.org/2000/01/rdf-schema#label> "VPC network segmentation (subnetworks + firewalls + Cloud Armor)" .
+<http://dynamicalsystems.group/compliance-engine/VPC_Segmentation> <https://www.omg.org/spec/SysML/2.0/ownedRelationship> _:nfd5cd8c6a58f4931b485ea29f1ad1a4bb11 .
+<http://dynamicalsystems.group/compliance-engine/VPNAccess_BeyondCorp> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.12> .
+<http://dynamicalsystems.group/compliance-engine/VPNAccess_BeyondCorp> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.13> .
+<http://dynamicalsystems.group/compliance-engine/VPNAccess_BeyondCorp> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.14> .
+<http://dynamicalsystems.group/compliance-engine/VPNAccess_BeyondCorp> <http://dynamicalsystems.group/ontology/cmmc#verificationMethod> <http://dynamicalsystems.group/compliance-engine/oracle-beyondcorp-remote-access> .
+<http://dynamicalsystems.group/compliance-engine/VPNAccess_BeyondCorp> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/PartUsage> .
+<http://dynamicalsystems.group/compliance-engine/VPNAccess_BeyondCorp> <http://www.w3.org/2000/01/rdf-schema#label> "BeyondCorp Enterprise remote access + TLS enforcement" .
+<http://dynamicalsystems.group/compliance-engine/VPNAccess_BeyondCorp> <https://www.omg.org/spec/SysML/2.0/ownedRelationship> _:nfd5cd8c6a58f4931b485ea29f1ad1a4bb16 .
+<http://dynamicalsystems.group/compliance-engine/Workspace2SV_CUI_OU> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.2> .
+<http://dynamicalsystems.group/compliance-engine/Workspace2SV_CUI_OU> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.3> .
+<http://dynamicalsystems.group/compliance-engine/Workspace2SV_CUI_OU> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.4> .
+<http://dynamicalsystems.group/compliance-engine/Workspace2SV_CUI_OU> <http://dynamicalsystems.group/ontology/cmmc#verificationMethod> <http://dynamicalsystems.group/compliance-engine/oracle-mfa-2sv-enforced> .
+<http://dynamicalsystems.group/compliance-engine/Workspace2SV_CUI_OU> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/PartUsage> .
+<http://dynamicalsystems.group/compliance-engine/Workspace2SV_CUI_OU> <http://www.w3.org/2000/01/rdf-schema#label> "Google Workspace 2-Step Verification (phishing-resistant) enforced on CUI OU" .
+<http://dynamicalsystems.group/compliance-engine/Workspace2SV_CUI_OU> <https://www.omg.org/spec/SysML/2.0/ownedRelationship> _:nfd5cd8c6a58f4931b485ea29f1ad1a4bb1 .
+<http://dynamicalsystems.group/compliance-engine/WorkspaceAdmin_Policy> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.10> .
+<http://dynamicalsystems.group/compliance-engine/WorkspaceAdmin_Policy> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.11> .
+<http://dynamicalsystems.group/compliance-engine/WorkspaceAdmin_Policy> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.1> .
+<http://dynamicalsystems.group/compliance-engine/WorkspaceAdmin_Policy> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.5> .
+<http://dynamicalsystems.group/compliance-engine/WorkspaceAdmin_Policy> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.6> .
+<http://dynamicalsystems.group/compliance-engine/WorkspaceAdmin_Policy> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.7> .
+<http://dynamicalsystems.group/compliance-engine/WorkspaceAdmin_Policy> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.8> .
+<http://dynamicalsystems.group/compliance-engine/WorkspaceAdmin_Policy> <http://dynamicalsystems.group/ontology/cmmc#controlsSatisfied> <http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.9> .
+<http://dynamicalsystems.group/compliance-engine/WorkspaceAdmin_Policy> <http://dynamicalsystems.group/ontology/cmmc#verificationMethod> <http://dynamicalsystems.group/compliance-engine/oracle-workspace-admin-policy> .
+<http://dynamicalsystems.group/compliance-engine/WorkspaceAdmin_Policy> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/PartUsage> .
+<http://dynamicalsystems.group/compliance-engine/WorkspaceAdmin_Policy> <http://www.w3.org/2000/01/rdf-schema#label> "Workspace Admin identity lifecycle + password policy" .
+<http://dynamicalsystems.group/compliance-engine/WorkspaceAdmin_Policy> <https://www.omg.org/spec/SysML/2.0/ownedRelationship> _:nfd5cd8c6a58f4931b485ea29f1ad1a4bb15 .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/SatisfyRequirementUsage> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb1 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.2> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb1 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.3> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb1 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.4> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb1 <https://www.omg.org/spec/SysML/2.0/satisfyingElement> <http://dynamicalsystems.group/compliance-engine/Workspace2SV_CUI_OU> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb10 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/SatisfyRequirementUsage> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb10 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.1> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb10 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.2> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb10 <https://www.omg.org/spec/SysML/2.0/satisfyingElement> <http://dynamicalsystems.group/compliance-engine/CSP_Physical_Inheritance> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb11 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/SatisfyRequirementUsage> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb11 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.15> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb11 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.3> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb11 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.4> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb11 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.5> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb11 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.6> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb11 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.7> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb11 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.8> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb11 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.9> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb11 <https://www.omg.org/spec/SysML/2.0/satisfyingElement> <http://dynamicalsystems.group/compliance-engine/VPC_Segmentation> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb12 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/SatisfyRequirementUsage> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb12 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.2> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb12 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.4> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb12 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.7> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb12 <https://www.omg.org/spec/SysML/2.0/satisfyingElement> <http://dynamicalsystems.group/compliance-engine/EndpointVerification_CrowdStrike> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb13 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/SatisfyRequirementUsage> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb13 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.16> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb13 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.17> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb13 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.18> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb13 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.19> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb13 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.7> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb13 <https://www.omg.org/spec/SysML/2.0/satisfyingElement> <http://dynamicalsystems.group/compliance-engine/MDM_ChromeOS> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb14 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/SatisfyRequirementUsage> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb14 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#RA.L2-3.11.2> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb14 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.1> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb14 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.5> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb14 <https://www.omg.org/spec/SysML/2.0/satisfyingElement> <http://dynamicalsystems.group/compliance-engine/SecurityCommandCenter> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb15 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/SatisfyRequirementUsage> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb15 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.10> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb15 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.11> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb15 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.1> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb15 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.5> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb15 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.6> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb15 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.7> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb15 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.8> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb15 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#IA.L2-3.5.9> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb15 <https://www.omg.org/spec/SysML/2.0/satisfyingElement> <http://dynamicalsystems.group/compliance-engine/WorkspaceAdmin_Policy> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb16 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/SatisfyRequirementUsage> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb16 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.12> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb16 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.13> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb16 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.14> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb16 <https://www.omg.org/spec/SysML/2.0/satisfyingElement> <http://dynamicalsystems.group/compliance-engine/VPNAccess_BeyondCorp> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb17 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/SatisfyRequirementUsage> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb17 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.3> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb17 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.5> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb17 <https://www.omg.org/spec/SysML/2.0/satisfyingElement> <http://dynamicalsystems.group/compliance-engine/ChangeManagement_GitHub> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb18 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/SatisfyRequirementUsage> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb18 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.5> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb18 <https://www.omg.org/spec/SysML/2.0/satisfyingElement> <http://dynamicalsystems.group/compliance-engine/CloudIdentity_RemoteMaintenance> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb19 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/SatisfyRequirementUsage> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb19 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.4> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb19 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.7> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb19 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.8> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb19 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.9> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb19 <https://www.omg.org/spec/SysML/2.0/satisfyingElement> <http://dynamicalsystems.group/compliance-engine/CloudLogging_Config> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/SatisfyRequirementUsage> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb2 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.10> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb2 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.11> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb2 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.16> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb2 <https://www.omg.org/spec/SysML/2.0/satisfyingElement> <http://dynamicalsystems.group/compliance-engine/CMEK_KeyRing> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb20 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/SatisfyRequirementUsage> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb20 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.8> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb20 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.9> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb20 <https://www.omg.org/spec/SysML/2.0/satisfyingElement> <http://dynamicalsystems.group/compliance-engine/OrgPolicy_Allowlist> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb21 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/SatisfyRequirementUsage> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb21 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.10> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb21 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.11> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb21 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.8> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb21 <https://www.omg.org/spec/SysML/2.0/satisfyingElement> <http://dynamicalsystems.group/compliance-engine/OrgPolicy_SessionControl> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb22 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/SatisfyRequirementUsage> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb22 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.20> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb22 <https://www.omg.org/spec/SysML/2.0/satisfyingElement> <http://dynamicalsystems.group/compliance-engine/AccessTransparency_ExternalSystems> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb23 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/SatisfyRequirementUsage> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb23 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.6> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb23 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.7> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb23 <https://www.omg.org/spec/SysML/2.0/satisfyingElement> <http://dynamicalsystems.group/compliance-engine/IAMRoles_Privilege> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb24 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/SatisfyRequirementUsage> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb24 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#CA.L2-3.12.4> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb24 <https://www.omg.org/spec/SysML/2.0/satisfyingElement> <http://dynamicalsystems.group/compliance-engine/POL_SSP_SystemDescription> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb25 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/SatisfyRequirementUsage> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb25 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#AT.L2-3.2.1> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb25 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#AT.L2-3.2.2> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb25 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#AT.L2-3.2.3> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb25 <https://www.omg.org/spec/SysML/2.0/satisfyingElement> <http://dynamicalsystems.group/compliance-engine/POL_AT_Training> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb26 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/SatisfyRequirementUsage> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb26 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#IR.L2-3.6.1> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb26 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#IR.L2-3.6.2> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb26 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#IR.L2-3.6.3> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb26 <https://www.omg.org/spec/SysML/2.0/satisfyingElement> <http://dynamicalsystems.group/compliance-engine/POL_IR_Plan> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb27 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/SatisfyRequirementUsage> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb27 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#RA.L2-3.11.1> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb27 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#RA.L2-3.11.3> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb27 <https://www.omg.org/spec/SysML/2.0/satisfyingElement> <http://dynamicalsystems.group/compliance-engine/POL_RA_Assessment> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb28 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/SatisfyRequirementUsage> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb28 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#PS.L2-3.9.1> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb28 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#PS.L2-3.9.2> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb28 <https://www.omg.org/spec/SysML/2.0/satisfyingElement> <http://dynamicalsystems.group/compliance-engine/POL_PS_Personnel> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb29 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/SatisfyRequirementUsage> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb29 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.4> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb29 <https://www.omg.org/spec/SysML/2.0/satisfyingElement> <http://dynamicalsystems.group/compliance-engine/POL_CM_Config> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb3 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/SatisfyRequirementUsage> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb3 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.1> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb3 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.2> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb3 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.5> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb3 <https://www.omg.org/spec/SysML/2.0/satisfyingElement> <http://dynamicalsystems.group/compliance-engine/CUI_Users_Group> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb30 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/SatisfyRequirementUsage> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb30 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.1> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb30 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.2> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb30 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.3> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb30 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.4> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb30 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#MA.L2-3.7.6> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb30 <https://www.omg.org/spec/SysML/2.0/satisfyingElement> <http://dynamicalsystems.group/compliance-engine/POL_MA_Maintenance> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb31 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/SatisfyRequirementUsage> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb31 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.1> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb31 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.2> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb31 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.3> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb31 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.4> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb31 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.5> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb31 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.6> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb31 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.8> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb31 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#MP.L2-3.8.9> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb31 <https://www.omg.org/spec/SysML/2.0/satisfyingElement> <http://dynamicalsystems.group/compliance-engine/POL_MP_Media> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb32 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/SatisfyRequirementUsage> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb32 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.3> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb32 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.6> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb32 <https://www.omg.org/spec/SysML/2.0/satisfyingElement> <http://dynamicalsystems.group/compliance-engine/POL_AU_Procedure> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb33 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/SatisfyRequirementUsage> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb33 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.2> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb33 <https://www.omg.org/spec/SysML/2.0/satisfyingElement> <http://dynamicalsystems.group/compliance-engine/POL_SC_SecEng> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb34 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/SatisfyRequirementUsage> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb34 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.15> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb34 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.21> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb34 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.22> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb34 <https://www.omg.org/spec/SysML/2.0/satisfyingElement> <http://dynamicalsystems.group/compliance-engine/POL_AC_RemoteAuth> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb35 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/SatisfyRequirementUsage> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb35 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.3> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb35 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.4> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb35 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.5> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb35 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#PE.L2-3.10.6> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb35 <https://www.omg.org/spec/SysML/2.0/satisfyingElement> <http://dynamicalsystems.group/compliance-engine/POL_PE_Physical> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb36 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/SatisfyRequirementUsage> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb36 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.12> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb36 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.13> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb36 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.14> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb36 <https://www.omg.org/spec/SysML/2.0/satisfyingElement> <http://dynamicalsystems.group/compliance-engine/POL_SC_Collab> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb37 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/SatisfyRequirementUsage> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb37 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.4> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb37 <https://www.omg.org/spec/SysML/2.0/satisfyingElement> <http://dynamicalsystems.group/compliance-engine/POL_AC_SoD> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb38 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/SatisfyRequirementUsage> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb38 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#CA.L2-3.12.1> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb38 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#CA.L2-3.12.2> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb38 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#CA.L2-3.12.3> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb38 <https://www.omg.org/spec/SysML/2.0/satisfyingElement> <http://dynamicalsystems.group/compliance-engine/POL_CA_Monitoring> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb39 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/SatisfyRequirementUsage> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb39 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.9> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb39 <https://www.omg.org/spec/SysML/2.0/satisfyingElement> <http://dynamicalsystems.group/compliance-engine/POL_AC_LoginBanner> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb4 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/SatisfyRequirementUsage> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb4 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#AC.L2-3.1.3> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb4 <https://www.omg.org/spec/SysML/2.0/satisfyingElement> <http://dynamicalsystems.group/compliance-engine/Drive_DLP_Rules> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb5 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/SatisfyRequirementUsage> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb5 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#SC.L2-3.13.1> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb5 <https://www.omg.org/spec/SysML/2.0/satisfyingElement> <http://dynamicalsystems.group/compliance-engine/OrgPolicy_USRegion> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb6 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/SatisfyRequirementUsage> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb6 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.1> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb6 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.2> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb6 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#AU.L2-3.3.5> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb6 <https://www.omg.org/spec/SysML/2.0/satisfyingElement> <http://dynamicalsystems.group/compliance-engine/AuditLog_Export> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb7 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/SatisfyRequirementUsage> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb7 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.6> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb7 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.7> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb7 <https://www.omg.org/spec/SysML/2.0/satisfyingElement> <http://dynamicalsystems.group/compliance-engine/Disable_NonFedRAMP_Services> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb8 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/SatisfyRequirementUsage> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb8 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.1> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb8 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#CM.L2-3.4.2> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb8 <https://www.omg.org/spec/SysML/2.0/satisfyingElement> <http://dynamicalsystems.group/compliance-engine/Terraform_Baseline> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb9 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.omg.org/spec/SysML/2.0/SatisfyRequirementUsage> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb9 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.3> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb9 <https://www.omg.org/spec/SysML/2.0/satisfiedRequirement> <http://dynamicalsystems.group/ontology/cmmc#SI.L2-3.14.6> .
+_:nfd5cd8c6a58f4931b485ea29f1ad1a4bb9 <https://www.omg.org/spec/SysML/2.0/satisfyingElement> <http://dynamicalsystems.group/compliance-engine/Monitoring_Alerting> .

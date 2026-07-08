@@ -101,6 +101,8 @@ ce:REF_POL_SSP_v1 a ce:Reference ;
     ce:sourceSystem ce:AUTHSRC_DocRepo ;
     ce:freshnessDays "365"^^xsd:integer ;
     ce:lastVerified "2026-06-15T12:00:00+00:00"^^xsd:dateTime ;
+    ce:version "a24a3a009e50c11885add90a6b7e2c2134ba648e4042bb18a9c327be73b4884a"^^xsd:string ;
+    ce:signature "Kfiiwv8cHt2RRpm0cTsVID891gE5JSbNpjrSmu3fPrwL+QQBgdosX1l6CTs95ho+xuuJ8yrFkd5BbdYZrLYeBg=="^^xsd:string ;
     ce:custodian "Sayer Tindall (Affirming Official)" .
 
 ce:REF_POL_AT_Training_v1 a ce:Reference ;
@@ -109,6 +111,8 @@ ce:REF_POL_AT_Training_v1 a ce:Reference ;
     ce:sourceSystem ce:AUTHSRC_LMS ;
     ce:freshnessDays "365"^^xsd:integer ;
     ce:lastVerified "2026-06-15T12:00:00+00:00"^^xsd:dateTime ;
+    ce:version "180dde084fb16478a30290be831ebf3981dca349959cb6784a78ce8807261f2e"^^xsd:string ;
+    ce:signature "ae6nUyPEOz7N9Kd/roP5qAYeY3Snyu0TWnIzp8T9E2CQ1H1QTMUE0vx9hszRojs7Fvfj/I0ScRFCFoTe55rMCQ=="^^xsd:string ;
     ce:custodian "Operations lead (LMS admin)" .
 
 ce:REF_POL_IR_Plan_v1 a ce:Reference ;
@@ -117,6 +121,8 @@ ce:REF_POL_IR_Plan_v1 a ce:Reference ;
     ce:sourceSystem ce:AUTHSRC_DocRepo ;
     ce:freshnessDays "365"^^xsd:integer ;
     ce:lastVerified "2026-06-15T12:00:00+00:00"^^xsd:dateTime ;
+    ce:version "ef2f0ed929c198a8f27a0db8dcab61d2d026438c2590d7f9cfb26a934ab50dae"^^xsd:string ;
+    ce:signature "r2afy56JPAVlnCueLv3oqZn/z75ziQc+Zvj1hkUnqaY0lfTlDAqirWczjElqW8MxiS1aLuXsLNySlPRgJR2RBg=="^^xsd:string ;
     ce:custodian "Security Officer" .
 
 ce:REF_POL_RA_Assessment_v1 a ce:Reference ;
@@ -125,6 +131,8 @@ ce:REF_POL_RA_Assessment_v1 a ce:Reference ;
     ce:sourceSystem ce:AUTHSRC_DocRepo ;
     ce:freshnessDays "365"^^xsd:integer ;
     ce:lastVerified "2026-06-15T12:00:00+00:00"^^xsd:dateTime ;
+    ce:version "a9a40a16b2050da39e04747b60a7e0a3615657eb0e4a80e692c4926057364b84"^^xsd:string ;
+    ce:signature "FDxQ6u6IELau/dkqc4ifkGbjux9UhNzP0tRl0Pbp6N26aepsBcXY6JV3d5kFs18PfcdNA9+l1Ns48Hv4CjGmAQ=="^^xsd:string ;
     ce:custodian "Security Officer" .
 
 ce:REF_POL_PS_Personnel_v1 a ce:Reference ;
@@ -133,6 +141,8 @@ ce:REF_POL_PS_Personnel_v1 a ce:Reference ;
     ce:sourceSystem ce:AUTHSRC_HRIS ;
     ce:freshnessDays "0"^^xsd:integer ;   # event-based: exists per event
     ce:lastVerified "2026-06-15T12:00:00+00:00"^^xsd:dateTime ;
+    ce:version "19b16764e49d14e6f6942d1c7dc1b950610bba5aef75b5ba8f21c185c8955516"^^xsd:string ;
+    ce:signature "pK38+riteDQ0b5VIJ/iTHNvd2+YPKcpdDzFoQ28jBDNUtOSsCKj9eJpUF1NLf3UXgln76kSxkqurrN6+PwftBA=="^^xsd:string ;
     ce:custodian "Operations lead" .
 
 ce:REF_POL_CM_Config_v1 a ce:Reference ;
@@ -141,6 +151,8 @@ ce:REF_POL_CM_Config_v1 a ce:Reference ;
     ce:sourceSystem ce:AUTHSRC_DocRepo ;
     ce:freshnessDays "180"^^xsd:integer ;
     ce:lastVerified "2026-06-15T12:00:00+00:00"^^xsd:dateTime ;
+    ce:version "ae495c9b8f2c0e81e94149adf9c42bfbf85cbe7a91dd4b14c544d9a15440fc77"^^xsd:string ;
+    ce:signature "oQI5Rf3pmTRklAtlevThRBBdu+nQwQlsF2btu9iUolW+0j3OVLsry7XnBQ7TfnID37x96dTaTsl0SQA3GSGYBg=="^^xsd:string ;
     ce:custodian "IT Admin" .
 
 ce:REF_POL_MA_Maintenance_v1 a ce:Reference ;
@@ -149,6 +161,8 @@ ce:REF_POL_MA_Maintenance_v1 a ce:Reference ;
     ce:sourceSystem ce:AUTHSRC_DocRepo ;
     ce:freshnessDays "365"^^xsd:integer ;
     ce:lastVerified "2026-06-15T12:00:00+00:00"^^xsd:dateTime ;
+    ce:version "eb35fb9a5824185a5f88571035735c8a938dbbb56877a3d689d215c9e21ea393"^^xsd:string ;
+    ce:signature "7aqnKXWaSy9jQBw+ftt0Hr7vS+CF5HlCZJk3wzKVzUOaBjenbMGXGbHV292DsxfKwv9UgljS29F/j+/OJDOcAA=="^^xsd:string ;
     ce:custodian "Operations lead" .
 
 ce:REF_POL_MP_Media_v1 a ce:Reference ;
@@ -157,6 +171,8 @@ ce:REF_POL_MP_Media_v1 a ce:Reference ;
     ce:sourceSystem ce:AUTHSRC_DocRepo ;
     ce:freshnessDays "0"^^xsd:integer ;   # event-based: per sanitization event
     ce:lastVerified "2026-06-15T12:00:00+00:00"^^xsd:dateTime ;
+    ce:version "a89a3c0e2b297354d49d0d041e5ef8944dfb372f9a123a882066e0cd7c13e695"^^xsd:string ;
+    ce:signature "5njzrQ7Ubr+0isbxMsWAddbp7Myhe+S1SazUeOQPLViJ/LDNlEEtZ+bYIhwMIk3frVU27rFDqExmbzXY5K8NCg=="^^xsd:string ;
     ce:custodian "Operations lead" .
 
 ce:REF_POL_AU_Procedure_v1 a ce:Reference ;
@@ -165,6 +181,8 @@ ce:REF_POL_AU_Procedure_v1 a ce:Reference ;
     ce:sourceSystem ce:AUTHSRC_DocRepo ;
     ce:freshnessDays "90"^^xsd:integer ;
     ce:lastVerified "2026-06-15T12:00:00+00:00"^^xsd:dateTime ;
+    ce:version "36c4d7355280f4230f67d23aaf3e90e79551c19727faad9169971887a9bcd333"^^xsd:string ;
+    ce:signature "c9oCMzAZyVHlrQq4JBwHvv+eXQz52aArR6jljRDYtqHQPP4nxXkEVW71QTk9msTLUnLVhj282j38rDqxuBTHDA=="^^xsd:string ;
     ce:custodian "Security Officer" .
 
 ce:REF_POL_SC_SecEng_v1 a ce:Reference ;
@@ -173,6 +191,8 @@ ce:REF_POL_SC_SecEng_v1 a ce:Reference ;
     ce:sourceSystem ce:AUTHSRC_DocRepo ;
     ce:freshnessDays "365"^^xsd:integer ;
     ce:lastVerified "2026-06-15T12:00:00+00:00"^^xsd:dateTime ;
+    ce:version "bd099d38da87e0823280b1478fd84354a7fdbf99b967652d990582cf1be663d5"^^xsd:string ;
+    ce:signature "tR2Kh2OowlRRONHid84kTbb0aUxdmt+87dZti25gXg44/zyrmJgkBrTFxdAlNbRvqK5UMUj7SyMuPeKJd7nZAA=="^^xsd:string ;
     ce:custodian "Security Officer" .
 
 ce:REF_POL_AC_RemoteAuth_v1 a ce:Reference ;
@@ -181,6 +201,8 @@ ce:REF_POL_AC_RemoteAuth_v1 a ce:Reference ;
     ce:sourceSystem ce:AUTHSRC_DocRepo ;
     ce:freshnessDays "365"^^xsd:integer ;
     ce:lastVerified "2026-06-15T12:00:00+00:00"^^xsd:dateTime ;
+    ce:version "e72ac1c82bac4a12f4f40dd1f34742735f70b4c202cad3c3884a0d8c3f158796"^^xsd:string ;
+    ce:signature "EBtlpyy06ODWk27FlePPAgP6k3IptJtbZWpiLVOaB9/GItWItloHJwC9NnkkcB58Ij49v47tdEC7R8KLB8pkCQ=="^^xsd:string ;
     ce:custodian "Security Officer" .
 
 ce:REF_POL_PE_Physical_v1 a ce:Reference ;
@@ -189,6 +211,8 @@ ce:REF_POL_PE_Physical_v1 a ce:Reference ;
     ce:sourceSystem ce:AUTHSRC_DocRepo ;
     ce:freshnessDays "365"^^xsd:integer ;
     ce:lastVerified "2026-06-15T12:00:00+00:00"^^xsd:dateTime ;
+    ce:version "06cb72f393a6d46393c940a23246d506bd6ec24a6bf2dbdefc61e312603e5b3c"^^xsd:string ;
+    ce:signature "hTreBpXFzQrIgt3vvkJ/ljYpB6RHPKqOWBKmhBYtdoQqqfqsm8slO7Es7BAVDXfWSjmu6Esxurv96J38RPutDA=="^^xsd:string ;
     ce:custodian "Operations lead" .
 
 ce:REF_POL_SC_Collab_v1 a ce:Reference ;
@@ -197,6 +221,8 @@ ce:REF_POL_SC_Collab_v1 a ce:Reference ;
     ce:sourceSystem ce:AUTHSRC_DocRepo ;
     ce:freshnessDays "365"^^xsd:integer ;
     ce:lastVerified "2026-06-15T12:00:00+00:00"^^xsd:dateTime ;
+    ce:version "3572f47e4ecf05277025cef3e09c53d476027908054dc2f4e7a30fe47775db52"^^xsd:string ;
+    ce:signature "2AhRM57tlBn5iHU64IWA4g1rdIJy3rEY+RkPvhsQQ8dnymEW23KeyFLB3apUGZyvwsuq1Nsvtm9shJGUmrFVDw=="^^xsd:string ;
     ce:custodian "IT Admin" .
 
 ce:REF_POL_AC_SoD_v1 a ce:Reference ;
@@ -205,6 +231,8 @@ ce:REF_POL_AC_SoD_v1 a ce:Reference ;
     ce:sourceSystem ce:AUTHSRC_DocRepo ;
     ce:freshnessDays "365"^^xsd:integer ;
     ce:lastVerified "2026-06-15T12:00:00+00:00"^^xsd:dateTime ;
+    ce:version "999cec0bfdc05236ca3756db65624a72ed395ef3a6994f9d3cf266981f720113"^^xsd:string ;
+    ce:signature "bZJFjJ6c84fqfCElYVUf2MbdovWx0TjpSabvBPDXF78utAlZr8w2Wheb6o4ndsUZxs8QT8dMmxSABGy6qICmDg=="^^xsd:string ;
     ce:custodian "Security Officer" .
 
 ce:REF_POL_CA_Monitoring_v1 a ce:Reference ;
@@ -213,6 +241,8 @@ ce:REF_POL_CA_Monitoring_v1 a ce:Reference ;
     ce:sourceSystem ce:AUTHSRC_EngineHistory ;
     ce:freshnessDays "90"^^xsd:integer ;
     ce:lastVerified "2026-06-15T12:00:00+00:00"^^xsd:dateTime ;
+    ce:version "8f21848dc6379e97a94f8a7ab57398eff0f79e70c263890f95eb6ae32c1e5a9a"^^xsd:string ;
+    ce:signature "HM+9N1kzquhqZCn3H5JiYymkWoJT4wcM8ibVCufd5DrECdWxy9TUfZWVjhTPRWHXkPGuBQFVw2YdFu171oTADg=="^^xsd:string ;
     ce:custodian "Security Officer" .
 
 ce:REF_POL_AC_LoginBanner_v1 a ce:Reference ;
@@ -221,4 +251,6 @@ ce:REF_POL_AC_LoginBanner_v1 a ce:Reference ;
     ce:sourceSystem ce:AUTHSRC_DocRepo ;
     ce:freshnessDays "365"^^xsd:integer ;
     ce:lastVerified "2026-06-15T12:00:00+00:00"^^xsd:dateTime ;
+    ce:version "f8899a4f032f1cace69f666903cd25ca3962adc0f8c1b71e79b9c8bd268cf085"^^xsd:string ;
+    ce:signature "IRjpZECTBITXq08X4b1+Vg2lvt0O+QtBX1NAdDjVwrcdvsXCan8mUZZMbMb81bZ5Wg4KGAYZc0iben5QYTzmAA=="^^xsd:string ;
     ce:custodian "Security Officer" .

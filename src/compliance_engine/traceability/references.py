@@ -67,6 +67,8 @@ def load_attested_controls(ds) -> dict[str, AttestedControl]:
         uri = ds.value(ref, CE.uri) if ref is not None else None
         custodian = ds.value(ref, CE.custodian) if ref is not None else None
         source = ds.value(ref, CE.sourceSystem) if ref is not None else None
+        version = ds.value(ref, CE.version) if ref is not None else None
+        signature = ds.value(ref, CE.signature) if ref is not None else None
         uri_s = str(uri) if uri is not None else ""
         custodian_s = str(custodian) if custodian is not None else ""
         source_s = _localname(source) if source is not None else ""
@@ -80,6 +82,8 @@ def load_attested_controls(ds) -> dict[str, AttestedControl]:
                 last_verified=_parse_dt(ds.value(ref, CE.lastVerified)),
                 source_system=source_s,
                 custodian=custodian_s,
+                version=str(version) if version is not None else None,
+                signature=str(signature) if signature is not None else None,
             )
 
         for _s, _pp, ctrl in ds.triples((module, CMMC.controlsSatisfied, None)):

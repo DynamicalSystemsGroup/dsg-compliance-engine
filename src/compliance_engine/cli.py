@@ -71,7 +71,7 @@ def _load_ds(out: Path):
     return ds
 
 
-def _dump_run_state(state, out: Path) -> None:
+def _dump_run_state(state, out: Path, *, degraded: bool = False) -> None:
     lo = state.load_order
     plan_resources = [
         {"resource_id": r.resource_id, "controls": list(r.controls)}
@@ -104,6 +104,7 @@ def _dump_run_state(state, out: Path) -> None:
         else [],
         "halted": state.halted,
         "halted_at": state.halted_at,
+        "degraded": bool(getattr(state, "registry_degraded", False)) or degraded,
     }
     _run_state_path(out).write_text(json.dumps(payload, indent=2, sort_keys=True))
 
@@ -269,10 +270,10 @@ def _do_run_factory(
     )
 
 
-def _persist_to_flexo(ds, output_dir: Path) -> None:
+def _persist_to_flexo(ds, output_dir: Path) -> bool:
     """Durably persist the run to the Flexo append-only tier of record. Degrades
     gracefully: on Flexo unavailability the local files remain as the cache and the
-    run is not failed."""
+    run is not failed. Returns True if persistence degraded (Flexo unavailable)."""
     from compliance_engine.pipeline.backends.base import BackendUnavailable
     from compliance_engine.pipeline.backends.flexo import FlexoBackend
 
@@ -286,8 +287,10 @@ def _persist_to_flexo(ds, output_dir: Path) -> None:
             f"(ref={flexo.ref}, version={version[:12]}, "
             f"{sum(counts.values())} triples across {len(counts)} graphs)"
         )
+        return False
     except BackendUnavailable as exc:
         typer.echo(f"[flexo] unavailable — local cache retained (degraded): {exc}")
+        return True
 
 
 def _do_attest(ds, state) -> int:
@@ -436,13 +439,32 @@ def _do_audit(ds, output_dir: Path):
 
 
 def _do_bom(state, ds, output_dir: Path):
+    import base64
+
     from compliance_engine.pipeline.registry import Registry
     from compliance_engine.traceability.bom import build_bom, store_bom
 
     bom = build_bom(state, ds, contract_id=CONTRACT_ID)
-    registry = Registry(output_dir / "registry")
+    # state.store_backend is already resolved (local or flexo) by
+    # _do_run_factory / _make_store_backend — reuse it as the Registry's
+    # write-through/read-through remote tier so --store-backend flexo also
+    # covers the BOM/artifact object store, not just the whole-dataset
+    # snapshot persisted separately by _persist_to_flexo.
+    registry = Registry(output_dir / "registry", remote=state.store_backend)
     store_bom(bom, registry, CONTRACT_ID)
     (output_dir / "bom.json").write_text(bom.to_canonical_json())
+    state.registry_degraded = registry.degraded
+
+    # ce:step-SignAndStore: store_bom() already signed the BOM's canonical
+    # bytes and recorded the signature in the registry; write it out next to
+    # bom.json, mirroring how manifest.sig sits next to package/manifest.json.
+    sig_hash = registry.bom_signature(bom.bom_hash)
+    if sig_hash is not None:
+        sig_bytes = registry.get(sig_hash)
+        (output_dir / "bom.json.sig").write_text(
+            base64.b64encode(sig_bytes).decode("ascii")
+        )
+
     return bom
 
 
@@ -844,7 +866,15 @@ def demo(
     _save_ds(ds, out)  # persist first so ssp's dataset path resolves
     _ssp_hook(out, ds=ds, audit_report=report, bom=bom)
 
-    _dump_run_state(state, out)
+    # Durable append-only tier of record (Flexo), when selected. Local files are
+    # always written above, so the local registry remains the cache/fallback tier.
+    # Resolved before _dump_run_state so a degraded outcome here is captured in
+    # run_state.json rather than the file being written before this runs.
+    flexo_degraded = False
+    if store_backend == "flexo":
+        flexo_degraded = _persist_to_flexo(ds, out)
+
+    _dump_run_state(state, out, degraded=flexo_degraded)
 
     # 7. Audit package — assemble + sign the full deliverable a C3PAO re-verifies.
     from compliance_engine.traceability.package import build_audit_package
@@ -863,11 +893,6 @@ def demo(
         res = render_report(pkg.package_dir)
         pdf = res.pdf_path if res.pdf_path else f"HTML only ({res.note})"
         typer.echo(f"[report] {res.html_path}" + (f" + {pdf}" if res.pdf_path else f" — {res.note}"))
-
-    # Durable append-only tier of record (Flexo), when selected. Local files are
-    # always written above, so the local registry remains the cache/fallback tier.
-    if store_backend == "flexo":
-        _persist_to_flexo(ds, out)
 
 
 def main() -> None:  # pragma: no cover
